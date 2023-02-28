@@ -151,6 +151,10 @@
   -webkit-box-orient: vertical;
 }
 
+.row__info-name:hover {
+  color: #ef3f3f;
+}
+
 .price__wrapper {
   display: flex;
   align-items: flex-end;
