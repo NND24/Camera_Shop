@@ -1,0 +1,38 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  border: 0;
+  outline: none;
+  list-style: none;
+  text-decoration: none;
+}
+
+html {
+  font-family: "Inter", sans-serif;
+  line-height: 1.6rem;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #efefef !important;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.container {
+  height: 100vh;
+}
+
+.mt-10 {
+  margin-top: 10px !important;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px !important;
+  }
+}
