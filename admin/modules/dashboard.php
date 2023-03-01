@@ -1,5 +1,4 @@
 <div class="app-container">
-    <?php include('menu.php') ?>
 
     <div class="app-content">
         <div class="app-content-header">

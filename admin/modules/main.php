@@ -1,4 +1,5 @@
-<div class="clear"></div>
+<link rel="stylesheet" href="css/main.css">
+
 <div class="main">
     <?php
     if (isset($_GET['action']) && isset($_GET['query'])) {
@@ -14,8 +15,14 @@
         include('modules/quanlydanhmucsp/lietke.php');
     } else if ($tam == 'quanlydanhmucsanpham' && $query == 'sua') {
         include('modules/quanlydanhmucsp/sua.php');
-    } else {
-        include('modules/dashboard.php');
+    } else if ($tam == 'quanlysanpham' && $query == 'them') {
+        include('modules/quanlysp/them.php');
+        include('modules/quanlysp/lietke.php');
+    } else if ($tam == 'quanlysanpham' && $query == 'sua') {
+        include('modules/quanlysp/sua.php');
+    } 
+    else {
+        //include('modules/dashboard.php');
     }
     ?>
 </div>

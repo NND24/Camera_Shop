@@ -1,4 +1,66 @@
-ul.admin__list li {
-  float: left;
-  margin: 15px;
+/* Sidebar */
+.sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 250px;
+  height: 100vh;
+  background-color: var(--sidebar);
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(99, 99, 99) 2px 0px 8px 0px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.sidebar-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar-list-item {
+  position: relative;
+  margin-bottom: 4px;
+}
+.sidebar-list-item a {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 16px;
+  color: var(--sidebar-link);
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.sidebar-list-item svg {
+  margin-right: 8px;
+}
+
+.sidebar-list-item :hover {
+  background-color: var(--sidebar-hover-link);
+}
+
+.sidebar-list-item.active {
+  background-color: var(--sidebar-active-link);
+}
+
+.sidebar-list-item.active::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  background-color: var(--action-color);
+  height: 100%;
+  width: 4px;
+}
+
+@media screen and (max-width: 1024px) {
+  .sidebar {
+    display: none;
+  }
 }
