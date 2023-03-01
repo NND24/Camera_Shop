@@ -23,14 +23,15 @@
 <body>
     <div class="container">
         <?php 
-          //  include('pages/header.php');
+        include('admin/config/config.php');
+            include('pages/header.php');
            // include('pages/register.php');
            // include('pages/login.php');
            // include('pages/cart.php');
-          //  include('pages/main.php');
+            include('pages/main.php');
            // include('pages/detailProduct.php');
            // include('pages/shopPage.php');
-           // include('pages/footer.php');
+            include('pages/footer.php');
         ?>
     </div>
 </body>

@@ -2,6 +2,12 @@
 <!-- Link Swiper's CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 
+<?php 
+    $sql_chitiet = "SELECT * FROM tbl_sanpham,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
+    AND tbl_sanpham.id_sanpham='$_GET[id]' LIMIT 1 ";
+    $query_chitiet = mysqli_query($mysqli, $sql_chitiet);
+    while($row_chitiet = mysqli_fetch_array($query_chitiet)) {
+?>
 
 <!-- Breadcrumb -->
 <div class="breadcrumb">
@@ -11,16 +17,16 @@
         </span>
         »
         <span>
-            <a href="#">Shop</a>
+            <a href="index.php?quanly=danhmucsanpham&id=<?php echo $row_chitiet['id_danhmuc'] ?>">Shop</a>
         </span>
         »
-        <span class="breadcrumb_last">Camera Yoosee 3 Râu 3M Ban Đêm Có Màu</span>
+        <span class="breadcrumb_last"><?php echo $row_chitiet['tensanpham'] ?></span>
     </span>
 </div>
 
 <div class="product__detail-container">
     <div class="product__header-container">
-        <h1 class="product_title">Camera Yoosee 3 Râu 3M Ban Đêm Có Màu</h1>
+        <h1 class="product_title"><?php echo $row_chitiet['tensanpham'] ?></h1>
         <div class="product_rating">
             <span class="average_rate">5.00</span>
             <div class="star_rating">
@@ -41,13 +47,14 @@
     <div class="product_main-container">
         <div class="row">
             <div class="col-lg-5 col product_gallery">
-                <img class="product_thumbnail" src="./images/products/yoosee-3-rau-3m.jpg" alt="">
+                <img class="product_thumbnail"
+                    src="./admin/modules/quanlysp/uploads/<?php echo $row_chitiet['hinhanh'] ?>" alt="">
             </div>
 
             <div class="col-lg-4 col product_summary">
                 <div class="price_wrapper">
                     <h4>Gía bán: </h4>
-                    <span class="price_on_sale">290,000đ</span>
+                    <span class="price_on_sale"><?php echo number_format($row_chitiet['giasp'],0,',','.') ?>đ</span>
                     <span class="price_original">560,000đ</span>
                 </div>
                 <div class="status__wrapper">
@@ -681,6 +688,9 @@
     </div>
 </div>
 
+<?php 
+    }
+?>
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 

@@ -1,3 +1,8 @@
+<?php 
+$sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc DESC";
+$query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
+?>
+
 <link rel="stylesheet" href="css/header.css">
 
 <header id="header">
@@ -11,7 +16,7 @@
                 <!-- Logo -->
                 <div class="col-lg-2 col-sm-3 col-3 ">
                     <div class="logo_container">
-                        <div class="logo"><a href="#">
+                        <div class="logo"><a href="index.php">
                                 <img src="images/logo.webp" alt="logo">
                             </a></div>
                     </div>
@@ -75,25 +80,19 @@
                                 <li class="has_subs">
                                     <a href="#"><i class="fa-solid fa-bars"></i><span>Danh mục sản phẩm</span></a>
                                     <ul>
-                                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i>Camera Yoosee</i></a>
+                                        <?php 
+                                        while($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
+                                        ?>
+                                        <li>
+                                            <a
+                                                href="index.php?quanly=danhmucsanpham&id=<?php echo $row_danhmuc['id_danhmuc'] ?>">
+                                                <i class="fa-solid fa-chevron-right"></i>
+                                                <?php echo $row_danhmuc['ten_danhmuc'] ?>
+                                            </a>
                                         </li>
-                                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i>Camera Ezviz</i></a>
-                                        </li>
-                                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i>Camera Imou</i></a>
-                                        </li>
-                                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i>Trọn bộ Camera
-                                                Hikvision</i></a>
-                                        </li>
-                                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i>Camera Vantech</i></a>
-                                        </li>
-                                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i>Camera Kbvision</i></a>
-                                        </li>
-                                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i>Camera Dahua</i></a>
-                                        </li>
-                                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i>Camera
-                                                Hikvision</i></a></li>
-                                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i>Phụ kiện Camera
-                                                </i></a></li>
+                                        <?php 
+                                        }
+                                        ?>
                                     </ul>
                                 </li>
                                 <li><a href="#">Tin Tức<i class="fas fa-chevron-down"></i></a></li>
