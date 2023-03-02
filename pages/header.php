@@ -1,4 +1,5 @@
-<?php 
+<?php
+session_start();
 $sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc DESC";
 $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
 ?>
@@ -47,10 +48,10 @@ $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
                         <!-- Cart -->
 
                         <div class="cart_container d-flex flex-row align-items-center justify-content-end">
-                            <div class="cart_icon">
+                            <a href="index.php?quanly=giohang" class="cart_icon">
                                 <i class="fa-solid fa-cart-shopping"></i>
                                 <div class="cart_count"><span>3</span></div>
-                            </div>
+                            </a>
                         </div>
 
                         <div class="user_option d-flex flex-row align-items-center justify-content-end">
@@ -80,8 +81,8 @@ $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
                                 <li class="has_subs">
                                     <a href="#"><i class="fa-solid fa-bars"></i><span>Danh mục sản phẩm</span></a>
                                     <ul>
-                                        <?php 
-                                        while($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
+                                        <?php
+                                        while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
                                         ?>
                                         <li>
                                             <a
@@ -90,7 +91,7 @@ $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
                                                 <?php echo $row_danhmuc['ten_danhmuc'] ?>
                                             </a>
                                         </li>
-                                        <?php 
+                                        <?php
                                         }
                                         ?>
                                     </ul>

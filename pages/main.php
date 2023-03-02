@@ -10,6 +10,8 @@
         include('main/shopPage.php');
     } else if($tam == 'sanpham') {
         include('main/detailProduct.php');
+    }else if($tam == 'giohang') {
+        include('main/cart.php');
     } else {
         include('main/home.php');
     }

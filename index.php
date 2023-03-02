@@ -27,7 +27,6 @@
             include('pages/header.php');
            // include('pages/register.php');
            // include('pages/login.php');
-           // include('pages/cart.php');
             include('pages/main.php');
            // include('pages/detailProduct.php');
            // include('pages/shopPage.php');

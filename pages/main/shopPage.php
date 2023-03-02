@@ -1,11 +1,11 @@
-<?php 
-    $sql_pro = "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_danhmuc='$_GET[id]' ORDER BY id_sanpham DESC ";
-    $query_pro = mysqli_query($mysqli, $sql_pro);
-    // Lay ten danh muc
-    $sql_cate = "SELECT * FROM tbl_danhmuc WHERE tbl_danhmuc.id_danhmuc='$_GET[id]' LIMIT 1 ";
-    $query_cate = mysqli_query($mysqli, $sql_cate);
-    $row_title = mysqli_fetch_array($query_cate);
-    
+<?php
+$sql_pro = "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_danhmuc='$_GET[id]' ORDER BY id_sanpham DESC ";
+$query_pro = mysqli_query($mysqli, $sql_pro);
+// Lay ten danh muc
+$sql_cate = "SELECT * FROM tbl_danhmuc WHERE tbl_danhmuc.id_danhmuc='$_GET[id]' LIMIT 1 ";
+$query_cate = mysqli_query($mysqli, $sql_cate);
+$row_title = mysqli_fetch_array($query_cate);
+
 ?>
 
 <link rel="stylesheet" href="css/shopPage.css">
@@ -80,8 +80,8 @@
             </div> -->
 
             <div class="row no-wrap products-category">
-                <?php 
-                    while($row_pro = mysqli_fetch_array($query_pro)) {
+                <?php
+                while ($row_pro = mysqli_fetch_array($query_pro)) {
                 ?>
                 <div class="col col-lg-3 col-md-4 col-4 mb-10">
                     <div class="row__item item--product">
@@ -93,14 +93,18 @@
                                     </div>
                                 </a>
                                 <div class="add-to-cart-btn">
-                                    <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
+                                    <form method="POST"
+                                        action="pages/main/addToCart.php?idsanpham=<?php echo $row_pro['id_sanpham'] ?>">
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                        <input name="themgiohang" type="submit" value="Thêm vào giỏ hàng">
+                                    </form>
                                 </div>
                             </div>
                             <div class="row__item-info">
                                 <a href="#" class="row__info-name"><?php echo $row_pro['tensanpham'] ?></a>
                                 <div class="price__wrapper">
                                     <span
-                                        class="price-has-dropped"><?php echo number_format($row_pro['giasp'],0,',','.') ?>đ</span>
+                                        class="price-has-dropped"><?php echo number_format($row_pro['giasp'], 0, ',', '.') ?>đ</span>
                                     <span class="price-previous-dropped">560,000đ</span>
                                 </div>
 
@@ -108,8 +112,8 @@
                         </div>
                     </div>
                 </div>
-                <?php 
-                    }
+                <?php
+                }
                 ?>
             </div>
         </div>
