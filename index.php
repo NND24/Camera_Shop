@@ -22,15 +22,25 @@
 
 <body>
     <div class="container">
-        <?php 
+        <?php
         include('admin/config/config.php');
+
+        if (isset($_GET['quanly'])) {
+            $tam = $_GET['quanly'];
+        } else {
+            $tam = '';
+        }
+
+        if ($tam == 'dangky') {
+            include('pages/register.php');
+        } else if ($tam == 'dangnhap') {
+            include('pages/login.php');
+        } else {
             include('pages/header.php');
-           // include('pages/register.php');
-           // include('pages/login.php');
             include('pages/main.php');
-           // include('pages/detailProduct.php');
-           // include('pages/shopPage.php');
             include('pages/footer.php');
+        }
+
         ?>
     </div>
 </body>

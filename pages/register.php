@@ -1,60 +1,66 @@
-<link rel="stylesheet" href="css/register.css">
+<?php
+session_start();
+if (isset($_POST['dangky'])) {
+    $tenkhachhang = $_POST['hovaten'];
+    $email = $_POST['email'];
+    $dienthoai = $_POST['dienthoai'];
+    $matkhau = $_POST['password'];
+    $diachi = $_POST['diachi'];
+    $sql_dangky = mysqli_query($mysqli, "INSERT INTO tbl_dangky(tenkhachhang,email,diachi,matkhau,dienthoai) 
+    VALUE ('" . $tenkhachhang . "','" . $email . "','" . $diachi . "','" . $matkhau . "','" . $dienthoai . "')");
+    $_SESSION['dangky'] = $tenkhachhang;
+    if ($sql_dangky) {
 
-<section class="vh-100 bg-image">
-    <div class="mask d-flex align-items-center h-100">
-        <div class="container h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-                    <div class="card" style="border-radius: 15px;">
-                        <div class="card-body p-4">
-                            <h2 class="text-uppercase text-center mb-3">Tạo tài khoản mới</h2>
+        header('Location: index.php');
+    }
+}
+?>
 
-                            <form>
+<link rel="stylesheet" href="css/login.css">
+<div class="wrapper">
+    <form action="" method="POST" class="form" id="form-1">
+        <h3 class="heading">Đăng ký thành viên</h3>
 
-                                <div class="form-outline mb-3">
-                                    <label class="form-label" for="form3Example1cg">Nhập tên tài khoản:</label>
-                                    <input type="text" id="form3Example1cg" class="form-control" />
-                                </div>
+        <div class="spacer"></div>
 
-                                <div class="form-outline mb-3">
-                                    <label class="form-label" for="form3Example3cg">Nhâp Email:</label>
-                                    <input type="email" id="form3Example3cg" class="form-control" />
-                                </div>
-
-                                <div class="form-outline mb-3">
-                                    <label class="form-label" for="form3Example4cg">Nhập mật khẩu:</label>
-                                    <input type="password" id="form3Example4cg" class="form-control" />
-                                </div>
-
-                                <div class="form-outline mb-3">
-                                    <label class="form-label" for="form3Example4cdg">Nhập lại mật khẩu:</label>
-                                    <input type="password" id="form3Example4cdg" class="form-control" />
-                                </div>
-
-                                <div class="form-check d-flex justify-content-center mb-5">
-                                    <input class="form-check-input me-2" type="checkbox" value=""
-                                        id="form2Example3cg" />
-                                    <label class="form-check-label" for="form2Example3g">
-                                        Tôi đồng ý với tất cả điều khoản trong <a href="#!" class="text-body"><u>Terms
-                                                of
-                                                service</u></a>
-                                    </label>
-                                </div>
-
-                                <div class="d-flex justify-content-center">
-                                    <button type="button" class="btn btn-primary btn-block btn-lg  text-body"
-                                        style="width: 100%;">Đăng ký</button>
-                                </div>
-
-                                <p class="text-center text-muted mt-3 mb-1">Bạn đã có tài khoản? <a href="#!"
-                                        class="fw-bold text-body"><u>Đăng nhập</u></a></p>
-
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="form-group">
+            <label for="hovaten" class="form-label">Tên đầy đủ</label>
+            <input id="hovaten" name="hovaten" type="text" placeholder="VD: Đạt Nguyễn" class="form-control">
+            <span class="form-message"></span>
         </div>
-    </div>
-</section>
+
+        <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input id="email" name="email" type="text" placeholder="VD: email@domain.com" class="form-control">
+            <span class="form-message"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="dienthoai" class="form-label">Điện thoại</label>
+            <input id="dienthoai" name="dienthoai" type="text" placeholder="VD: email@domain.com" class="form-control">
+            <span class="form-message"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="diachi" class="form-label">Địa chỉ</label>
+            <input id="diachi" name="diachi" type="text" placeholder="VD: email@domain.com" class="form-control">
+            <span class="form-message"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="form-label">Mật khẩu</label>
+            <input id="password" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
+            <span class="form-message"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+            <input id="password_confirmation" name="password_confirmation" placeholder="Nhập lại mật khẩu"
+                type="password" class="form-control">
+            <span class="form-message"></span>
+        </div>
+
+        <button class="form-submit" name="dangky">Đăng ký</button>
+        <span>Nếu bạn đã có tài khoản <a href="index.php?quanly=dangnhap">Đăng nhập</a></span>
+    </form>
+</div class="wrapper">

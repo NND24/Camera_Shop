@@ -1,37 +1,58 @@
-<section class="vh-100">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div class="card shadow-2-strong" style="border-radius: 1rem;">
-                    <div class="card-body p-5 ">
+<?php
+session_start();
+if (isset($_POST['dangnhap'])) {
+    $email = $_POST['email'];
+    $matkhau = $_POST['password'];
+    $sql = "SELECT * FROM tbl_dangky WHERE email='" . $email . "' AND matkhau='" . $matkhau . "' LIMIT 1 ";
+    $sql_query = mysqli_query($mysqli, $sql);
+    $count = mysqli_num_rows($sql_query);
+    if ($count > 0) {
+        $data = mysqli_fetch_array($sql_query);
+        $_SESSION['dangnhap'] = $data['tenkhachhang'];
+        header('Location: index.php');
+    } else {
+        echo '<p style="color:red;">Mật khẩu hoặc email sai, vui lòng nhập lại</p>';
+    }
+}
+?>
 
-                        <h3 class="text-uppercase text-center mb-4">Đăng nhập</h3>
+<!DOCTYPE html>
+<html lang="en">
 
-                        <div class="form-outline mb-3">
-                            <label class="form-label" for="typeEmailX-2">Tên tài khoản hoặc địa chỉ email</label>
-                            <input type="email" id="typeEmailX-2" class="form-control form-control-lg" />
-                        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Css -->
+    <link rel="stylesheet" href="css/login.css">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
 
-                        <div class="form-outline mb-3">
-                            <label class="form-label" for="typePasswordX-2">Mật khẩu</label>
-                            <input type="password" id="typePasswordX-2" class="form-control form-control-lg" />
-                        </div>
+<body>
+    <div class="wrapper">
+        <form action="" method="POST" autocomplete="off" class="form" id="form-2">
+            <h3 class="heading">Đăng nhập</h3>
 
-                        <!-- Checkbox -->
-                        <div class="form-check d-flex justify-content-start mb-4">
-                            <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
-                            <label class="form-check-label ps-2 " for="form1Example3"> Nhớ mật khẩu? </label>
-                        </div>
+            <div class="spacer"></div>
 
-                        <button class="btn btn-primary btn-lg btn-block" type="submit" style="width: 100%;">Đăng
-                            nhập</button>
-
-                        <div class="d-flex justify-content-start mt-2">
-                            <a href="#">Quên mật khẩu</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input id="email" name="email" type="text" placeholder="" class="form-control">
+                <span class="form-message"></span>
             </div>
-        </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label">Mật khẩu</label>
+                <input id="password" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
+                <span class="form-message"></span>
+            </div>
+
+            <button class="form-submit" name="dangnhap" type="submit">Đăng nhập</button>
+            <span>Nếu bạn chưa có tài khoản <a href="index.php?quanly=dangky">Đăng ký</a></span>
+        </form>
     </div>
-</section>
+</body>
+
+</html>

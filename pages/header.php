@@ -2,6 +2,12 @@
 session_start();
 $sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc DESC";
 $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
+
+if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
+    unset($_SESSION['dangky']);
+    unset($_SESSION['dangnhap']);
+    header('Location: index.php');
+}
 ?>
 
 <link rel="stylesheet" href="css/header.css">
@@ -55,8 +61,24 @@ $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
                         </div>
 
                         <div class="user_option d-flex flex-row align-items-center justify-content-end">
-                            <div><a href="#">Đăng nhập</a></div>
-                            <div><a href="#">Đăng ký</a></div>
+                            <?php
+                            if (isset($_SESSION['dangky']) || isset($_SESSION['dangnhap'])) {
+                            ?>
+                            <p style="color:white;">Xin chào
+                                <?php
+                                    if ($_SESSION['dangnhap']) {
+                                        echo $_SESSION['dangnhap'];
+                                    } else {
+                                        echo $_SESSION['dangnhap'];
+                                    }
+                                    ?></p>
+                            <span><a href="index.php?dangxuat=1">Đăng xuất</a></span>
+                            <?php
+                            } else {
+                            ?>
+                            <div><a href="index.php?quanly=dangnhap">Đăng nhập</a></div>
+                            <div><a href="index.php?quanly=dangky">Đăng ký</a></div>
+                            <?php }  ?>
                         </div>
 
                     </div>

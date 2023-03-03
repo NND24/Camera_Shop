@@ -38,7 +38,7 @@ session_start();
                     foreach ($_SESSION['cart'] as $cart_item) {
                         $thanhtien = $cart_item['soluong'] * $cart_item['giasp'];
                     ?>
-                <div class="row border-top border-bottom">
+                <div class="row border-bottom">
                     <div class="row main align-items-center">
                         <div class="col-2"><img class="img-fluid"
                                 src="./admin/modules/quanlysp/uploads/<?php echo $cart_item['hinhanh'] ?>"></div>
@@ -76,24 +76,66 @@ session_start();
                             <span class="text-muted">TIẾP TỤC MUA SẮM</span>
                         </a>
                     </div>
-                    <div class="pay-product"><a href="#"></a><span class="pay-product-text">THANH TOÁN</span>
+                    <div class="pay-product">
+                        <a href="index.php?quanly=thanhtoan"><span class="pay-product-text">THANH TOÁN</span></a>
+
                     </div>
                 </div>
 
             </div>
             <?php } else { ?>
-            <span>HIỆN TẠI GIỎ HÀNG TRỐNG</span>
+            <div class="d-flex justify-content-center align-items-center flex-column" style="height:100%;">
+                <span class="mb-4" style="font-size:25px;">HIỆN TẠI GIỎ HÀNG TRỐNG</span>
+                <a class="back-to-shop-btn" href="index.php">
+                    <span class="text-muted">QUAY TRỞ LẠI MUA HÀNG</span>
+                </a>
+            </div>
             <?php } ?>
         </div>
 
 
-        <div class="col-md-4 summary">
-            <div>
+        <div class="col-md-4 summary border-bottom">
+            <div class=" pb-3">
                 <h5><b>TÓM TẮT ĐƠN HÀNG</b></h5>
             </div>
-            <div>
-                <p>Tổng tiền: <?php echo number_format($tongtien, 0, ',', '.') ?>đ</p>
+            <?php if (isset($_SESSION['cart'])) { ?>
+            <p class=" pb-2">Chi phí đơn hàng = Giá trị đơn hàng + phí vận chuyển + Thuế</p>
+            <div class="d-flex justify-content-between pb-2">
+                <p>Giá trị đơn hàng</p>
+                <p><?php echo number_format($tongtien, 0, ',', '.') ?>đ</p>
             </div>
+            <div class="d-flex justify-content-between pb-2">
+                <p>Phí vận chuyển</p>
+                <p>0đ</p>
+            </div>
+            <div class="d-flex justify-content-between pb-2">
+                <p>Thuế</p>
+                <p>0đ</p>
+            </div>
+            <div class="d-flex justify-content-between pb-2">
+                <p>Tổng Chi Phí </p>
+                <p style="font-weight:500;font-size:18px;"><?php echo number_format($tongtien, 0, ',', '.') ?>đ</p>
+            </div>
+
+            <?php } else { ?>
+            <p class=" pb-2">Chi phí đơn hàng = Giá trị đơn hàng + phí vận chuyển + Thuế</p>
+            <div class="d-flex justify-content-between pb-2">
+                <p>Giá trị đơn hàng</p>
+                <p>0đ</p>
+            </div>
+            <div class="d-flex justify-content-between pb-2">
+                <p>Phí vận chuyển</p>
+                <p>0đ</p>
+            </div>
+            <div class="d-flex justify-content-between pb-2">
+                <p>Thuế</p>
+                <p>0đ</p>
+            </div>
+            <div class="d-flex justify-content-between pb-2">
+                <p>Tổng Chi Phí </p>
+                <p style="font-weight:500;font-size:18px;">0đ</p>
+            </div>
+            <?php } ?>
         </div>
     </div>
 </div>

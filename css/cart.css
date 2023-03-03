@@ -2,7 +2,7 @@
   height: 100%;
   width: 100%;
   box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-top: 145px;
+  margin-top: 100px;
 }
 @media (max-width: 767px) {
   .cart_wrapper {
@@ -84,6 +84,12 @@
 .pay-product {
   margin-top: 40px;
   align-items: flex-end;
+}
+
+.back-to-shop-btn {
+  background-color: orange;
+  border-radius: 5px;
+  padding: 4px 8px;
 }
 
 .pay-product-text {
