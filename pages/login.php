@@ -9,6 +9,7 @@ if (isset($_POST['dangnhap'])) {
     if ($count > 0) {
         $data = mysqli_fetch_array($sql_query);
         $_SESSION['dangnhap'] = $data['tenkhachhang'];
+        $_SESSION['id_khachhang'] = $data['id_dangky'];
         header('Location: index.php');
     } else {
         echo '<p style="color:red;">Mật khẩu hoặc email sai, vui lòng nhập lại</p>';

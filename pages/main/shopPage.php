@@ -1,11 +1,20 @@
 <?php
-$sql_pro = "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_danhmuc='$_GET[id]' ORDER BY id_sanpham DESC ";
+if (isset($_GET['trang'])) {
+    $page = $_GET['trang'];
+} else {
+    $page = '';
+}
+if ($page == '' || $page == 1) {
+    $begin = 0;
+} else {
+    $begin = ($page * 3) - 3;
+}
+$sql_pro = "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_danhmuc='$_GET[id]' ORDER BY id_sanpham DESC LIMIT $begin,20";
 $query_pro = mysqli_query($mysqli, $sql_pro);
 // Lay ten danh muc
 $sql_cate = "SELECT * FROM tbl_danhmuc WHERE tbl_danhmuc.id_danhmuc='$_GET[id]' LIMIT 1 ";
 $query_cate = mysqli_query($mysqli, $sql_cate);
 $row_title = mysqli_fetch_array($query_cate);
-
 ?>
 
 <link rel="stylesheet" href="css/shopPage.css">
@@ -116,6 +125,33 @@ $row_title = mysqli_fetch_array($query_cate);
                 }
                 ?>
             </div>
+
+            <?php
+            $sql_trang = mysqli_query($mysqli, "SELECT * FROM tbl_sanpham");
+            $row_count = mysqli_num_rows($sql_trang);
+            $trang = ceil($row_count / 20)
+            ?>
+            <ul class="page__pagination col-8">
+                <li class="page__btn"><i class="fa-solid fa-angles-left"></i></li>
+                <li class="page__btn"><i class="fa-solid fa-chevron-left"></i></li>
+
+                <?php
+                for ($i = 1; $i <= $trang; $i++) {
+                ?>
+                <li class="page__numbers <?php if ($i == $page) {
+                                                    echo "active";
+                                                } ?>">
+                    <a href="index.php?quanly=danhmucsanpham&id=1&trang=<?php echo $i ?>"><?php echo $i ?></a>
+                </li>
+                <?php
+                }
+                ?>
+
+                <!--  <li class="page__numbers active">2</li> -->
+                <!-- <li class="page__dots">...</li> -->
+                <li class="page__btn"><i class="fa-solid fa-chevron-right"></i></li>
+                <li class="page__btn"><i class="fa-solid fa-angles-right"></i></li>
+            </ul>
         </div>
     </div>
 </div>

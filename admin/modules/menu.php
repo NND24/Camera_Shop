@@ -19,5 +19,8 @@
         <li class="sidebar-list-item">
             <a href="index.php?action=quanlydanhmucbaiviet&query=them">Quản lý danh mục bài viết</a>
         </li>
+        <li class="sidebar-list-item">
+            <a href="index.php?action=quanlydonhang&query=lietke">Quản lý đơn hàng</a>
+        </li>
     </ul>
 </div>

@@ -7,6 +7,7 @@ session_start();
     <div class="row">
         <div class="col-md-8 cart">
             <?php
+
             if (isset($_SESSION['cart'])) {
                 $sosp = 0;
                 $tongtien = 0;
@@ -77,7 +78,7 @@ session_start();
                         </a>
                     </div>
                     <div class="pay-product">
-                        <a href="index.php?quanly=thanhtoan"><span class="pay-product-text">THANH TOÁN</span></a>
+                        <a href="pages/main/thanhtoan.php"><span class="pay-product-text">THANH TOÁN</span></a>
 
                     </div>
                 </div>

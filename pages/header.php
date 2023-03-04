@@ -110,7 +110,7 @@ if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
                                         ?>
                                         <li>
                                             <a
-                                                href="index.php?quanly=danhmucsanpham&id=<?php echo $row_danhmuc['id_danhmuc'] ?>">
+                                                href="index.php?quanly=danhmucsanpham&id=<?php echo $row_danhmuc['id_danhmuc'] ?>&trang=1">
                                                 <i class="fa-solid fa-chevron-right"></i>
                                                 <?php echo $row_danhmuc['ten_danhmuc'] ?>
                                             </a>
