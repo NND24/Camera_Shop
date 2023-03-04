@@ -20,9 +20,8 @@
         include('modules/quanlysp/lietke.php');
     } else if ($tam == 'quanlysanpham' && $query == 'sua') {
         include('modules/quanlysp/sua.php');
-    } 
-    else {
-        //include('modules/dashboard.php');
+    } else {
+        include('modules/dashboard.php');
     }
     ?>
 </div>

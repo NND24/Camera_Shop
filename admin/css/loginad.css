@@ -1,8 +1,11 @@
+body {
+  margin: 0;
+}
+
 .wrapper {
   background: #f1f1f1;
-  /* min-height: 100vh; */
+  min-height: 100vh;
   display: flex;
-  margin-top: 120px;
   justify-content: center;
   color: #333;
   font-size: 62.5%;

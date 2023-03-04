@@ -3,4 +3,5 @@
   right: 0;
   top: 0;
   width: calc(100% - 250px);
+  margin-top: 60px;
 }

@@ -14,6 +14,8 @@
         include('main/cart.php');
     } else if ($tam == 'thanhtoan') {
         include('main/thanhtoan.php');
+    } else if ($tam == 'timkiem') {
+        include('main/timkiem.php');
     } else {
         include('main/home.php');
     }

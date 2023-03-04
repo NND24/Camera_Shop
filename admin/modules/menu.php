@@ -7,10 +7,10 @@
         </div>
     </div>
     <ul class="sidebar-list">
-        <li class="sidebar-list-item">
+        <li class="sidebar-list-item active">
             <a href="index.php?action=quanlydanhmucsanpham&query=them">Quản lý danh mục sản phẩm</a>
         </li>
-        <li class="sidebar-list-item active">
+        <li class="sidebar-list-item">
             <a href="index.php?action=quanlysanpham&query=them">Quản lý sản phẩm</a>
         </li>
         <li class="sidebar-list-item">

@@ -1,6 +1,6 @@
 <?php
 session_start();
-$sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc DESC";
+$sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY thutu ASC";
 $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
 
 if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
@@ -34,11 +34,13 @@ if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
                     <div class="header_search">
                         <div class="header_search_content">
                             <div class="header_search_form_container">
-                                <form action="#" class="header_search_form clearfix">
-                                    <input type="search" required="required" class="header_search_input"
+                                <form method="POST" action="index.php?quanly=timkiem"
+                                    class="header_search_form clearfix">
+                                    <input type="search" name="tukhoa" required="required" class="header_search_input"
                                         placeholder="Tìm camera...">
 
-                                    <button type="submit" class="header_search_button trans_300" value="Submit"><img
+                                    <button type="submit" class="header_search_button trans_300" name="timkiem"
+                                        value="Submit"><img
                                             src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918770/search.png"
                                             alt="">
                                     </button>

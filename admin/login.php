@@ -12,7 +12,6 @@ if (isset($_POST['dangnhap'])) {
         header('Location: index.php');
     } else {
         echo '<script>alert("Tai khoa ko dung")</script>';
-        header('Location: login.php');
     }
 }
 ?>
@@ -26,7 +25,7 @@ if (isset($_POST['dangnhap'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- Css -->
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/loginad.css">
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>

@@ -1,5 +1,5 @@
-<?php 
-$sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc DESC";
+<?php
+$sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY thutu ASC ";
 $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
 ?>
 
@@ -17,8 +17,8 @@ $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
                 <div class="row ">
                     <div class="col-3">
                         <ul class="home__menu">
-                            <?php 
-                            while($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
+                            <?php
+                            while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
                             ?>
                             <li>
                                 <a href="index.php?quanly=danhmucsanpham&id=<?php echo $row_danhmuc['id_danhmuc'] ?>">
@@ -26,9 +26,9 @@ $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
                                     <?php echo $row_danhmuc['ten_danhmuc'] ?>
                                 </a>
                             </li>
-                            <?php 
-                                        }
-                                        ?>
+                            <?php
+                            }
+                            ?>
                         </ul>
                     </div>
                     <div class="col-9">
