@@ -1,10 +1,20 @@
 <link rel="stylesheet" href="css/menu.css">
+<?php
+if ((isset($_GET['dangxuat']) == 1)) {
+    unset($_SESSION['dangnhap']);
+    header('Location: login.php');
+}
+?>
 
 <div class="sidebar">
     <div class="sidebar-header">
-        <div class="app-icon">
-            <i class="fa-solid fa-bars"></i>
-        </div>
+        <a href="index.php?dangxuat=1">Đăng xuất
+            <?php
+        if (isset($_SESSION['dangnhap'])) {
+            echo $_SESSION['dangnhap'];
+        }
+        ?>
+        </a>
     </div>
     <ul class="sidebar-list">
         <li class="sidebar-list-item active">

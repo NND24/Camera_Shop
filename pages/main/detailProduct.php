@@ -2,11 +2,11 @@
 <!-- Link Swiper's CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 
-<?php 
-    $sql_chitiet = "SELECT * FROM tbl_sanpham,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
+<?php
+$sql_chitiet = "SELECT * FROM tbl_sanpham,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
     AND tbl_sanpham.id_sanpham='$_GET[id]' LIMIT 1 ";
-    $query_chitiet = mysqli_query($mysqli, $sql_chitiet);
-    while($row_chitiet = mysqli_fetch_array($query_chitiet)) {
+$query_chitiet = mysqli_query($mysqli, $sql_chitiet);
+while ($row_chitiet = mysqli_fetch_array($query_chitiet)) {
 ?>
 
 <!-- Breadcrumb -->
@@ -54,7 +54,7 @@
             <div class="col-lg-4 col product_summary">
                 <div class="price_wrapper">
                     <h4>Gía bán: </h4>
-                    <span class="price_on_sale"><?php echo number_format($row_chitiet['giasp'],0,',','.') ?>đ</span>
+                    <span class="price_on_sale"><?php echo number_format($row_chitiet['giasp'], 0, ',', '.') ?>đ</span>
                     <span class="price_original">560,000đ</span>
                 </div>
                 <div class="status__wrapper">
@@ -64,24 +64,7 @@
 
                 <div class="product-short-description">
                     <h3>Đặc điểm nổi bật</h3>
-                    <ul>
-                        <li>
-                            <i class="fa-solid fa-check"></i> Độ phân giải 3 Megapixel
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-check"></i>Bảo hành 12 tháng
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-check"></i>Đàm thoại 2 chiều qua điện thoại
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-check"></i>Quay quét 360 độ
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-check"></i>Ban đêm có màu
-                        </li>
-
-                    </ul>
+                    <?php echo $row_chitiet['tomtat'] ?>
 
                 </div>
 
@@ -408,11 +391,7 @@
                         <div class="product__tab-header">MÔ TẢ</div>
 
                         <div class="product__tab-content">
-                            <h2>Camera Yoosee Ngoài Trời 5.0Mp – Nhìn Đêm Có Màu – Chống Nước – Đàm Thoại 2 Chiều</h2>
-                            <p>Camera Yoosee ngoài trời là là dòng camera thân hồng ngoại kết nối không dây của hãng
-                                camera yoosee. Tầm xa hồng ngoại nhìn đêm từ 20m đến 30m độ phân giải 5.0 Megapixel nhìn
-                                đêm có màu như ban ngày. Có kết cấu thiết kế tiêu chuẩn vỏ IP 66 chống mưa, chịu được
-                                thời tiết khắc nghiệt.</p>
+                            <?php echo $row_chitiet['noidung'] ?>
                         </div>
                     </div>
                 </div>
@@ -688,8 +667,8 @@
     </div>
 </div>
 
-<?php 
-    }
+<?php
+}
 ?>
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
