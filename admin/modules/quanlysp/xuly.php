@@ -18,12 +18,12 @@ $danhmuc = $_POST['danhmuc'];
 
 if (isset($_POST['themsanpham'])) {
     // Them
-    $sql_them = "INSERT INTO tbl_sanpham(tensanpham, masp, giasp, soluong, hinhanh, giamgia, tomtat, noidung, trangthai, noibat, id_danhmuc, created_time, last_updated) 
+    $sql_them = "INSERT INTO tbl_sanpham(tensanpham, masp, giasp, soluong, hinhanh, giamgia, tomtat, noidung, trangthaisp, noibat, id_danhmuc, created_time, last_updated) 
     VALUE('" . $tensanpham . "','" . $masp . "','" . $giasp . "','" . $soluong . "','" . $image . "','" . $giamgia . "','" . $tomtat . "','" . $noidung . "',
     '" . $trangthai . "','" . $noibat . "','" . $danhmuc . "','" . time() . "','" . time() . "')";
     mysqli_query($mysqli, $sql_them);
     move_uploaded_file($hinhanh_tmp, 'uploads/' . $image);
-    header('Location:../../index.php?action=quanlysanpham&query=them');
+    header('Location:../../index.php?action=quanlysanpham&query=lietke');
 } else if (isset($_POST['suasanpham'])) {
     if ($hinhanh != '') {
         move_uploaded_file($hinhanh_tmp, 'uploads/' . $hinhanh);

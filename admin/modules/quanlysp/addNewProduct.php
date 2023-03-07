@@ -16,15 +16,15 @@
                     while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
                         if ($row_danhmuc['id_danhmuc'] == $row['id_danhmuc']) {
                     ?>
-                            <option selected value="<?php echo $row_danhmuc['id_danhmuc'] ?>">
-                                <?php echo $row_danhmuc['ten_danhmuc'] ?>
-                            </option>
-                        <?php
+                    <option selected value="<?php echo $row_danhmuc['id_danhmuc'] ?>">
+                        <?php echo $row_danhmuc['ten_danhmuc'] ?>
+                    </option>
+                    <?php
                         } else {
                         ?>
-                            <option value="<?php echo $row_danhmuc['id_danhmuc'] ?>"><?php echo $row_danhmuc['ten_danhmuc'] ?>
-                            </option>
-                        <?php
+                    <option value="<?php echo $row_danhmuc['id_danhmuc'] ?>"><?php echo $row_danhmuc['ten_danhmuc'] ?>
+                    </option>
+                    <?php
                         }
                         ?>
                     <?php } ?>
@@ -53,13 +53,13 @@
                     <?php
                     if ($row['noibat'] == 1) {
                     ?>
-                        <option value="1" selected>Nổi bật</option>
-                        <option value="0">Không nổi bật</option>
+                    <option value="1" selected>Nổi bật</option>
+                    <option value="0">Không nổi bật</option>
                     <?php
                     } else {
                     ?>
-                        <option value="1" selected>Nổi bật</option>
-                        <option value="0">Không nổi bật</option>
+                    <option value="1" selected>Nổi bật</option>
+                    <option value="0">Không nổi bật</option>
                     <?php
                     }
                     ?>
@@ -68,20 +68,8 @@
             <div class="model__content">
                 <label class="col-2">Trạng thái: </label>
                 <select name="trangthai">
-
-                    <?php
-                    if ($row['trangthai'] == 1) {
-                    ?>
-                        <option value="1" selected>Kích hoạt</option>
-                        <option value="0">Ẩn</option>
-                    <?php
-                    } else {
-                    ?>
-                        <option value="1" selected>Kích hoạt</option>
-                        <option value="0">Ẩn</option>
-                    <?php
-                    }
-                    ?>
+                    <option value="1" selected>Kích hoạt</option>
+                    <option value="0">Ẩn</option>
                 </select>
             </div>
             <div class="model__content">
