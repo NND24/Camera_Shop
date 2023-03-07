@@ -1,27 +1,135 @@
 <?php
-$sql_lietke_danhmucsp = "SELECT * FROM tbl_danhmuc WHERE id_danhmuc='$_GET[iddanhmuc]' LIMIT 1";
-$query_lietke_danhmucsp = mysqli_query($mysqli, $sql_lietke_danhmucsp);
+include('../../config/config.php');
+$sql_edit_detail_category = "SELECT * FROM tbl_danhmuc WHERE id_danhmuc='" . $_GET['iddanhmuc'] . "' LIMIT 1";
+$query__edit_detail_category = mysqli_query($mysqli, $sql_edit_detail_category);
 ?>
+<div class="model__edit-category-container">
+    <div class="model-close-btn"><i class="fa-solid fa-xmark"></i></div>
+    <form id="form-edit-category" method="POST" enctype="multipart/form-data">
+        <div class="model__edit-category">
+            <h3>Sửa danh mục</h3>
+            <?php
+            while ($row = mysqli_fetch_array($query__edit_detail_category)) {
+            ?>
+            <div class="model__content">
+                <label class="col-2">Tên danh mục: </label>
+                <input type="text" class="tendanhmuc1" value="<?php echo $row['ten_danhmuc'] ?>" name="tendanhmuc">
+            </div>
+            <div class="model__content">
+                <label class="col-2">Thứ tự danh mục: </label>
+                <input type="number" value="<?php echo $row['thutu'] ?>" name="thutu" class="thutu1">
+            </div>
+            <div class="model__content">
+                <label class="col-2">Trạng thái: </label>
+                <select name="trangthai" class="trangthai1">
+                    <?php
+                        if ($row['category_status'] == 1) {
+                        ?>
+                    <option readonly value="1" selected>Kích hoạt</option>
+                    <?php
+                        } else {
+                        ?>
+                    <option readonly value="0">Ẩn</option>
+                    <?php
+                        }
+                        ?>
+                </select>
+            </div>
+            <div class="model__content">
+                <label>Chi tiết danh mục: </label>
+                <!-- The toolbar will be rendered in this container. -->
+                <div id="edit-toolbar-container"></div>
+                <!-- This container will become the editable. -->
+                <div name="category_detail" id="edit-editor"> </div>
+            </div>
+            <script>
+            var myEditor;
+            DecoupledEditor
+                .create(document.querySelector('#edit-editor'))
+                .then(editor => {
+                    const toolbarContainer = document.querySelector('#edit-toolbar-container');
+                    editor.setData('<?php echo $row['category_detail'] ?>');
+                    toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+                    myEditor = editor;
+                })
+            </script>
+            <?php
+            }
+            ?>
+            <div class="model__content">
 
-<p>Sửa danh mục sản phẩm</p>
-<Table width="100%">
-    <form method="POST" action="modules/quanlydanhmucsp/xuly.php?iddanhmuc=<?php echo $_GET['iddanhmuc'] ?>">
-        <?php 
-        while($dong = mysqli_fetch_array($query_lietke_danhmucsp)) {
-        ?>
-        <tr>
-            <td>Tên danh mục</td>
-            <td><input type="text" value="<?php echo $dong['ten_danhmuc'] ?>" name="tendanhmuc"></td>
-        </tr>
-        <tr>
-            <td>Thứ tự</td>
-            <td><input type="text" value="<?php echo $dong['thutu'] ?>" name="thutu"></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" name="suadanhmuc" value="Sửa danh mục sản phẩm"></td>
-        </tr>
-        <?php 
+                <button id="suadanhmuc">Sửa danh mục sản phẩm</button>
+            </div>
+            <span class="errorExist" style="color:red;"></span>
+        </div>
+
+</div>
+</form>
+</div>
+
+<script>
+$(document).ready(() => {
+    // Handle add new category
+    $('#suadanhmuc').click((e) => {
+        e.preventDefault();
+        var tendanhmuc = $('.tendanhmuc1').val();
+        var thutu = $('.thutu1').val();
+        var trangthai = $('.trangthai1').val();
+        let errors = {
+            nameError: '',
+            thuTuError: '',
+            detailError: ''
         }
-        ?>
-    </form>
-</Table>
+
+        // Validate category name
+        if (tendanhmuc.length === 0) {
+            errors.nameError = 'Tên danh mục không được để trống'
+            swal("Vui lòng nhập lại", errors.nameError, "error");
+        }
+
+        // Validate thu tu
+        if (thutu.length === 0) {
+            errors.thuTuError = 'Thứ tự không được để trống'
+            swal("Vui lòng nhập lại", errors.thuTuError, "error");
+        } else if (thutu <= 0) {
+            errors.thuTuError = 'Thứ tự phải lớn hơn 1'
+            swal("Vui lòng nhập lại", errors.thuTuError, "error");
+        }
+
+        // Validate category detail
+        if (myEditor.getData().length === 0) {
+            errors.detailError = 'Nội dung danh mục không được để trống'
+            swal("Vui lòng nhập lại", errors.detailErrorr, "error");
+        }
+
+        if (errors.detailError === '' && errors.thuTuError === '' && errors.nameError === '') {
+            $.ajax({
+                url: "http://localhost:3000/admin/modules/quanlydanhmucsp/handleEditCategory.php",
+                data: {
+                    tendanhmuc: tendanhmuc,
+                    thutu: thutu,
+                    trangthai: trangthai,
+                    category_detail: myEditor.getData(),
+                },
+                dataType: 'json',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    console.log('Du lieu: ', data);
+                    if (data.existName === 1) {
+                        $('.errorName').text('Danh mục đã tồn tại');
+                    } else {
+                        $('.errorName').text('');
+                    }
+                    if (data.existThutu === 1) {
+                        $('.errorThutu').text('Thứ tự đã tồn tại');
+                    } else {
+                        $('.errorThutu').text('');
+                    }
+                }
+            })
+        }
+
+    })
+})
+</script>

@@ -1,31 +1,4 @@
-</script>
-<!-- Ckeditor -->
-<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/decoupled-document/ckeditor.js"></script>
-
-
-
-<?php
-// Validate form
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-
-    // Validate thu tu
-    if (empty(trim($_POST['thutu']))) {
-        $errors['thutu']['required'] = 'Thứ tự không được để trống';
-    } else {
-        if (!filter_var(trim($_POST['thutu']), FILTER_VALIDATE_INT, [
-            'options' => ['min_range' => 1]
-        ])) {
-            $errors['thutu']['invalid'] = 'Thứ tự không hợp lệ';
-        }
-    }
-}
-?>
-
-
-<!-- action="modules/quanlydanhmucsp/xuly.php" -->
 <div class="model__add-new-container">
-    <!-- <div class="model-close-btn"><a href="index.php?action=quanlydanhmucsanpham&query=lietke"><i class="fa-solid fa-xmark"></i></a></div> -->
     <div class="model-close-btn"><i class="fa-solid fa-xmark"></i></div>
     <form id="form-add-new-category" method="POST" enctype="multipart/form-data">
         <div class="model__add-new">
@@ -57,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <span class="errorDetail" style="color:red;"></span>
             </div>
-            <button id="themdanhmuc" type="button">Thêm danh mục sản phẩm</button>
+            <button id="themdanhmuc">Thêm danh mục sản phẩm</button>
             <span class="errorExist" style="color:red;"></span>
         </div>
     </form>
@@ -124,7 +97,7 @@ $(document).ready(() => {
 
         if (errors.detailError === '' && errors.thuTuError === '' && errors.nameError === '') {
             $.ajax({
-                url: "http://localhost:3000/admin/modules/quanlydanhmucsp/handleAddCategory.php?action=themdanhmuc",
+                url: "http://localhost:3000/admin/modules/quanlydanhmucsp/handleAddCategory.php",
                 data: {
                     tendanhmuc: tendanhmuc,
                     thutu: thutu,
@@ -186,12 +159,13 @@ $(document).ready(() => {
                     <div class="product-cell col stock">${getLocalTime(updated_time)}
                     </div>
                     <div class="product-cell col-1-8 detail">
-                        <a title="Chi tiết sản phẩm">Xem chi tiết</a>
+                    <button title="Xem chi tiết" class="detail-category" value="<?php echo $row['id_danhmuc'] ?>"><span>Xem
+                chi tiết</span></button>
                     </div>
                     <div class="product-cell col-1 btn">
                         <!-- <a title="Xóa" href="modules/quanlydanhmucsp/xuly.php?iddanhmuc=<?php echo $row['id_danhmuc'] ?>"><i class="fa-solid fa-trash"></i></a> -->
-                        <a title="Xóa" class="remove-category" idDM="<?php echo $row['id_danhmuc'] ?>" href="#"><i
-                                class="fa-solid fa-trash"></i></a>
+                        <button class="remove-category" value="<?php echo $row['id_danhmuc'] ?>"><i
+                class="fa-solid fa-trash"></i></button>
                     </div>
                     <div class="product-cell col-1 btn">
                         <a href="?action=quanlydanhmucsanpham&query=sua&iddanhmuc=<?php echo $row['id_danhmuc'] ?>"><i
