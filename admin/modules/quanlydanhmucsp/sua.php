@@ -85,6 +85,8 @@ $(document).ready(() => {
         if (tendanhmuc.length === 0) {
             errors.nameError = 'Tên danh mục không được để trống'
             swal("Vui lòng nhập lại", errors.nameError, "error");
+        } else {
+            errors.nameError = '';
         }
 
         // Validate thu tu
@@ -94,37 +96,53 @@ $(document).ready(() => {
         } else if (thutu <= 0) {
             errors.thuTuError = 'Thứ tự phải lớn hơn 1'
             swal("Vui lòng nhập lại", errors.thuTuError, "error");
+        } else {
+            errors.thuTuError = '';
         }
 
         // Validate category detail
         if (myEditor.getData().length === 0) {
             errors.detailError = 'Nội dung danh mục không được để trống'
             swal("Vui lòng nhập lại", errors.detailErrorr, "error");
+        } else {
+            errors.detailError = '';
         }
 
+        function view_data() {
+            $.post('http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/listCategoryData.php',
+                function(
+                    data) {
+                    $('#load_category_data').html(data)
+                })
+        }
         if (errors.detailError === '' && errors.thuTuError === '' && errors.nameError === '') {
             $.ajax({
-                url: "http://localhost:3000/admin/modules/quanlydanhmucsp/handleEditCategory.php",
+                url: "http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/handleEditCategory.php",
                 data: {
                     tendanhmuc: tendanhmuc,
                     thutu: thutu,
                     trangthai: trangthai,
                     category_detail: myEditor.getData(),
+                    iddanhmuc: <?php echo $_GET['iddanhmuc'] ?>,
                 },
                 dataType: 'json',
                 method: "post",
                 cache: true,
                 success: function(data) {
                     console.log('Du lieu: ', data);
+                    view_data();
                     if (data.existName === 1) {
-                        $('.errorName').text('Danh mục đã tồn tại');
-                    } else {
-                        $('.errorName').text('');
+                        swal("Vui lòng nhập lại", 'Danh mục đã tồn tại', "error");
                     }
                     if (data.existThutu === 1) {
-                        $('.errorThutu').text('Thứ tự đã tồn tại');
-                    } else {
-                        $('.errorThutu').text('');
+                        swal("Vui lòng nhập lại", 'Thứ tự đã tồn tại', "error");
+                    }
+
+                    if (data.existThutu === 0 && data.existName === 0) {
+                        $('.tendanhmuc').val('')
+                        $('.thutu').val('');
+                        swal("OK!", "Sửa thành công", "success");
+                        view_data();
                     }
                 }
             })

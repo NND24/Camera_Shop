@@ -39,146 +39,106 @@
 
 
 <script>
-// CKEditor 5
-var myEditor;
-DecoupledEditor
-    .create(document.querySelector('#editor'))
-    .then(editor => {
-        const toolbarContainer = document.querySelector('#toolbar-container');
-        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
-        myEditor = editor;
+    // CKEditor 5
+    var myEditor;
+    DecoupledEditor
+        .create(document.querySelector('#editor'))
+        .then(editor => {
+            const toolbarContainer = document.querySelector('#toolbar-container');
+            toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+            myEditor = editor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    $(document).ready(() => {
+        // View data
+        function view_data() {
+            $.post('http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/listCategoryData.php',
+                function(
+                    data) {
+                    console.log(data)
+                    $('#load_category_data').html(data)
+                })
+        }
+        // Handle add new category
+        $('#themdanhmuc').click((e) => {
+            e.preventDefault();
+            var tendanhmuc = $('.tendanhmuc').val();
+            var thutu = $('.thutu').val();
+            var trangthai = $('.trangthai').val();
+
+            let errors = {
+                nameError: '',
+                thuTuError: '',
+                detailError: ''
+            }
+
+            // Validate category name
+            if (tendanhmuc.length === 0) {
+                errors.nameError = 'Tên danh mục không được để trống'
+                swal("Vui lòng nhập lại", errors.nameError, "error");
+                $('.tendanhmuc').val('')
+            } else {
+                errors.nameError = '';
+            }
+
+            // Validate thu tu
+            if (thutu.length === 0) {
+                errors.thuTuError = 'Thứ tự không được để trống'
+                swal("Vui lòng nhập lại", errors.thuTuError, "error");
+                $('.thutu').val('');
+            } else if (thutu <= 0) {
+                errors.thuTuError = 'Thứ tự phải lớn hơn 1'
+                swal("Vui lòng nhập lại", errors.thuTuError, "error");
+                $('.thutu').val('');
+            } else {
+                errors.thuTuError = '';
+            }
+
+            // Validate category detail
+            if (myEditor.getData().length === 0) {
+                errors.detailError = 'Nội dung danh mục không được để trống'
+                swal("Vui lòng nhập lại", errors.detailError, "error");
+            } else {
+                errors.detailError = ''
+                $('.errorDetail').text(errors.detailError);
+            }
+
+            if (errors.detailError === '' && errors.thuTuError === '' && errors.nameError === '') {
+                $.ajax({
+                    url: "http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/handleAddCategory.php",
+                    data: {
+                        tendanhmuc: tendanhmuc,
+                        thutu: thutu,
+                        trangthai: trangthai,
+                        category_detail: myEditor.getData(),
+                    },
+                    dataType: 'json',
+                    method: "post",
+                    cache: true,
+                    success: function(data) {
+
+                        if (data.existName === 1) {
+                            swal("Vui lòng nhập lại", 'Danh mục đã tồn tại', "error");
+                            $('.tendanhmuc').val('')
+                        }
+                        if (data.existThutu === 1) {
+                            swal("Vui lòng nhập lại", 'Thứ tự đã tồn tại', "error");
+                            $('.thutu').val('');
+                        }
+
+                        if (data.existThutu === 0 && data.existName === 0) {
+                            $('.tendanhmuc').val('')
+                            $('.thutu').val('');
+                            swal("OK!", "Thêm thành công", "success");
+                            view_data();
+                        }
+                    }
+                })
+            }
+
+        })
     })
-    .catch(error => {
-        console.error(error);
-    });
-
-$(document).ready(() => {
-    // Handle add new category
-    $('#themdanhmuc').click((e) => {
-        e.preventDefault();
-        var tendanhmuc = $('.tendanhmuc').val();
-        var thutu = $('.thutu').val();
-        var trangthai = $('.trangthai').val();
-        let errors = {
-            nameError: '',
-            thuTuError: '',
-            detailError: ''
-        }
-
-        // Validate category name
-        if (tendanhmuc.length === 0) {
-            errors.nameError = 'Tên danh mục không được để trống'
-            $('.errorName').text(errors.nameError);
-        } else {
-            errors.nameError = '';
-            $('.errorName').text(errors.nameError);
-        }
-
-        // Validate thu tu
-        if (thutu.length === 0) {
-            errors.thuTuError = 'Thứ tự không được để trống'
-            $('.errorThutu').text(errors.thuTuError);
-        } else if (thutu <= 0) {
-            errors.thuTuError = 'Thứ tự phải lớn hơn 1'
-            $('.errorThutu').text(errors.thuTuError);
-        } else {
-            errors.thuTuError = ''
-            $('.errorThutu').text(errors.thuTuError);
-        }
-
-        // Validate category detail
-        if (myEditor.getData().length === 0) {
-            errors.detailError = 'Nội dung danh mục không được để trống'
-            $('.errorDetail').text(errors.detailError);
-        } else {
-            errors.detailError = ''
-            $('.errorDetail').text(errors.detailError);
-        }
-
-        if (errors.detailError === '' && errors.thuTuError === '' && errors.nameError === '') {
-            $.ajax({
-                url: "http://localhost:3000/admin/modules/quanlydanhmucsp/handleAddCategory.php",
-                data: {
-                    tendanhmuc: tendanhmuc,
-                    thutu: thutu,
-                    trangthai: trangthai,
-                    category_detail: myEditor.getData(),
-                },
-                dataType: 'json',
-                method: "post",
-                cache: true,
-                success: function(data) {
-                    console.log('Du lieu: ', data);
-                    if (data.existName === 1) {
-                        $('.errorName').text('Danh mục đã tồn tại');
-                    } else {
-                        $('.errorName').text('');
-                    }
-                    if (data.existThutu === 1) {
-                        $('.errorThutu').text('Thứ tự đã tồn tại');
-                    } else {
-                        $('.errorThutu').text('');
-                    }
-
-                    if (data.existThutu === 0 && data.existName === 0) {
-                        var created_time = data.category_created_time;
-                        var updated_time = data.category_last_updated;
-
-                        function getLocalTime(nS) {
-                            return new Date(parseInt(nS) * 1000).toLocaleString('en-GB')
-                                .slice(
-                                    0, 17);
-                        };
-
-                        // Render category row
-                        var category = `
-                    <div class="products-row">
-                    <button class="cell-more-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="feather feather-more-vertical">
-                            <circle cx="12" cy="12" r="1" />
-                            <circle cx="12" cy="5" r="1" />
-                            <circle cx="12" cy="19" r="1" />
-                        </svg>
-                    </button>
-                    <div class="product-cell col-1-5 thutu-danhmuc ">
-                        <p>${data.thutu}</p>
-                    </div>
-                    <div class="product-cell col-2 category ">
-                        <p>${data.tendanhmuc}</p>
-                    </div>
-                    <div class="product-cell col status-cell">
-
-                        
-                        <span class="status active">Kích hoạt</span>
-                        
-                    </div>
-                    <div class="product-cell col sales">${getLocalTime(created_time)}
-                    </div>
-                    <div class="product-cell col stock">${getLocalTime(updated_time)}
-                    </div>
-                    <div class="product-cell col-1-8 detail">
-                    <button title="Xem chi tiết" class="detail-category" value="<?php echo $row['id_danhmuc'] ?>"><span>Xem
-                chi tiết</span></button>
-                    </div>
-                    <div class="product-cell col-1 btn">
-                        <!-- <a title="Xóa" href="modules/quanlydanhmucsp/xuly.php?iddanhmuc=<?php echo $row['id_danhmuc'] ?>"><i class="fa-solid fa-trash"></i></a> -->
-                        <button class="remove-category" value="<?php echo $row['id_danhmuc'] ?>"><i
-                class="fa-solid fa-trash"></i></button>
-                    </div>
-                    <div class="product-cell col-1 btn">
-                        <a href="?action=quanlydanhmucsanpham&query=sua&iddanhmuc=<?php echo $row['id_danhmuc'] ?>"><i
-                                class="fa-regular fa-pen-to-square"></i></a>
-                    </div>
-                </div>
-                    `;
-                        $('.products-area-wrapper').append(category);
-                    }
-                }
-            })
-        }
-
-    })
-})
 </script>

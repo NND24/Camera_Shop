@@ -1,5 +1,5 @@
 <?php
-include('../../config/config.php');
+$mysqli = new mysqli("localhost", "root", "", "camera_shop");
 //echo json_encode($_POST);
 
 //Validate exist category name
@@ -26,9 +26,6 @@ if (mysqli_num_rows($query_category_name) > 0 && mysqli_num_rows($query_category
     $category_detail = $_POST['category_detail'];
     $d = array("existName" => 0, "existThutu" => 0, "category_created_time" => time(), "category_last_updated" => time());
     echo json_encode(array_merge($_POST, $d));
-}
-
-if (mysqli_num_rows($query_category_name) == 0 && mysqli_num_rows($query_category_thutu) == 0) {
     $sql_them = "INSERT INTO tbl_danhmuc(ten_danhmuc, thutu,category_status,category_detail,category_created_time,category_last_updated) 
     VALUE('" . $tendanhmuc . "', '" . $thutu . "', '" . $trangthai . "','" . $category_detail . "','" . time() . "','" . time() . "')";
     mysqli_query($mysqli, $sql_them);

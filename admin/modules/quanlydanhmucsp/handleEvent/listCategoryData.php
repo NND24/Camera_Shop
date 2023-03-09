@@ -1,9 +1,10 @@
 <?php
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
 $sql_lietke_danhmucsp = "SELECT * FROM tbl_danhmuc ORDER BY thutu ASC";
-$query_lietke_danhmucsp = mysqli_query($mysqli, $sql_lietke_danhmucsp);
-$i = 0;
-while ($row = mysqli_fetch_array($query_lietke_danhmucsp)) {
+$query_lietke_danhmucsp = mysqli_query($mysqli, $sql_lietke_danhmucsp);;
+if (mysqli_num_rows($query_lietke_danhmucsp) > 0) {
+    while ($row = mysqli_fetch_array($query_lietke_danhmucsp)) {
+        // echo json_encode($row);
 ?>
 <div class="products-row">
     <button class="cell-more-button">
@@ -24,23 +25,23 @@ while ($row = mysqli_fetch_array($query_lietke_danhmucsp)) {
     <div class="product-cell col status-cell">
 
         <?php
-            if ($row['category_status'] == 1) {
-            ?>
+                if ($row['category_status'] == 1) {
+                ?>
         <span class="status active">Kích hoạt</span>
         <?php
-            } else {
-            ?>
+                } else {
+                ?>
         <span class="status">Ẩn</span>
         <?php
-            }
-            ?>
+                }
+                ?>
     </div>
     <div class="product-cell col sales"><?php
-                                            date_default_timezone_set('Asia/Ho_Chi_Minh');
-                                            echo date('d/m/Y H:i', $row['category_created_time'])
-                                            ?>
+                                                date_default_timezone_set('Asia/Ho_Chi_Minh');
+                                                echo date('d/m/Y H:i', $row['category_created_time'])
+                                                ?>
     </div>
-    <div class="product-cell col stock"><?php echo date('d/m/Y H:i', $row['category_created_time']) ?>
+    <div class="product-cell col stock"><?php echo date('d/m/Y H:i', $row['category_last_updated']) ?>
     </div>
     <div class="product-cell col-1-8 detail">
         <button title="Xem chi tiết" class="detail-category" value="<?php echo $row['id_danhmuc'] ?>"><span>Xem
@@ -55,6 +56,14 @@ while ($row = mysqli_fetch_array($query_lietke_danhmucsp)) {
                 class="fa-regular fa-pen-to-square"></i></button>
     </div>
 </div>
+<?php
+    }
+    ?>
+
+<?php
+} else {
+?>
+<h1 class="empty-row">Chưa có danh mục nào</h1>
 <?php
 }
 ?>

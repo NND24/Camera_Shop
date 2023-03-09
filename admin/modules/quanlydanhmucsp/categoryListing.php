@@ -1,9 +1,12 @@
 </script>
 <!-- Ckeditor -->
 <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/decoupled-document/ckeditor.js"></script>
+
 <div class="app-content">
 
-    <?php include('them.php')
+    <?php include('them.php');
+    // echo '<pre>'; print_r($_SERVER);  echo '</pre>';
+    // exit;
     ?>
 
     <div class="app-content-header">
@@ -22,9 +25,10 @@
     </div>
 
     <div class="app-content-actions">
-        <input class="search-bar" placeholder="Search..." type="text">
+        <div class="app-content-actions-wrapper" style="margin:0;">
+            <input class="search-bar" placeholder="Search..." type="text">
+        </div>
         <div class="app-content-actions-wrapper">
-            <button class="filter-button-wrapper">Xóa tất cả danh mục</button>
             <div class="filter-button-wrapper">
                 <button class="action-button filter jsFilter"><span>Filter</span><svg xmlns="http://www.w3.org/2000/svg"
                         width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -32,19 +36,19 @@
                         <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
                     </svg></button>
                 <div class="filter-menu">
-                    <label>Category</label>
+                    <!-- <label>Category</label>
                     <select>
                         <option>All Categories</option>
                         <option>Furniture</option>
                         <option>Decoration</option>
                         <option>Kitchen</option>
                         <option>Bathroom</option>
-                    </select>
-                    <label>Status</label>
-                    <select>
-                        <option>All Status</option>
-                        <option>Active</option>
-                        <option>Disabled</option>
+                    </select> -->
+                    <label>Trạng thái</label>
+                    <select class="filter_status">
+                        <option value="3">Tất cả trạng thái</option>
+                        <option value="1">Kích hoạt</option>
+                        <option value="0">Ẩn</option>
                     </select>
                     <div class="filter-menu-buttons">
                         <button class="filter-button reset">
@@ -55,6 +59,9 @@
                         </button>
                     </div>
                 </div>
+            </div>
+            <div class="filter-button-wrapper">
+                <button class="action-button delete-all-category">Xóa tất cả danh mục</button>
             </div>
         </div>
     </div>
@@ -98,7 +105,9 @@
             <div class="product-cell col-1 price">Xóa</div>
             <div class="product-cell col-1 price">Sửa</div>
         </div>
-        <div id="load_category_data"></div>
+        <div id="load_category_data">
+
+        </div>
         <div id="view-detail-category"></div>
         <div id="view-edit-category"></div>
     </div>
@@ -106,38 +115,85 @@
 
 <script>
 $(document).ready(() => {
+    // Open add model
     $('.add-new-category-btn').click((e) => {
         e.preventDefault();
         $('.model__add-new-container').css("display", "block")
     })
+
+    // Close model
     $('.model-close-btn i').click((e) => {
         e.preventDefault();
         $('.model__add-new-container').css("display", "none");
     })
 
     view_data();
-
+    // View data
     function view_data() {
-        $.post('http://localhost:3000/admin/modules/quanlydanhmucsp/listCategoryData.php', function(data) {
-            $('#load_category_data').html(data)
-        })
+        $.post('http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/listCategoryData.php',
+            function(
+                data) {
+                $('#load_category_data').html(data)
+            })
     }
+
     // Remove category
     $(document).on("click", '.remove-category', function() {
         var id = $(this).val();
         var url =
-            "http://localhost:3000/admin/modules/quanlydanhmucsp/handleDeleteCategory.php?iddanhmuc=" +
+            "http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/handleDeleteCategory.php?iddanhmuc=" +
             id;
-        $.post(url, (data) => {
-            view_data();
-        });
+        swal({
+                title: "Bạn có chắc muốn xóa danh sách này không?",
+                text: "Nếu có danh sách này sẽ bị xóa đi!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Danh sách đã bị xóa!", {
+                        icon: "success",
+                    });
+                    $.post(url, (data) => {
+                        view_data();
+                    });
+                }
+            });
+
+
+    })
+
+    // Delete all category
+    $(document).on("click", '.delete-all-category', function() {
+        var url =
+            "http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/handleDeleteCategory.php?action=deleteAll";
+        swal({
+                title: "Bạn có chắc muốn thực hiện thao tác không?",
+                text: "Nếu có tất cả danh sách sẽ bị xóa đi!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Tất cả danh sách đã bị xóa!", {
+                        icon: "success",
+                    });
+                    $.post(url, (data) => {
+                        view_data();
+                    });
+                }
+            });
+
+
     })
 
     // View detail category
     $(document).on("click", '.detail-category', function() {
         var id = $(this).val();
         var url =
-            "http://localhost:3000/admin/modules/quanlydanhmucsp/handleViewDetail.php?iddanhmuc=" +
+            "http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/handleViewDetail.php?iddanhmuc=" +
             id;
         $.post(url, (data) => {
             $("#view-detail-category").html(data);
@@ -154,12 +210,47 @@ $(document).ready(() => {
             "http://localhost:3000/admin/modules/quanlydanhmucsp/sua.php?iddanhmuc=" +
             id;
         $.post(url, (data) => {
-            console.log("Dữ liệu: ", data);
             $("#view-edit-category").html(data);
             $('.model-close-btn i').click(() => {
                 $('.model__edit-category-container').css("display", "none");
             })
         });
+    })
+
+    // Handle search
+    $(document).on("keyup", '.search-bar', function() {
+        var searchInput = $(this).val();
+
+        $.ajax({
+            url: "http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/handleSearch.php",
+            data: {
+                searchInput: searchInput,
+            },
+            dataType: 'html',
+            method: "post",
+            cache: true,
+            success: function(data) {
+                $('#load_category_data').html(data)
+            }
+        })
+    })
+
+    // Handle filter
+    $('.filter-button.apply').click((e) => {
+        var status = $('.filter_status').val();
+        $.ajax({
+            url: "http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/handleFilter.php",
+            data: {
+                status: status,
+            },
+            dataType: 'html',
+            method: "post",
+            cache: true,
+            success: function(data) {
+                console.log(data)
+                $('#load_category_data').html(data)
+            }
+        })
     })
 })
 </script>

@@ -1,14 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['dangnhap'])) {
-    header('Location: login.php');
-}
-if ((isset($_GET['dangxuat']) == 1)) {
-    unset($_SESSION['dangnhap']);
-    header('Location: login.php');
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,6 +27,23 @@ if ((isset($_GET['dangxuat']) == 1)) {
 </head>
 
 <body>
+    <?php
+    session_start();
+    if (!isset($_SESSION['dangnhap'])) {
+        header('Location: login.php');
+    }
+    if ((isset($_GET['dangxuat']) == 1)) {
+        unset($_SESSION['dangnhap']);
+        header('Location: login.php');
+    }
+    // echo '<pre>'; print_r($_SERVER);  echo '</pre>';
+    //exit;
+    // $url = "";
+    // $regexResult = checkPrivilege();
+    // if (!$regexResult) {
+    //     echo "Bạn không có quyền truy cập chức năng này";
+    // }
+    ?>
     <div class="app-container">
 
         <!-- Sidebar -->
@@ -53,7 +59,9 @@ if ((isset($_GET['dangxuat']) == 1)) {
             </div>
             <ul class="sidebar-list">
                 <li class="sidebar-list-item">
-                    <a class="list-gallery" href="#danhmuc">Quản lý danh mục sản phẩm</a>
+                    <a class="list-gallery" href="modules/quanlydanhmucsp/categoryListing.php">Quản lý danh mục
+                        sản
+                        phẩm</a>
                 </li>
                 <li class="sidebar-list-item ">
                     <a class="list-product" href="#sanpham">Quản lý sản phẩm</a>
@@ -64,17 +72,17 @@ if ((isset($_GET['dangxuat']) == 1)) {
             </ul>
         </div>
         <div class="main" id="main">
-            <?php include('modules/quanlydanhmucsp/lietke.php') ?>
+            <?php include('modules/quanlydanhmucsp/categoryListing.php') ?>
         </div>
         <script>
         $(document).ready(() => {
             $(".list-gallery").click(() => {
                 //console.log(window.location.href)
-                $('#main').load('modules/quanlydanhmucsp/lietke.php');
+                $('#main').load('modules/quanlydanhmucsp/categoryListing.php');
             })
 
             $(".list-product").click(() => {
-                $('#main').load('modules/quanlysp/lietke.php');
+                $('#main').load('modules/quanlysp/productListing.php');
             })
 
             $(".list-order").click(() => {

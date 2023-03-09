@@ -1,5 +1,5 @@
 <?php
-include('../../config/config.php');
+$mysqli = new mysqli("localhost", "root", "", "camera_shop");
 $sql_view_detail_category = "SELECT * FROM tbl_danhmuc WHERE id_danhmuc='" . $_GET['iddanhmuc'] . "' LIMIT 1";
 $query__view_detail_category = mysqli_query($mysqli, $sql_view_detail_category);
 ?>
