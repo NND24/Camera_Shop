@@ -21,17 +21,11 @@
                 </select>
             </div>
             <div class="model__content">
-                <label>Chi tiết danh mục: </label>
-                <!-- The toolbar will be rendered in this container. -->
-                <div id="toolbar-container"></div>
 
-                <!-- This container will become the editable. -->
-                <div name="category_detail" id="editor">
-                </div>
-                <span class="errorDetail" style="color:red;"></span>
+                <label>Chi tiết danh mục: </label>
+                <textarea name="content" class="category-content" id="category-content"></textarea>
             </div>
             <button id="themdanhmuc">Thêm danh mục sản phẩm</button>
-            <span class="errorExist" style="color:red;"></span>
         </div>
     </form>
 </div>
@@ -39,106 +33,95 @@
 
 
 <script>
-    // CKEditor 5
-    var myEditor;
-    DecoupledEditor
-        .create(document.querySelector('#editor'))
-        .then(editor => {
-            const toolbarContainer = document.querySelector('#toolbar-container');
-            toolbarContainer.appendChild(editor.ui.view.toolbar.element);
-            myEditor = editor;
-        })
-        .catch(error => {
-            console.error(error);
-        });
+CKEDITOR.replace('category-content')
+$(document).ready(() => {
+    // View data
+    function view_data() {
+        $.post('http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/listCategoryData.php',
+            function(
+                data) {
+                $('#load_category_data').html(data)
+            })
+    }
+    // Handle add new category
+    $('#themdanhmuc').click((e) => {
+        e.preventDefault();
+        var tendanhmuc = $('.tendanhmuc').val();
+        var thutu = $('.thutu').val();
+        var trangthai = $('.trangthai').val();
+        var content = CKEDITOR.instances['category-content'].getData();
+        console.log(content);
 
-    $(document).ready(() => {
-        // View data
-        function view_data() {
-            $.post('http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/listCategoryData.php',
-                function(
-                    data) {
-                    console.log(data)
-                    $('#load_category_data').html(data)
-                })
+        let errors = {
+            nameError: '',
+            thuTuError: '',
+            detailError: ''
         }
-        // Handle add new category
-        $('#themdanhmuc').click((e) => {
-            e.preventDefault();
-            var tendanhmuc = $('.tendanhmuc').val();
-            var thutu = $('.thutu').val();
-            var trangthai = $('.trangthai').val();
 
-            let errors = {
-                nameError: '',
-                thuTuError: '',
-                detailError: ''
-            }
+        // Validate category name
+        if (tendanhmuc.length === 0) {
+            errors.nameError = 'Tên danh mục không được để trống'
+            swal("Vui lòng nhập lại", errors.nameError, "error");
+            $('.tendanhmuc').val('')
+        } else {
+            errors.nameError = '';
+        }
 
-            // Validate category name
-            if (tendanhmuc.length === 0) {
-                errors.nameError = 'Tên danh mục không được để trống'
-                swal("Vui lòng nhập lại", errors.nameError, "error");
-                $('.tendanhmuc').val('')
-            } else {
-                errors.nameError = '';
-            }
+        // Validate thu tu
+        if (thutu.length === 0) {
+            errors.thuTuError = 'Thứ tự không được để trống'
+            swal("Vui lòng nhập lại", errors.thuTuError, "error");
+            $('.thutu').val('');
+        } else if (thutu <= 0) {
+            errors.thuTuError = 'Thứ tự phải lớn hơn 1'
+            swal("Vui lòng nhập lại", errors.thuTuError, "error");
+            $('.thutu').val('');
+        } else {
+            errors.thuTuError = '';
+        }
 
-            // Validate thu tu
-            if (thutu.length === 0) {
-                errors.thuTuError = 'Thứ tự không được để trống'
-                swal("Vui lòng nhập lại", errors.thuTuError, "error");
-                $('.thutu').val('');
-            } else if (thutu <= 0) {
-                errors.thuTuError = 'Thứ tự phải lớn hơn 1'
-                swal("Vui lòng nhập lại", errors.thuTuError, "error");
-                $('.thutu').val('');
-            } else {
-                errors.thuTuError = '';
-            }
+        // Validate category detail
+        if (content.length === 0) {
+            errors.detailError = 'Nội dung danh mục không được để trống'
+            swal("Vui lòng nhập lại", errors.detailError, "error");
+        } else {
+            errors.detailError = ''
+            $('.errorDetail').text(errors.detailError);
+        }
 
-            // Validate category detail
-            if (myEditor.getData().length === 0) {
-                errors.detailError = 'Nội dung danh mục không được để trống'
-                swal("Vui lòng nhập lại", errors.detailError, "error");
-            } else {
-                errors.detailError = ''
-                $('.errorDetail').text(errors.detailError);
-            }
-
-            if (errors.detailError === '' && errors.thuTuError === '' && errors.nameError === '') {
-                $.ajax({
-                    url: "http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/handleAddCategory.php",
-                    data: {
-                        tendanhmuc: tendanhmuc,
-                        thutu: thutu,
-                        trangthai: trangthai,
-                        category_detail: myEditor.getData(),
-                    },
-                    dataType: 'json',
-                    method: "post",
-                    cache: true,
-                    success: function(data) {
-
-                        if (data.existName === 1) {
-                            swal("Vui lòng nhập lại", 'Danh mục đã tồn tại', "error");
-                            $('.tendanhmuc').val('')
-                        }
-                        if (data.existThutu === 1) {
-                            swal("Vui lòng nhập lại", 'Thứ tự đã tồn tại', "error");
-                            $('.thutu').val('');
-                        }
-
-                        if (data.existThutu === 0 && data.existName === 0) {
-                            $('.tendanhmuc').val('')
-                            $('.thutu').val('');
-                            swal("OK!", "Thêm thành công", "success");
-                            view_data();
-                        }
+        if (errors.detailError === '' && errors.thuTuError === '' && errors.nameError === '') {
+            $.ajax({
+                url: "http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/handleAddCategory.php",
+                data: {
+                    tendanhmuc: tendanhmuc,
+                    thutu: thutu,
+                    trangthai: trangthai,
+                    category_detail: content,
+                },
+                dataType: 'json',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    console.log(data);
+                    if (data.existName === 1) {
+                        swal("Vui lòng nhập lại", 'Danh mục đã tồn tại', "error");
+                        $('.tendanhmuc').val('')
                     }
-                })
-            }
+                    if (data.existThutu === 1) {
+                        swal("Vui lòng nhập lại", 'Thứ tự đã tồn tại', "error");
+                        $('.thutu').val('');
+                    }
 
-        })
+                    if (data.existThutu === 0 && data.existName === 0) {
+                        $('.tendanhmuc').val('')
+                        $('.thutu').val('');
+                        swal("OK!", "Thêm thành công", "success");
+                        view_data();
+                    }
+                }
+            })
+        }
+
     })
+})
 </script>

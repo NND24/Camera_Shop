@@ -112,10 +112,9 @@ html {
 
 /* Main */
 .main {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: calc(100% - 250px);
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 
 /* Mode switch */
@@ -733,7 +732,7 @@ select.active {
   position: absolute;
   top: 0;
   bottom: 0;
-  transform: translate(-265px, 0px);
+  transform: translate(-360px, 0px);
   width: calc(100% + 250px);
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
@@ -748,7 +747,7 @@ select.active {
   position: absolute;
   top: 0;
   bottom: 0;
-  transform: translate(-265px, 0px);
+  transform: translate(-360px, 0px);
   width: calc(100% + 250px);
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
@@ -790,12 +789,13 @@ select.active {
   position: absolute;
   right: 0px;
   top: 10px;
-  padding: 0 51px 100% 100px;
+  padding: 0 207px 100% 70px;
 }
 
 /* Sidebar */
 .sidebar {
   max-width: 250px;
+  width: 250px;
   height: 100vh;
   background-color: var(--sidebar);
   display: flex;
@@ -828,13 +828,14 @@ select.active {
   text-decoration: none;
   font-size: 16px;
   line-height: 24px;
+  cursor: pointer;
 }
 
 .sidebar-list-item svg {
   margin-right: 8px;
 }
 
-.sidebar-list-item :hover {
+.sidebar-list-item:hover {
   background-color: var(--sidebar-hover-link);
 }
 

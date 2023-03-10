@@ -1,7 +1,6 @@
 <?php
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
 //echo json_encode($_POST);
-//echo json_encode($_POST);
 
 //Validate exist category name
 $sql_category_name = "SELECT * FROM tbl_danhmuc WHERE ten_danhmuc='" . $_POST['tendanhmuc'] . "' ";
