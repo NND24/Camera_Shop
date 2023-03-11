@@ -1,5 +1,4 @@
 <?php include('./js/link.php') ?>
-
 <?php
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
 $sql_lietke_sp = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
@@ -60,6 +59,9 @@ $query_lietke_sp = mysqli_query($mysqli, $sql_lietke_sp);
                             </div>
                         </div>
                     </div>
+                    <div class="filter-button-wrapper">
+                        <button class="action-button delete-all-product">Xóa tất cả danh mục</button>
+                    </div>
                 </div>
             </div>
 
@@ -97,56 +99,9 @@ $query_lietke_sp = mysqli_query($mysqli, $sql_lietke_sp);
                     <div class="product-cell col price">Xóa</div>
                     <div class="product-cell col price">Sửa</div>
                 </div>
-
-                <?php
-                $i = 0;
-                while ($row = mysqli_fetch_array($query_lietke_sp)) {
-                    $i++;
-                ?>
-                    <div class="products-row">
-                        <button class="cell-more-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
-                                <circle cx="12" cy="12" r="1" />
-                                <circle cx="12" cy="5" r="1" />
-                                <circle cx="12" cy="19" r="1" />
-                            </svg>
-                        </button>
-                        <div class="product-cell col-2-4 image">
-                            <img src="modules/quanlysp/uploads/<?php echo $row['hinhanh'] ?>" alt="product">
-                            <span title="<?php echo $row['tensanpham'] ?>"><?php echo $row['tensanpham'] ?></span>
-                        </div>
-                        <div class="product-cell col-1-8 category ">
-                            <p><?php echo $row['ten_danhmuc'] ?></p>
-                        </div>
-                        <div class="product-cell col-1-5 status-cell">
-                            <?php
-                            if ($row['trangthaisp'] == 1) {
-                            ?>
-                                <span class="status active">Kích hoạt</span>
-                            <?php
-                            } else if ($row['trangthaisp'] == 0) {
-                            ?>
-                                <span class="status">Ẩn</span>
-                            <?php
-                            }
-                            ?>
-                        </div>
-                        <div class="product-cell col-2 sales"><?php echo date('d/m/Y H:i', $row['created_time']) ?></div>
-                        <div class="product-cell col-2 stock"><?php echo date('d/m/Y H:i', $row['created_time']) ?></div>
-                        <div class="product-cell col-1-8 detail">
-                            <a title="Chi tiết sản phẩm">Xem chi tiết</a>
-                        </div>
-                        <div class="product-cell col btn">
-                            <a title="Xóa" href="modules/quanlysp/xuly.php?idsanpham=<?php echo $row['id_sanpham'] ?>"><i class="fa-solid fa-trash"></i></a>
-                        </div>
-                        <div class="product-cell col btn">
-                            <!-- <a href="?action=quanlysanpham&query=sua&idsanpham=<?php echo $row['id_sanpham'] ?>">Sửa</a> -->
-                            <a title="Sửa" class="edit-product-btn" data-id="<?php echo $row['id_sanpham'] ?>"><i class="fa-regular fa-pen-to-square"></i></a>
-                        </div>
-                    </div>
-                <?php
-                }
-                ?>
+                <div id="load_product_data"></div>
+                <div id="view-detail-product"></div>
+                <div id="view-edit-product"></div>
             </div>
         </div>
 
@@ -176,6 +131,134 @@ $query_lietke_sp = mysqli_query($mysqli, $sql_lietke_sp);
         $('.model-close-btn i').click((e) => {
             console.log(e);
             $('.model__add-new-container').css("display", "none");
+        })
+
+        // View data
+        function view_data() {
+            $.post('http://localhost:3000/admin/modules/quanlysp/handleEvent/listProductData.php',
+                function(data) {
+                    $('#load_product_data').html(data)
+                })
+        }
+        view_data();
+
+        // Remove product
+        $(document).on("click", '.remove-product', function() {
+            var id = $(this).val();
+            var url =
+                "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleDeleteProduct.php?idsanpham=" +
+                id;
+            swal({
+                    title: "Bạn có chắc muốn xóa danh sách này không?",
+                    text: "Nếu có danh sách này sẽ bị xóa đi!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("Danh sách đã bị xóa!", {
+                            icon: "success",
+                        });
+                        $.post(url, (data) => {
+                            view_data();
+                        });
+                    }
+                });
+
+
+        })
+
+        // Delete all product
+        $(document).on("click", '.delete-all-product', function() {
+            var url =
+                "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleDeleteProduct.php?action=deleteAll";
+            swal({
+                    title: "Bạn có chắc muốn thực hiện thao tác không?",
+                    text: "Nếu có tất cả danh sách sẽ bị xóa đi!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("Tất cả danh sách đã bị xóa!", {
+                            icon: "success",
+                        });
+                        $.post(url, (data) => {
+                            view_data();
+                        });
+                    }
+                });
+        })
+
+        // View detail category
+        $(document).on("click", '.detail-product', function() {
+            var id = $(this).val();
+            var url =
+                "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleViewDetail.php?idsanpham=" +
+                id;
+            $.post(url, (data) => {
+                console.log(data)
+                $("#view-detail-product").html(data);
+                $('.model-close-btn i').click(() => {
+                    $('.model__view-detail-container').css("display", "none");
+                })
+            });
+        })
+
+        // Edit product
+        $(document).on("click", '.edit-product', function() {
+            var id = $(this).val();
+            var url =
+                "http://localhost:3000/admin/modules/quanlysp/editProduct.php?idsanpham=" +
+                id;
+            $.post(url, (data) => {
+                $("#view-edit-product").html(data);
+                $('.model-close-btn i').click(() => {
+                    $('.model__edit-product-container').css("display", "none");
+                })
+            });
+        })
+
+        // Handle search
+        $(document).on("keyup", '.search-bar', function() {
+            var searchInput = $(this).val();
+
+            $.ajax({
+                url: "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleSearch.php",
+                data: {
+                    searchInput: searchInput,
+                },
+                dataType: 'html',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    $('#load_product_data').html(data)
+                }
+            })
+        })
+
+        // Handle filter
+        document.querySelector(".jsFilter").addEventListener("click", function() {
+            document.querySelector(".filter-menu").classList.toggle("active");
+        });
+
+        $('.filter-button.apply').click((e) => {
+            var status = $('.filter_status').val();
+            $.ajax({
+                url: "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleFilter.php",
+                data: {
+                    status: status,
+                },
+                dataType: 'html',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    console.log(data)
+                    $('#load_product_data').html(data)
+                }
+            })
         })
     })
 </script>

@@ -303,11 +303,13 @@ html {
   cursor: pointer;
 }
 
-.action-button.delete-all-category {
+.action-button.delete-all-category,
+.action-button.delete-all-product {
   background-color: #ff282894;
 }
 
-.action-button.delete-all-category:hover {
+.action-button.delete-all-category:hover,
+.action-button.delete-all-product:hover {
   background-color: #ff2828c5;
 }
 
@@ -519,7 +521,8 @@ select.active {
   color: #fff;
 }
 
-.detail-category {
+.detail-category,
+.detail-product {
   background-color: transparent;
   border: none;
 }
@@ -789,7 +792,7 @@ select.active {
   position: absolute;
   right: 0px;
   top: 10px;
-  padding: 0 207px 100% 70px;
+  padding: 0 207px 100vh 70px;
 }
 
 /* Sidebar */
@@ -861,7 +864,9 @@ select.active {
 
 /* Btn */
 .remove-category,
-.edit-category {
+.edit-category,
+.remove-product,
+.edit-product {
   background-color: transparent;
   border: none;
   color: #fff;

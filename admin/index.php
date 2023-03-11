@@ -31,15 +31,6 @@
 
     <?php include('category.php') ?>
 
-    <script>
-        $(document).ready(() => {
-            $(".list-order").click(() => {
-                //$('#main').load('modules/quanlydonhang/lietke.php');
-            })
-        })
-    </script>
-    </div>
-
     <script src="js/script.js"></script>
 
 </body>
