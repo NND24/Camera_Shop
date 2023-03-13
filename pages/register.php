@@ -18,43 +18,39 @@ if (isset($_POST['dangky'])) {
 ?>
 
 <link rel="stylesheet" href="css/login.css">
-<div class="wrapper">
+<div class="wrapper register">
+    <div class="close-login"><i class="fa-solid fa-xmark"></i></div>
     <form action="" method="POST" class="form" id="form-1">
-        <h3 class="heading">Đăng ký thành viên</h3>
+        <h3 class="heading col-12">Đăng ký thành viên</h3>
 
         <div class="spacer"></div>
 
-        <div class="form-group">
+        <div class="form-group col-12">
             <label for="hovaten" class="form-label">Tên đầy đủ</label>
             <input id="hovaten" name="hovaten" type="text" placeholder="VD: Đạt Nguyễn" class="form-control">
             <span class="form-message"></span>
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-6" style="padding-right:20px;">
             <label for="email" class="form-label">Email</label>
-            <input id="email" name="email" type="text" placeholder="VD: email@domain.com" class="form-control">
+            <input id="email" name="email" type="email" placeholder="VD: email@domain.com" class="form-control">
             <span class="form-message"></span>
         </div>
 
-        <div class="form-group">
-            <label for="dienthoai" class="form-label">Điện thoại</label>
-            <input id="dienthoai" name="dienthoai" type="text" placeholder="VD: email@domain.com" class="form-control">
+        <div class="form-group col-6">
+            <label for="phone-number" class="form-label">Số điện thoại</label>
+            <input id="phone-number" name="phone-number" type="number" placeholder="VD: email@domain.com"
+                class="form-control">
             <span class="form-message"></span>
         </div>
 
-        <div class="form-group">
-            <label for="diachi" class="form-label">Địa chỉ</label>
-            <input id="diachi" name="diachi" type="text" placeholder="VD: email@domain.com" class="form-control">
-            <span class="form-message"></span>
-        </div>
-
-        <div class="form-group">
+        <div class="form-group col-6" style="padding-right:20px;">
             <label for="password" class="form-label">Mật khẩu</label>
             <input id="password" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
             <span class="form-message"></span>
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-6">
             <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
             <input id="password_confirmation" name="password_confirmation" placeholder="Nhập lại mật khẩu"
                 type="password" class="form-control">

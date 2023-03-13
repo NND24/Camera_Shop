@@ -1,7 +1,7 @@
 <?php
 session_start();
+
 $filename = $_FILES['file']['name'];
-$_SESSION['product_img'] = time() . '_' . $filename;
 // Location
 $location = "uploads" . DIRECTORY_SEPARATOR . time() . '_' . $filename;
 //echo $location;
@@ -17,9 +17,7 @@ if (!in_array(strtolower($imageFileType), $valid_extensions)) {
 if ($uploadOk == 0) {
     echo 0;
 } else {
-    if (move_uploaded_file($_FILES['file']['tmp_name'], realpath('') . DIRECTORY_SEPARATOR . $location)) {
-        echo str_replace(DIRECTORY_SEPARATOR, "/", $location);
-    } else {
-        echo 0;
-    }
+    $_SESSION['product_img'] = time() . '_' . $filename;
+    $_SESSION['product_img-tmp'] = $_FILES['file']['tmp_name'];;
+    echo $filename;
 }

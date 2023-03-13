@@ -1,13 +1,6 @@
 <?php
-session_start();
-$sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY thutu ASC";
+$sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY thutu ASC LIMIT 9";
 $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
-
-if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
-    unset($_SESSION['dangky']);
-    unset($_SESSION['dangnhap']);
-    header('Location: index.php');
-}
 ?>
 
 <link rel="stylesheet" href="css/header.css">
@@ -23,7 +16,7 @@ if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
                 <!-- Logo -->
                 <div class="col-lg-2 col-sm-3 col-3 ">
                     <div class="logo_container">
-                        <div class="logo"><a href="index.php">
+                        <div class="logo"><a href="home.php">
                                 <img src="images/logo.webp" alt="logo">
                             </a></div>
                     </div>
@@ -34,15 +27,10 @@ if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
                     <div class="header_search">
                         <div class="header_search_content">
                             <div class="header_search_form_container">
-                                <form method="POST" action="index.php?quanly=timkiem"
-                                    class="header_search_form clearfix">
-                                    <input type="search" name="tukhoa" required="required" class="header_search_input"
-                                        placeholder="Tìm camera...">
+                                <form method="POST" action="index.php?quanly=timkiem" class="header_search_form clearfix">
+                                    <input type="search" name="tukhoa" required="required" class="header_search_input" placeholder="Tìm camera...">
 
-                                    <button type="submit" class="header_search_button trans_300" name="timkiem"
-                                        value="Submit"><img
-                                            src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918770/search.png"
-                                            alt="">
+                                    <button type="submit" class="header_search_button trans_300" name="timkiem" value="Submit"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918770/search.png" alt="">
                                     </button>
                                 </form>
                             </div>
@@ -61,26 +49,10 @@ if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
                                 <div class="cart_count"><span>3</span></div>
                             </a>
                         </div>
-
-                        <div class="user_option d-flex flex-row align-items-center justify-content-end">
-                            <?php
-                            if (isset($_SESSION['dangky']) || isset($_SESSION['dangnhap'])) {
-                            ?>
-                            <p style="color:white;">Xin chào
-                                <?php
-                                    if ($_SESSION['dangnhap']) {
-                                        echo $_SESSION['dangnhap'];
-                                    } else {
-                                        echo $_SESSION['dangnhap'];
-                                    }
-                                    ?></p>
-                            <span><a href="index.php?dangxuat=1">Đăng xuất</a></span>
-                            <?php
-                            } else {
-                            ?>
-                            <div><a href="index.php?quanly=dangnhap">Đăng nhập</a></div>
-                            <div><a href="index.php?quanly=dangky">Đăng ký</a></div>
-                            <?php }  ?>
+                        <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+                            <div class="user__option">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
                         </div>
 
                     </div>
@@ -108,13 +80,9 @@ if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
                                         <?php
                                         while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
                                         ?>
-                                        <li>
-                                            <a
-                                                href="index.php?quanly=danhmucsanpham&id=<?php echo $row_danhmuc['id_danhmuc'] ?>&trang=1">
-                                                <i class="fa-solid fa-chevron-right"></i>
-                                                <?php echo $row_danhmuc['ten_danhmuc'] ?>
-                                            </a>
-                                        </li>
+                                            <li>
+                                                <button class="category__product-btn" value="<?php echo $row_danhmuc['id_danhmuc'] ?>"><?php echo $row_danhmuc['ten_danhmuc'] ?></button>
+                                            </li>
                                         <?php
                                         }
                                         ?>
@@ -129,5 +97,25 @@ if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
             </div>
         </div>
     </nav>
-
 </header>
+<div id="view__login"></div>
+<script>
+    $(document).ready(() => {
+        $(document).on("click", '.category__product-btn', function() {
+            var id = $(this).val();
+            var url = "shopPage.php?id=" + id;
+            window.history.pushState("new", "title", url);
+            $("#main").load("shopPage.php?id=" + id);
+        })
+
+        $(document).on("click", '.user__option i', function() {
+            $("#view__login").load("pages/login.php");
+        })
+        $(document).on("click", '.register-btn', function() {
+            $("#view__login").load("pages/register.php");
+        })
+        $(document).on("click", '.close-login i', function() {
+            $(".wrapper").remove();
+        })
+    })
+</script>

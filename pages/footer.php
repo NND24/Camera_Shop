@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="css/footer.css">
-
 <footer class="footer">
     <div class="mid_footer">
         <div class="row">

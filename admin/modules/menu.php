@@ -1,4 +1,7 @@
 <div class="sidebar">
+    <button class="sidebar-btn">
+
+    </button>
     <div class="sidebar-header">
         <a href="index.php?dangxuat=1">Đăng xuất
             <?php
@@ -8,6 +11,7 @@
             ?>
         </a>
     </div>
+
     <ul class="sidebar-list">
         <li class="sidebar-list-item">
             <a class="list-gallery">Quản lý danh mục</a>

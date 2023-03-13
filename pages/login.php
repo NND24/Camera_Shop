@@ -25,14 +25,13 @@ if (isset($_POST['dangnhap'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- Css -->
-    <link rel="stylesheet" href="css/login.css">
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <?php include('../js/link.php');
+    include('../admin/config/config.php'); ?>
 </head>
 
 <body>
     <div class="wrapper">
+        <div class="close-login"><i class="fa-solid fa-xmark"></i></div>
         <form action="" method="POST" autocomplete="off" class="form" id="form-2">
             <h3 class="heading">Đăng nhập</h3>
 
@@ -51,7 +50,7 @@ if (isset($_POST['dangnhap'])) {
             </div>
 
             <button class="form-submit" name="dangnhap" type="submit">Đăng nhập</button>
-            <span>Nếu bạn chưa có tài khoản <a href="index.php?quanly=dangky">Đăng ký</a></span>
+            <span>Nếu bạn chưa có tài khoản <div class="register-btn">Đăng ký</div></span>
         </form>
     </div>
 </body>

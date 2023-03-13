@@ -1,4 +1,4 @@
-<div class="model__add-new-container">
+<div class="model__container">
     <div class="model-close-btn"><i class="fa-solid fa-xmark"></i></div>
     <form method="POST" enctype="multipart/form-data">
         <div class="model__add-new">
