@@ -2,7 +2,11 @@
 
 ## 1. BOOTSTRAP
 
-Để tìm hiểu có thể vào trang này: [Tìm hiểu cơ bản về bootstrap](https://www.hostinger.vn/huong-dan/bootstrap-la-gi)
+Bootstrap là một front-end framework miễn phí gồm các đoạn mã HTML, CSS, Javascript giúp các lập trình viên phát triển website dễ dàng và nhanh hơn theo chuẩn responsive.
+
+Bootstrap sử dụng mã nguồn mở và một số công cụ khác nhau giúp tạo ra một mẫu Website hoàn chỉnh. Ở đó được cài đặt mặc định một số tiêu chí như kích thước, cao-rộng của giao diện, màu sắc,… các nhà lập trình viên/quản trị website có thể chỉnh sửa, sáng tạo, hô biến giao diện có sẵn thành nhiều sản phẩm riêng biệt cho mình giúp giảm thiểu tối đa thời gian thiết kế cũng như chi phí khi việc với framework.
+
+Để tìm hiểu thêm có thể vào trang này: [Tìm hiểu cơ bản về bootstrap](https://www.hostinger.vn/huong-dan/bootstrap-la-gi)
 
 Hoặc vào [Trang chủ bootstrap](https://getbootstrap.com/) để biết thêm chi tiết cũng như cách sử dụng
 
