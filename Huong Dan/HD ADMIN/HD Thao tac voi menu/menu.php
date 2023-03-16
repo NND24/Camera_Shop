@@ -15,17 +15,17 @@
 </div>
 
 <script>
-$(document).ready(() => {
-    $(".list-gallery").click(() => {
-        const url = "category.php";
-        window.history.pushState("new", "title", url);
-        $("#main").load("category.php");
-    });
+    $(document).ready(() => {
+        $(".list-gallery").click(() => {
+            const url = "category.php";
+            window.history.pushState("", "", url);
+            $("#main").load("category.php");
+        });
 
-    $(".list-product").click(() => {
-        const url = "product.php";
-        window.history.pushState("new", "title", url);
-        $("#main").load("product.php");
-    });
-})
+        $(".list-product").click(() => {
+            const url = "product.php";
+            window.history.pushState("", "", url);
+            $("#main").load("product.php");
+        });
+    })
 </script>
