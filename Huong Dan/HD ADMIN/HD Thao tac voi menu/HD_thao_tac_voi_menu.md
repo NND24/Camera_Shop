@@ -5,6 +5,7 @@ Hiện tại thì menu mới có 1 phần chính là các tab, để có thể �
 ### Giải thích code
 
 Đây là toàn bộ code của phần header hiện tại
+`
 
 <html>
     <div class="sidebar">
@@ -40,5 +41,4 @@ $(document).ready(() => {
 })
 </script>
 </html>
-
----
+`
