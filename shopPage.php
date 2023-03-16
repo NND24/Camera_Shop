@@ -14,21 +14,7 @@
     <div class="container">
         <div class="main" id="main">
             <?php
-
             include('pages/header.php');
-
-            if (isset($_GET['trang'])) {
-                $page = $_GET['trang'];
-            } else {
-                $page = '';
-            }
-            if ($page == '' || $page == 1) {
-                $begin = 0;
-            } else {
-                $begin = ($page * 3) - 3;
-            }
-            $sql_pro = "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_danhmuc='$_GET[id]' ORDER BY id_sanpham ASC LIMIT $begin,20";
-            $query_pro = mysqli_query($mysqli, $sql_pro);
             // Lay ten danh muc
             $sql_cate = "SELECT * FROM tbl_danhmuc WHERE tbl_danhmuc.id_danhmuc='$_GET[id]' LIMIT 1 ";
             $query_cate = mysqli_query($mysqli, $sql_cate);
@@ -37,13 +23,11 @@
 
             <!-- Breadcrumb -->
             <div class="breadcrumb">
-                <span>
-                    <span>
-                        <a href="index.php">Trang chủ</a>
-                    </span>
+                <div class="breadcrumb-wrapper">
+                    <div class="view__home"><span>Trang chủ </span></div>
                     »
                     <span class="breadcrumb_last"><?php echo $row_title['ten_danhmuc'] ?></span>
-                </span>
+                </div>
             </div>
 
             <!-- Shop page title -->
@@ -59,21 +43,33 @@
             <div class="row category__page-row">
                 <div class="col col-lg-12">
                     <div class="sidebar__filter">
-                        <p>Bộ lọc:</p>
-                        <div class="price__list-filter">
-                            <span class="price__filter-title">Lọc theo giá<i class="fa-solid fa-chevron-down"></i></span>
-                        </div>
+                        <span>Lọc theo giá:</span>
+                        <select class="price__list-filter">
+                            <option value="0">Tất cả</option>
+                            <option value="1">Dưới 500.000đ</option>
+                            <option value="2">500.000đ đến 2.000.000đ</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col col-lg-12 mt-10">
                     <div class="ordering">
                         <ul>
                             <li>Sắp xếp theo:</li>
-                            <li>Mức độ phổ biến</li>
-                            <li>Điểm đánh giá</li>
-                            <li>Mới nhất</li>
-                            <li>Giá thấp đến cao</li>
-                            <li>Giá cao đến thấp</li>
+                            <li><input checked class="fliter__order" value="0" name="filter__order" id="filter__order-1"
+                                    type="radio"><label for="filter__order-1">Mức
+                                    độ phổ biến</label></li>
+                            <li><input class="fliter__order" value="1" name="filter__order" id="filter__order-2"
+                                    type="radio"><label for="filter__order-2">Điểm
+                                    đánh giá</label></li>
+                            <li><input class="fliter__order" value="2" name="filter__order" id="filter__order-3"
+                                    type="radio"><label for="filter__order-3">Mới
+                                    nhất</label></li>
+                            <li><input class="fliter__order" value="3" name="filter__order" id="filter__order-4"
+                                    type="radio"><label for="filter__order-4">Giá
+                                    thấp đến cao</label></li>
+                            <li><input class="fliter__order" value="4" name="filter__order" id="filter__order-5"
+                                    type="radio"><label for="filter__order-5">Giá
+                                    cao đến thấp</label></li>
                         </ul>
                     </div>
 
@@ -83,40 +79,7 @@
                             <?php echo $row_title['category_detail'] ?>
                         </div>
 
-                        <div class="row no-wrap products-category">
-                            <?php
-                            while ($row_pro = mysqli_fetch_array($query_pro)) {
-                            ?>
-                                <div class="col col-lg-3 col-md-4 col-4 mb-10">
-                                    <div class="row__item item--product">
-                                        <div class="row__item-container">
-                                            <div class="row__item-display br-5">
-                                                <div class="view__product-detail" value="<?php echo $row_pro['id_sanpham'] ?>">
-                                                    <div class="row__item-img" style="background: url('./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_pro['hinhanh'] ?>') no-repeat center center / cover">
-                                                    </div>
-                                                </div>
-                                                <div class="add-to-cart-btn">
-                                                    <form method="POST" action="pages/main/addToCart.php?idsanpham=<?php echo $row_pro['id_sanpham'] ?>">
-                                                        <i class="fa-solid fa-cart-plus"></i>
-                                                        <input name="themgiohang" type="submit" value="Thêm vào giỏ hàng">
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <div class="row__item-info">
-                                                <a href="#" class="row__info-name"><?php echo $row_pro['tensanpham'] ?></a>
-                                                <div class="price__wrapper">
-                                                    <span class="price-has-dropped"><?php echo number_format($row_pro['giasp'], 0, ',', '.') ?>đ</span>
-                                                    <span class="price-previous-dropped">560,000đ</span>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php
-                            }
-                            ?>
-                        </div>
+                        <div id="load__product-row"></div>
 
                         <?php
                         $sql_trang = mysqli_query($mysqli, "SELECT * FROM tbl_sanpham");
@@ -130,11 +93,12 @@
                             <?php
                             for ($i = 1; $i <= $trang; $i++) {
                             ?>
-                                <li class="page__numbers <?php if ($i == $page) {
+                            <li class="page__numbers <?php if ($i == $page) {
                                                                 echo "active";
                                                             } ?>">
-                                    <a href="index.php?quanly=danhmucsanpham&id=1&trang=<?php echo $i ?>"><?php echo $i ?></a>
-                                </li>
+                                <a
+                                    href="index.php?quanly=danhmucsanpham&id=1&trang=<?php echo $i ?>"><?php echo $i ?></a>
+                            </li>
                             <?php
                             }
                             ?>
@@ -153,15 +117,94 @@
     include('pages/footer.php');
     ?>
     <script>
-        $(document).ready(() => {
-            $(document).on("click", '.view__product-detail', function() {
-                var id = $(this).attr("value");
-                console.log(id)
-                var url = "chitietsanpham.php?id=" + id;
-                window.history.pushState("new", "title", url);
-                $("#main").load("chitietsanpham.php?id=" + id);
+    $(document).ready(() => {
+
+        // $(window).bind('mousewheel', function(event) {
+        //     if (event.originalEvent.wheelDelta >= 100) {
+        //         $('.container').removeClass('active');
+        //     } else {
+        //         $('.container').addClass('active');
+        //     }
+        // });
+
+        window.onscroll = function() {
+            if (document.documentElement.scrollTop > 50) {
+                $('.container').addClass('active');
+            } else {
+                $('.container').removeClass('active');
+            }
+        };
+
+
+        $(document).on("click", '.view__product-detail', function() {
+            var id = $(this).attr("value");
+            var url = "chitietsanpham.php?id=" + id;
+            window.history.pushState("new", "title", url);
+            $("#main").load("chitietsanpham.php?id=" + id);
+        })
+
+        $(document).on("click", '.view__home', function() {
+            var url = "home.php";
+            window.history.pushState("new", "title", url);
+            $("#main").load("home.php");
+        })
+
+        // View data
+        function view_data() {
+            $.post('http://localhost:3000/pages/handleEvent/listProductData.php?id=' +
+                <?php echo $_GET['id'] ?>,
+                function(data) {
+                    $('#load__product-row').html(data)
+                })
+        }
+        view_data();
+
+        /* FILTER START */
+        $(document).on("change", '.fliter__order', function() {
+            var value = $(this).val();
+            console.log(value)
+            $.ajax({
+                url: "http://localhost:3000/pages/handleEvent/filterOrder.php?id=" +
+                    <?php echo $_GET['id'] ?>,
+                data: {
+                    value: value,
+                },
+                dataType: 'html',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    if (value == 1 || value == 2 || value == 3 || value == 4) {
+                        $('#load__product-row').html(data)
+                    } else {
+                        view_data();
+                    }
+                }
             })
         })
+
+        $(document).on("click", '.price__list-filter', function() {
+            var value = $(this).val();
+            $.ajax({
+                url: "http://localhost:3000/pages/handleEvent/handlePriceRange.php?id=" +
+                    <?php echo $_GET['id'] ?>,
+                data: {
+                    value: value,
+                },
+                dataType: 'html',
+                method: "post",
+                cache: true,
+                success: function(data) {
+
+                    if (value == 1 || value == 2) {
+                        $('#load__product-row').html(data)
+                    } else {
+                        view_data();
+                    }
+                }
+            })
+        })
+        /* FILTER END */
+    })
     </script>
 </body>
 

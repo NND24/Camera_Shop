@@ -30,6 +30,7 @@ if (isset($_GET['action'])) {
     $soluong = $_POST['soluong'];
     $image = $_SESSION['product_img'];
     $giamgia = $_POST['giamgia'];
+    $giadagiam = $_POST['giasp'] - ($_POST['giasp'] * $_POST['giamgia']) / 100;
     $trangthai = $_POST['trangthai'];
     $tomtat = $_POST['tomtat'];
     $noidung = $_POST['noidung'];
@@ -40,13 +41,13 @@ if (isset($_GET['action'])) {
     $sql = "SELECT * FROM tbl_sanpham WHERE id_sanpham = '$id'  LIMIT 1";
     $query = mysqli_query($mysqli, $sql);
     while ($row = mysqli_fetch_array($query)) {
-        unlink('uploads/' . $row['hinhanh']);
+        //unlink('uploads/' . $row['hinhanh']);
     }
 
     //if ($image != '') {
     // Sua
     $sql_update = "UPDATE `tbl_sanpham` SET `tensanpham`='$tensanpham',`giasp`='$giasp',`soluong`='$soluong',`hinhanh`='$image',
-    `giamgia`='$giamgia',`trangthaisp`='$trangthai',`tomtat`='$tomtat',`noidung`='$noidung',`id_danhmuc`='$danhmuc',`last_updated`='$last_updated' WHERE id_sanpham='$id'";
+    `giamgia`='$giamgia',`giadagiam`='$giadagiam',`trangthaisp`='$trangthai',`tomtat`='$tomtat',`noidung`='$noidung',`id_danhmuc`='$danhmuc',`last_updated`='$last_updated' WHERE id_sanpham='$id'";
     $query_update = mysqli_query($mysqli, $sql_update);
     // } else {
     //     $sql_update = "UPDATE tbl_sanpham SET tensanpham='" . $tensanpham . "',masp='" . $masp . "',giasp='" . $giasp . "',

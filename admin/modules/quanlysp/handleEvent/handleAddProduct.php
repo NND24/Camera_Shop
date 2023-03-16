@@ -8,6 +8,7 @@ $giasp = $_POST['giasp'];
 $soluong = $_POST['soluong'];
 $image = $_SESSION['product_img'];
 $giamgia = $_POST['giamgia'];
+$giadagiam = $_POST['giasp'] - ($_POST['giasp'] * $_POST['giamgia']) / 100;
 $tomtat = $_POST['tomtat'];
 $noidung = $_POST['noidung'];
 $trangthai = $_POST['trangthai'];
@@ -44,9 +45,9 @@ if (mysqli_num_rows($query_product_name) > 0) {
     $b = array("existName" => 0);
     echo json_encode($b);
     if (isset($_GET['action'])) {
-        $sql_them = "INSERT INTO tbl_sanpham(tensanpham, masp, giasp, soluong, hinhanh, giamgia, tomtat,
+        $sql_them = "INSERT INTO tbl_sanpham(tensanpham, masp, giasp, soluong, hinhanh, giamgia,giadagiam, tomtat,
  noidung, trangthaisp, id_danhmuc, created_time, last_updated) 
-VALUE('" . $tensanpham . "','" . $masp . "','" . $giasp . "','" . $soluong . "','" . $image . "','" . $giamgia . "','" . $tomtat . "','" . $noidung . "',
+VALUE('" . $tensanpham . "','" . $masp . "','" . $giasp . "','" . $soluong . "','" . $image . "','" . $giamgia . "','" . $giadagiam . "','" . $tomtat . "','" . $noidung . "',
 '" . $trangthai . "','" . $danhmuc . "','" . time() . "','" . time() . "')";
         mysqli_query($mysqli, $sql_them);
     }

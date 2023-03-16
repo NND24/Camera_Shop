@@ -17,6 +17,7 @@
         ?>
         <div class="main" id="main">
             <?php
+            // Query category
             $sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY thutu ASC ";
             $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
             ?>
@@ -93,244 +94,63 @@
 
                             <div class="col col-lg-12 col-md-12 col-12">
                                 <div class="row no-wrap product--container">
-
+                                    <?php
+                                    $sql_product_discount = "SELECT * FROM tbl_sanpham ORDER BY giamgia ASC LIMIT 8";
+                                    $query_product_discount = mysqli_query($mysqli, $sql_product_discount);
+                                    while ($row_product_discount = mysqli_fetch_array($query_product_discount)) {
+                                    ?>
                                     <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
                                         <div class="row__item item--product">
                                             <div class="row__item-container">
                                                 <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
+                                                    <div class="view__product-detail"
+                                                        value="<?php echo $row_product_discount['id_sanpham'] ?>">
+                                                        <div class="row__item-img"
+                                                            style="background: url('./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_product_discount['hinhanh'] ?>') no-repeat center center / cover">
+                                                        </div>
                                                     </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
+                                                    <div class="add-to-cart-btn"
+                                                        value="<?php echo $row_product_discount['id_sanpham'] ?>">
+                                                        <i class="fa-solid fa-cart-plus"></i>
+                                                        <span>Thêm vào giỏ hàng</span>
                                                     </div>
                                                 </div>
                                                 <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
+                                                    <div class="view__product-detail"
+                                                        value="<?php echo $row_product_discount['id_sanpham'] ?>">
+                                                        <div class="row__info-name">
+                                                            <span
+                                                                style="cursor:pointer;"><?php echo $row_product_discount['tensanpham'] ?></span>
+                                                        </div>
+                                                    </div>
                                                     <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
+                                                        <?php
+                                                            if ($row_product_discount['giamgia'] > 0) {
+                                                            ?>
+                                                        <span
+                                                            class="price-discount"><?php echo number_format($row_product_discount['giasp'] - ($row_product_discount['giasp'] * $row_product_discount['giamgia']) / 100, 0, ',', '.') ?>đ</span>
+                                                        <span
+                                                            class="price-normal-discount"><?php echo number_format($row_product_discount['giasp'], 0, ',', '.') ?>đ</span>
+                                                        <?php
+                                                            } else {
+                                                            ?>
+                                                        <span
+                                                            class="price-normal"><?php echo number_format($row_product_discount['giasp'], 0, ',', '.') ?>đ</span>
+                                                        <?php
+                                                            }
+                                                            ?>
                                                     </div>
 
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
-                                                    </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
-                                                    </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
-                                                    </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
-                                                    </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
-                                                    </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
-                                                    </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
-                                                    </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
-                                                    </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
-                                                    </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
+                                    <?php
+                                    }
+                                    ?>
                     </section>
 
-                    <!--  Products -->
+                    <!--  Products Sold -->
                     <section class="section box__product">
                         <div class="section_content row">
                             <div class="col col-lg-12 col-md-12 col-12">
@@ -341,255 +161,161 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col col-lg-12 col-md-12 col-12">
                                 <div class="row no-wrap product--container">
-
+                                    <?php
+                                    $sql_product_sold = "SELECT * FROM tbl_sanpham ORDER BY daban ASC LIMIT 8";
+                                    $query_product_sold = mysqli_query($mysqli, $sql_product_sold);
+                                    while ($row_product_sold = mysqli_fetch_array($query_product_sold)) {
+                                    ?>
                                     <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
                                         <div class="row__item item--product">
                                             <div class="row__item-container">
                                                 <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
+                                                    <div class="view__product-detail"
+                                                        value="<?php echo $row_product_sold['id_sanpham'] ?>">
+                                                        <div class="row__item-img"
+                                                            style="background: url('./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_product_sold['hinhanh'] ?>') no-repeat center center / cover">
+                                                        </div>
                                                     </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
+                                                    <div class="add-to-cart-btn"
+                                                        value="<?php echo $row_product_sold['id_sanpham'] ?>">
+                                                        <i class="fa-solid fa-cart-plus"></i>
+                                                        <span>Thêm vào giỏ hàng</span>
                                                     </div>
                                                 </div>
                                                 <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
+                                                    <div class="view__product-detail"
+                                                        value="<?php echo $row_product_sold['id_sanpham'] ?>">
+                                                        <div class="row__info-name">
+                                                            <span
+                                                                style="cursor:pointer;"><?php echo $row_product_sold['tensanpham'] ?></span>
+                                                        </div>
                                                     </div>
+                                                    <div class="price__wrapper">
+                                                        <?php
+                                                            if ($row_product_sold['giamgia'] > 0) {
+                                                            ?>
+                                                        <span
+                                                            class="price-discount"><?php echo number_format($row_product_sold['giasp'] - ($row_product_sold['giasp'] * $row_product_sold['giamgia']) / 100, 0, ',', '.') ?>đ</span>
+                                                        <span
+                                                            class="price-normal-discount"><?php echo number_format($row_product_sold['giasp'], 0, ',', '.') ?>đ</span>
+                                                        <?php
+                                                            } else {
+                                                            ?>
+                                                        <span
+                                                            class="price-normal"><?php echo number_format($row_product_sold['giasp'], 0, ',', '.') ?>đ</span>
+                                                        <?php
+                                                            }
+                                                            ?>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
-                                                    </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
-                                                    </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
-                                                    </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
-                                                    </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
-                                                    </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
-                                                    </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
-                                                    </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
-                                                    </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <div class="row__item-display br-5">
-                                                    <div class="row__item-img"
-                                                        style="background: url('./images/products/yoosee-3-rau-3m.jpg') no-repeat center center / cover">
-                                                    </div>
-                                                    <div class="add-to-cart-btn">
-                                                        <a><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row__item-info">
-                                                    <a href="#" class="row__info-name">Camera Yoosee 3 Râu 3M Ban Đêm Có
-                                                        Màu</a>
-                                                    <div class="price__wrapper">
-                                                        <span class="price-has-dropped">290,000đ</span>
-                                                        <span class="price-previous-dropped">560,000đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>
                     </section>
 
+                    <!-- Normal  Products -->
+                    <?php
+                    $sql_category = "SELECT * FROM tbl_danhmuc ORDER BY thutu ASC LIMIT 9";
+                    $query_category = mysqli_query($mysqli, $sql_category);
+                    while ($row_category = mysqli_fetch_array($query_category)) {
+                        $sql_product = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc AND tbl_sanpham.id_danhmuc='$row_category[id_danhmuc]' ORDER BY daban ASC LIMIT 8";
+                        $query_product = mysqli_query($mysqli, $sql_product);
+                        if (mysqli_num_rows($query_product) > 0) {
+                    ?>
+                    <section class="section box__product">
+                        <div class="section_content row">
+                            <div class="col col-lg-12 col-md-12 col-12">
+                                <div class="container__header">
+                                    <h2 class="container__header-title"><?php echo $row_category['ten_danhmuc'] ?></h2>
+                                    <div class="view-all">
+                                        <div class="view__all-product-with-categogy"
+                                            value="<?php echo $row_category['id_danhmuc'] ?>">Xem tất cả<i
+                                                class="fa-solid fa-chevron-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-lg-12 col-md-12 col-12">
+                                <div class="row no-wrap product--container">
+                                    <?php
 
+                                            while ($row_product = mysqli_fetch_array($query_product)) {
+                                            ?>
+                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
+                                        <div class="row__item item--product">
+                                            <div class="row__item-container">
+                                                <div class="row__item-display br-5">
+                                                    <div class="view__product-detail"
+                                                        value="<?php echo $row_product['id_sanpham'] ?>">
+                                                        <div class="row__item-img"
+                                                            style="background: url('./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_product['hinhanh'] ?>') no-repeat center center / cover">
+                                                        </div>
+                                                    </div>
+                                                    <div class="add-to-cart-btn"
+                                                        value="<?php echo $row_product['id_sanpham'] ?>">
+                                                        <i class="fa-solid fa-cart-plus"></i>
+                                                        <span>Thêm vào giỏ hàng</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row__item-info">
+                                                    <div class="view__product-detail"
+                                                        value="<?php echo $row_product['id_sanpham'] ?>">
+                                                        <div class="row__info-name">
+                                                            <span
+                                                                style="cursor:pointer;"><?php echo $row_product['tensanpham'] ?></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="price__wrapper">
+                                                        <?php
+                                                                    if ($row_product['giamgia'] > 0) {
+                                                                    ?>
+                                                        <span
+                                                            class="price-discount"><?php echo number_format($row_product['giasp'] - ($row_product['giasp'] * $row_product['giamgia']) / 100, 0, ',', '.') ?>đ</span>
+                                                        <span
+                                                            class="price-normal-discount"><?php echo number_format($row_product['giasp'], 0, ',', '.') ?>đ</span>
+                                                        <?php
+                                                                    } else {
+                                                                    ?>
+                                                        <span
+                                                            class="price-normal"><?php echo number_format($row_product['giasp'], 0, ',', '.') ?>đ</span>
+                                                        <?php
+                                                                    }
+                                                                    ?>
+                                                    </div>
 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php
+                                            }
+                                            ?>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <?php
+                        }
+                        ?>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
 
         </div>
     </div>
     <?php
-        include('pages/footer.php');
-        ?>
+    include('pages/footer.php');
+    ?>
     <!-- Swiper JS -->
     <script>
     var swiper = new Swiper(".mySwiper", {
@@ -607,6 +333,27 @@
             dynamicBullets: true,
         },
     });
+
+    $(document).ready(() => {
+        $(document).on("click", '.view__product-detail', function() {
+            var idDetail = $(this).attr("value");
+            var url = "chitietsanpham.php?id=" + idDetail;
+            window.history.pushState("new", "title", url);
+            $("#main").load("chitietsanpham.php?id=" + idDetail);
+        })
+
+        $(document).on("click", '.add-to-cart-btn', function() {
+            var id = $(this).attr("value");
+        })
+
+        // View all
+        $(document).on("click", '.view__all-product-with-categogy', function() {
+            var idAll = $(this).attr("value");
+            var url = "shopPage.php?id=" + idAll;
+            window.history.pushState("new", "title", url);
+            $("#main").load("shopPage.php?id=" + idAll);
+        })
+    })
     </script>
 </body>
 
