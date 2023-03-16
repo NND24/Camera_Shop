@@ -6,10 +6,11 @@ Hiện tại thì menu mới có 1 phần chính là các tab, để có thể �
 
 Đây là toàn bộ code của phần header hiện tại
 
-<div class="sidebar">
+<html>
+    <div class="sidebar">
     <div class="sidebar-header">
-        <a href="#">Đăng xuất
-        </a>
+        <div href="#">Đăng xuất
+        </div>
     </div>
 
     <ul class="sidebar-list">
@@ -38,5 +39,6 @@ $(document).ready(() => {
     });
 })
 </script>
+</html>
 
 ---
