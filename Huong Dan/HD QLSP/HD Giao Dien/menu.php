@@ -1,7 +1,4 @@
 <div class="sidebar">
-    <button class="sidebar-btn">
-
-    </button>
     <div class="sidebar-header">
         <a href="index.php?dangxuat=1">Đăng xuất
             <?php
