@@ -1,33 +1,35 @@
-<div class="model__container">
-    <div class="model-close-btn"><i class="fa-solid fa-xmark"></i></div>
-    <form method="POST" enctype="multipart/form-data">
-        <div class="model__add-new">
-            <h3>Thêm danh mục</h3>
-            <div class="model__content">
-                <label class="col-2">Tên danh mục: </label>
-                <input type="text" class="tendanhmuc" val="" name="tendanhmuc">
-                <span class="errorName" style="color:red;"></span>
-            </div>
-            <div class="model__content">
-                <label class="col-2">Thứ tự danh mục: </label>
-                <input type="number" name="thutu" class="thutu">
-                <span class="errorThutu" style="color:red;"></span>
-            </div>
-            <div class="model__content">
-                <label class="col-2">Trạng thái: </label>
-                <select name="trangthai" class="trangthai">
-                    <option value="1">Kích hoạt</option>
-                    <option value="0">Ẩn</option>
-                </select>
-            </div>
-            <div class="model__content">
+<div id="product__add-model">
+    <div class="model__container">
+        <div class="model-close-btn"><i class="fa-solid fa-xmark"></i></div>
+        <form enctype="multipart/form-data">
+            <div class="model__add-new">
+                <h3>Thêm danh mục</h3>
+                <div class="model__content">
+                    <label class="col-2">Tên danh mục: </label>
+                    <input type="text" class="tendanhmuc" val="" name="tendanhmuc">
+                    <span class="errorName" style="color:red;"></span>
+                </div>
+                <div class="model__content">
+                    <label class="col-2">Thứ tự danh mục: </label>
+                    <input type="number" name="thutu" class="thutu">
+                    <span class="errorThutu" style="color:red;"></span>
+                </div>
+                <div class="model__content">
+                    <label class="col-2">Trạng thái: </label>
+                    <select name="trangthai" class="trangthai">
+                        <option value="1">Kích hoạt</option>
+                        <option value="0">Ẩn</option>
+                    </select>
+                </div>
+                <div class="model__content">
 
-                <label>Chi tiết danh mục: </label>
-                <textarea name="category-content" class="category-content" id="category-content"></textarea>
+                    <label>Chi tiết danh mục: </label>
+                    <textarea name="category-content" class="category-content" id="category-content"></textarea>
+                </div>
+                <button id="themdanhmuc">Thêm danh mục sản phẩm</button>
             </div>
-            <button id="themdanhmuc">Thêm danh mục sản phẩm</button>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 
 <script>

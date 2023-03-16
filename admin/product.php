@@ -40,9 +40,7 @@ ORDER BY id_sanpham DESC";
                             <button class="action-button filter jsFilter"><span>Filter</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter">
                                     <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
                                 </svg></button>
-                            <div class="filter-menu d-flex wrap" style="
-    width: 400px;
-    flex-wrap: wrap;">
+                            <div class="filter-menu d-flex wrap" style=" width: 400px;flex-wrap: wrap;">
                                 <div class=" col-6 " style="padding-right: 10px;">
                                     <label>Trạng thái</label>
                                     <select class="filter_status">
@@ -110,34 +108,11 @@ ORDER BY id_sanpham DESC";
 
                 <div class="products-area-wrapper tableView">
                     <div class="products-header">
-                        <div class="product-cell col-2-4 image">
-                            Sản phẩm
-                            <button class="sort-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
-                                    <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="product-cell col-1-8 category">Danh mục<button class="sort-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
-                                    <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" />
-                                </svg>
-                            </button></div>
-                        <div class="product-cell col-1-5 status-cell">Trạng thái<button class="sort-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
-                                    <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" />
-                                </svg>
-                            </button></div>
-                        <div class="product-cell col-2 sales">Ngày tạo<button class="sort-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
-                                    <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" />
-                                </svg>
-                            </button></div>
-                        <div class="product-cell col-2 stock">Ngày cập nhật<button class="sort-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
-                                    <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" />
-                                </svg>
-                            </button></div>
+                        <div class="product-cell col-2-4 image"> Sản phẩm</div>
+                        <div class="product-cell col-1-8 category">Danh mục</div>
+                        <div class="product-cell col-1-5 status-cell">Trạng thái</div>
+                        <div class="product-cell col-2 sales">Ngày tạo</div>
+                        <div class="product-cell col-2 stock">Ngày cập nhật</div>
                         <div class="product-cell col-1-8 price">Chi tiết</div>
                         <div class="product-cell col price">Xóa</div>
                         <div class="product-cell col price">Sửa</div>
@@ -147,7 +122,6 @@ ORDER BY id_sanpham DESC";
                     <div id="view-edit-product"></div>
                     <div id="view-add-product"></div>
 
-
                 </div>
             </div>
         </div>
@@ -155,30 +129,6 @@ ORDER BY id_sanpham DESC";
 
     <script>
         $(document).ready(() => {
-            $(".list-gallery").click(() => {
-                //console.log(window.location.href)
-                const url = "category.php";
-                window.history.pushState("new", "title", url);
-                $("#main").load("category.php");
-            });
-
-            $(".list-product").click(() => {
-                const url = "product.php";
-                window.history.pushState("new", "title", url);
-                $("#main").load("product.php");
-            });
-
-            $(".list-order").click(() => {
-                const url = "order.php";
-                window.history.pushState("new", "title", url);
-                $("#main").load("order.php");
-            });
-
-            // 
-            $('.sidebar-btn').click(() => {
-                document.querySelector(".sidebar").classList.toggle("active");
-            })
-
             // View data
             function view_data() {
                 $.post('http://localhost:3000/admin/modules/quanlysp/handleEvent/listProductData.php',
