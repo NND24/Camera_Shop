@@ -1,4 +1,4 @@
-# CÁC THÀNH PHẦN TRONG GIAO DIỆN QUẢN LÝ SẢN PHẨM
+# CÁC THÀNH PHẦN TRONG GIAO DIỆN QUẢN LÝ
 
 Giao diện admin được chia thành 3 thành phần chính:
 
