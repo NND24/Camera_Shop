@@ -8,5 +8,6 @@ Giao diện quản lý được chia thành 3 thành phần chính:
 
 ## MENU
 
+![alt](Huong Dan/HD QLSP/HD Giao Dien/image/menu.png);
 image.png
 Có chức năng chính là điều hướng các danh mục
