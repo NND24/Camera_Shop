@@ -367,10 +367,7 @@
                     </div>
 
                     <div class="review__product">
-                        <div class="review__title">Đánh giá Camera Yoosee Ngoài Trời 5.0Mp – Nhìn Đêm Có Màu – Chống
-                            Nước – Đàm
-                            Thoại 2 Chiều (Mẫu Mới 2022)
-                        </div>
+                        <div class="review__title">Đánh giá <?php echo $row_chitiet['tensanpham'] ?></div>
 
                         <div class="star__box">
                             <div class="star__average">
@@ -438,11 +435,12 @@
                                 </div>
                             </div>
                             <div class="star__box-right">
-                                <a href="#" title="Đánh giá ngay" class="btn-reviews-now">Đánh giá ngay</a>
+                                <button title="Đánh giá ngay" class="btn-reviews-now">Đánh giá ngay</button>
                             </div>
                         </div>
 
-                        <div class="review__form-wrapper"></div>
+                        <div class="load__review-modal">
+                        </div>
 
                         <p class="no-review">Chưa có đánh giá nào.</p>
                     </div>
@@ -456,24 +454,8 @@
                                         name="" id="" cols="30" rows="10"></textarea>
                                 </div>
                                 <div class="form__comment-bottom">
-                                    <div class="comment__gender-radio">
-                                        <div>
-                                            <input type="radio" value="male" checked name="comment_gender" id="male">
-                                            <label for="male">Anh</label>
-                                        </div>
-                                        <div>
-                                            <input type="radio" value="female" name="comment_gender" id="female">
-                                            <label for="female">Chị</label>
-                                        </div>
-                                    </div>
-                                    <div class="comment__name-input">
-                                        <input type="text" placeholder="Họ tên (bắt buộc)" name="" id="">
-                                    </div>
-                                    <div class="comment__email-input">
-                                        <input type="email" placeholder="Email" name="" id="">
-                                    </div>
                                     <div class="comment__submit">
-                                        <button type="submit">Gửi</button>
+                                        <button>Gửi</button>
                                     </div>
                                 </div>
                             </form>
@@ -487,10 +469,11 @@
             }
             ?>
         </div>
+        <?php
+        include('pages/footer.php');
+        ?>
     </div>
-    <?php
-    include('pages/footer.php');
-    ?>
+
     <!-- Initialize Swiper -->
     <script>
     var swiper = new Swiper(".mySwiper", {
@@ -528,14 +511,14 @@
             console.log(id)
             var url = "shopPage.php?id=" + id;
             window.history.pushState("new", "title", url);
-            $("#main").load("shopPage.php?id=" + id);
+            $(".container").load("shopPage.php?id=" + id);
         })
 
         // Back to home
         $(document).on("click", '.view__home', function() {
             var url = "home.php"
             window.history.pushState("new", "title", url);
-            $("#main").load("home.php");
+            $(".container").load("home.php");
         })
 
         // Preview product
@@ -552,7 +535,7 @@
             var id = $(this).attr("value");
             var url = "chitietsanpham.php?id=" + id;
             window.history.pushState("new", "title", url);
-            $("#main").load("chitietsanpham.php?id=" + id);
+            $(".container").load("chitietsanpham.php?id=" + id);
             $(window).scrollTop(0);
         })
 
@@ -568,6 +551,97 @@
             $('.product__tab-content').css('height', '560px');
             $('.product__footer-content .load-more').css('display', 'block')
             $('.product__footer-content .collapse').css('display', 'none')
+        })
+
+        /* REVIEW STAR ANIMATION START */
+        $(document).on("mouseover", '.star-1', function() {
+            $('.star-1 i').css("font-size", "27px")
+            $('.star-1').css("font-size", "16px")
+            $('.star-2 i').css("color", "grey")
+            $('.star-3 i').css("color", "grey")
+            $('.star-4 i').css("color", "grey")
+            $('.star-5 i').css("color", "grey")
+        })
+
+        $(document).on("mouseout", '.star-1', function() {
+            $('.star-1 i').css("font-size", "24px")
+            $('.star-1').css("font-size", "14px")
+            $('.star-2 i').css("color", "#fe9727")
+            $('.star-3 i').css("color", "#fe9727")
+            $('.star-4 i').css("color", "#fe9727")
+            $('.star-5 i').css("color", "#fe9727")
+        })
+
+        $(document).on("mouseover", '.star-2', function() {
+            $('.star-2 i').css("font-size", "27px")
+            $('.star-2').css("font-size", "16px")
+            $('.star-3 i').css("color", "grey")
+            $('.star-4 i').css("color", "grey")
+            $('.star-5 i').css("color", "grey")
+        })
+
+        $(document).on("mouseout", '.star-2', function() {
+            $('.star-2 i').css("font-size", "24px")
+            $('.star-2').css("font-size", "14px")
+            $('.star-3 i').css("color", "#fe9727")
+            $('.star-4 i').css("color", "#fe9727")
+            $('.star-5 i').css("color", "#fe9727")
+        })
+
+        $(document).on("mouseover", '.star-3', function() {
+            $('.star-3 i').css("font-size", "27px")
+            $('.star-3').css("font-size", "16px")
+            $('.star-4 i').css("color", "grey")
+            $('.star-5 i').css("color", "grey")
+        })
+
+        $(document).on("mouseout", '.star-3', function() {
+            $('.star-3 i').css("font-size", "24px")
+            $('.star-3').css("font-size", "14px")
+            $('.star-4 i').css("color", "#fe9727")
+            $('.star-5 i').css("color", "#fe9727")
+        })
+
+        $(document).on("mouseover", '.star-4', function() {
+            $('.star-4 i').css("font-size", "27px")
+            $('.star-4').css("font-size", "16px")
+            $('.star-5 i').css("color", "grey")
+        })
+
+        $(document).on("mouseout", '.star-4', function() {
+            $('.star-4 i').css("font-size", "24px")
+            $('.star-4').css("font-size", "14px")
+            $('.star-5 i').css("color", "#fe9727")
+        })
+
+        $(document).on("mouseover", '.star-5', function() {
+            $('.star-5 i').css("font-size", "27px")
+            $('.star-5').css("font-size", "16px")
+        })
+
+        $(document).on("mouseout", '.star-5', function() {
+            $('.star-5 i').css("font-size", "24px")
+            $('.star-5').css("font-size", "14px")
+        })
+
+        $(document).on("mouseout", '.star-4', function() {
+            $('.star-5 i').css("color", "#fe9727")
+        })
+        /* REVIEW STAR ANIMATION END */
+
+        // Open review modal
+        $(document).on("click", '.btn-reviews-now', function() {
+            var id = <?php echo $_GET['id'] ?>;
+            $(".load__review-modal").load("pages/reviewModal.php?id=" + id);
+        })
+
+        // Vlose review modal
+        $(document).on("click", '.close-review-modal', function() {
+            $(".review-modal-container").remove();
+        })
+
+        $(document).on("click", '.review-modal-background', function() {
+            $(".review-modal-container").remove();
         })
     })
     </script>
