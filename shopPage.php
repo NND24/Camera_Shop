@@ -51,35 +51,39 @@
                         </select>
                     </div>
                 </div>
-                <div class="col col-lg-12 mt-10">
-                    <div class="ordering">
-                        <ul>
-                            <li>Sắp xếp theo:</li>
-                            <li><input checked class="fliter__order" value="0" name="filter__order" id="filter__order-1"
-                                    type="radio"><label for="filter__order-1">Mức
-                                    độ phổ biến</label></li>
-                            <li><input class="fliter__order" value="1" name="filter__order" id="filter__order-2"
-                                    type="radio"><label for="filter__order-2">Điểm
-                                    đánh giá</label></li>
-                            <li><input class="fliter__order" value="2" name="filter__order" id="filter__order-3"
-                                    type="radio"><label for="filter__order-3">Mới
-                                    nhất</label></li>
-                            <li><input class="fliter__order" value="3" name="filter__order" id="filter__order-4"
-                                    type="radio"><label for="filter__order-4">Giá
-                                    thấp đến cao</label></li>
-                            <li><input class="fliter__order" value="4" name="filter__order" id="filter__order-5"
-                                    type="radio"><label for="filter__order-5">Giá
-                                    cao đến thấp</label></li>
-                        </ul>
-                    </div>
 
+                <div class="col col-lg-12 mt-10">
                     <!-- Shop container -->
                     <div class="shop__container">
-                        <div class="term__description">
-                            <?php echo $row_title['category_detail'] ?>
+
+                        <div class="ordering">
+                            <ul>
+                                <li>Sắp xếp theo:</li>
+                                <li><input checked class="fliter__order" value="0" name="filter__order" id="filter__order-1" type="radio"><label for="filter__order-1">Mức
+                                        độ phổ biến</label></li>
+                                <li><input class="fliter__order" value="1" name="filter__order" id="filter__order-2" type="radio"><label for="filter__order-2">Điểm
+                                        đánh giá</label></li>
+                                <li><input class="fliter__order" value="2" name="filter__order" id="filter__order-3" type="radio"><label for="filter__order-3">Mới
+                                        nhất</label></li>
+                                <li><input class="fliter__order" value="3" name="filter__order" id="filter__order-4" type="radio"><label for="filter__order-4">Giá
+                                        thấp đến cao</label></li>
+                                <li><input class="fliter__order" value="4" name="filter__order" id="filter__order-5" type="radio"><label for="filter__order-5">Giá
+                                        cao đến thấp</label></li>
+                            </ul>
                         </div>
 
-                        <div id="load__product-row"></div>
+                        <div class="term__description">
+                            <?php echo $row_title['category_detail']; ?>
+                            <div class="load-more">
+                                <span>Xem thêm <i class="fa-solid fa-caret-down"></i></span>
+                            </div>
+                            <div class="collapse">
+                                <span>Thu gọn <i class="fa-solid fa-caret-up"></i></i></span>
+                            </div>
+                        </div>
+                        <div id="load__product-row">
+
+                        </div>
 
                         <?php
                         $sql_trang = mysqli_query($mysqli, "SELECT * FROM tbl_sanpham");
@@ -93,12 +97,11 @@
                             <?php
                             for ($i = 1; $i <= $trang; $i++) {
                             ?>
-                            <li class="page__numbers <?php if ($i == $page) {
+                                <li class="page__numbers <?php if ($i == $page) {
                                                                 echo "active";
                                                             } ?>">
-                                <a
-                                    href="index.php?quanly=danhmucsanpham&id=1&trang=<?php echo $i ?>"><?php echo $i ?></a>
-                            </li>
+                                    <a href="index.php?quanly=danhmucsanpham&id=1&trang=<?php echo $i ?>"><?php echo $i ?></a>
+                                </li>
                             <?php
                             }
                             ?>
@@ -117,94 +120,122 @@
     include('pages/footer.php');
     ?>
     <script>
-    $(document).ready(() => {
+        $(document).ready(() => {
+            window.onscroll = function() {
+                if (document.documentElement.scrollTop > 50) {
+                    $('.container').addClass('active');
+                } else {
+                    $('.container').removeClass('active');
+                }
+            };
 
-        // $(window).bind('mousewheel', function(event) {
-        //     if (event.originalEvent.wheelDelta >= 100) {
-        //         $('.container').removeClass('active');
-        //     } else {
-        //         $('.container').addClass('active');
-        //     }
-        // });
+            // Load more description
+            $(document).on("click", '.load-more', function() {
+                $('.term__description').css('height', '100%');
+                $('.load-more').css('display', 'none')
+                $('.collapse').css('display', 'block')
+            })
 
-        window.onscroll = function() {
-            if (document.documentElement.scrollTop > 50) {
-                $('.container').addClass('active');
-            } else {
-                $('.container').removeClass('active');
+            // Collapse description
+            $(document).on("click", '.collapse', function() {
+                $('.term__description').css('height', '200px');
+                $('.load-more').css('display', 'block')
+                $('.collapse').css('display', 'none')
+            })
+
+            // View product detail
+            $(document).on("click", '.view__product-detail', function() {
+                var id = $(this).attr("value");
+                var url = "chitietsanpham.php?id=" + id;
+                window.history.pushState("new", "title", url);
+                $("#main").load("chitietsanpham.php?id=" + id);
+                $(window).scrollTop(0);
+            })
+
+            $(document).on("click", '.view__home', function() {
+                var url = "home.php";
+                window.history.pushState("new", "title", url);
+                $("#main").load("home.php");
+                $(window).scrollTop(0);
+            })
+
+            // View data
+            function view_data() {
+                $.post('http://localhost:3000/pages/handleEvent/listProductData.php?id=' +
+                    <?php echo $_GET['id'] ?>,
+                    function(data) {
+                        $('#load__product-row').html(data)
+                    })
             }
-        };
+            view_data();
 
+            /* FILTER START */
+            var priceRange = 0;
+            $(document).on("click", '.price__list-filter', function() {
+                priceRange = $(this).val();
+                $.ajax({
+                    url: "http://localhost:3000/pages/handleEvent/handlePriceRange.php?id=" +
+                        <?php echo $_GET['id'] ?>,
+                    data: {
+                        priceRange: priceRange,
+                    },
+                    dataType: 'html',
+                    method: "post",
+                    cache: true,
+                    success: function(data) {
 
-        $(document).on("click", '.view__product-detail', function() {
-            var id = $(this).attr("value");
-            var url = "chitietsanpham.php?id=" + id;
-            window.history.pushState("new", "title", url);
-            $("#main").load("chitietsanpham.php?id=" + id);
-        })
-
-        $(document).on("click", '.view__home', function() {
-            var url = "home.php";
-            window.history.pushState("new", "title", url);
-            $("#main").load("home.php");
-        })
-
-        // View data
-        function view_data() {
-            $.post('http://localhost:3000/pages/handleEvent/listProductData.php?id=' +
-                <?php echo $_GET['id'] ?>,
-                function(data) {
-                    $('#load__product-row').html(data)
+                        if (priceRange == 1 || priceRange == 2) {
+                            $('#load__product-row').html(data)
+                            $('.ordering').html(
+                                `
+                            <ul>
+                                <li>Sắp xếp theo:</li>
+                                <li><input checked class="fliter__order" value="0" name="filter__order" id="filter__order-1" type="radio"><label for="filter__order-1">Mức
+                                        độ phổ biến</label></li>
+                                <li><input class="fliter__order" value="1" name="filter__order" id="filter__order-2" type="radio"><label for="filter__order-2">Điểm
+                                        đánh giá</label></li>
+                                <li><input class="fliter__order" value="2" name="filter__order" id="filter__order-3" type="radio"><label for="filter__order-3">Mới
+                                        nhất</label></li>
+                                <li><input class="fliter__order" value="3" name="filter__order" id="filter__order-4" type="radio"><label for="filter__order-4">Giá
+                                        thấp đến cao</label></li>
+                                <li><input class="fliter__order" value="4" name="filter__order" id="filter__order-5" type="radio"><label for="filter__order-5">Giá
+                                        cao đến thấp</label></li>
+                            </ul>
+                            `
+                            )
+                        } else {
+                            view_data();
+                        }
+                    }
                 })
-        }
-        view_data();
-
-        /* FILTER START */
-        $(document).on("change", '.fliter__order', function() {
-            var value = $(this).val();
-            console.log(value)
-            $.ajax({
-                url: "http://localhost:3000/pages/handleEvent/filterOrder.php?id=" +
-                    <?php echo $_GET['id'] ?>,
-                data: {
-                    value: value,
-                },
-                dataType: 'html',
-                method: "post",
-                cache: true,
-                success: function(data) {
-                    if (value == 1 || value == 2 || value == 3 || value == 4) {
-                        $('#load__product-row').html(data)
-                    } else {
-                        view_data();
-                    }
-                }
             })
-        })
 
-        $(document).on("click", '.price__list-filter', function() {
-            var value = $(this).val();
-            $.ajax({
-                url: "http://localhost:3000/pages/handleEvent/handlePriceRange.php?id=" +
-                    <?php echo $_GET['id'] ?>,
-                data: {
-                    value: value,
-                },
-                dataType: 'html',
-                method: "post",
-                cache: true,
-                success: function(data) {
-
-                    if (value == 1 || value == 2) {
-                        $('#load__product-row').html(data)
-                    } else {
-                        view_data();
+            $(document).on("change", '.fliter__order', function() {
+                var value = $(this).val();
+                $.ajax({
+                    url: "http://localhost:3000/pages/handleEvent/filterOrder.php?id=" +
+                        <?php echo $_GET['id'] ?>,
+                    data: {
+                        value: value,
+                        priceRange: priceRange,
+                    },
+                    dataType: 'html',
+                    method: "post",
+                    cache: true,
+                    success: function(data) {
+                        if (value == 0 || value == 1 || value == 2 || value == 3 || value ==
+                            4) {
+                            $('#load__product-row').html(data)
+                        } else {
+                            view_data();
+                        }
                     }
-                }
+                })
             })
+
+
+            /* FILTER END */
         })
-        /* FILTER END */
-    })
     </script>
 </body>
 

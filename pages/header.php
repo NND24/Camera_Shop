@@ -1,24 +1,24 @@
 <?php
+session_start();
 $sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY thutu ASC LIMIT 9";
 $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
+include('./js/link.php');
 ?>
-
-<link rel="stylesheet" href="css/header.css">
 
 <header id="header">
 
     <!-- Header Main -->
-
     <div class="header_main">
         <div class="header_container">
             <div class="row">
-
                 <!-- Logo -->
                 <div class="col-lg-2 col-sm-3 col-3 ">
                     <div class="logo_container">
-                        <div class="logo"><a href="home.php">
+                        <div class="logo">
+                            <a>
                                 <img src="images/logo.webp" alt="logo">
-                            </a></div>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -27,10 +27,15 @@ $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
                     <div class="header_search">
                         <div class="header_search_content">
                             <div class="header_search_form_container">
-                                <form method="POST" action="index.php?quanly=timkiem" class="header_search_form clearfix">
-                                    <input type="search" name="tukhoa" required="required" class="header_search_input" placeholder="Tìm camera...">
+                                <form method="POST" action="index.php?quanly=timkiem"
+                                    class="header_search_form clearfix">
+                                    <input type="search" name="tukhoa" required="required" class="header_search_input"
+                                        placeholder="Tìm camera...">
 
-                                    <button type="submit" class="header_search_button trans_300" name="timkiem" value="Submit"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918770/search.png" alt="">
+                                    <button type="submit" class="header_search_button trans_300" name="timkiem"
+                                        value="Submit"><img
+                                            src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918770/search.png"
+                                            alt="">
                                     </button>
                                 </form>
                             </div>
@@ -49,9 +54,16 @@ $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
                                 <div class="cart_count"><span>3</span></div>
                             </a>
                         </div>
+
                         <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                             <div class="user__option">
-                                <i class="fa-solid fa-user"></i>
+                                <?php if (isset($_SESSION['login'])) { ?>
+
+                                <i class="fa-solid fa-user roi"></i>
+                                <div id="load-user-modal"></div>
+                                <?php } else { ?>
+                                <i class="fa-solid fa-user chua"></i>
+                                <?php } ?>
                             </div>
                         </div>
 
@@ -80,9 +92,10 @@ $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
                                         <?php
                                         while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
                                         ?>
-                                            <li>
-                                                <button class="category__product-btn" value="<?php echo $row_danhmuc['id_danhmuc'] ?>"><?php echo $row_danhmuc['ten_danhmuc'] ?></button>
-                                            </li>
+                                        <li>
+                                            <button class="category__product-btn"
+                                                value="<?php echo $row_danhmuc['id_danhmuc'] ?>"><?php echo $row_danhmuc['ten_danhmuc'] ?></button>
+                                        </li>
                                         <?php
                                         }
                                         ?>
@@ -98,24 +111,84 @@ $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
         </div>
     </nav>
 </header>
+
+<div class="scroll-to-bottom">
+    <i>&#8595;</i>
+</div>
+<div class="scroll-to-top">
+    <i>&#8593;</i>
+</div>
+
 <div id="view__login"></div>
 <script>
-    $(document).ready(() => {
-        $(document).on("click", '.category__product-btn', function() {
-            var id = $(this).val();
-            var url = "shopPage.php?id=" + id;
-            window.history.pushState("new", "title", url);
-            $("#main").load("shopPage.php?id=" + id);
-        })
-
-        $(document).on("click", '.user__option i', function() {
-            $("#view__login").load("pages/login.php");
-        })
-        $(document).on("click", '.register-btn', function() {
-            $("#view__login").load("pages/register.php");
-        })
-        $(document).on("click", '.close-login i', function() {
-            $(".wrapper").remove();
-        })
+$(document).ready(() => {
+    $(document).on("click", '.category__product-btn', function() {
+        var id = $(this).val();
+        var url = "shopPage.php?id=" + id;
+        window.history.pushState("new", "title", url);
+        $("#main").load("shopPage.php?id=" + id);
+        $(window).scrollTop(0);
     })
+
+    $(document).on("click", '.logo a', function() {
+        $("#main").load("home.php");
+        $(window).scrollTop(0);
+    })
+
+    $(document).on("click", '.user__option i.chua', function() {
+        $("#view__login").load("pages/login.php");
+    })
+
+    $(document).on("click", '.user__option i.roi', function() {
+        $("#load-user-modal").load("pages/userOptionModal.php");
+    })
+
+    $(document).on("click", '.user-modal-background', function() {
+        $(".user-modal-wrapper").remove()
+    })
+
+
+    $(document).on("click", '.register-btn', function() {
+        $("#view__login").load("pages/register.php");
+    })
+
+    $(document).on("click", '.login-btn', function() {
+        $("#view__login").load("pages/login.php");
+    })
+
+    $(document).on("click", '.logout', function() {
+        $.post('http://localhost:3000/pages/handleEvent/handleLogin.php?logout=' + 1, (data) => {
+            setTimeout(function() {
+                window.location.reload();
+            }, 1000);
+        });
+
+    })
+
+    $(document).on("click", '.modal-background', function() {
+        $(".wrapper").remove();
+    })
+
+    $(document).on("click", '.scroll-to-bottom ', function() {
+        var height = $(document).height();
+        console.log(height)
+        height = height - 1070;
+        console.log(height)
+        $(window).scrollTop(height);
+        $('.scroll-to-bottom ').css("display", "none");
+        $('.scroll-to-top').css("display", "block");
+    })
+
+    $(document).on("click", '.scroll-to-top ', function() {
+        $(window).scrollTop(0);
+        $('.scroll-to-bottom ').css("display", "block");
+        $('.scroll-to-top ').css("display", "none");
+    })
+
+    window.onpopstate = function() {
+        window.location.reload();
+        $(window).scrollTop(0);
+    };
+
+})
 </script>

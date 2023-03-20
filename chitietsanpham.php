@@ -20,6 +20,7 @@
     AND tbl_sanpham.id_sanpham='$_GET[id]' LIMIT 1 ";
             $query_chitiet = mysqli_query($mysqli, $sql_chitiet);
             while ($row_chitiet = mysqli_fetch_array($query_chitiet)) {
+                $iddanhmuc = $row_chitiet['id_danhmuc'];
             ?>
 
             <!-- Breadcrumb -->
@@ -47,7 +48,7 @@
                         </div>
                         <a href="#" class="review_link">(4 đánh giá)</a>
                         <span class="sold">
-                            <span class="sold_count">258948</span>
+                            <span class="sold_count"><?php echo $row_chitiet['daban'] ?></span>
                             đã bán
                         </span>
                     </div>
@@ -60,14 +61,30 @@
                                 src="./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_chitiet['hinhanh'] ?>"
                                 alt="">
                         </div>
+                        <div class="product_preview">
+                            <img class="product_thumbnail-preview"
+                                src="./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_chitiet['hinhanh'] ?>"
+                                alt="">
+                        </div>
 
                         <div class="col-lg-4 col product_summary">
                             <div class="price_wrapper">
                                 <h4>Gía bán: </h4>
+                                <?php
+                                    if ($row_chitiet['giamgia'] > 0) {
+                                    ?>
                                 <span
                                     class="price_on_sale"><?php echo number_format($row_chitiet['giadagiam'], 0, ',', '.') ?>đ</span>
                                 <span
                                     class="price_original"><?php echo number_format($row_chitiet['giasp'], 0, ',', '.') ?>đ</span>
+                                <?php
+                                    } else {
+                                    ?>
+                                <span
+                                    class="price_on_sale"><?php echo number_format($row_chitiet['giasp'], 0, ',', '.') ?>đ</span>
+                                <?php
+                                    }
+                                    ?>
                             </div>
                             <div class="status__wrapper">
                                 <h4>Tình trạng:</h4>
@@ -204,7 +221,8 @@
                         <div class="swiper mySwiper">
                             <div class="swiper-wrapper ">
                                 <?php
-                                    $sql_pro = "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_danhmuc=1 ORDER BY daban ASC ";
+                                    $sql_pro = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
+                                    AND tbl_sanpham.id_danhmuc=$iddanhmuc ORDER BY daban";
                                     $query_pro = mysqli_query($mysqli, $sql_pro);
                                     while ($row_pro = mysqli_fetch_array($query_pro)) {
                                     ?>
@@ -220,8 +238,12 @@
                                                 </div>
                                                 <div class="add-to-cart-btn"
                                                     value="<?php echo $row_pro['id_sanpham'] ?>">
-                                                    <i class="fa-solid fa-cart-plus"></i>
-                                                    <span>Thêm vào giỏ hàng</span>
+                                                    <i class="fa-solid fa-cart-plus" style="
+                                                                left: 21px;
+                                                            "></i>
+                                                    <span style="
+                                                                font-size: 1rem;
+                                                            ">Thêm vào giỏ hàng</span>
                                                 </div>
                                             </div>
                                             <div class="row__item-info">
@@ -266,164 +288,77 @@
 
                     <div class="content__product-footer">
                         <div class="row">
-                            <div class="col-12 col-lg-9">
+                            <div class="col-12 col-lg-9" style="padding: 0;">
                                 <div class="product__footer-content">
                                     <div class="product__tab-header">MÔ TẢ</div>
 
                                     <div class="product__tab-content">
                                         <?php echo $row_chitiet['noidung'] ?>
                                     </div>
+                                    <div class="load-more">
+                                        <span>Xem thêm <i class="fa-solid fa-caret-down"></i></span>
+                                    </div>
+                                    <div class="collapse">
+                                        <span>Thu gọn <i class="fa-solid fa-caret-up"></i></i></span>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- Sidebar -->
-                            <div class="col-12 col-lg-3">
+                            <div class="col-12 col-lg-3" style="padding-right: 0;">
                                 <div class="product__footer-sidebar">
                                     <h3 class="footer__sidebar-title">BẠN CÓ THỂ THÍCH</h3>
 
                                     <div class="footer__sidebar-inner">
                                         <div class="row">
-
+                                            <?php
+                                                $sql_pro = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
+                                                AND tbl_sanpham.id_danhmuc=$iddanhmuc ORDER BY daban ASC LIMIT 6";
+                                                $query_pro = mysqli_query($mysqli, $sql_pro);
+                                                while ($row_pro = mysqli_fetch_array($query_pro)) {
+                                                ?>
                                             <div class="col">
-                                                <div class="sidebar__product-wrapper">
-                                                    <div class="sidebar__product-img">
-                                                        <img src="./images/products/yoosee-3-rau-3m.jpg" alt="">
+                                                <div class="sidebar__product-wrapper ">
+                                                    <div class="sidebar__product-img view__product-detail"
+                                                        value="<?php echo $row_pro['id_sanpham'] ?>">
+                                                        <img alt="<?php echo $row_pro['ten_danhmuc'] ?></p>"
+                                                            src="./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_pro['hinhanh'] ?>"
+                                                            alt="">
                                                     </div>
+
                                                     <div class="sidebar__product-text">
                                                         <div class="title-wrapper">
-                                                            <p class="category-title">Camera Yoosee</p>
-                                                            <p class="product-name">
-                                                                <a href="#">Camera Wifi Uniarch Uho-S2 Loại Tốt</a>
-                                                            </p>
+                                                            <p class="category-title">
+                                                                <?php echo $row_pro['ten_danhmuc'] ?></p>
+                                                            <span class="product-name view__product-detail"
+                                                                value="<?php echo $row_pro['id_sanpham'] ?>"
+                                                                title="<?php echo $row_pro['tensanpham'] ?>">
+                                                                <?php echo $row_pro['tensanpham'] ?>
+                                                            </span>
                                                         </div>
                                                         <div class="price-wrapper">
-                                                            <span class="price-has-dropped">290,000đ</span>
-                                                            <span class="price-previous-dropped">560,000đ</span>
+                                                            <?php
+                                                                    if ($row_pro['giamgia'] > 0) {
+                                                                    ?>
+                                                            <span
+                                                                class="price-discount"><?php echo number_format($row_pro['giadagiam'], 0, ',', '.') ?>đ</span>
+                                                            <span
+                                                                class="price-normal-discount"><?php echo number_format($row_pro['giasp'], 0, ',', '.') ?>đ</span>
+                                                            <?php
+                                                                    } else {
+                                                                    ?>
+                                                            <span
+                                                                class="price-normal"><?php echo number_format($row_pro['giasp'], 0, ',', '.') ?>đ</span>
+                                                            <?php
+                                                                    }
+                                                                    ?>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="col">
-                                                <div class="sidebar__product-wrapper">
-                                                    <div class="sidebar__product-img">
-                                                        <img src="./images/products/yoosee-3-rau-3m.jpg" alt="">
-                                                    </div>
-                                                    <div class="sidebar__product-text">
-                                                        <div class="title-wrapper">
-                                                            <p class="category-title">Camera Yoosee</p>
-                                                            <p class="product-name">
-                                                                <a href="#">Camera Wifi Uniarch Uho-S2 Loại Tốt</a>
-                                                            </p>
-                                                        </div>
-                                                        <div class="price-wrapper">
-                                                            <span class="price-has-dropped">290,000đ</span>
-                                                            <span class="price-previous-dropped">560,000đ</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col">
-                                                <div class="sidebar__product-wrapper">
-                                                    <div class="sidebar__product-img">
-                                                        <img src="./images/products/yoosee-3-rau-3m.jpg" alt="">
-                                                    </div>
-                                                    <div class="sidebar__product-text">
-                                                        <div class="title-wrapper">
-                                                            <p class="category-title">Camera Yoosee</p>
-                                                            <p class="product-name">
-                                                                <a href="#">Camera Wifi Uniarch Uho-S2 Loại Tốt</a>
-                                                            </p>
-                                                        </div>
-                                                        <div class="price-wrapper">
-                                                            <span class="price-has-dropped">290,000đ</span>
-                                                            <span class="price-previous-dropped">560,000đ</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col">
-                                                <div class="sidebar__product-wrapper">
-                                                    <div class="sidebar__product-img">
-                                                        <img src="./images/products/yoosee-3-rau-3m.jpg" alt="">
-                                                    </div>
-                                                    <div class="sidebar__product-text">
-                                                        <div class="title-wrapper">
-                                                            <p class="category-title">Camera Yoosee</p>
-                                                            <p class="product-name">
-                                                                <a href="#">Camera Wifi Uniarch Uho-S2 Loại Tốt</a>
-                                                            </p>
-                                                        </div>
-                                                        <div class="price-wrapper">
-                                                            <span class="price-has-dropped">290,000đ</span>
-                                                            <span class="price-previous-dropped">560,000đ</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col">
-                                                <div class="sidebar__product-wrapper">
-                                                    <div class="sidebar__product-img">
-                                                        <img src="./images/products/yoosee-3-rau-3m.jpg" alt="">
-                                                    </div>
-                                                    <div class="sidebar__product-text">
-                                                        <div class="title-wrapper">
-                                                            <p class="category-title">Camera Yoosee</p>
-                                                            <p class="product-name">
-                                                                <a href="#">Camera Wifi Uniarch Uho-S2 Loại Tốt</a>
-                                                            </p>
-                                                        </div>
-                                                        <div class="price-wrapper">
-                                                            <span class="price-has-dropped">290,000đ</span>
-                                                            <span class="price-previous-dropped">560,000đ</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col">
-                                                <div class="sidebar__product-wrapper">
-                                                    <div class="sidebar__product-img">
-                                                        <img src="./images/products/yoosee-3-rau-3m.jpg" alt="">
-                                                    </div>
-                                                    <div class="sidebar__product-text">
-                                                        <div class="title-wrapper">
-                                                            <p class="category-title">Camera Yoosee</p>
-                                                            <p class="product-name">
-                                                                <a href="#">Camera Wifi Uniarch Uho-S2 Loại Tốt</a>
-                                                            </p>
-                                                        </div>
-                                                        <div class="price-wrapper">
-                                                            <span class="price-has-dropped">290,000đ</span>
-                                                            <span class="price-previous-dropped">560,000đ</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col">
-                                                <div class="sidebar__product-wrapper">
-                                                    <div class="sidebar__product-img">
-                                                        <img src="./images/products/yoosee-3-rau-3m.jpg" alt="">
-                                                    </div>
-                                                    <div class="sidebar__product-text">
-                                                        <div class="title-wrapper">
-                                                            <p class="category-title">Camera Yoosee</p>
-                                                            <p class="product-name">
-                                                                <a href="#">Camera Wifi Uniarch Uho-S2 Loại Tốt</a>
-                                                            </p>
-                                                        </div>
-                                                        <div class="price-wrapper">
-                                                            <span class="price-has-dropped">290,000đ</span>
-                                                            <span class="price-previous-dropped">560,000đ</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
+                                            <?php
+                                                }
+                                                ?>
                                         </div>
                                     </div>
                                 </div>
@@ -585,6 +520,56 @@
             },
         },
     });
+
+    $(document).ready(() => {
+        // Back to shop page
+        $(document).on("click", '.view__category', function() {
+            var id = $(this).attr("value");
+            console.log(id)
+            var url = "shopPage.php?id=" + id;
+            window.history.pushState("new", "title", url);
+            $("#main").load("shopPage.php?id=" + id);
+        })
+
+        // Back to home
+        $(document).on("click", '.view__home', function() {
+            var url = "home.php"
+            window.history.pushState("new", "title", url);
+            $("#main").load("home.php");
+        })
+
+        // Preview product
+        $(document).on("click", '.product_thumbnail', function() {
+            $('.product_preview').css("display", "block")
+        })
+
+        $(document).on("click", '.product_preview', function() {
+            $('.product_preview').css("display", "none")
+        })
+
+        // View product detail
+        $(document).on("click", '.view__product-detail', function() {
+            var id = $(this).attr("value");
+            var url = "chitietsanpham.php?id=" + id;
+            window.history.pushState("new", "title", url);
+            $("#main").load("chitietsanpham.php?id=" + id);
+            $(window).scrollTop(0);
+        })
+
+        // Load more description
+        $(document).on("click", '.product__footer-content .load-more', function() {
+            $('.product__tab-content').css('height', '100%');
+            $('.product__footer-content .load-more').css('display', 'none')
+            $('.product__footer-content .collapse').css('display', 'block')
+        })
+
+        // Collapse description
+        $(document).on("click", '.product__footer-content .collapse', function() {
+            $('.product__tab-content').css('height', '560px');
+            $('.product__footer-content .load-more').css('display', 'block')
+            $('.product__footer-content .collapse').css('display', 'none')
+        })
+    })
     </script>
 </body>
 

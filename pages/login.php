@@ -1,58 +1,79 @@
-<?php
-session_start();
-if (isset($_POST['dangnhap'])) {
-    $email = $_POST['email'];
-    $matkhau = $_POST['password'];
-    $sql = "SELECT * FROM tbl_dangky WHERE email='" . $email . "' AND matkhau='" . $matkhau . "' LIMIT 1 ";
-    $sql_query = mysqli_query($mysqli, $sql);
-    $count = mysqli_num_rows($sql_query);
-    if ($count > 0) {
-        $data = mysqli_fetch_array($sql_query);
-        $_SESSION['dangnhap'] = $data['tenkhachhang'];
-        $_SESSION['id_khachhang'] = $data['id_dangky'];
-        header('Location: index.php');
-    } else {
-        echo '<p style="color:red;">Mật khẩu hoặc email sai, vui lòng nhập lại</p>';
-    }
-}
-?>
+<?php include('../js/link.php');
+include('../admin/config/config.php'); ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<div class="wrapper login">
+    <form action="" method="POST" autocomplete="off" class="form" id="form-2">
+        <h3 class="heading">Đăng nhập</h3>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <?php include('../js/link.php');
-    include('../admin/config/config.php'); ?>
-</head>
+        <div class="spacer"></div>
 
-<body>
-    <div class="wrapper">
-        <div class="close-login"><i class="fa-solid fa-xmark"></i></div>
-        <form action="" method="POST" autocomplete="off" class="form" id="form-2">
-            <h3 class="heading">Đăng nhập</h3>
-
-            <div class="spacer"></div>
-
-            <div class="form-group">
-                <label for="email" class="form-label">Email</label>
-                <input id="email" name="email" type="text" placeholder="" class="form-control">
-                <span class="form-message"></span>
+        <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <div class="form-input">
+                <input id="email" name="email" type="text" placeholder="Nhập email" class="form-control">
+                <div class="error-icon email-error"><i class="fa-solid fa-exclamation"></i></i></div>
+                <div class="valid-icon email-valid"><i class="fa-regular fa-circle-check"></i></div>
             </div>
+            <span class="form-message"></span>
+        </div>
 
-            <div class="form-group">
-                <label for="password" class="form-label">Mật khẩu</label>
+        <div class="form-group">
+            <label for="password" class="form-label">Mật khẩu</label>
+            <div class="form-input">
                 <input id="password" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
-                <span class="form-message"></span>
+                <div class="error-icon password-error"><i class="fa-solid fa-exclamation"></i></i></div>
+                <div class="valid-icon password-valid"><i class="fa-regular fa-circle-check"></i></div>
             </div>
+            <span class="form-message"></span>
+        </div>
 
-            <button class="form-submit" name="dangnhap" type="submit">Đăng nhập</button>
-            <span>Nếu bạn chưa có tài khoản <div class="register-btn">Đăng ký</div></span>
-        </form>
-    </div>
-</body>
+        <button class="form-submit" id="form-login-submit">Đăng nhập</button>
+        <span>Nếu bạn chưa có tài khoản! <span class="register-btn">Đăng ký</span></span>
+    </form>
+    <div class="modal-background"></div>
+</div>
 
-</html>
+<script>
+    $(document).ready(() => {
+        $('#form-login-submit').click((e) => {
+            e.preventDefault();
+            var email = $('#email').val();
+            var password = $('#password').val();
+
+            $.ajax({
+                url: "http://localhost:3000/pages/handleEvent/handleLogin.php",
+                data: {
+                    email: email,
+                    password: password,
+                },
+                dataType: 'json',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    console.log(data)
+                    if (data.existAccount == 0) {
+                        swal("Email hoặc mật khẩu không đúng",
+                            "Vui lòng nhập lại hoặc đăng ký tài khoản",
+                            "error");
+                        $('#email').css("border-color", "#f33a58");
+                        $('.email-error').css("display", "block");
+
+                        $('#password').css("border-color", "#f33a58");
+                        $('.password-error').css("display", "block");
+                    } else if (data.existAccount == 1) {
+                        swal("OK!", "Đăng nhập thành công", "success");
+                        $('#password').css("border-color", "#008000ab");
+                        $('.password-error').css("display", "none");
+                        $('.password-valid').css("display", "block");
+                        $('#email').css("border-color", "#008000ab");
+                        $('.email-error').css("display", "none");
+                        $('.email-valid').css("display", "block");
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1500);
+                    }
+                },
+            })
+        })
+    })
+</script>

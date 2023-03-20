@@ -26,29 +26,28 @@
 </div>
 
 <script>
-$(document).ready(() => {
-    $(".list-gallery").click(() => {
-        //console.log(window.location.href)
-        const url = "category.php";
-        window.history.pushState("new", "title", url);
-        $("#main").load("category.php");
-    });
+    $(document).ready(() => {
+        $(".list-gallery").click(() => {
+            const url = "category.php";
+            window.history.pushState("new", "title", url);
+            $("#main").load("category.php");
+        });
 
-    $(".list-product").click(() => {
-        const url = "product.php";
-        window.history.pushState("new", "title", url);
-        $("#main").load("product.php");
-    });
+        $(".list-product").click(() => {
+            const url = "product.php";
+            window.history.pushState("new", "title", url);
+            $("#main").load("product.php");
+        });
 
-    $(".list-order").click(() => {
-        const url = "order.php";
-        window.history.pushState("new", "title", url);
-        $("#main").load("order.php");
-    });
+        $(".list-order").click(() => {
+            const url = "order.php";
+            window.history.pushState("new", "title", url);
+            $("#main").load("order.php");
+        });
 
-    // 
-    $('.sidebar-btn').click(() => {
-        document.querySelector(".sidebar").classList.toggle("active");
+        // 
+        $('.sidebar-btn').click(() => {
+            document.querySelector(".sidebar").classList.toggle("active");
+        })
     })
-})
 </script>

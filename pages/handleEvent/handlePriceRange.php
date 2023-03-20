@@ -13,7 +13,7 @@
     }
 
 
-    if ($_POST['value'] == 1) {
+    if ($_POST['priceRange'] == 1) {
         $sql_pro = "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_danhmuc='$_GET[id]' AND tbl_sanpham.giasp < 500000 ORDER BY id_sanpham ASC LIMIT $begin,20";
         $query_pro = mysqli_query($mysqli, $sql_pro);
         if (mysqli_num_rows($query_pro) > 0) {
@@ -68,7 +68,7 @@
         }
         ?>
         <?php
-    } else if ($_POST['value'] == 2) {
+    } else if ($_POST['priceRange'] == 2) {
         $sql_pro = "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_danhmuc='$_GET[id]' AND tbl_sanpham.giasp >= 500000 AND tbl_sanpham.giasp <= 2000000 ORDER BY id_sanpham ASC LIMIT $begin,20";
         $query_pro = mysqli_query($mysqli, $sql_pro);
         if (mysqli_num_rows($query_pro) > 0) {
