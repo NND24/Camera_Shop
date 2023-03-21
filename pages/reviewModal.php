@@ -8,28 +8,34 @@
         while ($row_chitiet = mysqli_fetch_array($query_chitiet)) {
             $iddanhmuc = $row_chitiet['id_danhmuc'];
         ?>
-        <h3>Đánh giá <?php echo $row_chitiet['tensanpham'] ?></h3>
-        <div class="close-review-modal">
-            <i class="fa-solid fa-xmark"></i>
-        </div>
-        <textarea id="review" name="review" cols="45" rows="8" minlength="10" required=""
-            placeholder="Mời bạn chia sẻ thêm một số cảm nhận..." aria-required="true"></textarea>
-        <div class="wrap-attaddsend"><span id="countContent">0 ký tự (Tối thiểu 10)</span>
-        </div>
-        <div class="comment-form-rating"><label for="rating">Bạn cảm thấy thế nào về sản
-                phẩm? (Chọn sao)</label>
-            <span>
-                <div class="star star-1" value="1"><i class="fa-solid fa-star"></i>Rất tệ</div>
-                <div class="star star-2" value="2"><i class="fa-solid fa-star"></i>Không tệ</div>
-                <div class="star star-3" value="3"><i class="fa-solid fa-star"></i>Trung bình
+            <h3>Đánh giá <?php echo $row_chitiet['tensanpham'] ?></h3>
+            <div class="close-review-modal">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <textarea id="review" name="review" cols="45" rows="8" minlength="10" required="" placeholder="Mời bạn chia sẻ thêm một số cảm nhận..." aria-required="true"></textarea>
+            <div class="wrap-attaddsend"><span id="countContent">0 ký tự (Tối thiểu 10)</span>
+            </div>
+            <div class="comment-form-rating">
+                <label for="rating">Bạn cảm thấy thế nào về sản phẩm? (Chọn sao)</label>
+                <div class="star-container">
+                    <div class="star-wrapper">
+                        <a class="fas fa-star s5" value="5"></a>
+                        <a class="fas fa-star s4" value="4"> </a>
+                        <a class="fas fa-star s3" value="3"></a>
+                        <a class="fas fa-star s2" value="2"></a>
+                        <a class="fas fa-star s1" value="1"></a>
+                    </div>
+                    <div class="star-text-wrapper">
+                        <span>Tuyệt vời</span>
+                        <span>Tốt</span>
+                        <span>Trung bình</span>
+                        <span>Không tệ</span>
+                        <span>Rất tệ</span>
+                    </div>
                 </div>
-                <div class="star star-4" value="4"><i class="fa-solid fa-star"></i>Tốt</div>
-                <div class="star star-5" value="5"><i class="fa-solid fa-star"></i>Tuyệt
-                    vời</div>
-            </span>
-        </div>
+            </div>
 
-        <button class="btn btn-primary">GỬI ĐÁNH GIÁ</button>
+            <button class="btn btn-primary review-btn">GỬI ĐÁNH GIÁ</button>
         <?php
         }
         ?>

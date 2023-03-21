@@ -20,4 +20,5 @@ if (mysqli_num_rows($query_user) > 0) {
 
 if (isset($_GET['logout'])) {
     unset($_SESSION['login']);
+    unset($_SESSION['id_user']);
 }

@@ -85,7 +85,11 @@ input[type="number"]::-webkit-outer-spin-button {
 /** SHOP PAGE START **/
 /* Breadcrumb */
 .breadcrumb {
-  margin-top: 145px;
+  margin-top: 90px;
+}
+
+.breadcrumb-shop {
+  margin-top: 140px;
 }
 
 .breadcrumb-wrapper {
@@ -107,6 +111,11 @@ input[type="number"]::-webkit-outer-spin-button {
 .breadcrumb .breadcrumb_last {
   color: #ef3f3f;
   margin-left: 5px;
+}
+
+.breadcrumb .view__category {
+  margin: 0 4px;
+  cursor: pointer;
 }
 
 /* Shop page title */
@@ -281,6 +290,7 @@ select option {
 }
 
 .row__item-container {
+  position: relative;
   border: 1px solid #f1f1f1;
   width: 100%;
   height: 100%;
@@ -290,6 +300,19 @@ select option {
 .row__item-display {
   position: relative;
   overflow: hidden;
+}
+
+.discount-banner {
+  position: absolute;
+  background: url(../images/banner/discount.svg) 50% no-repeat;
+  top: 4px;
+  left: -5px;
+  height: 30px;
+  width: 75px;
+  color: #fff;
+  z-index: 1;
+  font-size: 14px;
+  text-align: center;
 }
 
 .row__item-img {
@@ -364,7 +387,7 @@ select option {
   text-align: center;
   border-radius: 3px;
   cursor: pointer;
-  display: none;
+  display: block;
 }
 
 .row__item-container:hover .add-to-cart-btn {
@@ -597,13 +620,13 @@ ul.page__pagination {
   }
 
   .col-lg-2-4 {
-    flex: 0 0 20%;
-    max-width: 20%;
+    flex: 0 0 20% !important;
+    max-width: 20% !important;
   }
 
   .col-lg-1-7 {
-    flex: 0 0 14.28571%;
-    max-width: 14.28571%;
+    flex: 0 0 14.28571% !important;
+    max-width: 14.28571% !important;
   }
 
   .col-lg-1-7 {
@@ -611,8 +634,8 @@ ul.page__pagination {
   }
 
   .col-lg-1-5 {
-    flex: 0 0 12.5%;
-    max-width: 12.5%;
+    flex: 0 0 12.5% !important;
+    max-width: 12.5% !important;
   }
 
   .col {
@@ -994,6 +1017,7 @@ ul.standard_dropdown {
 
 .cart_icon {
   position: relative;
+  cursor: pointer;
 }
 
 .cart_icon i {
@@ -1339,24 +1363,6 @@ ul.social__option-list {
 /** FOOTER END **/
 
 /** DETAIL PRODUCT START **/
-/* Breadcrumb */
-.breadcrumb {
-  margin-top: 145px;
-}
-
-.breadcrumb .view__category {
-  margin: 0 5px;
-  cursor: pointer;
-}
-
-.breadcrumb .view__category:hover {
-  color: #ef3f3f;
-}
-
-.breadcrumb .breadcrumb_last {
-  color: #ef3f3f;
-}
-
 /*  */
 .product__detail-container {
   border-radius: 4px;
@@ -1391,6 +1397,7 @@ ul.social__option-list {
 }
 
 .product_rating .star_rating {
+  color: #ffbe00;
   color: #ffbe00;
   margin-right: 6px;
 }
@@ -1874,8 +1881,18 @@ ul.social__option-list {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 25px;
+  padding: 0 16px;
   font-size: 12px;
+}
+
+.star__average-text {
+  color: #fe9727;
+  font-size: 40px;
+}
+
+.star__average span {
+  font-size: 14px;
+  color: #333;
 }
 
 .star__box-left {
@@ -1907,6 +1924,7 @@ ul.social__option-list {
 }
 
 .review-row .rating_scale {
+  position: relative;
   border-radius: 3px;
   display: inline-block;
   height: 15px;
@@ -1917,15 +1935,24 @@ ul.social__option-list {
 }
 
 .review-row .nums_review {
-  width: 150px;
-  margin-left: 10px;
+  width: 230px;
+  margin-left: 2px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.review-row .nums_review b {
+  width: 54px;
+  margin: 0 4px;
+  text-align: right;
 }
 
 .star__box-right {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 12px;
 }
 
 .star__box-right button {
@@ -2063,33 +2090,145 @@ span#countContent {
   width: 100%;
 }
 
-.comment-form-rating .star {
-  font-size: 14px;
-  text-indent: inherit;
-  width: 20%;
-  height: auto;
-  float: left;
-  text-align: center;
-  color: #999 !important;
-  transition: all 0.3s linear;
-  margin: 0;
-  font-family: inherit;
+.star-container {
   display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.star-wrapper {
+  display: flex;
+  flex: 1;
+  flex-direction: row-reverse;
+}
+
+.star-text-wrapper {
+  display: flex;
+  flex: 1;
+  flex-direction: row-reverse;
+}
+
+.star-wrapper a {
+  font-size: 24px;
+  color: grey;
+  text-decoration: none !important;
+  transition: all 0.5s;
+  margin: 4px;
+  display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
 }
 
-.comment-form-rating .star i {
-  font-size: 24px;
-  color: #fe9727;
-  margin-bottom: 16px;
-  cursor: pointer;
+.star-text-wrapper span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* .star-1 i:hover {
-  color: grey;
-} */
+.star-wrapper a:hover {
+  color: #fe9727;
+  transform: scale(1.2);
+}
+.s1:hover ~ a {
+  color: #fe9727;
+}
+.s2:hover ~ a {
+  color: #fe9727;
+}
+.s3:hover ~ a {
+  color: #fe9727;
+}
+.s4:hover ~ a {
+  color: #fe9727;
+}
+.s5:hover ~ a {
+  color: #fe9727;
+}
+
+.review-container {
+  margin: 10px 0;
+}
+
+.review__header-name {
+  font-weight: 700;
+}
+
+.review__header-check {
+  font-size: 14px;
+  color: #52b858;
+}
+
+.review__header-check i {
+  font-size: 12px;
+  padding: 0 5px;
+}
+
+.review__header,
+.review__content,
+.review__footer {
+  display: flex;
+  flex-direction: row;
+}
+
+.review__header {
+  margin-bottom: 6px;
+}
+
+.review__content-rating {
+  font-size: 14px;
+  color: #fe9727;
+  margin-right: 10px;
+}
+
+.review__content-description {
+  width: 80%;
+}
+
+.review__footer-answer {
+  background-color: transparent;
+  color: #288ad6;
+  margin-right: 4px;
+  font-size: 14px;
+}
+
+.review__footer-date {
+  color: #999;
+  font-size: 14px;
+  margin-left: 4px;
+}
+
+.review__delete-btn,
+.review__edit-btn {
+  margin-left: auto;
+  font-size: 13px !important;
+  padding: 2px 20px !important;
+}
+
+.comment__header-avatar {
+  width: 25px;
+  height: 25px;
+  background-color: #ccc;
+  margin-right: 5px;
+  border-radius: 1px;
+}
+
+.comment__header-avatar i {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  color: #d6d6d6;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.comment__space {
+  width: 25px;
+  height: 25px;
+  color: transparent;
+  margin-right: 5px;
+}
 
 /* Product comment */
 .comment__product {
@@ -2250,7 +2389,31 @@ span#countContent {
   color: rgb(65, 65, 65);
 }
 
-.cart_wrapper .cart .close {
+.cart__wrapper {
+  padding-left: 0 !important;
+}
+
+.cart__name-category {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.cart__name-product {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.cart__img-product {
+  padding: 0 !important;
+}
+
+.cart_wrapper .cart .cart__delete-btn {
   cursor: pointer;
   width: 15px;
   height: 15px;
@@ -2560,3 +2723,89 @@ span#countContent {
 }
 
 /** LOGIN & REGISTER END **/
+
+/* LOADER */
+figure {
+  margin: 0;
+  transform: translate(-50%, -50%) rotate(0deg) scale(1.4, 1.4);
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  border-radius: 150px;
+  box-sizing: border-box;
+  animation: rotation 20s infinite linear;
+  z-index: 1000;
+}
+
+figure div:after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border: 1px solid #aaaaaa;
+  box-sizing: border-box;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  animation: shuffle 2s infinite;
+}
+
+figure div:nth-child(1) {
+  transform: rotate(0deg);
+}
+figure div:nth-child(1):after {
+  animation-delay: -0.5s;
+}
+figure div:nth-child(2) {
+  transform: rotate(45deg);
+}
+figure div:nth-child(2):after {
+  animation-delay: -1s;
+}
+figure div:nth-child(3) {
+  transform: rotate(90deg);
+}
+figure div:nth-child(3):after {
+  animation-delay: -1.5s;
+}
+figure div:nth-child(4) {
+  transform: rotate(135deg);
+}
+figure div:nth-child(4):after {
+  animation-delay: -2s;
+}
+figure div:nth-child(5) {
+  transform: rotate(180deg);
+}
+figure div:nth-child(5):after {
+  animation-delay: -2.5s;
+}
+figure div:nth-child(6) {
+  transform: rotate(225deg);
+}
+figure div:nth-child(6):after {
+  animation-delay: -3s;
+}
+figure div:nth-child(7) {
+  transform: rotate(270deg);
+}
+figure div:nth-child(7):after {
+  animation-delay: -3.5s;
+}
+figure div:nth-child(8) {
+  transform: rotate(315deg);
+}
+figure div:nth-child(8):after {
+  animation-delay: -4;
+}
+
+@keyframes rotation {
+  100% {
+    transform: translate(-50%, -50%) rotate(-360deg) scale(1.4, 1.4);
+  }
+}
+@keyframes shuffle {
+  50% {
+    transform: scale(0.4, 0.4) rotate(-90deg);
+    border-radius: 50%;
+  }
+}

@@ -96,13 +96,18 @@
                             <div class="col col-lg-12 col-md-12 col-12">
                                 <div class="row no-wrap product--container">
                                     <?php
-                                    $sql_product_discount = "SELECT * FROM tbl_sanpham ORDER BY giamgia ASC LIMIT 8";
+                                    $sql_product_discount = "SELECT * FROM tbl_sanpham WHERE giamgia > 0 ORDER BY giamgia ASC LIMIT 8";
                                     $query_product_discount = mysqli_query($mysqli, $sql_product_discount);
                                     while ($row_product_discount = mysqli_fetch_array($query_product_discount)) {
                                     ?>
                                     <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
                                         <div class="row__item item--product">
                                             <div class="row__item-container">
+                                                <?php if ($row_product_discount['giamgia'] > 0) { ?>
+                                                <div class="discount-banner">
+                                                    Giảm <?php echo $row_product_discount['giamgia'] ?>%
+                                                </div>
+                                                <?php } ?>
                                                 <div class="row__item-display br-5">
                                                     <div class="view__product-detail"
                                                         value="<?php echo $row_product_discount['id_sanpham'] ?>">
@@ -157,9 +162,6 @@
                             <div class="col col-lg-12 col-md-12 col-12">
                                 <div class="container__header">
                                     <h2 class="container__header-title">Sản Phẩm Bán Chạy</h2>
-                                    <div class="view-all">
-                                        <a href="#">Xem tất cả<i class="fa-solid fa-chevron-right"></i></a>
-                                    </div>
                                 </div>
                             </div>
                             <div class="col col-lg-12 col-md-12 col-12">
@@ -172,6 +174,11 @@
                                     <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
                                         <div class="row__item item--product">
                                             <div class="row__item-container">
+                                                <?php if ($row_product_sold['giamgia'] > 0) { ?>
+                                                <div class="discount-banner">
+                                                    Giảm <?php echo $row_product_sold['giamgia'] ?>%
+                                                </div>
+                                                <?php } ?>
                                                 <div class="row__item-display br-5">
                                                     <div class="view__product-detail"
                                                         value="<?php echo $row_product_sold['id_sanpham'] ?>">
@@ -253,6 +260,11 @@
                                     <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
                                         <div class="row__item item--product">
                                             <div class="row__item-container">
+                                                <?php if ($row_product['giamgia'] > 0) { ?>
+                                                <div class="discount-banner">
+                                                    Giảm <?php echo $row_product['giamgia'] ?>%
+                                                </div>
+                                                <?php } ?>
                                                 <div class="row__item-display br-5">
                                                     <div class="view__product-detail"
                                                         value="<?php echo $row_product['id_sanpham'] ?>">

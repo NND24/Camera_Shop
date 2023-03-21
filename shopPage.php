@@ -22,7 +22,7 @@
             ?>
 
             <!-- Breadcrumb -->
-            <div class="breadcrumb">
+            <div class="breadcrumb breadcrumb-shop">
                 <div class="breadcrumb-wrapper">
                     <div class="view__home"><span>Trang chủ </span></div>
                     »
@@ -76,7 +76,10 @@
                                         cao đến thấp</label></li>
                             </ul>
                         </div>
-
+                        <?php
+                        $sql_pro = "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_danhmuc='$_GET[id]'";
+                        $query_pro = mysqli_query($mysqli, $sql_pro);
+                        if (mysqli_num_rows($query_pro) > 0) { ?>
                         <div class="term__description">
                             <?php echo $row_title['category_detail']; ?>
                             <div class="load-more">
@@ -86,37 +89,9 @@
                                 <span>Thu gọn <i class="fa-solid fa-caret-up"></i></i></span>
                             </div>
                         </div>
-                        <div id="load__product-row">
+                        <?php } ?>
+                        <div id="load__product-row"> </div>
 
-                        </div>
-
-                        <?php
-                        $sql_trang = mysqli_query($mysqli, "SELECT * FROM tbl_sanpham");
-                        $row_count = mysqli_num_rows($sql_trang);
-                        $trang = ceil($row_count / 20)
-                        ?>
-                        <ul class="page__pagination col-8">
-                            <li class="page__btn"><i class="fa-solid fa-angles-left"></i></li>
-                            <li class="page__btn"><i class="fa-solid fa-chevron-left"></i></li>
-
-                            <?php
-                            for ($i = 1; $i <= $trang; $i++) {
-                            ?>
-                            <li class="page__numbers <?php if ($i == $page) {
-                                                                echo "active";
-                                                            } ?>">
-                                <a
-                                    href="index.php?quanly=danhmucsanpham&id=1&trang=<?php echo $i ?>"><?php echo $i ?></a>
-                            </li>
-                            <?php
-                            }
-                            ?>
-
-                            <!--  <li class="page__numbers active">2</li> -->
-                            <!-- <li class="page__dots">...</li> -->
-                            <li class="page__btn"><i class="fa-solid fa-chevron-right"></i></li>
-                            <li class="page__btn"><i class="fa-solid fa-angles-right"></i></li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -124,6 +99,13 @@
         <?php
         include('pages/footer.php');
         ?>
+    </div>
+
+    <div class="loader-wrapper">
+        <div id="loader">
+            <div id="shadow"></div>
+            <div id="box"></div>
+        </div>
     </div>
 
     <script>
@@ -157,6 +139,7 @@
             window.history.pushState("new", "title", url);
             $(".container").load("chitietsanpham.php?id=" + id);
             $(window).scrollTop(0);
+            window.location.reload();
         })
 
         $(document).on("click", '.view__home', function() {
@@ -167,6 +150,8 @@
         })
 
         // View data
+        view_data();
+
         function view_data() {
             $.post('http://localhost:3000/pages/handleEvent/listProductData.php?id=' +
                 <?php echo $_GET['id'] ?>,
@@ -174,7 +159,6 @@
                     $('#load__product-row').html(data)
                 })
         }
-        view_data();
 
         /* FILTER START */
         var priceRange = 0;
