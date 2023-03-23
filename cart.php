@@ -5,7 +5,7 @@ session_start();
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8">s
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GPM Camera</title>
@@ -24,13 +24,15 @@ session_start();
                     <div class="col-md-8 cart">
                         <?php
 
-                        if (isset($_SESSION['cart'])) {
+                        if (isset($_SESSION['cart']) && isset($_SESSION['id_user'])) {
                             $sosp = 0;
                             $tongtien = 0;
                             foreach ($_SESSION['cart'] as $cart_item) {
-                                $sosp += $cart_item['soluong'];
-                                $thanhtien = $cart_item['soluong'] * $cart_item['giasp'];
-                                $tongtien += $thanhtien;
+                                if ($cart_item['idUser'] == $_SESSION['id_user']) {
+                                    $sosp += $cart_item['soluong'];
+                                    $thanhtien = $cart_item['soluong'] * $cart_item['giasp'];
+                                    $tongtien += $thanhtien;
+                                }
                             }
                         ?>
                         <div class="cart__content">
@@ -40,38 +42,29 @@ session_start();
                                     <div class="col-md-10 col-7">
                                         <h4><b>GIỎ HÀNG</b></h4>
                                     </div>
-                                    <div class="col-md-2 col-5  text-right text-muted"><?php echo $sosp ?> sản phẩm
+                                    <div class="col-md-2 col-5  text-right text-muted  d-flex">
+                                        <div class="product-count"><?php echo $sosp ?></div> sản phẩm
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row__title row">
                                 <div class="col-4 justify-content-center d-flex">SẢN PHẨM</div>
-                                <div class="col-2 justify-content-center d-flex">GIÁ</div>
-                                <div class="col-3 justify-content-center d-flex quantity">SỐ LƯỢNG</div>
+                                <div class="col justify-content-center d-flex">GIÁ</div>
+                                <div class="col-lg-2-4 justify-content-left d-flex quantity">SỐ LƯỢNG</div>
                                 <div class="col justify-content-center sum">TỔNG</div>
                             </div>
 
                             <div id="load__cart-product"></div>
 
-                            <div class="d-flex justify-content-between mb-3">
-                                <div class="back-to-shop">
-                                    <a class="back-to-shop-btn" href="index.php">
-                                        <span class="text-muted">TIẾP TỤC MUA SẮM</span>
-                                    </a>
-                                </div>
-                                <div class="pay-product">
-                                    <a href="pages/main/thanhtoan.php"><span class="pay-product-text">THANH
-                                            TOÁN</span></a>
 
-                                </div>
-                            </div>
 
                         </div>
-                        <?php } else { ?>
+                        <?php
+                        } else { ?>
                         <div class="d-flex justify-content-center align-items-center flex-column" style="height:100%;">
                             <span class="mb-4" style="font-size:25px;">HIỆN TẠI GIỎ HÀNG TRỐNG</span>
-                            <a class="back-to-shop-btn" href="index.php">
+                            <a class="back-to-shop-btn">
                                 <span class="text-muted">QUAY TRỞ LẠI MUA HÀNG</span>
                             </a>
                         </div>
@@ -83,11 +76,11 @@ session_start();
                         <div class=" pb-3">
                             <h5><b>TÓM TẮT ĐƠN HÀNG</b></h5>
                         </div>
-                        <?php if (isset($_SESSION['cart'])) { ?>
+                        <?php if (isset($_SESSION['cart']) && isset($_SESSION['id_user'])) { ?>
                         <p class=" pb-2">Chi phí đơn hàng = Giá trị đơn hàng + phí vận chuyển + Thuế</p>
                         <div class="d-flex justify-content-between pb-2">
                             <p>Giá trị đơn hàng</p>
-                            <p><?php echo number_format($tongtien, 0, ',', '.') ?>đ</p>
+                            <p class="order-value"><?php echo number_format($tongtien, 0, ',', '.') ?>đ</p>
                         </div>
                         <div class="d-flex justify-content-between pb-2">
                             <p>Phí vận chuyển</p>
@@ -99,7 +92,7 @@ session_start();
                         </div>
                         <div class="d-flex justify-content-between pb-2">
                             <p>Tổng Chi Phí </p>
-                            <p style="font-weight:500;font-size:18px;">
+                            <p class="order-value" style="font-weight:500;font-size:18px;">
                                 <?php echo number_format($tongtien, 0, ',', '.') ?>đ</p>
                         </div>
 
@@ -143,16 +136,34 @@ session_start();
         }
 
         function view_data() {
-            $.post('http://localhost:3000/pages/handleCart/handleCartData.php',
-                function(data) {
-                    console.log(data);
-                })
+            $.ajax({
+                url: "http://localhost:3000/pages/handleCart/handleCartData.php",
+                dataType: 'json',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    $('.product-count').html(data.sosp);
+                    $('.order-value').html(`${data.tongtien}\u0111`)
+                    $('.cart_count span').html(data.sosp)
+                },
+                error: function(data) {
+                    $('.product-count').html('0')
+                    $('.order-value').html('0đ')
+                    $('.cart').html(`
+                    <div class="d-flex justify-content-center align-items-center flex-column" style="height:100%;">
+                            <span class="mb-4" style="font-size:25px;">HIỆN TẠI GIỎ HÀNG TRỐNG</span>
+                            <a class="back-to-shop-btn">
+                                <span class="text-muted">QUAY TRỞ LẠI MUA HÀNG</span>
+                            </a>
+                        </div>
+                    `)
+                }
+            })
         }
         view_data()
 
         $(document).on("click", '.cart__delete-btn', function() {
             var idProduct = $(this).attr("value");
-            console.log(idProduct)
             $.ajax({
                 url: "http://localhost:3000/pages/handleCart/handleDeleteCart.php",
                 data: {
@@ -163,11 +174,17 @@ session_start();
                 cache: true,
                 success: function(data) {
                     view_cart();
+                    view_data()
+                },
+                error: function(data) {
+                    view_cart();
+                    view_data()
                 }
             })
         })
 
         $(document).on("click", '.plus-quantity-btn', function() {
+            view_data();
             var idProduct = $(this).attr('value');
             console.log(idProduct)
             $.ajax({
@@ -180,6 +197,7 @@ session_start();
                 cache: true,
                 success: function(data) {
                     view_cart();
+                    view_data();
                 }
             })
         })
@@ -197,8 +215,26 @@ session_start();
                 cache: true,
                 success: function(data) {
                     view_cart();
+                    view_data()
                 }
             })
+        })
+
+        $(document).on("click", '.back-to-shop-btn', function() {
+            var url = "home.php";
+            window.history.pushState("new", "title", url);
+            $(".container").load("home.php");
+            $(window).scrollTop(0);
+        })
+
+        // View product detail
+        $(document).on("click", '.view__product-detail', function() {
+            var id = $(this).attr("value");
+            var url = "chitietsanpham.php?id=" + id;
+            window.history.pushState("new", "title", url);
+            $(".container").load("chitietsanpham.php?id=" + id);
+            $(window).scrollTop(0);
+            window.location.reload();
         })
     })
     </script>

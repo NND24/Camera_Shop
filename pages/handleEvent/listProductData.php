@@ -1,5 +1,6 @@
 <div class="row no-wrap products-category">
     <?php
+    session_start();
     $mysqli = new mysqli("localhost", "root", "", "camera_shop");
     if (isset($_GET['trang'])) {
         $page = $_GET['trang'];
@@ -17,7 +18,7 @@
     if (mysqli_num_rows($query_pro) > 0) {
         while ($row_pro = mysqli_fetch_array($query_pro)) {
     ?>
-    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
+    <div class="col col-lg-2-4 col-md-3 col-6 mb-10">
         <div class="row__item item--product">
             <div class="row__item-container">
                 <?php if ($row_pro['giamgia'] > 0) { ?>
@@ -32,10 +33,17 @@
                             style="background: url('./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_pro['hinhanh'] ?>') no-repeat center center / cover">
                         </div>
                     </div>
+                    <?php if (isset($_SESSION['id_user'])) { ?>
                     <button class="add-to-cart-btn" value="<?php echo $row_pro['id_sanpham'] ?>">
                         <i class="fa-solid fa-cart-plus"></i>
                         <span>Thêm vào giỏ hàng</span>
                     </button>
+                    <?php } else { ?>
+                    <button class="add-to-cart-btn-not-login" value="<?php echo $row_pro['id_sanpham'] ?>">
+                        <i class="fa-solid fa-cart-plus"></i>
+                        <span>Thêm vào giỏ hàng</span>
+                    </button>
+                    <?php } ?>
                 </div>
                 <div class="row__item-info">
                     <div class="view__product-detail" value="<?php echo $row_pro['id_sanpham'] ?>">

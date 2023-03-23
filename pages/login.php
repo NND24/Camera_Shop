@@ -34,46 +34,46 @@ include('../admin/config/config.php'); ?>
 </div>
 
 <script>
-    $(document).ready(() => {
-        $('#form-login-submit').click((e) => {
-            e.preventDefault();
-            var email = $('#email').val();
-            var password = $('#password').val();
+$(document).ready(() => {
+    $('#form-login-submit').click((e) => {
+        e.preventDefault();
+        var email = $('#email').val();
+        var password = $('#password').val();
 
-            $.ajax({
-                url: "http://localhost:3000/pages/handleEvent/handleLogin.php",
-                data: {
-                    email: email,
-                    password: password,
-                },
-                dataType: 'json',
-                method: "post",
-                cache: true,
-                success: function(data) {
-                    console.log(data)
-                    if (data.existAccount == 0) {
-                        swal("Email hoặc mật khẩu không đúng",
-                            "Vui lòng nhập lại hoặc đăng ký tài khoản",
-                            "error");
-                        $('#email').css("border-color", "#f33a58");
-                        $('.email-error').css("display", "block");
+        $.ajax({
+            url: "http://localhost:3000/pages/handleEvent/handleLogin.php",
+            data: {
+                email: email,
+                password: password,
+            },
+            dataType: 'json',
+            method: "post",
+            cache: true,
+            success: function(data) {
+                console.log(data)
+                if (data.existAccount == 0) {
+                    swal("Email hoặc mật khẩu không đúng",
+                        "Vui lòng nhập lại hoặc đăng ký tài khoản",
+                        "error");
+                    $('#email').css("border-color", "#f33a58");
+                    $('.email-error').css("display", "block");
 
-                        $('#password').css("border-color", "#f33a58");
-                        $('.password-error').css("display", "block");
-                    } else if (data.existAccount == 1) {
-                        swal("OK!", "Đăng nhập thành công", "success");
-                        $('#password').css("border-color", "#008000ab");
-                        $('.password-error').css("display", "none");
-                        $('.password-valid').css("display", "block");
-                        $('#email').css("border-color", "#008000ab");
-                        $('.email-error').css("display", "none");
-                        $('.email-valid').css("display", "block");
-                        setTimeout(function() {
-                            window.location.reload();
-                        }, 1500);
-                    }
-                },
-            })
+                    $('#password').css("border-color", "#f33a58");
+                    $('.password-error').css("display", "block");
+                } else if (data.existAccount == 1) {
+                    swal("OK!", "Đăng nhập thành công", "success");
+                    $('#password').css("border-color", "#008000ab");
+                    $('.password-error').css("display", "none");
+                    $('.password-valid').css("display", "block");
+                    $('#email').css("border-color", "#008000ab");
+                    $('.email-error').css("display", "none");
+                    $('.email-valid').css("display", "block");
+                    // setTimeout(function() {
+                    //     window.location.reload();
+                    // }, 1500);
+                }
+            },
         })
     })
+})
 </script>

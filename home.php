@@ -29,7 +29,7 @@
                     <section class="section box__slide_home">
                         <div class="section_content">
                             <div class="row ">
-                                <div class="col-3">
+                                <div class="col-lg-3 col-md-4 hide-on-mobile">
                                     <ul class="home__menu">
                                         <?php
                                         while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
@@ -47,7 +47,7 @@
                                         ?>
                                     </ul>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-lg-9 col-md-8 col-12">
                                     <div class="slide_ads">
                                         <!-- Swiper -->
                                         <div class="swiper mySwiper">
@@ -100,7 +100,7 @@
                                     $query_product_discount = mysqli_query($mysqli, $sql_product_discount);
                                     while ($row_product_discount = mysqli_fetch_array($query_product_discount)) {
                                     ?>
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
+                                    <div class="col col-lg-2-4 col-md-3 col-6 mb-10">
                                         <div class="row__item item--product">
                                             <div class="row__item-container">
                                                 <?php if ($row_product_discount['giamgia'] > 0) { ?>
@@ -115,11 +115,19 @@
                                                             style="background: url('./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_product_discount['hinhanh'] ?>') no-repeat center center / cover">
                                                         </div>
                                                     </div>
-                                                    <div class="add-to-cart-btn"
+                                                    <?php if (isset($_SESSION['id_user'])) { ?>
+                                                    <button class="add-to-cart-btn"
                                                         value="<?php echo $row_product_discount['id_sanpham'] ?>">
                                                         <i class="fa-solid fa-cart-plus"></i>
                                                         <span>Thêm vào giỏ hàng</span>
-                                                    </div>
+                                                    </button>
+                                                    <?php } else { ?>
+                                                    <button class="add-to-cart-btn-not-login"
+                                                        value="<?php echo $row_product_discount['id_sanpham'] ?>">
+                                                        <i class="fa-solid fa-cart-plus"></i>
+                                                        <span>Thêm vào giỏ hàng</span>
+                                                    </button>
+                                                    <?php } ?>
                                                 </div>
                                                 <div class="row__item-info">
                                                     <div class="view__product-detail"
@@ -171,7 +179,7 @@
                                     $query_product_sold = mysqli_query($mysqli, $sql_product_sold);
                                     while ($row_product_sold = mysqli_fetch_array($query_product_sold)) {
                                     ?>
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
+                                    <div class="col col-lg-2-4 col-md-3 col-6 mb-10">
                                         <div class="row__item item--product">
                                             <div class="row__item-container">
                                                 <?php if ($row_product_sold['giamgia'] > 0) { ?>
@@ -186,11 +194,19 @@
                                                             style="background: url('./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_product_sold['hinhanh'] ?>') no-repeat center center / cover">
                                                         </div>
                                                     </div>
-                                                    <div class="add-to-cart-btn"
+                                                    <?php if (isset($_SESSION['id_user'])) { ?>
+                                                    <button class="add-to-cart-btn"
                                                         value="<?php echo $row_product_sold['id_sanpham'] ?>">
                                                         <i class="fa-solid fa-cart-plus"></i>
                                                         <span>Thêm vào giỏ hàng</span>
-                                                    </div>
+                                                    </button>
+                                                    <?php } else { ?>
+                                                    <button class="add-to-cart-btn-not-login"
+                                                        value="<?php echo $row_product_sold['id_sanpham'] ?>">
+                                                        <i class="fa-solid fa-cart-plus"></i>
+                                                        <span>Thêm vào giỏ hàng</span>
+                                                    </button>
+                                                    <?php } ?>
                                                 </div>
                                                 <div class="row__item-info">
                                                     <div class="view__product-detail"
@@ -257,7 +273,7 @@
 
                                             while ($row_product = mysqli_fetch_array($query_product)) {
                                             ?>
-                                    <div class="col col-lg-2-4 col-md-3 col-4 mb-10">
+                                    <div class="col col-lg-2-4 col-md-3 col-6 mb-10">
                                         <div class="row__item item--product">
                                             <div class="row__item-container">
                                                 <?php if ($row_product['giamgia'] > 0) { ?>
@@ -272,11 +288,19 @@
                                                             style="background: url('./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_product['hinhanh'] ?>') no-repeat center center / cover">
                                                         </div>
                                                     </div>
-                                                    <div class="add-to-cart-btn"
+                                                    <?php if (isset($_SESSION['id_user'])) { ?>
+                                                    <button class="add-to-cart-btn"
                                                         value="<?php echo $row_product['id_sanpham'] ?>">
                                                         <i class="fa-solid fa-cart-plus"></i>
                                                         <span>Thêm vào giỏ hàng</span>
-                                                    </div>
+                                                    </button>
+                                                    <?php } else { ?>
+                                                    <button class="add-to-cart-btn-not-login"
+                                                        value="<?php echo $row_product['id_sanpham'] ?>">
+                                                        <i class="fa-solid fa-cart-plus"></i>
+                                                        <span>Thêm vào giỏ hàng</span>
+                                                    </button>
+                                                    <?php } ?>
                                                 </div>
                                                 <div class="row__item-info">
                                                     <div class="view__product-detail"

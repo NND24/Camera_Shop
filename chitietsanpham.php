@@ -124,7 +124,7 @@
 
                 <div class="product_main-container">
                     <div class="row">
-                        <div class="col-lg-5 col product_category">
+                        <div class="col-lg-5 col-md-6 col-sm-12 product_category">
                             <img class="product_thumbnail"
                                 src="./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_chitiet['hinhanh'] ?>"
                                 alt="">
@@ -135,7 +135,7 @@
                                 alt="">
                         </div>
 
-                        <div class="col-lg-4 col product_summary">
+                        <div class="col-lg-4  col-md-6 col-sm-12 product_summary">
                             <div class="price_wrapper">
                                 <h4>Giá bán: </h4>
                                 <?php
@@ -185,21 +185,23 @@
 
                             </div>
 
-                            <form action="" class="cart">
-                                <div class="quantity_wrapper">
-                                    <label for="quantity">Số lượng: </label>
-                                    <div class="quantity_button-wrapper">
-                                        <input type="button" value="-" class="minus-quantity button-quantity">
-                                        <input type="number" name="quantity" class="input-text" step="1" min="1"
-                                            value="1" id="quantity" placeholder inputmode="numeric">
-                                        <input type="button" value="+" class="plus-quantity button-quantity">
-                                    </div>
-                                </div>
-                                <button type="submit" name="add-to-cart" class="add-to-cart-button">THÊM VÀO GIỎ
-                                    HÀNG</button>
-                            </form>
 
-                            <a href="#" class="buy_now">
+                            <?php if (isset($_SESSION['id_user'])) { ?>
+                            <div class="cart">
+                                <button class="add-to-cart-button" value="<?php echo $row_chitiet['id_sanpham'] ?>">THÊM
+                                    VÀO GIỎ
+                                    HÀNG</button>
+                            </div>
+                            <?php } else { ?>
+                            <div class="cart">
+                                <button class="add-to-cart-button-not-login"
+                                    value="<?php echo $row_chitiet['id_sanpham'] ?>">THÊM
+                                    VÀO GIỎ
+                                    HÀNG</button>
+                            </div>
+                            <?php } ?>
+
+                            <a class="buy_now">
                                 <strong>MUA NGAY</strong>
                                 <span>Gọi điện xác nhận và giao hàng tận nơi</span>
                             </a>
@@ -219,7 +221,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col product_sidebar hide-for-medium">
+                        <div class="col-lg-3 col-12 product_sidebar hide-for-medium">
                             <div class="featured__box-wrapper">
 
                                 <div class="featured__box">
@@ -318,6 +320,9 @@
                                                         style="background: url('./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_pro['hinhanh'] ?>') no-repeat center center / cover">
                                                     </div>
                                                 </div>
+
+
+                                                <?php if (isset($_SESSION['id_user'])) { ?>
                                                 <div class="add-to-cart-btn"
                                                     value="<?php echo $row_pro['id_sanpham'] ?>">
                                                     <i class="fa-solid fa-cart-plus" style="
@@ -327,6 +332,17 @@
                                                                 font-size: 1rem;
                                                             ">Thêm vào giỏ hàng</span>
                                                 </div>
+                                                <?php } else { ?>
+                                                <div class="add-to-cart-btn-not-login"
+                                                    value="<?php echo $row_pro['id_sanpham'] ?>">
+                                                    <i class="fa-solid fa-cart-plus" style="
+                                                                left: 21px;
+                                                            "></i>
+                                                    <span style="
+                                                                font-size: 1rem;
+                                                            ">Thêm vào giỏ hàng</span>
+                                                </div>
+                                                <?php } ?>
                                             </div>
                                             <div class="row__item-info">
                                                 <div class="view__product-detail"
@@ -387,7 +403,7 @@
                             </div>
 
                             <!-- Sidebar -->
-                            <div class="col-12 col-lg-3" style="padding-right: 0;">
+                            <div class="col-12 col-lg-3">
                                 <div class="product__footer-sidebar">
                                     <h3 class="footer__sidebar-title">BẠN CÓ THỂ THÍCH</h3>
 
@@ -664,9 +680,22 @@
                                         name="" id="" cols="30" rows="10"></textarea>
                                 </div>
                                 <div class="form__comment-bottom">
+
+                                    <?php
+                                        if (isset($_SESSION['id_user'])) {
+                                        ?>
                                     <div class="comment__submit">
-                                        <button>Gửi</button>
+                                        Gửi
                                     </div>
+                                    <?php
+                                        } else {
+                                        ?>
+                                    <div class="comment__submit-not-login">
+                                        Gửi
+                                    </div>
+                                    <?php
+                                        }
+                                        ?>
                                 </div>
                             </form>
                         </div>
@@ -715,7 +744,7 @@
                 spaceBetween: 10,
             },
             425: {
-                slidesPerView: 3,
+                slidesPerView: 2,
                 spaceBetween: 10,
             },
             768: {
@@ -830,7 +859,12 @@
         })
 
         $(document).on("click", '.btn-reviews-not-login', function() {
-            console.log('dasd')
+            swal("Bạn cần đăng nhập để đánh giá",
+                "Vui lòng đăng nhập hoặc đăng ký tài khoản!",
+                "error");
+        })
+
+        $(document).on("click", '.comment__submit-not-login', function() {
             swal("Bạn cần đăng nhập để đánh giá",
                 "Vui lòng đăng nhập hoặc đăng ký tài khoản!",
                 "error");
@@ -856,6 +890,7 @@
         }
         view_review_data()
 
+        // View comment data
         function view_comment_data() {
             $.post('http://localhost:3000/pages/handleEvent/loadCommentData.php?idsanpham=' +
                 <?php echo $_GET['id'] ?>,

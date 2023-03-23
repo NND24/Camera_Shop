@@ -32,7 +32,7 @@
 
             <!-- Shop page title -->
             <div class="row">
-                <div class="col col-lg-12">
+                <div class="col-12 col-lg-12">
                     <div class="shop__page-title">
                         <h1><?php echo $row_title['ten_danhmuc'] ?></h1>
                     </div>
@@ -41,7 +41,7 @@
 
             <!--  -->
             <div class="row category__page-row">
-                <div class="col col-lg-12">
+                <div class="col-12 col-lg-12">
                     <div class="sidebar__filter">
                         <span>Lọc theo giá:</span>
                         <select class="price__list-filter">
@@ -59,20 +59,15 @@
                         <div class="ordering">
                             <ul>
                                 <li>Sắp xếp theo:</li>
-                                <li><input checked class="fliter__order" value="0" name="filter__order"
-                                        id="filter__order-1" type="radio"><label for="filter__order-1">Mức
+                                <li><input checked class="fliter__order" value="0" name="filter__order" id="filter__order-1" type="radio"><label for="filter__order-1">Mức
                                         độ phổ biến</label></li>
-                                <li><input class="fliter__order" value="1" name="filter__order" id="filter__order-2"
-                                        type="radio"><label for="filter__order-2">Điểm
+                                <li><input class="fliter__order" value="1" name="filter__order" id="filter__order-2" type="radio"><label for="filter__order-2">Điểm
                                         đánh giá</label></li>
-                                <li><input class="fliter__order" value="2" name="filter__order" id="filter__order-3"
-                                        type="radio"><label for="filter__order-3">Mới
+                                <li><input class="fliter__order" value="2" name="filter__order" id="filter__order-3" type="radio"><label for="filter__order-3">Mới
                                         nhất</label></li>
-                                <li><input class="fliter__order" value="3" name="filter__order" id="filter__order-4"
-                                        type="radio"><label for="filter__order-4">Giá
+                                <li><input class="fliter__order" value="3" name="filter__order" id="filter__order-4" type="radio"><label for="filter__order-4">Giá
                                         thấp đến cao</label></li>
-                                <li><input class="fliter__order" value="4" name="filter__order" id="filter__order-5"
-                                        type="radio"><label for="filter__order-5">Giá
+                                <li><input class="fliter__order" value="4" name="filter__order" id="filter__order-5" type="radio"><label for="filter__order-5">Giá
                                         cao đến thấp</label></li>
                             </ul>
                         </div>
@@ -80,15 +75,15 @@
                         $sql_pro = "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_danhmuc='$_GET[id]'";
                         $query_pro = mysqli_query($mysqli, $sql_pro);
                         if (mysqli_num_rows($query_pro) > 0) { ?>
-                        <div class="term__description">
-                            <?php echo $row_title['category_detail']; ?>
-                            <div class="load-more">
-                                <span>Xem thêm <i class="fa-solid fa-caret-down"></i></span>
+                            <div class="term__description">
+                                <?php echo $row_title['category_detail']; ?>
+                                <div class="load-more">
+                                    <span>Xem thêm <i class="fa-solid fa-caret-down"></i></span>
+                                </div>
+                                <div class="collapse">
+                                    <span>Thu gọn <i class="fa-solid fa-caret-up"></i></i></span>
+                                </div>
                             </div>
-                            <div class="collapse">
-                                <span>Thu gọn <i class="fa-solid fa-caret-up"></i></i></span>
-                            </div>
-                        </div>
                         <?php } ?>
                         <div id="load__product-row"> </div>
 
@@ -109,76 +104,76 @@
     </div>
 
     <script>
-    $(document).ready(() => {
-        window.onscroll = function() {
-            if (document.documentElement.scrollTop > 50) {
-                $('.container').addClass('active');
-            } else {
-                $('.container').removeClass('active');
-            }
-        };
+        $(document).ready(() => {
+            // window.onscroll = function() {
+            //     if (document.documentElement.scrollTop > 50) {
+            //         $('.container').addClass('active');
+            //     } else {
+            //         $('.container').removeClass('active');
+            //     }
+            // };
 
-        // Load more description
-        $(document).on("click", '.load-more', function() {
-            $('.term__description').css('height', '100%');
-            $('.load-more').css('display', 'none')
-            $('.collapse').css('display', 'block')
-        })
+            // Load more description
+            $(document).on("click", '.load-more', function() {
+                $('.term__description').css('height', '100%');
+                $('.load-more').css('display', 'none')
+                $('.collapse').css('display', 'block')
+            })
 
-        // Collapse description
-        $(document).on("click", '.collapse', function() {
-            $('.term__description').css('height', '200px');
-            $('.load-more').css('display', 'block')
-            $('.collapse').css('display', 'none')
-        })
+            // Collapse description
+            $(document).on("click", '.collapse', function() {
+                $('.term__description').css('height', '200px');
+                $('.load-more').css('display', 'block')
+                $('.collapse').css('display', 'none')
+            })
 
-        // View product detail
-        $(document).on("click", '.view__product-detail', function() {
-            var id = $(this).attr("value");
-            var url = "chitietsanpham.php?id=" + id;
-            window.history.pushState("new", "title", url);
-            $(".container").load("chitietsanpham.php?id=" + id);
-            $(window).scrollTop(0);
-            window.location.reload();
-        })
+            // View product detail
+            $(document).on("click", '.view__product-detail', function() {
+                var id = $(this).attr("value");
+                var url = "chitietsanpham.php?id=" + id;
+                window.history.pushState("new", "title", url);
+                $(".container").load("chitietsanpham.php?id=" + id);
+                $(window).scrollTop(0);
+                window.location.reload();
+            })
 
-        $(document).on("click", '.view__home', function() {
-            var url = "home.php";
-            window.history.pushState("new", "title", url);
-            $(".container").load("home.php");
-            $(window).scrollTop(0);
-        })
+            $(document).on("click", '.view__home', function() {
+                var url = "home.php";
+                window.history.pushState("new", "title", url);
+                $(".container").load("home.php");
+                $(window).scrollTop(0);
+            })
 
-        // View data
-        view_data();
+            // View data
+            view_data();
 
-        function view_data() {
-            $.post('http://localhost:3000/pages/handleEvent/listProductData.php?id=' +
-                <?php echo $_GET['id'] ?>,
-                function(data) {
-                    $('#load__product-row').html(data)
-                })
-        }
-
-        /* FILTER START */
-        var priceRange = 0;
-        $(document).on("click", '.price__list-filter', function() {
-            priceRange = $(this).val();
-            $.ajax({
-                url: "http://localhost:3000/pages/handleEvent/handlePriceRange.php?id=" +
+            function view_data() {
+                $.post('http://localhost:3000/pages/handleEvent/listProductData.php?id=' +
                     <?php echo $_GET['id'] ?>,
-                data: {
-                    priceRange: priceRange,
-                },
-                dataType: 'html',
-                method: "post",
-                cache: true,
-                success: function(data) {
-
-                    if (priceRange == 1 || priceRange == 2) {
+                    function(data) {
                         $('#load__product-row').html(data)
-                        $('.ordering').html(
-                            `
+                    })
+            }
+
+            /* FILTER START */
+            var priceRange = 0;
+            $(document).on("click", '.price__list-filter', function() {
+                priceRange = $(this).val();
+                $.ajax({
+                    url: "http://localhost:3000/pages/handleEvent/handlePriceRange.php?id=" +
+                        <?php echo $_GET['id'] ?>,
+                    data: {
+                        priceRange: priceRange,
+                    },
+                    dataType: 'html',
+                    method: "post",
+                    cache: true,
+                    success: function(data) {
+
+                        if (priceRange == 1 || priceRange == 2) {
+                            $('#load__product-row').html(data)
+                            $('.ordering').html(
+                                `
                             <ul>
                                 <li>Sắp xếp theo:</li>
                                 <li><input checked class="fliter__order" value="0" name="filter__order" id="filter__order-1" type="radio"><label for="filter__order-1">Mức
@@ -193,40 +188,40 @@
                                         cao đến thấp</label></li>
                             </ul>
                             `
-                        )
-                    } else {
-                        view_data();
+                            )
+                        } else {
+                            view_data();
+                        }
                     }
-                }
+                })
             })
-        })
 
-        $(document).on("change", '.fliter__order', function() {
-            var value = $(this).val();
-            $.ajax({
-                url: "http://localhost:3000/pages/handleEvent/filterOrder.php?id=" +
-                    <?php echo $_GET['id'] ?>,
-                data: {
-                    value: value,
-                    priceRange: priceRange,
-                },
-                dataType: 'html',
-                method: "post",
-                cache: true,
-                success: function(data) {
-                    if (value == 0 || value == 1 || value == 2 || value == 3 || value ==
-                        4) {
-                        $('#load__product-row').html(data)
-                    } else {
-                        view_data();
+            $(document).on("change", '.fliter__order', function() {
+                var value = $(this).val();
+                $.ajax({
+                    url: "http://localhost:3000/pages/handleEvent/filterOrder.php?id=" +
+                        <?php echo $_GET['id'] ?>,
+                    data: {
+                        value: value,
+                        priceRange: priceRange,
+                    },
+                    dataType: 'html',
+                    method: "post",
+                    cache: true,
+                    success: function(data) {
+                        if (value == 0 || value == 1 || value == 2 || value == 3 || value ==
+                            4) {
+                            $('#load__product-row').html(data)
+                        } else {
+                            view_data();
+                        }
                     }
-                }
+                })
             })
+
+
+            /* FILTER END */
         })
-
-
-        /* FILTER END */
-    })
     </script>
 </body>
 

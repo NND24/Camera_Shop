@@ -134,13 +134,13 @@ $mysqli = new mysqli("localhost", "root", "", "camera_shop");
 
     <script>
     $(document).ready(() => {
-        window.onscroll = function() {
-            if (document.documentElement.scrollTop > 50) {
-                $('.container').addClass('active');
-            } else {
-                $('.container').removeClass('active');
-            }
-        };
+        // window.onscroll = function() {
+        //     if (document.documentElement.scrollTop > 50) {
+        //         $('.container').addClass('active');
+        //     } else {
+        //         $('.container').removeClass('active');
+        //     }
+        // };
 
         // Load more description
         $(document).on("click", '.load-more', function() {
