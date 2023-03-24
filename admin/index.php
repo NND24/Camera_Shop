@@ -17,7 +17,7 @@
         header('Location: login.php');
     }
     if ((isset($_GET['dangxuat']) == 1)) {
-        unset($_SESSION['dangnhap']);
+        //unset($_SESSION['dangnhap']);
         header('Location: login.php');
     }
     // echo '<pre>'; print_r($_SERVER);  echo '</pre>';

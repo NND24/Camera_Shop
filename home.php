@@ -10,7 +10,7 @@
     include('admin/config/config.php'); ?>
 </head>
 
-<body>
+<body class="container">
     <div class="container">
         <?php
         include('pages/header.php');

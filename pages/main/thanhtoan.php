@@ -14,6 +14,6 @@ if ($cart_query) {
         VALUE('" . $id_sanpham . "','" . $code_order . "','" . $soluong . "')";
         mysqli_query($mysqli, $insert_order_details);
     }
-    unset($_SESSION['cart']);
+    //unset($_SESSION['cart']);
     header('Location: ../../index.php');
 }

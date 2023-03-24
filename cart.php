@@ -5,7 +5,7 @@ session_start();
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">s
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GPM Camera</title>
@@ -39,10 +39,11 @@ session_start();
 
                             <div class="cart__title">
                                 <div class="row">
-                                    <div class="col-md-10 col-7">
+                                    <div class="col-8">
                                         <h4><b>GIỎ HÀNG</b></h4>
                                     </div>
-                                    <div class="col-md-2 col-5  text-right text-muted  d-flex">
+                                    <div class=" col-4  text-right text-muted  d-flex"
+                                        style="justify-content: flex-end;">
                                         <div class="product-count"><?php echo $sosp ?></div> sản phẩm
                                     </div>
                                 </div>
@@ -50,8 +51,8 @@ session_start();
 
                             <div class="row__title row">
                                 <div class="col-4 justify-content-center d-flex">SẢN PHẨM</div>
-                                <div class="col justify-content-center d-flex">GIÁ</div>
-                                <div class="col-lg-2-4 justify-content-left d-flex quantity">SỐ LƯỢNG</div>
+                                <div class="col justify-content-center  hide-on-mobile-425">GIÁ</div>
+                                <div class="col-sm-3 col-lg-2-4-sm justify-content-left d-flex quantity">SỐ LƯỢNG</div>
                                 <div class="col justify-content-center sum">TỔNG</div>
                             </div>
 

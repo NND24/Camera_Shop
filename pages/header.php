@@ -1,4 +1,5 @@
 <?php
+@session_start();
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
 $sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY thutu ASC LIMIT 9";
 $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
@@ -10,7 +11,7 @@ include('./js/link.php');
     <!-- Header Main -->
     <div class="header_main">
         <div class="header_container">
-            <div class="row no-wrap">
+            <d class="row no-wrap">
 
 
                 <!-- Logo -->
@@ -27,29 +28,31 @@ include('./js/link.php');
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-7 col-1  ">
-                    <div class="main_nav_menu">
-                        <ul class="standard_dropdown main_nav_dropdown">
-                            <li class="has_subs">
-                                <a href="#"><i class="fa-solid fa-bars"></i><span>Danh mục</span></a>
-                                <ul>
-                                    <?php
-                                    while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
-                                    ?>
-                                        <li>
-                                            <button class="category__product-btn" value="<?php echo $row_danhmuc['id_danhmuc'] ?>"><?php echo $row_danhmuc['ten_danhmuc'] ?></button>
-                                        </li>
-                                    <?php
-                                    }
-                                    ?>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+
+                <div class="main_nav_menu">
+                    <ul class="standard_dropdown main_nav_dropdown">
+                        <li class="has_subs">
+                            <a><i class="fa-solid fa-bars"></i><span>Danh mục</span></a>
+                            <ul>
+
+                                <?php
+                                while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
+                                ?>
+                                    <li>
+                                        <button class="category__product-btn" value="<?php echo $row_danhmuc['id_danhmuc'] ?>"><?php echo $row_danhmuc['ten_danhmuc'] ?></button>
+                                    </li>
+                                <?php
+                                }
+                                ?>
+                            </ul>
+                        </li>
+                        <div class="menu-background"></div>
+                    </ul>
                 </div>
 
+
                 <!-- Search -->
-                <div class="col-lg-5 col-md-7 col-1  ">
+                <div class="col-lg-6 col-md-7 col-1  ">
                     <div class="header_search">
                         <div class="header_search_content">
                             <div class="header_search_form_container">
@@ -104,27 +107,9 @@ include('./js/link.php');
 
                     </div>
                 </div>
-            </div>
         </div>
     </div>
-
-    <!-- Main Navigation -->
-
-    <nav class="main_nav">
-        <div class="header_container">
-            <div class="row">
-                <div class="col">
-
-                    <div class="main_nav_content d-flex flex-row">
-
-                        <!-- Main Nav Menu -->
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+    </div>
 
     <div class="main__menu">
         <div class="main__menu-logo">
@@ -170,6 +155,17 @@ include('./js/link.php');
             $('.loader-wrapper').fadeOut()
         })
 
+        $(document).on("click", '.standard_dropdown li', function() {
+            $(".standard_dropdown li > ul").css("display", "block");
+            $(".menu-background").css("display", "block");
+        })
+
+        $(document).on("click", '.menu-background', function() {
+            console.log('dasd')
+            $(".standard_dropdown li > ul").css("display", "none");
+            $(".menu-background").css("display", "none");
+        })
+
         $(document).on("click", '.header_open-menu', function() {
             $(".main__menu").css("display", "block");
         })
@@ -194,7 +190,7 @@ include('./js/link.php');
         $(document).on("click", '.logo a', function() {
             var url = "home.php";
             window.history.pushState("new", "title", url);
-            $(".container").load("home.php");
+            $(".container").load("http://localhost:3000/home.php");
             $(window).scrollTop(0);
         })
 
@@ -229,6 +225,14 @@ include('./js/link.php');
         })
 
         $(document).on("click", '.modal-background', function() {
+            $(".wrapper").remove();
+        })
+
+        $(document).on("click", '.close-login-modal', function() {
+            $(".wrapper").remove();
+        })
+
+        $(document).on("click", '.close-register-modal', function() {
             $(".wrapper").remove();
         })
 
