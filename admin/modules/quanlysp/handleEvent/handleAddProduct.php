@@ -3,10 +3,10 @@ session_start();
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
 
 $tensanpham = $_POST['tensanpham'];
-$masp = time() . mt_rand(0, 999);
 $giasp = $_POST['giasp'];
 $soluong = $_POST['soluong'];
-$image = $_SESSION['product_img'];
+$filename = $_FILES['file']['name'];
+$image = time() . '_' . $filename;
 $giamgia = $_POST['giamgia'];
 $giadagiam = $_POST['giasp'] - ($_POST['giasp'] * $_POST['giamgia']) / 100;
 $tomtat = $_POST['tomtat'];
@@ -23,33 +23,30 @@ if (mysqli_num_rows($query_product_name) > 0) {
     $a = array("existName" => 1);
     echo json_encode($a);
 } else {
-    if (isset($_GET['query'])) {
-        // Location
-        $location = "uploads" . DIRECTORY_SEPARATOR . $_SESSION['product_img'];
-        $uploadOk = 1;
-        $imageFileType = pathinfo($location, PATHINFO_EXTENSION);
+    // Location
+    $location = "uploads" . DIRECTORY_SEPARATOR . time() . '_' . $filename;
+    $uploadOk = 1;
+    $imageFileType = pathinfo($location, PATHINFO_EXTENSION);
 
-        // Valid Extension
-        $valid_extensions = array("jpg", "jpeg", "png", "gif");
-        // Check
-        if (!in_array(strtolower($imageFileType), $valid_extensions)) {
-            $uploadOk = 0;
-        }
-        if ($uploadOk == 0) {
-            echo 0;
-        } else {
-            move_uploaded_file($_FILES['file']['tmp_name'], realpath('') . DIRECTORY_SEPARATOR . $location);
-        }
+    // Valid Extension
+    $valid_extensions = array("jpg", "jpeg", "png", "gif");
+    // Check
+    if (!in_array(strtolower($imageFileType), $valid_extensions)) {
+        $uploadOk = 0;
     }
+    if ($uploadOk == 0) {
+        echo 0;
+    } else {
+        move_uploaded_file($_FILES['file']['tmp_name'], realpath('') . DIRECTORY_SEPARATOR . $location);
+    }
+
 
     $b = array("existName" => 0);
     echo json_encode($b);
-    if (isset($_GET['action'])) {
-        $sql_them = "INSERT INTO tbl_sanpham(tensanpham, masp, giasp, soluong, hinhanh, giamgia,giadagiam, tomtat,
+    $sql_them = "INSERT INTO tbl_sanpham(tensanpham, giasp, soluong, hinhanh, giamgia,giadagiam, tomtat,
  noidung, trangthaisp, id_danhmuc, created_time, last_updated) 
-VALUE('" . $tensanpham . "','" . $masp . "','" . $giasp . "','" . $soluong . "','" . $image . "','" . $giamgia . "','" . $giadagiam . "','" . $tomtat . "','" . $noidung . "',
+VALUE('" . $tensanpham . "','" . $giasp . "','" . $soluong . "','" . $image . "','" . $giamgia . "','" . $giadagiam . "','" . $tomtat . "','" . $noidung . "',
 '" . $trangthai . "','" . $danhmuc . "','" . time() . "','" . time() . "')";
-        mysqli_query($mysqli, $sql_them);
-    }
+    mysqli_query($mysqli, $sql_them);
 }
 /** VALIDATE EXIST END **/

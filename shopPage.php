@@ -10,7 +10,7 @@
     include('admin/config/config.php'); ?>
 </head>
 
-<body>
+<body class="container">
     <div class="container">
         <div class="main" id="main">
             <?php
@@ -91,69 +91,6 @@
                         </div>
                         <?php } ?>
                         <div id="load__product-row"> </div>
-
-                        <!-- <div class="pagination__wrapper ">
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination">
-                                    <?php
-                                    // $item_per_page = 3;
-                                    // $current_page = 1;
-                                    // $totalRecords = mysqli_query($mysqli, "SELECT * FROM tbl_sanpham");
-                                    // $totalRecords = $totalRecords->num_rows;
-                                    // $totalPages = ceil($totalRecords / $item_per_page);
-                                    if ($current_page > 3) {
-                                        //$first_page = 1;
-                                    ?>
-                                    <li class="page-item">
-                                        <a class="page-link first-page-shopPage"><i
-                                                class="fa-solid fa-angles-left"></i></a>
-                                    </li>
-                                    <?php
-                                    }
-                                    if ($current_page > 1) {
-                                        //$prev_page = $current_page - 1;
-                                    ?>
-                                    <li class="page-item">
-                                        <a class="page-link prev-page-shopPage"><i
-                                                class="fa-solid fa-angle-left"></i></a>
-                                    </li>
-                                    <?php } ?>
-
-                                    <?php for ($num = 1; $num <= $totalPages; $num++) { ?>
-                                    <?php if ($num != $current_page) { ?>
-                                    <?php if ($num > $current_page - 3 && $num < $current_page + 3) { ?>
-                                    <li class="page-item"><a class="page-link"><?php echo $num ?></a></li>
-                                    <?php } ?>
-                                    <?php } else { ?>
-                                    <li class="page-item"><a class="page-link"><?php echo $num ?></a></li>
-                                    <?php } ?>
-                                    <?php } ?>
-
-
-                                    <?php
-                                    if ($current_page < $totalPages - 1) {
-                                        $next_page = $current_page + 1;
-                                    ?>
-                                    <li class="page-item">
-                                        <a class="page-link next-page-shopPage"><i
-                                                class="fa-solid fa-angle-right"></i></a>
-                                    </li>
-                                    <?php
-                                    }
-                                    if ($current_page < $totalPages - 3) {
-                                        $end_page = $totalPages;
-                                    ?>
-                                    <li class="page-item">
-                                        <a class="page-link last-page-shopPage"><i
-                                                class="fa-solid fa-angles-right"></i></a>
-                                    </li>
-                                    <?php
-                                    }
-                                    ?>
-
-                                </ul>
-                            </nav>
-                        </div> -->
                     </div>
                 </div>
             </div>

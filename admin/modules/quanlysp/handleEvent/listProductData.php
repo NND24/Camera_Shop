@@ -1,21 +1,20 @@
 <?php
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
+$item_per_page = 7;
+$current_page = $_GET['pageIndex'];
+$offset = ($current_page - 1) * $item_per_page;
+
 $sql_lietke_sp = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
-ORDER BY id_sanpham DESC";
+ORDER BY id_sanpham DESC LIMIT " . $item_per_page . " OFFSET " . $offset . " ";
 $query_lietke_sp = mysqli_query($mysqli, $sql_lietke_sp);
+
+$totalRecords = mysqli_query($mysqli, "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc");
+$totalRecords = mysqli_num_rows($totalRecords);
+$totalPages = ceil($totalRecords / $item_per_page);
 if (mysqli_num_rows($query_lietke_sp) > 0) {
     while ($row = mysqli_fetch_array($query_lietke_sp)) {
 ?>
 <div class="products-row">
-    <button class="cell-more-button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-more-vertical">
-            <circle cx="12" cy="12" r="1" />
-            <circle cx="12" cy="5" r="1" />
-            <circle cx="12" cy="19" r="1" />
-        </svg>
-    </button>
     <div class="product-cell col-2-4 image">
         <img src="modules/quanlysp/handleEvent/uploads/<?php echo $row['hinhanh'] ?>" alt="product">
         <span title="<?php echo $row['tensanpham'] ?>"><?php echo $row['tensanpham'] ?></span>
@@ -59,21 +58,59 @@ if (mysqli_num_rows($query_lietke_sp) > 0) {
 <div class="pagination__wrapper ">
     <nav aria-label="Page navigation">
         <ul class="pagination">
+            <?php
+                if ($current_page > 3) {
+                    $first_page = 1;
+                ?>
             <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                </a>
+                <a class="page-link main first-page-shopPage" value="<?php echo $first_page ?>"><i
+                        class="fa-solid fa-angles-left"></i></a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <?php
+                }
+                if ($current_page > 1) {
+                    $prev_page = $current_page - 1;
+                ?>
             <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                </a>
+                <a class="page-link main prev-page-shopPage" value="<?php echo $current_page - 1 ?>"><i
+                        class="fa-solid fa-angle-left"></i></a>
             </li>
+            <?php } ?>
+
+            <?php for ($num = 1; $num <= $totalPages; $num++) { ?>
+            <?php if ($num != $current_page) { ?>
+            <?php if ($num > $current_page - 3 && $num < $current_page + 3) { ?>
+            <li class="page-item <?php echo ($current_page == $num) ? 'active' : '' ?>"><a class="page-link main"
+                    value="<?php echo $num ?>"><?php echo $num ?></a></li>
+            <?php } ?>
+            <?php } else { ?>
+            <li class="page-item <?php echo ($current_page == $num) ? 'active' : '' ?>"><a class="page-link main"
+                    value="<?php echo $num ?>"><?php echo $num ?></a></li>
+            <?php } ?>
+            <?php } ?>
+
+
+            <?php
+                if ($current_page < $totalPages - 1) {
+                    $next_page = $current_page + 1;
+                ?>
+            <li class=" page-item">
+                <a class="page-link main next-page-shopPage" value="<?php echo $current_page + 1 ?>"><i
+                        class="fa-solid fa-angle-right"></i></a>
+            </li>
+            <?php
+                }
+                if ($current_page < $totalPages - 3) {
+                    $end_page = $totalPages;
+                ?>
+            <li class="page-item">
+                <a class="page-link main last-page-shopPage" value="<?php echo $end_page ?>"><i
+                        class="fa-solid fa-angles-right"></i></a>
+            </li>
+            <?php
+                }
+                ?>
+
         </ul>
     </nav>
 </div>

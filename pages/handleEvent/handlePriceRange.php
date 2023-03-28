@@ -92,11 +92,13 @@
                 <?php for ($num = 1; $num <= $totalPages; $num++) { ?>
                 <?php if ($num != $current_page) { ?>
                 <?php if ($num > $current_page - 3 && $num < $current_page + 3) { ?>
-                <li class="page-item"><a class="page-link order-range" value="<?php echo $num ?>"><?php echo $num ?></a>
+                <li class="page-item <?php echo ($current_page == $num) ? 'active' : '' ?>"><a
+                        class="page-link order-range" value="<?php echo $num ?>"><?php echo $num ?></a>
                 </li>
                 <?php } ?>
                 <?php } else { ?>
-                <li class="page-item"><a class="page-link order-range" value="<?php echo $num ?>"><?php echo $num ?></a>
+                <li class="page-item <?php echo ($current_page == $num) ? 'active' : '' ?>"><a
+                        class="page-link order-range" value="<?php echo $num ?>"><?php echo $num ?></a>
                 </li>
                 <?php } ?>
                 <?php } ?>
@@ -222,11 +224,13 @@
                 <?php for ($num = 1; $num <= $totalPages; $num++) { ?>
                 <?php if ($num != $current_page) { ?>
                 <?php if ($num > $current_page - 3 && $num < $current_page + 3) { ?>
-                <li class="page-item"><a class="page-link order-range" value="<?php echo $num ?>"><?php echo $num ?></a>
+                <li class="page-item <?php echo ($current_page == $num) ? 'active' : '' ?>"><a
+                        class="page-link order-range" value="<?php echo $num ?>"><?php echo $num ?></a>
                 </li>
                 <?php } ?>
                 <?php } else { ?>
-                <li class="page-item"><a class="page-link order-range" value="<?php echo $num ?>"><?php echo $num ?></a>
+                <li class="page-item <?php echo ($current_page == $num) ? 'active' : '' ?>"><a
+                        class="page-link order-range" value="<?php echo $num ?>"><?php echo $num ?></a>
                 </li>
                 <?php } ?>
                 <?php } ?>

@@ -286,7 +286,7 @@ include('./js/link.php');
             sosp++;
             $('.cart_count span').html(sosp)
             $.ajax({
-                url: "http://localhost:3000/pages/handleCart/handleAddToCart.php",
+                url: "http://localhost:3000/pages/Cart/handleAddToCart.php",
                 data: {
                     id_sanpham: productID,
                 },
@@ -310,7 +310,7 @@ include('./js/link.php');
             sosp++;
             $('.cart_count span').html(sosp)
             $.ajax({
-                url: "http://localhost:3000/pages/handleCart/handleAddToCart.php",
+                url: "http://localhost:3000/pages/Cart/handleAddToCart.php",
                 data: {
                     id_sanpham: productID,
                 },
@@ -333,6 +333,7 @@ include('./js/link.php');
             var url = "cart.php";
             window.history.pushState("new", "title", url);
             $(".container").load("cart.php");
+            window.location.reload();
             $(window).scrollTop(0);
         })
 

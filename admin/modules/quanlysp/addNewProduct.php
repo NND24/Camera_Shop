@@ -1,16 +1,18 @@
-<div id="product__add-model">
+<div id="product__edit-model">
     <div class="model__container">
-        <div class="model-close-btn"><i class="fa-solid fa-xmark"></i></div>
         <form enctype="multipart/form-data">
             <div class="model__add-new">
-                <h3>Thêm sản phẩm</h3>
+                <h3>Sửa sản phẩm</h3>
+                <div class="close-modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
                 <div class="model__content">
                     <label class="col-2">Tên sản phẩm: </label>
-                    <input type="text" name="tensanpham" class="tensanpham" />
+                    <input type="text" class="tensanpham" />
                 </div>
                 <div class="model__content">
                     <label class="col-2">Danh mục sản phẩm: </label>
-                    <select name="danhmuc" class="danhmuc">
+                    <select class="danhmuc">
                         <?php
                         $mysqli = new mysqli("localhost", "root", "", "camera_shop");
                         $sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc ASC";
@@ -27,48 +29,51 @@
                 <div class="model__content">
                     <label class="col-2">Hình ảnh: </label>
                     <input type="file" name="file" class="file[]">
-                    <img src="" class="image" alt="" style="width:100px;">
+                    <img src="" class="image" alt="" style="width:100px; border:1px solid #ccc;">
                 </div>
                 <div class="model__content">
                     <label class="col-2">Giá sản phẩm: </label>
-                    <input type="number" min="0" name="giasp" class="giasp" />
+                    <input type="number" min="0" class="giasp" />
                 </div>
                 <div class="model__content">
                     <label class="col-2">Số lượng: </label>
-                    <input type="number" min="0" name="soluong" class="soluong" />
+                    <input type="number" min="0" class="soluong" />
                 </div>
                 <div class="model__content">
                     <label class="col-2">Giảm giá: </label>
-                    <input type="number" min="0" name="giamgia" class="giamgia" />
+                    <input type="number" min="0" class="giamgia" />
                 </div>
                 <div class="model__content">
                     <label class="col-2">Trạng thái: </label>
-                    <select name="trangthai" class="trangthai">
+                    <select class="trangthai">
                         <option value="1" selected>Kích hoạt</option>
                         <option value="0">Ẩn</option>
                     </select>
                 </div>
                 <div class="model__content">
                     <label>Tóm tắt sản phẩm: </label>
-                    <textarea name="tomtat" class="product-tomtat" id="product-tomtat"></textarea>
+                    <textarea id="product-tomtat"></textarea>
                 </div>
                 <div class="model__content">
                     <label>Chi tiết sản phẩm: </label>
-                    <textarea name="noidung" class="product-detail" id="product-detail"></textarea>
+                    <textarea id="product-detail"></textarea>
                 </div>
-                <button id="themsanpham" name="themsanpham">Thêm sản phẩm</button>
+                <button id="themsanpham">Thêm sản phẩm</button>
             </div>
         </form>
+        <div class="modal__background"></div>
     </div>
+
 
     <script>
         $(document).ready(() => {
-            CKEDITOR.replace('product-tomtat')
-            CKEDITOR.replace('product-detail')
+            CKEDITOR.replace('product-tomtat');
+            CKEDITOR.replace('product-detail');
 
+            var fileData;
             $('input[type="file"]').on('change', function() {
                 var currentImg = this;
-                var fileData = currentImg.files[0];
+                fileData = currentImg.files[0];
                 var formĐata = new FormData();
                 formĐata.append('file', fileData);
                 var ajax = new XMLHttpRequest();
@@ -81,11 +86,13 @@
                 ajax.open('POST',
                     'modules/quanlysp/handleEvent/handleUpload.php', true);
                 ajax.send(formĐata);
+
+
             })
 
-            // Handle add new product
+            // Handle edit product
             $('#themsanpham').click((e) => {
-                e.preventDefault();
+                e.preventDefault()
                 var tensanpham = $('.tensanpham').val();
                 var danhmuc = $('.danhmuc').val();
                 var giasp = $('.giasp').val();
@@ -94,13 +101,12 @@
                 var trangthai = $('.trangthai').val();
                 var tomtat = CKEDITOR.instances['product-tomtat'].getData();
                 var noidung = CKEDITOR.instances['product-detail'].getData();
-                var currentImg = document.querySelector('input[type="file"]');
-                var fileData = currentImg.files[0];
-                var formĐata = new FormData();
 
+                var pageIndexMain = 1
                 // View data
                 function view_data() {
-                    $.post('http://localhost:3000/admin/modules/quanlysp/handleEvent/listProductData.php',
+                    $.post('http://localhost:3000/admin/modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
+                        pageIndexMain,
                         function(data) {
                             $('#load_product_data').html(data)
                         })
@@ -109,7 +115,6 @@
                 /** VALIDATE START **/
                 let errors = {
                     nameError: '',
-                    imageError: '',
                     priceError: '',
                     amountError: '',
                     discountError: '',
@@ -131,7 +136,8 @@
                 if (!fileData) {
                     errors.imageError = "Hình ảnh sản phẩm không được để trống";
                     swal("Vui lòng nhập lại", errors.imageError, "error");
-                    $('input[type="file"]').css("border-color", "#ff000087", "background-color",
+                    $('input[type="file"]').css("border-color", "#ff000087",
+                        "background-color",
                         "#ff000059");
                 } else {
                     errors.imageError = '';
@@ -200,36 +206,37 @@
                     $('.cke_chrome').css("border-color", "#008000ab");
                 }
                 /** VALIDATE END **/
-
+                console.log(fileData)
                 /** SEND DATA **/
-                if (errors.nameError == '' && errors.priceError == '' && errors.amountError == '' && errors
-                    .discountError == '' && errors.briefError == '' && errors.detailError == '' && errors
-                    .imageError == '') {
-                    // Send image
-                    formĐata.append('file', fileData);
-                    var ajax = new XMLHttpRequest();
-                    ajax.open('POST',
-                        'modules/quanlysp/handleEvent/handleAddproduct.php?query=image', true);
-                    ajax.send(formĐata);
+                if (errors.nameError == '' && errors.priceError == '' && errors
+                    .amountError == '' &&
+                    errors
+                    .discountError == '' && errors.briefError == '' && errors.detailError ==
+                    '') {
+                    //Send image
+                    var form_data = new FormData();
+                    form_data.append('file', fileData);
+                    form_data.append('tensanpham', tensanpham);
+                    form_data.append('danhmuc', danhmuc);
+                    form_data.append('giasp', giasp);
+                    form_data.append('soluong', soluong);
+                    form_data.append('giamgia', giamgia);
+                    form_data.append('trangthai', trangthai);
+                    form_data.append('tomtat', tomtat);
+                    form_data.append('noidung', noidung);
 
-                    $.ajax({
-                        url: "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleAddproduct.php?action=them",
-                        data: {
-                            tensanpham: tensanpham,
-                            danhmuc: danhmuc,
-                            giasp: giasp,
-                            soluong: soluong,
-                            giamgia: giamgia,
-                            trangthai: trangthai,
-                            tomtat: tomtat,
-                            noidung: noidung,
-                        },
-                        dataType: 'json',
-                        method: "post",
-                        cache: true,
-                        success: function(data) {
-                            if (data.existName == 1) {
-                                swal("Vui lòng nhập lại", "Tên sản phẩm đã tồn tại", "error");
+                    var ajax = new XMLHttpRequest();
+                    ajax.open('POST', 'modules/quanlysp/handleEvent/handleAddProduct.php',
+                        true);
+                    ajax.send(form_data);
+
+                    ajax.onreadystatechange = function() {
+                        if (ajax.readyState === 4 && ajax.status === 200) {
+                            var response = JSON.parse(ajax.responseText);
+                            console.log(response)
+                            if (response.existName == 1) {
+                                swal("Vui lòng nhập lại", "Tên sản phẩm đã tồn tại",
+                                    "error");
                                 $('.tensanpham').css("border-color", "#ff000087");
                                 $('.tensanpham').val('');
                             } else {
@@ -249,13 +256,12 @@
                                 $('input[type="file"]').val('');
                                 view_data();
                             }
-                        },
-                        error: function(data) {
-                            view_data();
                         }
-                    })
+                    };
+
                 }
             })
+
         })
     </script>
 </div>

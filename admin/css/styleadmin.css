@@ -579,13 +579,28 @@ select.active {
   position: absolute;
   top: 0;
   bottom: 0;
-  transform: translate(-360px, 0px);
+  transform: translate(-360px, -4px);
   width: calc(100% + 250px);
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 100;
+  height: 103%;
   overflow: scroll;
   overflow-y: visible;
+}
+
+.modal__background,
+.modal__background-add {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  transform: translate(-360px, 0px);
+  width: calc(100% + 250px);
+  background-color: rgba(0, 0, 0, 0.3);
+  overflow: scroll;
+  overflow-y: visible;
+  z-index: 99;
+}
+
+.modal__background-add {
+  height: 203%;
 }
 
 .model__view-detail,
@@ -599,10 +614,12 @@ select.active {
 
 .model__add-new {
   background-color: #fff;
-  width: 1024px;
+  width: 65%;
   margin: 50px auto;
   padding: 20px;
   border-radius: 8px;
+  position: relative;
+  z-index: 100;
 }
 
 .model__content {
@@ -612,16 +629,6 @@ select.active {
 .model__content input {
   width: 650px;
   margin-right: 140px;
-}
-
-.model-close-btn i {
-  color: #fff;
-  font-size: 30px;
-  cursor: pointer;
-  position: absolute;
-  right: 0px;
-  top: 10px;
-  padding: 0 207px 100vh 70px;
 }
 
 /* Sidebar */
@@ -718,12 +725,14 @@ select.active {
 
 /* Pagination */
 .pagination__wrapper {
-  padding-top: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: sticky;
-  bottom: 0;
+  position: fixed;
+  bottom: 0px;
+  right: 0;
+  height: 75px;
+  width: calc(100% - 250px);
   background-color: var(--app-bg);
 }
 
@@ -740,4 +749,25 @@ ul.pagination {
 .page-link:hover {
   background-color: rgba(255, 255, 255, 0.25) !important;
   color: #fff !important;
+}
+
+.close-modal {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #000;
+  color: #fff;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.close-modal i {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
 }

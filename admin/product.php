@@ -24,12 +24,6 @@ ORDER BY id_sanpham DESC";
             <div class="app-content">
                 <div class="app-content-header">
                     <h1 class="app-content-headerText">Sản phẩm</h1>
-                    <button class="mode-switch" title="Switch Theme">
-                        <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
-                            <defs></defs>
-                            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-                        </svg>
-                    </button>
                     <button class="app-content-headerButton add-new-product-btn add-product">Thêm sản phẩm</button>
                 </div>
 
@@ -44,7 +38,7 @@ ORDER BY id_sanpham DESC";
                                 <div class=" col-6 " style="padding-right: 10px;">
                                     <label>Trạng thái</label>
                                     <select class="filter_status">
-                                        <option value="2">Tất cả trạng thái</option>
+                                        <option value="2">Tất cả</option>
                                         <option value="1">Kích hoạt</option>
                                         <option value="0">Ẩn</option>
                                     </select>
@@ -53,13 +47,13 @@ ORDER BY id_sanpham DESC";
                                     <label>Tên </label>
                                     <select class="filter_name">
                                         <option value="2">Tất cả</option>
-                                        <option value="1">Tăng dần</option>
-                                        <option value="0">Giảm dần</option>
+                                        <option value="1">Từ A-Z</option>
+                                        <option value="0">Từ Z-A</option>
                                     </select>
                                 </div>
                                 <div class="col-6" style="padding-right: 10px;">
                                     <label>Giá </label>
-                                    <select class="filter_status">
+                                    <select class="filter_price">
                                         <option value="2">Tất cả</option>
                                         <option value="1">Tăng dần</option>
                                         <option value="0">Giảm dần</option>
@@ -67,7 +61,7 @@ ORDER BY id_sanpham DESC";
                                 </div>
                                 <div class="col-6">
                                     <label>Số lượng</label>
-                                    <select class="filter_status">
+                                    <select class="filter_amount">
                                         <option value="2">Tất cả</option>
                                         <option value="1">Tăng dần</option>
                                         <option value="0">Giảm dần</option>
@@ -75,21 +69,36 @@ ORDER BY id_sanpham DESC";
                                 </div>
                                 <div class="col-6" style="padding-right: 10px;">
                                     <label>Giảm giá</label>
-                                    <select class="filter_status">
+                                    <select class="filter_discount">
                                         <option value="2">Tất cả</option>
                                         <option value="1">Tăng dần</option>
                                         <option value="0">Giảm dần</option>
                                     </select>
                                 </div>
                                 <div class="col-6">
-                                    <label>Đã bán</label>
-                                    <select class="filter_status">
+                                    <label>Số lượng đã bán</label>
+                                    <select class="filter_sold-amount">
                                         <option value="2">Tất cả</option>
                                         <option value="1">Tăng dần</option>
                                         <option value="0">Giảm dần</option>
                                     </select>
                                 </div>
-
+                                <div class="col-6" style="padding-right: 10px;">
+                                    <label>Đánh giá</label>
+                                    <select class="filter_rating">
+                                        <option value="2">Tất cả</option>
+                                        <option value="1">Tăng dần</option>
+                                        <option value="0">Giảm dần</option>
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <label>Ngày đăng</label>
+                                    <select class="filter_dated">
+                                        <option value="2">Tất cả</option>
+                                        <option value="1">Mới nhất</option>
+                                        <option value="0">Cũ nhất</option>
+                                    </select>
+                                </div>
                                 <div class="filter-menu-buttons">
                                     <button class="filter-button reset">
                                         Reset
@@ -129,14 +138,34 @@ ORDER BY id_sanpham DESC";
 
     <script>
         $(document).ready(() => {
+            var pageIndexMain = 1
             // View data
+            view_data();
+
             function view_data() {
-                $.post('http://localhost:3000/admin/modules/quanlysp/handleEvent/listProductData.php',
+                $.post('http://localhost:3000/admin/modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
+                    pageIndexMain,
                     function(data) {
                         $('#load_product_data').html(data)
                     })
             }
-            view_data();
+
+            $(document).on("click", '.page-link.main', function() {
+                pageIndexMain = $(this).attr("value");
+                $.ajax({
+                    url: 'http://localhost:3000/admin/modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
+                        pageIndexMain,
+                    dataType: 'html',
+                    method: "post",
+                    cache: true,
+                    success: function() {
+                        view_data();
+                    },
+                    error: function() {
+                        view_data();
+                    }
+                })
+            })
 
             // Remove product
             $(document).on("click", '.remove-product', function() {
@@ -194,10 +223,15 @@ ORDER BY id_sanpham DESC";
                     id;
                 $.post(url, (data) => {
                     $("#view-detail-product").html(data);
-                    $('.model-close-btn i').click(() => {
-                        $("#product__detail-model").remove();
-                    })
                 });
+            })
+
+            $(document).on("click", '.close-modal', function() {
+                $("#product__detail-model").remove();
+            })
+
+            $(document).on("click", '.modal__background', function() {
+                $("#product__detail-model").remove();
             })
 
             // Edit product
@@ -208,10 +242,15 @@ ORDER BY id_sanpham DESC";
                     id;
                 $.post(url, (data) => {
                     $("#view-edit-product").html(data);
-                    $('.model-close-btn i').click(() => {
-                        $("#product__edit-model").remove();
-                    })
                 });
+            })
+
+            $(document).on("click", '.close-modal', function() {
+                $("#product__edit-model").remove();
+            })
+
+            $(document).on("click", '.modal__background', function() {
+                $("#product__edit-model").remove();
             })
 
             // Add product
@@ -221,18 +260,25 @@ ORDER BY id_sanpham DESC";
                     "http://localhost:3000/admin/modules/quanlysp/addNewProduct.php";
                 $.post(url, (data) => {
                     $("#view-add-product").html(data);
-                    $('.model-close-btn i').click(() => {
-                        $("#product__add-model").remove();
-                    })
                 });
             })
 
+            $(document).on("click", '.close-modal', function() {
+                $("#product__add-model").remove();
+            })
+
+            $(document).on("click", '.modal__background-add', function() {
+                $("#product__add-model").remove();
+            })
+
             // Handle search
+            var pageIndexSearch = 1;
             $(document).on("keyup", '.search-bar', function() {
                 var searchInput = $(this).val();
                 if (searchInput.length > 0) {
                     $.ajax({
-                        url: "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleSearch.php",
+                        url: "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleSearch.php?pageIndex=" +
+                            pageIndexSearch,
                         data: {
                             searchInput: searchInput,
                         },
@@ -246,26 +292,17 @@ ORDER BY id_sanpham DESC";
                 } else {
                     view_data()
                 }
-
             })
 
-            // Handle filter
-            $(".jsFilter").on("click", function() {
-                document.querySelector(".filter-menu").classList.toggle("active");
-            });
-
-            $('.filter-button.apply').click((e) => {
-                var status = $('.filter_status').val();
-                var name = $('.filter_name').val();
-                var price = $('.filter_status').val();
-                var amount = $('.filter_status').val();
-                var discount = $('.filter_status').val();
-                var soldCount = $('.filter_status').val();
-                if (status == 0 || status == 1) {
+            $(document).on("click", '.page-link.search', function() {
+                pageIndexSearch = $(this).attr("value");
+                var searchInput = $('.search-bar').val();
+                if (searchInput.length > 0) {
                     $.ajax({
-                        url: "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleFilter/filterStatus.php",
+                        url: "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleSearch.php?pageIndex=" +
+                            pageIndexSearch,
                         data: {
-                            status: status,
+                            searchInput: searchInput,
                         },
                         dataType: 'html',
                         method: "post",
@@ -274,26 +311,79 @@ ORDER BY id_sanpham DESC";
                             $('#load_product_data').html(data)
                         }
                     })
-                } else if (status == 2) {
-                    view_data();
+                } else {
+                    view_data()
                 }
+            })
 
-                // if (name == 0 || name == 1) {
-                //     $.ajax({
-                //         url: "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleFilter/filterName.php",
-                //         data: {
-                //             name: name,
-                //         },
-                //         dataType: 'html',
-                //         method: "post",
-                //         cache: true,
-                //         success: function(data) {
-                //             $('#load_product_data').html(data)
-                //         }
-                //     })
-                // } else if (name == 2) {
-                //     view_data();
-                // }
+            // Handle filter
+            $(".jsFilter").on("click", function() {
+                document.querySelector(".filter-menu").classList.toggle("active");
+            });
+
+            var pageIndexFilter = 1
+            $('.filter-button.apply').click((e) => {
+                var status = $('.filter_status').val();
+                var name = $('.filter_name').val();
+                var price = $('.filter_price').val();
+                var amount = $('.filter_amount').val();
+                var discount = $('.filter_discount').val();
+                var soldAmount = $('.filter_sold-amount').val();
+                var rating = $('.filter_rating').val();
+                var dated = $('.filter_dated').val();
+                $.ajax({
+                    url: "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleFilter.php?pageIndex=" +
+                        pageIndexFilter,
+                    data: {
+                        status: status,
+                        name: name,
+                        price: price,
+                        amount: amount,
+                        discount: discount,
+                        soldAmount: soldAmount,
+                        rating: rating,
+                        dated: dated,
+                    },
+                    dataType: 'html',
+                    method: "post",
+                    cache: true,
+                    success: function(data) {
+                        console.log(data)
+                        $('#load_product_data').html(data)
+                    }
+                })
+            })
+
+            $(document).on("click", '.page-link.filter', function() {
+                pageIndexFilter = $(this).attr("value");
+                var status = $('.filter_status').val();
+                var name = $('.filter_name').val();
+                var price = $('.filter_price').val();
+                var amount = $('.filter_amount').val();
+                var discount = $('.filter_discount').val();
+                var soldAmount = $('.filter_sold-amount').val();
+                var rating = $('.filter_rating').val();
+                var dated = $('.filter_dated').val();
+                $.ajax({
+                    url: "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleFilter.php?pageIndex=" +
+                        pageIndexFilter,
+                    dataType: 'html',
+                    data: {
+                        status: status,
+                        name: name,
+                        price: price,
+                        amount: amount,
+                        discount: discount,
+                        soldAmount: soldAmount,
+                        rating: rating,
+                        dated: dated,
+                    },
+                    method: "post",
+                    cache: true,
+                    success: function(data) {
+                        $('#load_product_data').html(data)
+                    }
+                })
             })
         })
     </script>

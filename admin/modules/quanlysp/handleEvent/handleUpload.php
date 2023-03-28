@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 $filename = $_FILES['file']['name'];
 // Location
 $location = "uploads" . DIRECTORY_SEPARATOR . time() . '_' . $filename;
@@ -17,7 +15,5 @@ if (!in_array(strtolower($imageFileType), $valid_extensions)) {
 if ($uploadOk == 0) {
     echo 0;
 } else {
-    $_SESSION['product_img'] = time() . '_' . $filename;
-    $_SESSION['product_img-tmp'] = $_FILES['file']['tmp_name'];;
     echo $filename;
 }
