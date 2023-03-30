@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS `tbl_danhmuc`;
 CREATE TABLE IF NOT EXISTS `tbl_danhmuc` (
   `id_danhmuc` int(11) NOT NULL AUTO_INCREMENT,
   `ten_danhmuc` varchar(100) NOT NULL,
-  `thutu` int(11) NOT NULL,
+  `id_danhmuc` int(11) NOT NULL,
   `category_status` int(11) NOT NULL,
   `category_detail` text NOT NULL,
   `category_created_time` int(11) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `tbl_danhmuc` (
 -- Dumping data for table `tbl_danhmuc`
 --
 
-INSERT INTO `tbl_danhmuc`(`id_danhmuc`, `ten_danhmuc`, `thutu`, `category_status`, `category_detail`, `category_created_time`, `category_last_updated`) VALUES
+INSERT INTO `tbl_danhmuc`(`id_danhmuc`, `ten_danhmuc`, `id_danhmuc`, `category_status`, `category_detail`, `category_created_time`, `category_last_updated`) VALUES
 ('', 'Camera Yoosee', '1', '1', '', 1678438681, 1678438681),
 ('', 'Camera Ezviz', '2', '1', '', 1678438681, 1678438681),
 ('', 'Camera Imou', '3', '1', '', 1678438681, 1678438681),

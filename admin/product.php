@@ -255,7 +255,6 @@ ORDER BY id_sanpham DESC";
 
             // Add product
             $(document).on("click", '.add-product', function() {
-                var id = $(this).val();
                 var url =
                     "http://localhost:3000/admin/modules/quanlysp/addNewProduct.php";
                 $.post(url, (data) => {
@@ -384,6 +383,17 @@ ORDER BY id_sanpham DESC";
                         $('#load_product_data').html(data)
                     }
                 })
+            })
+
+            $('.filter-button.reset').click((e) => {
+                $('.filter_status').val('2');
+                $('.filter_name').val('2');
+                $('.filter_price').val('2');
+                $('.filter_amount').val('2');
+                $('.filter_discount').val('2');
+                $('.filter_sold-amount').val('2');
+                $('.filter_rating').val('2');
+                $('.filter_dated').val('2');
             })
         })
     </script>

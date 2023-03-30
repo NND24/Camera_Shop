@@ -86,7 +86,7 @@
                                     <circle cx="12" cy="19" r="1" />
                                 </svg>
                             </button>
-                            <div class="product-cell col-1-5 thutu-danhmuc ">
+                            <div class="product-cell col-1-5 id_danhmuc-danhmuc ">
                                 <p>1</p>
                             </div>
                             <div class="product-cell col-2 category ">

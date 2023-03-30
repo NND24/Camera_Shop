@@ -1,11 +1,8 @@
 <?php
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
-echo json_encode($_GET['action']);
 
 if (isset($_GET['idsanpham'])) {
     $id = $_GET['idsanpham'];
-    $a = array("delete" => 1);
-    echo json_encode(array_merge($_GET, $a));
     // Xoa hinh anh
     $sql = "SELECT * FROM tbl_sanpham WHERE id_sanpham = '$id' LIMIT 1";
     $query = mysqli_query($mysqli, $sql);

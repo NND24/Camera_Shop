@@ -47,15 +47,15 @@
                     </div>
                     <div class="model__content">
                         <label class="col-2">Giá sản phẩm: </label>
-                        <input type="number" class="giasp" value="<?php echo $row['giasp'] ?>" />
+                        <input type="number" min="0" class="giasp" value="<?php echo $row['giasp'] ?>" />
                     </div>
                     <div class="model__content">
                         <label class="col-2">Số lượng: </label>
-                        <input type="number" class="soluong" value="<?php echo $row['soluong'] ?>" />
+                        <input type="number" min="0" class="soluong" value="<?php echo $row['soluong'] ?>" />
                     </div>
                     <div class="model__content">
                         <label class="col-2">Giảm giá: </label>
-                        <input type="number" class="giamgia" value="<?php echo $row['giamgia'] ?>" />
+                        <input type="number" min="0" class="giamgia" value="<?php echo $row['giamgia'] ?>" />
                     </div>
                     <div class="model__content">
                         <label class="col-2">Trạng thái: </label>
@@ -88,7 +88,7 @@
 
             var fileData;
             var i = 0;
-            $('input[type="file"]').on('change', function() {
+            $(document).on("change", 'input[type="file"]', function() {
                 i++;
                 var currentImg = this;
                 fileData = currentImg.files[0];
@@ -107,7 +107,7 @@
 
                 if (i > 0) {
                     // Handle edit product
-                    $('#suasanpham').click((e) => {
+                    $(document).on("click", '#suasanpham', function(e) {
                         e.preventDefault()
                         var tensanpham = $('.tensanpham').val();
                         var danhmuc = $('.danhmuc').val();
@@ -284,13 +284,9 @@
                 }
             })
 
-            $('input[type="file"]').on('click', function() {
-                i = 10;
-            })
-
             if (i == 0) {
                 // Handle edit product
-                $('#suasanpham').click((e) => {
+                $(document).on("click", '#suasanpham', function(e) {
                     e.preventDefault()
                     var tensanpham = $('.tensanpham').val();
                     var danhmuc = $('.danhmuc').val();

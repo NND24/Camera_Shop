@@ -18,10 +18,9 @@
         <div class="main" id="main">
             <?php
             // Query category
-            $sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY thutu ASC ";
+            $sql_danhmuc = "SELECT * FROM tbl_danhmuc WHERE category_status=1 ORDER BY id_danhmuc ASC LIMIT 9 ";
             $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
             ?>
-
             <div id="home">
                 <div class="content">
 
@@ -95,7 +94,7 @@
                             <div class="col col-lg-12 col-md-12 col-12">
                                 <div class="row no-wrap product--container">
                                     <?php
-                                    $sql_product_discount = "SELECT * FROM tbl_sanpham WHERE giamgia > 0 ORDER BY giamgia DESC LIMIT 10";
+                                    $sql_product_discount = "SELECT * FROM tbl_sanpham WHERE trangthaisp=1 AND giamgia > 0 ORDER BY giamgia DESC LIMIT 10";
                                     $query_product_discount = mysqli_query($mysqli, $sql_product_discount);
                                     while ($row_product_discount = mysqli_fetch_array($query_product_discount)) {
                                     ?>
@@ -165,7 +164,7 @@
                             <div class="col col-lg-12 col-md-12 col-12">
                                 <div class="row no-wrap product--container">
                                     <?php
-                                    $sql_product_sold = "SELECT * FROM tbl_sanpham ORDER BY daban ASC LIMIT 10";
+                                    $sql_product_sold = "SELECT * FROM tbl_sanpham WHERE trangthaisp=1 ORDER BY daban ASC LIMIT 10";
                                     $query_product_sold = mysqli_query($mysqli, $sql_product_sold);
                                     while ($row_product_sold = mysqli_fetch_array($query_product_sold)) {
                                     ?>
@@ -229,10 +228,10 @@
 
                     <!-- Normal  Products -->
                     <?php
-                    $sql_category = "SELECT * FROM tbl_danhmuc ORDER BY thutu ASC LIMIT 10";
+                    $sql_category = "SELECT * FROM tbl_danhmuc WHERE category_status=1 ORDER BY id_danhmuc ASC LIMIT 10";
                     $query_category = mysqli_query($mysqli, $sql_category);
                     while ($row_category = mysqli_fetch_array($query_category)) {
-                        $sql_product = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc AND tbl_sanpham.id_danhmuc='$row_category[id_danhmuc]' ORDER BY daban ASC LIMIT 10";
+                        $sql_product = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE trangthaisp=1 AND tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc AND tbl_sanpham.id_danhmuc='$row_category[id_danhmuc]' ORDER BY daban ASC LIMIT 10";
                         $query_product = mysqli_query($mysqli, $sql_product);
                         if (mysqli_num_rows($query_product) > 0) {
                     ?>
@@ -242,7 +241,7 @@
                                         <div class="container__header">
                                             <h2 class="container__header-title"><?php echo $row_category['ten_danhmuc'] ?></h2>
                                             <div class="view-all">
-                                                <div class="view__all-product-with-categogy" value="<?php echo $row_category['id_danhmuc'] ?>">Xem tất cả<i class="fa-solid fa-chevron-right"></i></div>
+                                                <div class="view__all-product-with-category" value="<?php echo $row_category['id_danhmuc'] ?>">Xem tất cả<i class="fa-solid fa-chevron-right"></i></div>
                                             </div>
                                         </div>
                                     </div>
@@ -349,6 +348,7 @@
                 window.history.pushState("new", "title", url);
                 $(".container").load("chitietsanpham.php?id=" + idDetail);
                 $(window).scrollTop(0);
+                window.location.reload();
             })
 
             $(document).on("click", '.add-to-cart-btn', function() {
@@ -356,12 +356,13 @@
             })
 
             // View all
-            $(document).on("click", '.view__all-product-with-categogy', function() {
+            $(document).on("click", '.view__all-product-with-category', function() {
                 var idAll = $(this).attr("value");
                 var url = "shopPage.php?id=" + idAll;
                 window.history.pushState("new", "title", url);
                 $(".container").load("shopPage.php?id=" + idAll);
                 $(window).scrollTop(0);
+                window.location.reload();
             })
         })
     </script>

@@ -51,5 +51,3 @@ if (isset($_SESSION['id_user'])) {
         }
     }
 }
-
-echo json_encode($_SESSION['cart']);

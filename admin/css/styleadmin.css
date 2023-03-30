@@ -96,6 +96,7 @@ input {
   flex: 0 0 auto !important;
   width: 13.666667% !important;
 }
+
 /* CUSTOM COLUMN END */
 
 /* App container */
@@ -261,12 +262,16 @@ input {
 }
 
 .action-button.delete-all-category,
-.action-button.delete-all-product {
+.action-button.delete-all-product,
+.action-button.delete-all-order,
+.action-button.delete-all-member {
   background-color: #ff282894;
 }
 
 .action-button.delete-all-category:hover,
-.action-button.delete-all-product:hover {
+.action-button.delete-all-product:hover,
+.action-button.delete-all-order:hover,
+.action-button.delete-all-member:hover {
   background-color: #ff2828c5;
 }
 
@@ -291,11 +296,11 @@ input {
 }
 
 /* filter menu */
-.filter-menu {
+.filter-menu,
+.filter-menu-cate {
   background-color: var(--app-content-secondary-color);
   position: absolute;
   top: calc(100% + 16px);
-  right: -74px;
   border-radius: 4px;
   padding: 8px;
   width: 220px;
@@ -306,7 +311,13 @@ input {
   right: -156px;
   transition: 0.2s all ease;
 }
-.filter-menu::before {
+
+.filter-menu-cate {
+  right: -90px;
+}
+
+.filter-menu::before,
+.filter-menu-cate::before {
   content: "";
   position: absolute;
   width: 0;
@@ -326,14 +337,23 @@ input {
   right: -156px;
 }
 
-.filter-menu label {
+.filter-menu-cate.active {
+  visibility: visible;
+  opacity: 1;
+  top: calc(100% + 8px);
+  right: -90px;
+}
+
+.filter-menu label,
+.filter-menu-cate label {
   display: block;
   font-size: 14px;
   color: var(--app-content-main-color);
   margin-bottom: 8px;
 }
 
-.filter-menu select {
+.filter-menu select,
+.filter-menu-cate select {
   appearance: none;
   background-repeat: no-repeat;
   padding: 8px 24px 8px 8px;
@@ -469,12 +489,14 @@ select.active {
 }
 
 .detail-category,
-.detail-product {
+.detail-product,
+.detail-order,
+.detail-member {
   background-color: transparent;
   border: none;
 }
 
-.product-cell.thutu-danhmuc p {
+.product-cell.id_danhmuc-danhmuc p {
   margin-bottom: 0;
 }
 
@@ -584,10 +606,12 @@ select.active {
   height: 103%;
   overflow: scroll;
   overflow-y: visible;
+  z-index: 1;
 }
 
 .modal__background,
-.modal__background-add {
+.modal__background-add,
+.modal__category-add-background {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -601,6 +625,10 @@ select.active {
 
 .modal__background-add {
   height: 203%;
+}
+
+.modal__category-add-background {
+  height: 100%;
 }
 
 .model__view-detail,
@@ -633,6 +661,7 @@ select.active {
 
 /* Sidebar */
 .sidebar {
+  position: relative;
   width: 250px;
   height: 100vh;
   background-color: var(--sidebar);
@@ -647,6 +676,53 @@ select.active {
   height: 100px;
 }
 
+.header_avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: gray;
+  cursor: pointer;
+}
+
+.header_avatar i {
+  width: 50px;
+  height: 50px;
+  font-size: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000ba;
+}
+
+.header_text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-left: 12px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.header-modal {
+  position: fixed;
+  top: 62px;
+  left: 77px;
+  width: 170px;
+  height: 56px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  display: none;
+}
+
+.header-modal.active {
+  display: block;
+}
+
+.header-modal button {
+  margin-bottom: 10px;
+}
+
 .sidebar-list {
   list-style-type: none;
   padding: 0;
@@ -654,8 +730,10 @@ select.active {
 
 .sidebar-list-item {
   position: relative;
-  margin-bottom: 4px;
+  width: 100%;
+  background-color: transparent;
 }
+
 .sidebar-list-item a {
   display: flex;
   align-items: center;
@@ -666,10 +744,6 @@ select.active {
   font-size: 16px;
   line-height: 24px;
   cursor: pointer;
-}
-
-.sidebar-list-item svg {
-  margin-right: 8px;
 }
 
 .sidebar-list-item:hover {
@@ -689,15 +763,55 @@ select.active {
   width: 4px;
 }
 
+.sidebar-list-item img {
+  width: 50px;
+  height: 50px;
+  display: none;
+}
+
 .sidebar.active {
   width: 80px;
 }
 
+.sidebar.active h1,
+.sidebar.active .header_text {
+  display: none;
+}
+
+.sidebar.active .sidebar-header {
+  margin-top: 30px;
+}
+
+.sidebar.active .sidebar-list-item a {
+  display: none;
+}
+
+.sidebar.active .sidebar-list-item img {
+  display: block;
+  margin-left: 12px;
+}
+
+.sidebar.active .sidebar-list-item {
+  height: 70px;
+}
+
 .sidebar-btn {
+  position: absolute;
   width: 30px;
   height: 30px;
-  color: #a92b2b;
-  display: block;
+  right: 5px;
+  top: 10px;
+  background-color: transparent;
+}
+
+.sidebar-btn i {
+  width: 27px;
+  height: 26px;
+  font-size: 20px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /*  */
@@ -711,7 +825,10 @@ select.active {
 .remove-category,
 .edit-category,
 .remove-product,
-.edit-product {
+.edit-product,
+.remove-order,
+.remove-member,
+.edit-member {
   background-color: transparent;
   border: none;
   color: #fff;
@@ -732,7 +849,7 @@ select.active {
   bottom: 0px;
   right: 0;
   height: 75px;
-  width: calc(100% - 250px);
+  width: calc(100% - 260px);
   background-color: var(--app-bg);
 }
 

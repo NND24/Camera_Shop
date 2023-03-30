@@ -31,29 +31,29 @@ session_start();
                 ?>
                 <div class="row address__wrapper">
                     <?php if (strlen($row_address['tendathang']) && strlen($row_address['sodienthoaidathang']) && strlen($row_address['address'])) { ?>
-                    <div class="col-lg-3 name-and-phonenumber">
-                        <p class="customer-name"><?php echo $row_address['tendathang'] ?></p>
-                        <p class="customer-phonenumber"><?php echo $row_address['sodienthoaidathang'] ?></p>
-                        </p>
-                    </div>
+                        <div class="col-lg-3 name-and-phonenumber">
+                            <p class="customer-name"><?php echo $row_address['tendathang'] ?></p>
+                            <p class="customer-phonenumber"><?php echo $row_address['sodienthoaidathang'] ?></p>
+                            </p>
+                        </div>
 
-                    <div class="col-lg-7 address">
-                        <p><?php echo $row_address['address'] ?></p>
-                        </p>
-                    </div>
+                        <div class="col-lg-7 address">
+                            <p><?php echo $row_address['address'] ?></p>
+                            </p>
+                        </div>
 
-                    <div class="col-lg-2 change-address">
-                        <button class="change-address-btn">Đổi địa chỉ</button>
-                    </div>
+                        <div class="col-lg-2 change-address">
+                            <button class="change-address-btn">Đổi địa chỉ</button>
+                        </div>
 
                     <?php } else { ?>
-                    <div class="col-lg-10">
-                        <p>Chưa có địa chỉ</p>
-                    </div>
+                        <div class="col-lg-10">
+                            <p>Chưa có địa chỉ</p>
+                        </div>
 
-                    <div class="col-lg-2 change-address">
-                        <button class="add-address-btn">Thêm địa chỉ</button>
-                    </div>
+                        <div class="col-lg-2 change-address">
+                            <button class="add-address-btn">Thêm địa chỉ</button>
+                        </div>
                     <?php } ?>
                     <div id="load__address-modal"></div>
 
@@ -83,39 +83,34 @@ session_start();
                         $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
                         $row_danhmuc = mysqli_fetch_array($query_danhmuc)
                 ?>
-                <div class="row no-wrap border-bottom">
-                    <div class="row  no-wrap order align-items-center justify-content-between order__wrapper">
-                        <div class="col-lg-1 col-md-1 col-sm-2 col-2 order__img-product view__product-detail"
-                            value="<?php echo $cart_item['id'] ?>"><img class="img-fluid"
-                                src="./admin/modules/quanlysp/handleEvent/uploads/<?php echo $cart_item['hinhanh'] ?>">
-                        </div>
+                        <div class="row no-wrap border-bottom">
+                            <div class="row  no-wrap order align-items-center justify-content-between order__wrapper">
+                                <div class="col-lg-1 col-md-1 col-sm-2 col-2 order__img-product view__product-detail" value="<?php echo $cart_item['id'] ?>"><img class="img-fluid" src="./admin/modules/quanlysp/handleEvent/uploads/<?php echo $cart_item['hinhanh'] ?>">
+                                </div>
 
-                        <div class="col-lg-6 col-md-6 col-sm-5 col-4 ">
-                            <div class="row text-muted order__name-category category__product-btn"
-                                value="<?php echo $row_danhmuc['id_danhmuc'] ?>">
-                                <?php echo $cart_item['tendanhmuc'] ?></div>
-                            <div class="row order__name-product view__product-detail"
-                                value="<?php echo $cart_item['id'] ?>">
-                                <?php echo $cart_item['tensanpham'] ?></div>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-3 justify-content-center order__price">
-                            <?php echo number_format($cart_item['giasp'], 0, ',', '.') ?>đ</div>
+                                <div class="col-lg-6 col-md-6 col-sm-5 col-4 ">
+                                    <div class="row text-muted order__name-category category__product-btn" value="<?php echo $row_danhmuc['id_danhmuc'] ?>">
+                                        <?php echo $cart_item['tendanhmuc'] ?></div>
+                                    <div class="row order__name-product view__product-detail" value="<?php echo $cart_item['id'] ?>">
+                                        <?php echo $cart_item['tensanpham'] ?></div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-3 justify-content-center order__price">
+                                    <?php echo number_format($cart_item['giasp'], 0, ',', '.') ?>đ</div>
 
 
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-1 order__price">
-                            <div class="quantity-wrapper">
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-1 order__price">
+                                    <div class="quantity-wrapper">
 
-                                <span><?php echo $cart_item['soluong'] ?></span>
+                                        <span><?php echo $cart_item['soluong'] ?></span>
 
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-2 d-flex justify-content-end order__price">
+                                    <?php echo number_format($thanhtien, 0, ',', '.')  ?>đ
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-2 d-flex justify-content-end order__price">
-                            <?php echo number_format($thanhtien, 0, ',', '.')  ?>đ
-
-                        </div>
-                    </div>
-                </div>
-                <?php } ?>
+                    <?php } ?>
                 <?php } ?>
             </div>
 
@@ -161,210 +156,210 @@ session_start();
         </div>
     </div>
     <script>
-    $(document).ready(() => {
-        $(document).on("click", '.add-address-btn', function() {
-            $('#load__address-modal').load('pages/checkout/addressModal.php')
-        })
+        $(document).ready(() => {
+            $(document).on("click", '.add-address-btn', function() {
+                $('#load__address-modal').load('pages/checkout/addressModal.php')
+            })
 
-        $(document).on("click", '.change-address-btn', function() {
-            $('#load__address-modal').load('pages/checkout/editAddressModal.php')
-        })
+            $(document).on("click", '.change-address-btn', function() {
+                $('#load__address-modal').load('pages/checkout/editAddressModal.php')
+            })
 
-        $(document).on("click", '.address__modal-background', function() {
-            $('.address__modal-container').remove()
-        })
+            $(document).on("click", '.address__modal-background', function() {
+                $('.address__modal-container').remove()
+            })
 
-        $(document).on("click", '.close-add-address-modal', function() {
-            $('.address__modal-container').remove()
-        })
+            $(document).on("click", '.close-add-address-modal', function() {
+                $('.address__modal-container').remove()
+            })
 
-        const validatePhoneNumber = (phoneNumber) => {
-            var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
-            if (vnf_regex.test(phoneNumber) == false) {
-                return false;
-            } else {
-                return true;
+            const validatePhoneNumber = (phoneNumber) => {
+                var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+                if (vnf_regex.test(phoneNumber) == false) {
+                    return false;
+                } else {
+                    return true;
+                }
             }
-        }
-        $(document).on("click", '.confirm-address-btn', function() {
+            $(document).on("click", '.confirm-address-btn', function() {
 
-            var name = $('.name').val();
-            var phonenumber = $('.phonenumber').val();
-            var address = $('.address-input').val();
+                var name = $('.name').val();
+                var phonenumber = $('.phonenumber').val();
+                var address = $('.address-input').val();
 
-            let errors = {
-                nameError: '',
-                phoneNumberError: '',
-                addressError: '',
-            }
+                let errors = {
+                    nameError: '',
+                    phoneNumberError: '',
+                    addressError: '',
+                }
 
-            if (name.length === 0) {
-                errors.nameError = "Không được để trống tên!";
-                $('.name-form').css("border-color", "#f33a58");
-                $('.name-error-message').text(errors.nameError);
-            } else {
-                errors.nameError = '';
-                $('.name-form').css("border-color", "#008000ab");
-                $('.name-error-message').text(errors.nameError);
-            }
+                if (name.length === 0) {
+                    errors.nameError = "Không được để trống tên!";
+                    $('.name-form').css("border-color", "#f33a58");
+                    $('.name-error-message').text(errors.nameError);
+                } else {
+                    errors.nameError = '';
+                    $('.name-form').css("border-color", "#008000ab");
+                    $('.name-error-message').text(errors.nameError);
+                }
 
-            if (phonenumber.length === 0) {
-                errors.phoneNumberError = "Không được để trống số điện thoại!";
-                $('.phonenumber-form').css("border-color", "#f33a58");
-                $('.phonenumber-error-message').text(errors.phoneNumberError);
-            } else if (validatePhoneNumber(phonenumber) == false) {
-                errors.phoneNumberError =
-                    "Số điện thoại không hợp lệ!";
-                $('.phonenumber-form').css("border-color", "#f33a58");
-                $('.phonenumber-error-message').text(errors.phoneNumberError);
-            } else {
-                errors.phoneNumberError = '';
-                $('.phonenumber-form').css("border-color", "#008000ab");
-                $('.phonenumber-error-message').text(errors.phoneNumberError);
-            }
+                if (phonenumber.length === 0) {
+                    errors.phoneNumberError = "Không được để trống số điện thoại!";
+                    $('.phonenumber-form').css("border-color", "#f33a58");
+                    $('.phonenumber-error-message').text(errors.phoneNumberError);
+                } else if (validatePhoneNumber(phonenumber) == false) {
+                    errors.phoneNumberError =
+                        "Số điện thoại không hợp lệ!";
+                    $('.phonenumber-form').css("border-color", "#f33a58");
+                    $('.phonenumber-error-message').text(errors.phoneNumberError);
+                } else {
+                    errors.phoneNumberError = '';
+                    $('.phonenumber-form').css("border-color", "#008000ab");
+                    $('.phonenumber-error-message').text(errors.phoneNumberError);
+                }
 
-            if (address.length === 0) {
-                errors.addressError = "Không được để trống!";
-                $('.address-form').css("border-color", "#f33a58");
-                $('.address-error-message').text(errors.addressError);
-            } else {
+                if (address.length === 0) {
+                    errors.addressError = "Không được để trống!";
+                    $('.address-form').css("border-color", "#f33a58");
+                    $('.address-error-message').text(errors.addressError);
+                } else {
+                    errors.addressError = '';
+                    $('.address-form').css("border-color", "#008000ab");
+                    $('.address-error-message').text(errors.addressError);
+                }
+
+                if (errors.nameError == '' && errors.phoneNumberError == '' && errors.addressError == '') {
+                    $.ajax({
+                        url: "http://localhost:3000/pages/checkout/handleUserAddress.php",
+                        data: {
+                            name: name,
+                            phonenumber: phonenumber,
+                            address: address,
+                        },
+                        dataType: 'json',
+                        method: "post",
+                        cache: true,
+                        success: function(data) {
+                            swal("OK!", "Thêm thông tin thành công", "success");
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 1500);
+                        },
+                        error: function() {
+                            swal("OK!", "Thêm thông tin thành công", "success");
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 1500);
+                        }
+                    })
+                }
+            })
+
+            $(document).on("click", '.edit-address-btn', function() {
+
+                var name = $('.name').val();
+                var phonenumber = $('.phonenumber').val();
+                var address = $('.address-input').val();
+
+                let errors = {
+                    nameError: '',
+                    phoneNumberError: '',
+                    addressError: '',
+                }
+
+                if (name.length === 0) {
+                    errors.nameError = "Không được để trống tên!";
+                    $('.name-form').css("border-color", "#f33a58");
+                    $('.name-error-message').text(errors.nameError);
+                } else {
+                    errors.nameError = '';
+                    $('.name-form').css("border-color", "#008000ab");
+                    $('.name-error-message').text(errors.nameError);
+                }
+
+                if (phonenumber.length === 0) {
+                    errors.phoneNumberError = "Không được để trống số điện thoại!";
+                    $('.phonenumber-form').css("border-color", "#f33a58");
+                    $('.phonenumber-error-message').text(errors.phoneNumberError);
+                } else if (validatePhoneNumber(phonenumber) == false) {
+                    errors.phoneNumberError =
+                        "Số điện thoại không hợp lệ!";
+                    $('.phonenumber-form').css("border-color", "#f33a58");
+                    $('.phonenumber-error-message').text(errors.phoneNumberError);
+                } else {
+                    errors.phoneNumberError = '';
+                    $('.phonenumber-form').css("border-color", "#008000ab");
+                    $('.phonenumber-error-message').text(errors.phoneNumberError);
+                }
+
+                if (address.length === 0) {
+                    errors.addressError = "Không được để trống!";
+                    $('.address-form').css("border-color", "#f33a58");
+                    $('.address-error-message').text(errors.addressError);
+                } else {
+                    errors.addressError = '';
+                    $('.address-form').css("border-color", "#008000ab");
+                    $('.address-error-message').text(errors.addressError);
+                }
+
+                if (errors.nameError == '' && errors.phoneNumberError == '' && errors.addressError == '') {
+                    $.ajax({
+                        url: "http://localhost:3000/pages/checkout/handleUserAddress.php",
+                        data: {
+                            name: name,
+                            phonenumber: phonenumber,
+                            address: address,
+                        },
+                        dataType: 'json',
+                        method: "post",
+                        cache: true,
+                        success: function(data) {
+                            swal("OK!", "Thêm thông tin thành công", "success");
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 1500);
+                        },
+                        error: function() {
+                            swal("OK!", "Đổi thông tin thành công", "success");
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 1500);
+                        }
+                    })
+                }
+            })
+
+            $(document).on("click", '.confirm-order-btn', function() {
+                let errors = {
+                    addressError: '',
+                }
+
+                // if (name.length === 0) {
+                //     errors.addressError = "Vui lòng nhập địa chỉ!";
+                //     swal("Chưa có địa chỉ", errors.addressError,
+                //         "error");
+                // } else {
+                // }
                 errors.addressError = '';
-                $('.address-form').css("border-color", "#008000ab");
-                $('.address-error-message').text(errors.addressError);
-            }
+                if (errors.addressError == '') {
+                    $.ajax({
+                        url: "http://localhost:3000/pages/checkout/handlePayment.php",
+                        dataType: 'json',
+                        method: "post",
+                        cache: true,
+                        success: function(data) {
 
-            if (errors.nameError == '' && errors.phoneNumberError == '' && errors.addressError == '') {
-                $.ajax({
-                    url: "http://localhost:3000/pages/checkout/handleUserAddress.php",
-                    data: {
-                        name: name,
-                        phonenumber: phonenumber,
-                        address: address,
-                    },
-                    dataType: 'json',
-                    method: "post",
-                    cache: true,
-                    success: function(data) {
-                        swal("OK!", "Thêm thông tin thành công", "success");
-                        setTimeout(function() {
-                            window.location.reload();
-                        }, 1500);
-                    },
-                    error: function() {
-                        swal("OK!", "Thêm thông tin thành công", "success");
-                        setTimeout(function() {
-                            window.location.reload();
-                        }, 1500);
-                    }
-                })
-            }
+                        },
+
+                    })
+                    swal("OK!", "Thanh toán thành công", "success");
+                    var url = "home.php";
+                    window.history.pushState("new", "title", url);
+                    $(".container").load("http://localhost:3000/home.php");
+                    $(window).scrollTop(0);
+                }
+            })
         })
-
-        $(document).on("click", '.edit-address-btn', function() {
-
-            var name = $('.name').val();
-            var phonenumber = $('.phonenumber').val();
-            var address = $('.address-input').val();
-
-            let errors = {
-                nameError: '',
-                phoneNumberError: '',
-                addressError: '',
-            }
-
-            if (name.length === 0) {
-                errors.nameError = "Không được để trống tên!";
-                $('.name-form').css("border-color", "#f33a58");
-                $('.name-error-message').text(errors.nameError);
-            } else {
-                errors.nameError = '';
-                $('.name-form').css("border-color", "#008000ab");
-                $('.name-error-message').text(errors.nameError);
-            }
-
-            if (phonenumber.length === 0) {
-                errors.phoneNumberError = "Không được để trống số điện thoại!";
-                $('.phonenumber-form').css("border-color", "#f33a58");
-                $('.phonenumber-error-message').text(errors.phoneNumberError);
-            } else if (validatePhoneNumber(phonenumber) == false) {
-                errors.phoneNumberError =
-                    "Số điện thoại không hợp lệ!";
-                $('.phonenumber-form').css("border-color", "#f33a58");
-                $('.phonenumber-error-message').text(errors.phoneNumberError);
-            } else {
-                errors.phoneNumberError = '';
-                $('.phonenumber-form').css("border-color", "#008000ab");
-                $('.phonenumber-error-message').text(errors.phoneNumberError);
-            }
-
-            if (address.length === 0) {
-                errors.addressError = "Không được để trống!";
-                $('.address-form').css("border-color", "#f33a58");
-                $('.address-error-message').text(errors.addressError);
-            } else {
-                errors.addressError = '';
-                $('.address-form').css("border-color", "#008000ab");
-                $('.address-error-message').text(errors.addressError);
-            }
-
-            if (errors.nameError == '' && errors.phoneNumberError == '' && errors.addressError == '') {
-                $.ajax({
-                    url: "http://localhost:3000/pages/checkout/handleUserAddress.php",
-                    data: {
-                        name: name,
-                        phonenumber: phonenumber,
-                        address: address,
-                    },
-                    dataType: 'json',
-                    method: "post",
-                    cache: true,
-                    success: function(data) {
-                        swal("OK!", "Thêm thông tin thành công", "success");
-                        setTimeout(function() {
-                            window.location.reload();
-                        }, 1500);
-                    },
-                    error: function() {
-                        swal("OK!", "Đổi thông tin thành công", "success");
-                        setTimeout(function() {
-                            window.location.reload();
-                        }, 1500);
-                    }
-                })
-            }
-        })
-
-        $(document).on("click", '.confirm-order-btn', function() {
-            let errors = {
-                addressError: '',
-            }
-
-            // if (name.length === 0) {
-            //     errors.addressError = "Vui lòng nhập địa chỉ!";
-            //     swal("Chưa có địa chỉ", errors.addressError,
-            //         "error");
-            // } else {
-            // }
-            errors.addressError = '';
-            if (errors.addressError == '') {
-                $.ajax({
-                    url: "http://localhost:3000/pages/checkout/handlePayment.php",
-                    dataType: 'json',
-                    method: "post",
-                    cache: true,
-                    success: function(data) {
-
-                    },
-
-                })
-                swal("OK!", "Thanh toán thành công", "success");
-                var url = "home.php";
-                window.history.pushState("new", "title", url);
-                $(".container").load("http://localhost:3000/home.php");
-                $(window).scrollTop(0);
-            }
-        })
-    })
     </script>
 </body>
 

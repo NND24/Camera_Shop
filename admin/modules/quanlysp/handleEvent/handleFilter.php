@@ -13,7 +13,7 @@ $soldAmount = $_POST['soldAmount'];
 $rating = $_POST['rating'];
 $dated = $_POST['dated'];
 
-$sql_lietke_sp = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
+$sql_sp = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
 AND (($status = 0 AND tbl_sanpham.trangthaisp = 0)
 OR   ($status = 1 AND tbl_sanpham.trangthaisp = 1)
 OR   ($status = 2 AND (tbl_sanpham.trangthaisp = 0  OR tbl_sanpham.trangthaisp = 1)))
@@ -42,8 +42,7 @@ ORDER BY
     
     CASE WHEN $name = 2 AND $price = 2 AND $amount = 2 AND $discount = 2 AND $soldAmount = 2 AND $rating = 2 AND $dated = 2  THEN id_sanpham  END DESC
 LIMIT " . $item_per_page . " OFFSET " . $offset . " ";
-$query_lietke_sp = mysqli_query($mysqli, $sql_lietke_sp);
-
+$query_sp = mysqli_query($mysqli, $sql_sp);
 
 $totalRecords = mysqli_query($mysqli, "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc
 AND (($status = 0 AND tbl_sanpham.trangthaisp = 0)
@@ -51,8 +50,8 @@ OR   ($status = 1 AND tbl_sanpham.trangthaisp = 1)
 OR   ($status = 2 AND (tbl_sanpham.trangthaisp = 0  OR tbl_sanpham.trangthaisp = 1)))");
 $totalRecords = mysqli_num_rows($totalRecords);
 $totalPages = ceil($totalRecords / $item_per_page);
-if (mysqli_num_rows($query_lietke_sp) > 0) {
-    while ($row = mysqli_fetch_array($query_lietke_sp)) {
+if (mysqli_num_rows($query_sp) > 0) {
+    while ($row = mysqli_fetch_array($query_sp)) {
 ?>
         <div class="products-row">
             <div class="product-cell col-2-4 image">

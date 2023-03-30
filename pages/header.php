@@ -1,7 +1,7 @@
 <?php
 @session_start();
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
-$sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY thutu ASC LIMIT 9";
+$sql_danhmuc = "SELECT * FROM tbl_danhmuc WHERE category_status=1 ORDER BY id_danhmuc ASC LIMIT 9";
 $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
 include('./js/link.php');
 ?>
@@ -124,7 +124,7 @@ include('./js/link.php');
             <span>Danh mục sản phẩm</span>
             <ul>
                 <?php
-                $sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY thutu ASC LIMIT 9";
+                $sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc ASC LIMIT 9";
                 $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
                 while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
                 ?>

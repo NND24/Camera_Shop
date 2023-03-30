@@ -1,23 +1,20 @@
 <?php
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
-$sql_view_detail_category = "SELECT * FROM tbl_danhmuc WHERE id_danhmuc='" . $_GET['iddanhmuc'] . "' LIMIT 1";
-$query__view_detail_category = mysqli_query($mysqli, $sql_view_detail_category);
+$sql = "SELECT * FROM tbl_danhmuc WHERE id_danhmuc='" . $_GET['iddanhmuc'] . "' LIMIT 1";
+$query = mysqli_query($mysqli, $sql);
+$row = mysqli_fetch_array($query)
 ?>
-<div class="model__view-detail-container">
-    <div class="model-close-btn"><i class="fa-solid fa-xmark"></i></div>
-    <form>
-        <div class="model__view-detail">
-            <h3>Chi tiết danh mục</h3>
-            <?php
-            while ($row = mysqli_fetch_array($query__view_detail_category)) {
-            ?>
+<div id="category__add-model">
+    <div class="model__container">
+        <form enctype="multipart/form-data">
+            <div class="model__add-new">
+                <h3>Chi tiết danh mục</h3>
+                <div class="close-modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
                 <div class="model__content">
                     <label class="col-2">Tên danh mục: </label>
                     <input readonly value="<?php echo $row['ten_danhmuc'] ?>" />
-                </div>
-                <div class="model__content">
-                    <label class="col-2">Thứ tự danh mục: </label>
-                    <input readonly value="<?php echo $row['thutu'] ?>" />
                 </div>
                 <div class="model__content">
                     <label class="col-2">Ngày tạo: </label>
@@ -31,7 +28,6 @@ $query__view_detail_category = mysqli_query($mysqli, $sql_view_detail_category);
                 <div class="model__content">
                     <label class="col-2">Trạng thái: </label>
                     <select>
-
                         <?php
                         if ($row['category_status'] == 1) {
                         ?>
@@ -49,11 +45,10 @@ $query__view_detail_category = mysqli_query($mysqli, $sql_view_detail_category);
                     <label>Chi tiết danh mục: </label>
                     <textarea readonly id="view-content"><?php echo $row['category_detail'] ?></textarea>
                 </div>
-            <?php
-            }
-            ?>
-        </div>
-    </form>
+            </div>
+        </form>
+        <div class="modal__category-add-background"></div>
+    </div>
 </div>
 
 <script>

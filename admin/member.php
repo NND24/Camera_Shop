@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý danh mục</title>
+    <title>Quản lý thành viên</title>
     <?php include('./js/link.php') ?>
 </head>
 
@@ -15,9 +15,9 @@
             <?php include('./modules/menu.php') ?>
             <div class="app-content">
                 <div class="app-content-header">
-                    <h1 class="app-content-headerText">Danh mục</h1>
-                    <button class="app-content-headerButton add-new-category-btn">
-                        Thêm danh mục
+                    <h1 class="app-content-headerText">Thành viên</h1>
+                    <button class="app-content-headerButton add-new-member-btn">
+                        Thêm thành viên
                     </button>
                 </div>
 
@@ -58,26 +58,25 @@
                             </div>
                         </div>
                         <div class="filter-button-wrapper">
-                            <button class="action-button delete-all-category">Xóa tất cả danh mục</button>
+                            <button class="action-button delete-all-member">Xóa tất cả thành viên</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="products-area-wrapper tableView">
                     <div class="products-header">
-                        <div class="product-cell col-1-5 image">Thứ tự</div>
-                        <div class="product-cell col-2 category">Tên danh mục</div>
-                        <div class="product-cell col status-cell">Trạng thái</div>
+                        <div class="product-cell col-2 member">Tên thành viên</div>
+                        <div class="product-cell col-2 image">Chức vụ</div>
                         <div class="product-cell col sales">Ngày tạo</div>
                         <div class="product-cell col stock">Ngày cập nhật</div>
-                        <div class="product-cell col-1-8 price">Chi tiết</div>
+                        <div class="product-cell col-2 price">Phân quyền</div>
                         <div class="product-cell col-1 price">Xóa</div>
                         <div class="product-cell col-1 price">Sửa</div>
                     </div>
-                    <div id="load_category_data"></div>
-                    <div id="view-add-category"></div>
-                    <div id="view-detail-category"></div>
-                    <div id="view-edit-category"></div>
+                    <div id="load_member_data"></div>
+                    <div id="view-add-member"></div>
+                    <div id="view-detail-member"></div>
+                    <div id="view-edit-member"></div>
                 </div>
             </div>
 
@@ -86,23 +85,23 @@
 
     <script>
     $(document).ready(() => {
-        var pageIndexMainCate = 1
+        var pageIndexMainMember = 1
         view_data();
         // View data
         function view_data() {
-            $.post('http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/listCategoryData.php?pageIndex=' +
-                pageIndexMainCate,
+            $.post('http://localhost:3000/admin/modules/quanlythanhvien/handleEvent/listmemberData.php?pageIndex=' +
+                pageIndexMainMember,
                 function(
                     data) {
-                    $('#load_category_data').html(data)
+                    $('#load_member_data').html(data)
                 })
         }
 
-        $(document).on("click", '.page-link.mainCate', function() {
-            pageIndexMainCate = $(this).attr("value");
+        $(document).on("click", '.page-link.mainMember', function() {
+            pageIndexMainMember = $(this).attr("value");
             $.ajax({
-                url: 'http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/listCategoryData.php?pageIndex=' +
-                    pageIndexMainCate,
+                url: 'http://localhost:3000/admin/modules/quanlythanhvien/handleEvent/listmemberData.php?pageIndex=' +
+                    pageIndexMainMember,
                 dataType: 'html',
                 method: "post",
                 cache: true,
@@ -115,40 +114,40 @@
             })
         })
 
-        // Add category
-        $(document).on("click", '.add-new-category-btn', function() {
+        // Add member
+        $(document).on("click", '.add-new-member-btn', function() {
             var id = $(this).val();
             var url =
-                "http://localhost:3000/admin/modules/quanlydanhmucsp/addNewCategory.php";
+                "http://localhost:3000/admin/modules/quanlythanhvien/addNewMember.php";
             $.post(url, (data) => {
-                $("#view-add-category").html(data);
+                $("#view-add-member").html(data);
             });
         })
 
         $(document).on("click", '.close-modal', function() {
-            $("#category__add-model").remove();
+            $("#member__add-model").remove();
         })
 
-        $(document).on("click", '.modal__category-add-background', function() {
-            $("#category__add-model").remove();
+        $(document).on("click", '.modal__member-add-background', function() {
+            $("#member__add-model").remove();
         })
 
-        // Remove category
-        $(document).on("click", '.remove-category', function() {
+        // Remove member
+        $(document).on("click", '.remove-member', function() {
             var id = $(this).val();
             var url =
-                "http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/handleDeleteCategory.php?iddanhmuc=" +
+                "http://localhost:3000/admin/modules/quanlythanhvien/handleEvent/handleDeleteMember.php?idmember=" +
                 id;
             swal({
-                    title: "Bạn có chắc muốn xóa danh mục này không?",
-                    text: "Nếu có danh mục này sẽ bị xóa đi!",
+                    title: "Bạn có chắc muốn xóa thành viên này không?",
+                    text: "Nếu có thành viên này sẽ bị xóa đi!",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        swal("Danh mục đã bị xóa!", {
+                        swal("thành viên đã bị xóa!", {
                             icon: "success",
                         });
                         $.post(url, (data) => {
@@ -158,20 +157,20 @@
                 });
         })
 
-        // Delete all category
-        $(document).on("click", '.delete-all-category', function() {
+        // Delete all member
+        $(document).on("click", '.delete-all-member', function() {
             var url =
-                "http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/handleDeleteCategory.php?action=deleteAll";
+                "http://localhost:3000/admin/modules/quanlythanhvien/handleEvent/handleDeletemember.php?action=deleteAll";
             swal({
                     title: "Bạn có chắc muốn thực hiện thao tác không?",
-                    text: "Nếu có tất cả danh mục sẽ bị xóa đi!",
+                    text: "Nếu có tất cả thành viên sẽ bị xóa đi!",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        swal("Tất cả danh mục đã bị xóa!", {
+                        swal("Tất cả thành viên đã bị xóa!", {
                             icon: "success",
                         });
                         $.post(url, (data) => {
@@ -181,52 +180,57 @@
                 });
         })
 
-        // View detail category
-        $(document).on("click", '.detail-category', function() {
+        // Edit member
+        $(document).on("click", '.edit-member', function() {
             var id = $(this).val();
             var url =
-                "http://localhost:3000/admin/modules/quanlydanhmucsp/viewDetailCategory.php?iddanhmuc=" +
+                "http://localhost:3000/admin/modules/quanlythanhvien/editMember.php?idmember=" +
                 id;
             $.post(url, (data) => {
-                $("#view-detail-category").html(data);
+                $("#view-edit-member").html(data);
             });
         })
 
         $(document).on("click", '.close-modal', function() {
-            $("#category__add-model").remove();
+            $("#member__add-model").remove();
         })
 
-        $(document).on("click", '.modal__category-add-background', function() {
-            $("#category__add-model").remove();
+        $(document).on("click", '.modal__member-add-background', function() {
+            $("#member__add-model").remove();
         })
 
-        // Edit category
-        $(document).on("click", '.edit-category', function() {
+        // View detail member
+        $(document).on("click", '.detail-member', function() {
             var id = $(this).val();
             var url =
-                "http://localhost:3000/admin/modules/quanlydanhmucsp/editCategory.php?iddanhmuc=" +
+                "http://localhost:3000/admin/modules/quanlythanhvien/viewDetailmember.php?idmember=" +
                 id;
             $.post(url, (data) => {
-                $("#view-edit-category").html(data);
+                $("#view-detail-member").html(data);
+                $('.model-close-btn i').click(() => {
+                    $('.model__view-detail-container').css("display", "none");
+                })
             });
         })
 
         $(document).on("click", '.close-modal', function() {
-            $("#category__add-model").remove();
+            $("#member__add-model").remove();
         })
 
-        $(document).on("click", '.modal__category-add-background', function() {
-            $("#category__add-model").remove();
+        $(document).on("click", '.modal__member-add-background', function() {
+            $("#member__add-model").remove();
         })
+
+
 
         // Handle search
-        var pageIndexCateSearch = 1;
+        var pageIndexMemberSearch = 1;
         $(document).on("keyup", '.search-bar', function() {
             var searchInput = $(this).val();
             if (searchInput.length > 0) {
                 $.ajax({
-                    url: "http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/handleSearch.php?pageIndex=" +
-                        pageIndexCateSearch,
+                    url: "http://localhost:3000/admin/modules/quanlythanhvien/handleEvent/handleSearch.php?pageIndex=" +
+                        pageIndexMemberSearch,
                     data: {
                         searchInput: searchInput,
                     },
@@ -234,7 +238,7 @@
                     method: "post",
                     cache: true,
                     success: function(data) {
-                        $('#load_category_data').html(data)
+                        $('#load_member_data').html(data)
                     }
                 })
             } else {
@@ -242,13 +246,13 @@
             }
         })
 
-        $(document).on("click", '.page-link.searchCate', function() {
-            pageIndexCateSearch = $(this).attr("value");
+        $(document).on("click", '.page-link.searchMember', function() {
+            pageIndexMemberSearch = $(this).attr("value");
             var searchInput = $('.search-bar').val();
             if (searchInput.length > 0) {
                 $.ajax({
-                    url: "http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/handleSearch.php?pageIndex=" +
-                        pageIndexCateSearch,
+                    url: "http://localhost:3000/admin/modules/quanlythanhvien/handleEvent/handleSearch.php?pageIndex=" +
+                        pageIndexMemberSearch,
                     data: {
                         searchInput: searchInput,
                     },
@@ -256,7 +260,7 @@
                     method: "post",
                     cache: true,
                     success: function(data) {
-                        $('#load_category_data').html(data)
+                        $('#load_member_data').html(data)
                     }
                 })
             } else {
@@ -266,16 +270,16 @@
 
         // Handle filter
         $(".jsFilter").on("click", function() {
-            document.querySelector(".filter-menu-cate").classList.toggle("active");
+            document.querySelector(".filter-menu-Member").classList.toggle("active");
         });
 
-        var pageIndexCateFilter = 1
+        var pageIndexMemberFilter = 1
         $(document).on("click", '.filter-button.apply', function() {
             var status = $('.filter_status').val();
             var dated = $('.filter_dated').val();
             $.ajax({
-                url: "http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/handleFilter.php?pageIndex=" +
-                    pageIndexCateFilter,
+                url: "http://localhost:3000/admin/modules/quanlythanhvien/handleEvent/handleFilter.php?pageIndex=" +
+                    pageIndexMemberFilter,
                 data: {
                     status: status,
                     dated: dated
@@ -284,18 +288,18 @@
                 method: "post",
                 cache: true,
                 success: function(data) {
-                    $('#load_category_data').html(data)
+                    $('#load_member_data').html(data)
                 }
             })
         })
 
-        $(document).on("click", '.page-link.searchCate', function() {
-            pageIndexCateFilter = $(this).attr("value");
+        $(document).on("click", '.page-link.searchMember', function() {
+            pageIndexMemberFilter = $(this).attr("value");
             var status = $('.filter_status').val();
             var dated = $('.filter_dated').val();
             $.ajax({
-                url: "http://localhost:3000/admin/modules/quanlydanhmucsp/handleEvent/handleFilter.php?pageIndex=" +
-                    pageIndexCateFilter,
+                url: "http://localhost:3000/admin/modules/quanlythanhvien/handleEvent/handleFilter.php?pageIndex=" +
+                    pageIndexMemberFilter,
                 data: {
                     status: status,
                     dated: dated
@@ -304,7 +308,7 @@
                 method: "post",
                 cache: true,
                 success: function(data) {
-                    $('#load_category_data').html(data)
+                    $('#load_member_data').html(data)
                 }
             })
         })
