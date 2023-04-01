@@ -13,10 +13,10 @@ $query_product_name = mysqli_query($mysqli, $sql_product_name);
 
 if ($row_product['tensanpham'] == $_POST['tensanpham']) {
     $tensanpham = $_POST['tensanpham'];
-    $giasp = $_POST['giasp'];
+    $giasp = round($_POST['giasp'], -3);
     $soluong = $_POST['soluong'];
     $giamgia = $_POST['giamgia'];
-    $giadagiam = $_POST['giasp'] - ($_POST['giasp'] * $_POST['giamgia']) / 100;
+    $giadagiam = $giasp - ($giasp * $_POST['giamgia']) / 100;
     $tomtat = $_POST['tomtat'];
     $noidung = $_POST['noidung'];
     $trangthai = $_POST['trangthai'];
@@ -38,10 +38,10 @@ if ($row_product['tensanpham'] == $_POST['tensanpham']) {
         echo json_encode($a);
     } else {
         $tensanpham = $_POST['tensanpham'];
-        $giasp = $_POST['giasp'];
+        $giasp = round($_POST['giasp'], -3);
         $soluong = $_POST['soluong'];
         $giamgia = $_POST['giamgia'];
-        $giadagiam = $_POST['giasp'] - ($_POST['giasp'] * $_POST['giamgia']) / 100;
+        $giadagiam = $giasp - ($giasp * $_POST['giamgia']) / 100;
         $tomtat = $_POST['tomtat'];
         $noidung = $_POST['noidung'];
         $trangthai = $_POST['trangthai'];
@@ -54,7 +54,7 @@ if ($row_product['tensanpham'] == $_POST['tensanpham']) {
 
         // Sua
         $sql_update = "UPDATE tbl_sanpham SET tensanpham='" . $tensanpham . "',giasp='" . $giasp . "',soluong='" . $soluong . "',giamgia='" . $giamgia . "',
-    giadagiam='" . $giadagiam . "',tomtat='" . $tomtat . "',noidung='" . $noidung . "',	trangthaisp='" . $trangthai . "',id_danhmuc='" . $danhmuc . "',
+    giadagiam='" . round($giadagiam, -3) . "',tomtat='" . $tomtat . "',noidung='" . $noidung . "',	trangthaisp='" . $trangthai . "',id_danhmuc='" . $danhmuc . "',
     last_updated='" . $last_updated . "' WHERE id_sanpham='$id' ";
         $query_update = mysqli_query($mysqli, $sql_update);
     }

@@ -98,7 +98,7 @@
                 ajax.onreadystatechange = function() {
                     if (ajax.status == 200 && ajax.readyState == 4) {
                         var imgPath = ajax.responseText;
-                        $('.image').attr('src', "http://localhost:3000/images/products/" + imgPath)
+                        $('.image').attr('src', " images/products/" + imgPath)
                     }
                 }
                 ajax.open('POST',
@@ -121,7 +121,7 @@
                         var pageIndexMain = 1
                         // View data
                         function view_data() {
-                            $.post('http://localhost:3000/admin/modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
+                            $.post(' admin/modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
                                 pageIndexMain,
                                 function(data) {
                                     $('#load_product_data').html(data)
@@ -300,7 +300,7 @@
                     var pageIndexMain = 1
                     // View data
                     function view_data() {
-                        $.post('http://localhost:3000/admin/modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
+                        $.post(' admin/modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
                             pageIndexMain,
                             function(data) {
                                 $('#load_product_data').html(data)

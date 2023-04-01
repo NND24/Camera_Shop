@@ -40,7 +40,7 @@
                         var password = $('#password').val();
 
                         $.ajax({
-                            url: "http://localhost:3000/admin/modules/quanlytaikhoan/handleLogin.php?dangnhap=1",
+                            url: " admin/modules/quanlytaikhoan/handleLogin.php?dangnhap=1",
                             data: {
                                 email: email,
                                 password: password,

@@ -99,7 +99,7 @@ $row = mysqli_fetch_array($query);
         $(document).on("click", '.logout', function(e) {
             e.preventDefault();
             $.ajax({
-                url: "http://localhost:3000/admin/modules/handleLogin.php?dangxuat=1",
+                url: " admin/modules/handleLogin.php?dangxuat=1",
                 dataType: 'json',
                 method: "post",
                 cache: true,
@@ -122,7 +122,7 @@ $row = mysqli_fetch_array($query);
         $(document).on("click", '.manage', function() {
             var id = $(this).val();
             var url =
-                "http://localhost:3000/admin/modules/quanlytaikhoan/manageAccount.php";
+                " admin/modules/quanlytaikhoan/manageAccount.php";
             $.post(url, (data) => {
                 $("#view-add-member").html(data);
             });

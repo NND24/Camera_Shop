@@ -297,7 +297,7 @@ select option {
   position: absolute;
   background: url(../images/banner/discount.svg) 50% no-repeat;
   top: 4px;
-  left: -5px;
+  left: -4px;
   height: 30px;
   width: 75px;
   color: #fff;
@@ -2266,6 +2266,7 @@ span#countContent {
   background-color: #fff;
   top: 14px;
   right: -90px;
+  width: 170px;
   text-align: left;
   padding: 6px 15px;
   border-radius: 4px;
@@ -2292,6 +2293,13 @@ span#countContent {
 .user-modal .logout {
   padding: 4px 6px;
   border-radius: 4px;
+  background-color: transparent;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.user-modal button:hover {
+  background-color: #ddd;
 }
 
 .wrapper {
@@ -2757,6 +2765,11 @@ a.page-link {
   margin-top: 20px;
 }
 
+.payment__header {
+  font-size: 18px;
+  padding-bottom: 5px;
+}
+
 .address__modal-container {
   position: absolute;
   z-index: 11;
@@ -2765,11 +2778,13 @@ a.page-link {
 .address__modal-wrapper {
   position: fixed;
   top: 70px;
-  left: 140px;
+  left: 30px;
+  display: flex;
+  flex-wrap: wrap;
   background-color: #fff;
-  border-radius: 6xp;
-  width: 600px;
-  height: 325px;
+  border-radius: 6px;
+  width: 700px;
+  height: 350px;
   padding: 20px;
   transform: translate(50%, 0%);
   z-index: 10;
@@ -2789,7 +2804,7 @@ a.page-link {
 .address__modal-header {
   font-size: 20px;
   font-weight: 500;
-  margin-bottom: 15px;
+  margin-bottom: -5px;
 }
 
 .address__modal-form {
@@ -2803,9 +2818,9 @@ a.page-link {
 
 .address-input-label {
   position: absolute;
-  top: -6px;
+  top: -10px;
   left: 10px;
-  font-size: 12px;
+  font-size: 13px;
   color: rgba(0, 0, 0, 0.4);
   padding: 0 3px;
   background: #fff;
@@ -2815,11 +2830,11 @@ a.page-link {
   height: 38px;
   box-sizing: border-box;
   width: 100%;
-  padding: 10px;
+  padding: 0 10px;
   background-color: transparent;
   flex: 1;
   outline: none;
-  font-size: 14px;
+  font-size: 16px;
   min-width: 0;
   color: #222;
   border: 0;
@@ -2829,11 +2844,82 @@ a.page-link {
 .edit-address-btn {
   color: #fff;
   background-color: #ee4d2d;
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
+  margin-top: 10px;
   padding: 5px 10px;
   border-radius: 4px;
 }
 
 /* CHECKOUT END */
+
+/* PROFILE START */
+.profile {
+  width: 100%;
+  padding: 4px 6px;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.profile_wrapper {
+  width: 100%;
+  background-color: #fff;
+  height: 100%;
+  border-radius: 6px;
+  padding: 20px;
+}
+
+.profile__sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile__avatar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 30px 0;
+}
+
+.profile__avatar i {
+  width: 100px;
+  height: 100px;
+  background-color: grey;
+  border-radius: 50%;
+  font-size: 75px;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile__avatar span {
+  font-size: 17px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.profile__sidebar button {
+  background-color: #dddddd;
+  width: 100%;
+  height: 30px;
+  border: 1px solid #555;
+}
+
+.profile__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-input {
+  border: 1px solid #000;
+  width: 260px;
+  margin-bottom: 15px;
+}
+
+.suamatkhau {
+  width: 120px;
+  border: 1px solid;
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+/* PROFILE END */

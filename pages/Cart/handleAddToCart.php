@@ -3,51 +3,34 @@ session_start();
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
 
 if (isset($_SESSION['id_user'])) {
-    $id = $_POST['id_sanpham'];
-    $soluong = 1;
-    $sql = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc AND tbl_sanpham.id_sanpham='" . $id . "' LIMIT 1 ";
-    $query = mysqli_query($mysqli, $sql);
-    $row = mysqli_fetch_array($query);
-    if ($row) {
-        $new_product = array(
-            array(
-                'tensanpham' => $row['tensanpham'],
-                'tendanhmuc' => $row['ten_danhmuc'],
-                'id' => $id,
-                'idUser' => $_SESSION['id_user'],
-                'soluong' => $soluong,
-                'giasp' => $row['giadagiam'],
-                'hinhanh' => $row['hinhanh'],
-                'masp' => $row['masp']
-            )
-        );
+    $id_sanpham = $_POST['id_sanpham'];
 
-        // Kiem tra session gio hang ton tai
-        if (isset($_SESSION['cart'])) {
-            $found = false;
-            $product = array();
-            foreach ($_SESSION['cart'] as $cart_item) {
-                if ($cart_item['idUser'] == $_SESSION['id_user']) {
-                    // Neu du lieu trung
-                    if ($cart_item['id'] == $id) {
-                        $cart_item['soluong']++;
-                        $found = true;
-                    }
-                    $product[] = $cart_item;
-                } else {
-                    $product[] = $cart_item;
-                }
+    $sql_cart = "SELECT * FROM tbl_cart WHERE id_sanpham='$id_sanpham' AND id_user='$_SESSION[id_user]'";
+    $query_cart = mysqli_query($mysqli, $sql_cart);
+    $row_cart = mysqli_fetch_array($query_cart);
+
+    $sql_sanpham = "SELECT * FROM tbl_sanpham WHERE id_sanpham='$id_sanpham'";
+    $query_sanpham = mysqli_query($mysqli, $sql_sanpham);
+    $row_sanpham = mysqli_fetch_array($query_sanpham);
+
+    if ($row_sanpham['soluong'] - 1 < 0) {
+        $a = array("hethang" => 1);
+        echo json_encode($a);
+    } else {
+        if ($row_cart['id_sanpham'] == $id_sanpham) {
+            if ($row_sanpham['soluong'] - ($row_cart['amount'] + 1) < 0) {
+                $a = array("hethang" => 1);
+                echo json_encode($a);
+            } else {
+
+                $soluong = $row_cart['amount'] + 1;
+                $sql_update = "UPDATE tbl_cart SET amount='" . $soluong . "' WHERE id_sanpham='$id_sanpham' AND id_user='$_SESSION[id_user]'";
+                mysqli_query($mysqli, $sql_update);
             }
-            if ($found == false) {
-                // Ket hop product va new product
-                $product = array_merge($product, $new_product);
-            }
-            usort($product, function ($a, $b) {
-                return $a['idUser'] - $b['idUser'];
-            });
-            $_SESSION['cart'] = $product;
         } else {
-            $_SESSION['cart'] = $new_product;
+            $sql_them = "INSERT INTO tbl_cart(id_user, id_sanpham, amount) 
+        VALUE('" . $_SESSION['id_user'] . "', '" . $id_sanpham . "','" . 1 . "')";
+            mysqli_query($mysqli, $sql_them);
         }
     }
 }

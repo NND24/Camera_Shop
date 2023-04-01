@@ -1,11 +1,8 @@
 <?php
 session_start();
-$idsanpham = $_GET['idsanpham'];
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
-$sql_user = "SELECT * FROM tbl_user WHERE id_user='$_SESSION[id_user]' LIMIT 1 ";
-$query_user = mysqli_query($mysqli, $sql_user);
-$row_user = mysqli_fetch_array($query_user);
 
+$idsanpham = $_GET['idsanpham'];
 $sql_review = "SELECT * FROM tbl_reviews, tbl_user WHERE tbl_reviews.id_user=tbl_user.id_user AND tbl_reviews.id_sanpham=$idsanpham LIMIT 10 ";
 $query_review = mysqli_query($mysqli, $sql_review);
 if (mysqli_num_rows($query_review) > 0) {
@@ -64,9 +61,16 @@ if (mysqli_num_rows($query_review) > 0) {
 
     </div>
     <div class="review__footer">
-        <?php if ($row_user['privilege'] == 1) { ?>
+        <?php
+                if (isset($_SESSION['id_user'])) {
+                $sql_user = "SELECT * FROM tbl_user WHERE id_user='$_SESSION[id_user]' LIMIT 1 ";
+                $query_user = mysqli_query($mysqli, $sql_user);
+                $row_user = mysqli_fetch_array($query_user);
+                if ($row_user['privilege'] == 1) {
+                ?>
         <button class="review__footer-answer" value="<?php echo $row_review['id_review'] ?>">Trả lời</button> &#8226;
-        <?php } ?>
+        <?php } 
+                }?>
         <div class="review__footer-date"><?php date_default_timezone_set('Asia/Ho_Chi_Minh');
                                                     echo date('d/m/Y', $row_review['review_date']) ?></div>
     </div>

@@ -94,7 +94,7 @@
                             <div class="col col-lg-12 col-md-12 col-12">
                                 <div class="row no-wrap product--container">
                                     <?php
-                                    $sql_product_discount = "SELECT * FROM tbl_sanpham WHERE trangthaisp=1 AND giamgia > 0 ORDER BY giamgia DESC LIMIT 10";
+                                    $sql_product_discount = "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.soluong>0 AND trangthaisp=1 AND giamgia > 0 ORDER BY giamgia DESC LIMIT 10";
                                     $query_product_discount = mysqli_query($mysqli, $sql_product_discount);
                                     while ($row_product_discount = mysqli_fetch_array($query_product_discount)) {
                                     ?>
@@ -164,7 +164,7 @@
                             <div class="col col-lg-12 col-md-12 col-12">
                                 <div class="row no-wrap product--container">
                                     <?php
-                                    $sql_product_sold = "SELECT * FROM tbl_sanpham WHERE trangthaisp=1 ORDER BY daban ASC LIMIT 10";
+                                    $sql_product_sold = "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.soluong>0 AND trangthaisp=1 ORDER BY daban ASC LIMIT 10";
                                     $query_product_sold = mysqli_query($mysqli, $sql_product_sold);
                                     while ($row_product_sold = mysqli_fetch_array($query_product_sold)) {
                                     ?>
@@ -231,7 +231,7 @@
                     $sql_category = "SELECT * FROM tbl_danhmuc WHERE category_status=1 ORDER BY id_danhmuc ASC LIMIT 10";
                     $query_category = mysqli_query($mysqli, $sql_category);
                     while ($row_category = mysqli_fetch_array($query_category)) {
-                        $sql_product = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE trangthaisp=1 AND tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc AND tbl_sanpham.id_danhmuc='$row_category[id_danhmuc]' ORDER BY daban ASC LIMIT 10";
+                        $sql_product = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.soluong>0 AND trangthaisp=1 AND tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc AND tbl_sanpham.id_danhmuc='$row_category[id_danhmuc]' ORDER BY daban ASC LIMIT 10";
                         $query_product = mysqli_query($mysqli, $sql_product);
                         if (mysqli_num_rows($query_product) > 0) {
                     ?>
@@ -323,6 +323,13 @@
         ?>
     </div>
 
+    <div class="loader-wrapper">
+        <div id="loader">
+            <div id="shadow"></div>
+            <div id="box"></div>
+        </div>
+    </div>
+
     <!-- Swiper JS -->
     <script>
         var swiper = new Swiper(".mySwiper", {
@@ -349,10 +356,6 @@
                 $(".container").load("chitietsanpham.php?id=" + idDetail);
                 $(window).scrollTop(0);
                 window.location.reload();
-            })
-
-            $(document).on("click", '.add-to-cart-btn', function() {
-                var id = $(this).attr("value");
             })
 
             // View all

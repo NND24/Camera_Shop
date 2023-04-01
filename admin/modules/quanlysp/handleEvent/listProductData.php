@@ -15,7 +15,7 @@ if (mysqli_num_rows($query_lietke_sp) > 0) {
     while ($row = mysqli_fetch_array($query_lietke_sp)) {
 ?>
 <div class="products-row">
-    <div class="product-cell col-2-4 image">
+    <div class="product-cell col-1-8 image">
         <img src="modules/quanlysp/handleEvent/uploads/<?php echo $row['hinhanh'] ?>" alt="product">
         <span title="<?php echo $row['tensanpham'] ?>"><?php echo $row['tensanpham'] ?></span>
     </div>
@@ -35,10 +35,23 @@ if (mysqli_num_rows($query_lietke_sp) > 0) {
                 }
                 ?>
     </div>
-    <div class="product-cell col-2 sales">
+    <div class="product-cell col-1-5 status-cell">
+        <?php
+                if ($row['soluong'] > 0) {
+                ?>
+        <span class="status active">Còn hàng</span>
+        <?php
+                } else if ($row['soluong'] <= 0) {
+                ?>
+        <span class="status">Hết hàng</span>
+        <?php
+                }
+                ?>
+    </div>
+    <div class="product-cell col-1-8 sales">
         <?php date_default_timezone_set('Asia/Ho_Chi_Minh');
-                echo date('d/m/Y H:i', $row['created_time']) ?></div>
-    <div class="product-cell col-2 stock"><?php echo date('d/m/Y H:i', $row['last_updated']) ?></div>
+                echo date('d/m/Y', $row['created_time']) ?></div>
+    <div class="product-cell col-1-8 stock"><?php echo date('d/m/Y', $row['last_updated']) ?></div>
     <div class="product-cell col-1-8 detail">
         <button title="Xem chi tiết" class="detail-product" value="<?php echo $row['id_sanpham'] ?>"><span>Xem
                 chi tiết</span></button>

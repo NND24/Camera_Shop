@@ -3,10 +3,8 @@ session_start();
 ?>
 <div class="user-modal-wrapper">
     <div class="user-modal">
-        <p>Chào mừng khách hàng</p>
-        <p><?php echo $_SESSION['login'] ?></p>
-        <p><?php echo $_SESSION['id_user'] ?></p>
-        <button class="logout">Đăng xuất
+        <button class="profile">Tài khoản của tôi</button>
+        <button class="logout">Đăng xuất</button>
     </div>
     <div class="user-modal-background"></div>
 </div>

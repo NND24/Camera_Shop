@@ -1,22 +1,25 @@
 <?php
 session_start();
+$mysqli = new mysqli("localhost", "root", "", "camera_shop");
 $id = $_POST['id_sanpham'];
-foreach ($_SESSION['cart'] as $cart_item) {
-    if ($cart_item['id'] != $id || $cart_item['idUser'] != $_SESSION['id_user']) {
-        $product[] = array(
-            'tensanpham' => $cart_item['tensanpham'], 'tendanhmuc' => $cart_item['tendanhmuc'], 'id' => $cart_item['id'], 'idUser' => $cart_item['idUser'], 'soluong' => $cart_item['soluong'],
-            'giasp' => $cart_item['giasp'], 'hinhanh' => $cart_item['hinhanh'], 'masp' => $cart_item['masp']
-        );
-        $_SESSION['cart'] = $product;
-    } else {
-        $tangsoluong = $cart_item['soluong'] + 1;
-        $product[] = array(
-            'tensanpham' => $cart_item['tensanpham'], 'tendanhmuc' => $cart_item['tendanhmuc'], 'id' => $cart_item['id'], 'idUser' => $cart_item['idUser'], 'soluong' => $tangsoluong,
-            'giasp' => $cart_item['giasp'], 'hinhanh' => $cart_item['hinhanh'], 'masp' => $cart_item['masp']
-        );
 
-        $_SESSION['cart'] = $product;
+if (isset($_SESSION['id_user'])) {
+    $id_sanpham = $_POST['id_sanpham'];
+
+    $sql_cart = "SELECT * FROM tbl_cart WHERE id_sanpham='$id_sanpham' AND id_user='$_SESSION[id_user]'";
+    $query_cart = mysqli_query($mysqli, $sql_cart);
+    $row_cart = mysqli_fetch_array($query_cart);
+
+    $sql_sanpham = "SELECT * FROM tbl_sanpham WHERE id_sanpham='$id_sanpham'";
+    $query_sanpham = mysqli_query($mysqli, $sql_sanpham);
+    $row_sanpham = mysqli_fetch_array($query_sanpham);
+
+    if ($row_sanpham['soluong'] - ($row_cart['amount'] + 1) < 0) {
+        $a = array("hethang" => 1);
+        echo json_encode($a);
+    } else {
+        $soluong = $row_cart['amount'] + 1;
+        $sql_update = "UPDATE tbl_cart SET amount='" . $soluong . "' WHERE id_sanpham='$id_sanpham' AND id_user='$_SESSION[id_user]'";
+        mysqli_query($mysqli, $sql_update);
     }
 }
-
-echo json_encode($_POST);

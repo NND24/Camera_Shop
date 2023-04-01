@@ -117,11 +117,12 @@ ORDER BY id_sanpham DESC";
 
                 <div class="products-area-wrapper tableView">
                     <div class="products-header">
-                        <div class="product-cell col-2-4 image"> Sản phẩm</div>
+                        <div class="product-cell col-1-8 image"> Sản phẩm</div>
                         <div class="product-cell col-1-8 category">Danh mục</div>
                         <div class="product-cell col-1-5 status-cell">Trạng thái</div>
-                        <div class="product-cell col-2 sales">Ngày tạo</div>
-                        <div class="product-cell col-2 stock">Ngày cập nhật</div>
+                        <div class="product-cell col-1-5 status-cell">Tình trạng</div>
+                        <div class="product-cell col-1-8 sales">Ngày tạo</div>
+                        <div class="product-cell col-1-8 stock">Ngày cập nhật</div>
                         <div class="product-cell col-1-8 price">Chi tiết</div>
                         <div class="product-cell col price">Xóa</div>
                         <div class="product-cell col price">Sửa</div>
@@ -143,7 +144,7 @@ ORDER BY id_sanpham DESC";
             view_data();
 
             function view_data() {
-                $.post('http://localhost:3000/admin/modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
+                $.post(' admin/modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
                     pageIndexMain,
                     function(data) {
                         $('#load_product_data').html(data)
@@ -153,7 +154,7 @@ ORDER BY id_sanpham DESC";
             $(document).on("click", '.page-link.main', function() {
                 pageIndexMain = $(this).attr("value");
                 $.ajax({
-                    url: 'http://localhost:3000/admin/modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
+                    url: ' admin/modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
                         pageIndexMain,
                     dataType: 'html',
                     method: "post",
@@ -171,7 +172,7 @@ ORDER BY id_sanpham DESC";
             $(document).on("click", '.remove-product', function() {
                 var id = $(this).val();
                 var url =
-                    "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleDeleteProduct.php?idsanpham=" +
+                    " admin/modules/quanlysp/handleEvent/handleDeleteProduct.php?idsanpham=" +
                     id;
                 swal({
                         title: "Bạn có chắc muốn xóa danh sách này không?",
@@ -195,7 +196,7 @@ ORDER BY id_sanpham DESC";
             // Delete all product
             $(document).on("click", '.delete-all-product', function() {
                 var url =
-                    "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleDeleteProduct.php?action=deleteAll";
+                    " admin/modules/quanlysp/handleEvent/handleDeleteProduct.php?action=deleteAll";
                 swal({
                         title: "Bạn có chắc muốn thực hiện thao tác không?",
                         text: "Nếu có tất cả danh sách sẽ bị xóa đi!",
@@ -219,7 +220,7 @@ ORDER BY id_sanpham DESC";
             $(document).on("click", '.detail-product', function() {
                 var id = $(this).val();
                 var url =
-                    "http://localhost:3000/admin/modules/quanlysp/viewProductDetail.php?idsanpham=" +
+                    " admin/modules/quanlysp/viewProductDetail.php?idsanpham=" +
                     id;
                 $.post(url, (data) => {
                     $("#view-detail-product").html(data);
@@ -238,7 +239,7 @@ ORDER BY id_sanpham DESC";
             $(document).on("click", '.edit-product', function() {
                 var id = $(this).val();
                 var url =
-                    "http://localhost:3000/admin/modules/quanlysp/editProduct.php?idsanpham=" +
+                    " admin/modules/quanlysp/editProduct.php?idsanpham=" +
                     id;
                 $.post(url, (data) => {
                     $("#view-edit-product").html(data);
@@ -256,7 +257,7 @@ ORDER BY id_sanpham DESC";
             // Add product
             $(document).on("click", '.add-product', function() {
                 var url =
-                    "http://localhost:3000/admin/modules/quanlysp/addNewProduct.php";
+                    " admin/modules/quanlysp/addNewProduct.php";
                 $.post(url, (data) => {
                     $("#view-add-product").html(data);
                 });
@@ -276,7 +277,7 @@ ORDER BY id_sanpham DESC";
                 var searchInput = $(this).val();
                 if (searchInput.length > 0) {
                     $.ajax({
-                        url: "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleSearch.php?pageIndex=" +
+                        url: " admin/modules/quanlysp/handleEvent/handleSearch.php?pageIndex=" +
                             pageIndexSearch,
                         data: {
                             searchInput: searchInput,
@@ -298,7 +299,7 @@ ORDER BY id_sanpham DESC";
                 var searchInput = $('.search-bar').val();
                 if (searchInput.length > 0) {
                     $.ajax({
-                        url: "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleSearch.php?pageIndex=" +
+                        url: " admin/modules/quanlysp/handleEvent/handleSearch.php?pageIndex=" +
                             pageIndexSearch,
                         data: {
                             searchInput: searchInput,
@@ -331,7 +332,7 @@ ORDER BY id_sanpham DESC";
                 var rating = $('.filter_rating').val();
                 var dated = $('.filter_dated').val();
                 $.ajax({
-                    url: "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleFilter.php?pageIndex=" +
+                    url: " admin/modules/quanlysp/handleEvent/handleFilter.php?pageIndex=" +
                         pageIndexFilter,
                     data: {
                         status: status,
@@ -364,7 +365,7 @@ ORDER BY id_sanpham DESC";
                 var rating = $('.filter_rating').val();
                 var dated = $('.filter_dated').val();
                 $.ajax({
-                    url: "http://localhost:3000/admin/modules/quanlysp/handleEvent/handleFilter.php?pageIndex=" +
+                    url: " admin/modules/quanlysp/handleEvent/handleFilter.php?pageIndex=" +
                         pageIndexFilter,
                     dataType: 'html',
                     data: {

@@ -56,7 +56,7 @@
             var pageIndexMainMember = 1
             // View data
             function view_data() {
-                $.post('http://localhost:3000/admin/modules/quanlythanhvien/handleEvent/listmemberData.php?pageIndex=' +
+                $.post(' admin/modules/quanlythanhvien/handleEvent/listmemberData.php?pageIndex=' +
                     pageIndexMainMember,
                     function(
                         data) {
@@ -151,7 +151,7 @@
             if (errors.nameError == '' && errors.emailError == '' && errors.dutyError == '' && errors
                 .passwordError == '' && errors.passwordConfirmationError == '') {
                 $.ajax({
-                    url: "http://localhost:3000/admin/modules/quanlythanhvien/handleEvent/handleAddMember.php",
+                    url: " admin/modules/quanlythanhvien/handleEvent/handleAddMember.php",
                     data: {
                         username: username,
                         email: email,

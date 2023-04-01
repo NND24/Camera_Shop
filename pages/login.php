@@ -44,7 +44,7 @@ include('../admin/config/config.php'); ?>
             var password = $('#password').val();
 
             $.ajax({
-                url: "http://localhost:3000/pages/handleEvent/handleLogin.php",
+                url: " pages/handleEvent/handleLogin.php",
                 data: {
                     email: email,
                     password: password,

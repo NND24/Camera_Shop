@@ -1,12 +1,15 @@
 <?php
 session_start();
-$id = $_POST['id_sanpham'];
-foreach ($_SESSION['cart'] as $cart_item) {
-    if ($cart_item['id'] != $id || $cart_item['idUser'] != $_SESSION['id_user']) {
-        $product[] = array(
-            'tensanpham' => $cart_item['tensanpham'], 'tendanhmuc' => $cart_item['tendanhmuc'], 'id' => $cart_item['id'], 'idUser' => $cart_item['idUser'], 'soluong' => $cart_item['soluong'],
-            'giasp' => $cart_item['giasp'], 'hinhanh' => $cart_item['hinhanh'], 'masp' => $cart_item['masp']
-        );
+$mysqli = new mysqli("localhost", "root", "", "camera_shop");
+
+if (isset($_SESSION['id_user'])) {
+    if (isset($_GET['xoa'])) {
+        $id_sanpham = $_POST['id_sanpham'];
+
+        $sql_xoa = "DELETE FROM tbl_cart WHERE id_sanpham='$id_sanpham' ";
+        mysqli_query($mysqli, $sql_xoa);
+    } else if (isset($_GET['action'])) {
+        $sql_delete_all = "DELETE FROM tbl_cart WHERE id_user='$_SESSION[id_user]'";
+        $query_delete_all = mysqli_query($mysqli, $sql_delete_all);
     }
-    $_SESSION['cart'] = $product;
 }

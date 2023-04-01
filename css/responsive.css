@@ -81,6 +81,10 @@
     width: 15.666667% !important;
   }
 
+  .user__option .user-modal {
+    right: -45px;
+  }
+
   /* HEADER START */
   .header_main {
     padding: 0 40px;
@@ -170,6 +174,10 @@
 
   .container {
     max-width: 850px !important;
+  }
+
+  .user__option .user-modal {
+    right: -20px;
   }
 
   /* HEADER START */
@@ -324,6 +332,10 @@
     left: 75px;
   }
 
+  .user__option .user-modal {
+    right: -30px;
+  }
+
   /* HEADER START */
   .header_main {
     padding: 0 30px;
@@ -473,6 +485,10 @@
 
   .home__menu {
     display: none;
+  }
+
+  .user__option .user-modal {
+    right: -20px;
   }
 
   /* .cart_wrapper .cart {

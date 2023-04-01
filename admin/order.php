@@ -61,7 +61,7 @@
             var pageIndexOrderMain = 1
             // View data
             function view_data() {
-                $.post('http://localhost:3000/admin/modules/quanlydonhang/handleEvent/listOrderData.php?pageIndex=' +
+                $.post(' admin/modules/quanlydonhang/handleEvent/listOrderData.php?pageIndex=' +
                     pageIndexOrderMain,
                     function(data) {
                         $('#load_order_data').html(data)
@@ -72,7 +72,7 @@
             $(document).on("click", '.page-link.main-order', function() {
                 var pageIndexOrderMain = 1;
                 $.ajax({
-                    url: 'http://localhost:3000/admin/modules/quanlydonhang/handleEvent/listOrderData.php?pageIndex=' +
+                    url: ' admin/modules/quanlydonhang/handleEvent/listOrderData.php?pageIndex=' +
                         pageIndexOrderMain,
                     dataType: 'html',
                     method: "post",
@@ -90,7 +90,7 @@
             $(document).on("click", '.detail-order', function() {
                 var id = $(this).val();
                 var url =
-                    "http://localhost:3000/admin/modules/quanlydonhang/viewOrderDetail.php?id_cart=" +
+                    " admin/modules/quanlydonhang/viewOrderDetail.php?id_cart=" +
                     id;
                 $.post(url, (data) => {
                     $("#view-detail-order").html(data);
@@ -109,7 +109,7 @@
             $(document).on("click", '.remove-order', function() {
                 var id = $(this).val();
                 var url =
-                    "http://localhost:3000/admin/modules/quanlydonhang/handleEvent/handleDeleteOrder.php?idsanpham=" +
+                    " admin/modules/quanlydonhang/handleEvent/handleDeleteOrder.php?idsanpham=" +
                     id;
                 swal({
                         title: "Bạn có chắc muốn xóa đơn hàng này không?",
@@ -133,7 +133,7 @@
             // Delete all order
             $(document).on("click", '.delete-all-order', function() {
                 var url =
-                    "http://localhost:3000/admin/modules/quanlydonhang/handleEvent/handleDeleteOrder.php?action=deleteAll";
+                    " admin/modules/quanlydonhang/handleEvent/handleDeleteOrder.php?action=deleteAll";
                 swal({
                         title: "Bạn có chắc muốn thực hiện thao tác không?",
                         text: "Nếu có tất cả đơn hàng sẽ bị xóa đi!",

@@ -27,10 +27,7 @@
                     </div>
                     <div class="app-content-actions-wrapper">
                         <div class="filter-button-wrapper">
-                            <button class="action-button filter jsFilter"><span>Filter</span><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-filter">
+                            <button class="action-button filter jsFilter"><span>Filter</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter">
                                     <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
                                 </svg></button>
                             <div class="filter-menu-cate">
@@ -84,155 +81,205 @@
     </div>
 
     <script>
-    $(document).ready(() => {
-        var pageIndexMainMember = 1
-        view_data();
-        // View data
-        function view_data() {
-            $.post('http://localhost:3000/admin/modules/quanlythanhvien/handleEvent/listmemberData.php?pageIndex=' +
-                pageIndexMainMember,
-                function(
-                    data) {
-                    $('#load_member_data').html(data)
-                })
-        }
-
-        $(document).on("click", '.page-link.mainMember', function() {
-            pageIndexMainMember = $(this).attr("value");
-            $.ajax({
-                url: 'http://localhost:3000/admin/modules/quanlythanhvien/handleEvent/listmemberData.php?pageIndex=' +
+        $(document).ready(() => {
+            var pageIndexMainMember = 1
+            view_data();
+            // View data
+            function view_data() {
+                $.post(' admin/modules/quanlythanhvien/handleEvent/listmemberData.php?pageIndex=' +
                     pageIndexMainMember,
-                dataType: 'html',
-                method: "post",
-                cache: true,
-                success: function() {
-                    view_data();
-                },
-                error: function() {
-                    view_data();
+                    function(
+                        data) {
+                        $('#load_member_data').html(data)
+                    })
+            }
+
+            $(document).on("click", '.page-link.mainMember', function() {
+                pageIndexMainMember = $(this).attr("value");
+                $.ajax({
+                    url: ' admin/modules/quanlythanhvien/handleEvent/listmemberData.php?pageIndex=' +
+                        pageIndexMainMember,
+                    dataType: 'html',
+                    method: "post",
+                    cache: true,
+                    success: function() {
+                        view_data();
+                    },
+                    error: function() {
+                        view_data();
+                    }
+                })
+            })
+
+            // Add member
+            $(document).on("click", '.add-new-member-btn', function() {
+                var id = $(this).val();
+                var url =
+                    " admin/modules/quanlythanhvien/addNewMember.php";
+                $.post(url, (data) => {
+                    $("#view-add-member").html(data);
+                });
+            })
+
+            $(document).on("click", '.close-modal', function() {
+                $("#member__add-model").remove();
+            })
+
+            $(document).on("click", '.modal__member-add-background', function() {
+                $("#member__add-model").remove();
+            })
+
+            // Remove member
+            $(document).on("click", '.remove-member', function() {
+                var id = $(this).val();
+                var url =
+                    " admin/modules/quanlythanhvien/handleEvent/handleDeleteMember.php?idmember=" +
+                    id;
+                swal({
+                        title: "Bạn có chắc muốn xóa thành viên này không?",
+                        text: "Nếu có thành viên này sẽ bị xóa đi!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            swal("thành viên đã bị xóa!", {
+                                icon: "success",
+                            });
+                            $.post(url, (data) => {
+                                view_data();
+                            });
+                        }
+                    });
+            })
+
+            // Delete all member
+            $(document).on("click", '.delete-all-member', function() {
+                var url =
+                    " admin/modules/quanlythanhvien/handleEvent/handleDeletemember.php?action=deleteAll";
+                swal({
+                        title: "Bạn có chắc muốn thực hiện thao tác không?",
+                        text: "Nếu có tất cả thành viên sẽ bị xóa đi!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            swal("Tất cả thành viên đã bị xóa!", {
+                                icon: "success",
+                            });
+                            $.post(url, (data) => {
+                                view_data();
+                            });
+                        }
+                    });
+            })
+
+            // Edit member
+            $(document).on("click", '.edit-member', function() {
+                var id = $(this).val();
+                var url =
+                    " admin/modules/quanlythanhvien/editMember.php?idmember=" +
+                    id;
+                $.post(url, (data) => {
+                    $("#view-edit-member").html(data);
+                });
+            })
+
+            $(document).on("click", '.close-modal', function() {
+                $("#member__add-model").remove();
+            })
+
+            $(document).on("click", '.modal__member-add-background', function() {
+                $("#member__add-model").remove();
+            })
+
+            // View detail member
+            $(document).on("click", '.detail-member', function() {
+                var id = $(this).val();
+                var url =
+                    " admin/modules/quanlythanhvien/viewDetailmember.php?idmember=" +
+                    id;
+                $.post(url, (data) => {
+                    $("#view-detail-member").html(data);
+                    $('.model-close-btn i').click(() => {
+                        $('.model__view-detail-container').css("display", "none");
+                    })
+                });
+            })
+
+            $(document).on("click", '.close-modal', function() {
+                $("#member__add-model").remove();
+            })
+
+            $(document).on("click", '.modal__member-add-background', function() {
+                $("#member__add-model").remove();
+            })
+
+
+
+            // Handle search
+            var pageIndexMemberSearch = 1;
+            $(document).on("keyup", '.search-bar', function() {
+                var searchInput = $(this).val();
+                if (searchInput.length > 0) {
+                    $.ajax({
+                        url: " admin/modules/quanlythanhvien/handleEvent/handleSearch.php?pageIndex=" +
+                            pageIndexMemberSearch,
+                        data: {
+                            searchInput: searchInput,
+                        },
+                        dataType: 'html',
+                        method: "post",
+                        cache: true,
+                        success: function(data) {
+                            $('#load_member_data').html(data)
+                        }
+                    })
+                } else {
+                    view_data()
                 }
             })
-        })
 
-        // Add member
-        $(document).on("click", '.add-new-member-btn', function() {
-            var id = $(this).val();
-            var url =
-                "http://localhost:3000/admin/modules/quanlythanhvien/addNewMember.php";
-            $.post(url, (data) => {
-                $("#view-add-member").html(data);
+            $(document).on("click", '.page-link.searchMember', function() {
+                pageIndexMemberSearch = $(this).attr("value");
+                var searchInput = $('.search-bar').val();
+                if (searchInput.length > 0) {
+                    $.ajax({
+                        url: " admin/modules/quanlythanhvien/handleEvent/handleSearch.php?pageIndex=" +
+                            pageIndexMemberSearch,
+                        data: {
+                            searchInput: searchInput,
+                        },
+                        dataType: 'html',
+                        method: "post",
+                        cache: true,
+                        success: function(data) {
+                            $('#load_member_data').html(data)
+                        }
+                    })
+                } else {
+                    view_data()
+                }
+            })
+
+            // Handle filter
+            $(".jsFilter").on("click", function() {
+                document.querySelector(".filter-menu-Member").classList.toggle("active");
             });
-        })
 
-        $(document).on("click", '.close-modal', function() {
-            $("#member__add-model").remove();
-        })
-
-        $(document).on("click", '.modal__member-add-background', function() {
-            $("#member__add-model").remove();
-        })
-
-        // Remove member
-        $(document).on("click", '.remove-member', function() {
-            var id = $(this).val();
-            var url =
-                "http://localhost:3000/admin/modules/quanlythanhvien/handleEvent/handleDeleteMember.php?idmember=" +
-                id;
-            swal({
-                    title: "Bạn có chắc muốn xóa thành viên này không?",
-                    text: "Nếu có thành viên này sẽ bị xóa đi!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        swal("thành viên đã bị xóa!", {
-                            icon: "success",
-                        });
-                        $.post(url, (data) => {
-                            view_data();
-                        });
-                    }
-                });
-        })
-
-        // Delete all member
-        $(document).on("click", '.delete-all-member', function() {
-            var url =
-                "http://localhost:3000/admin/modules/quanlythanhvien/handleEvent/handleDeletemember.php?action=deleteAll";
-            swal({
-                    title: "Bạn có chắc muốn thực hiện thao tác không?",
-                    text: "Nếu có tất cả thành viên sẽ bị xóa đi!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        swal("Tất cả thành viên đã bị xóa!", {
-                            icon: "success",
-                        });
-                        $.post(url, (data) => {
-                            view_data();
-                        });
-                    }
-                });
-        })
-
-        // Edit member
-        $(document).on("click", '.edit-member', function() {
-            var id = $(this).val();
-            var url =
-                "http://localhost:3000/admin/modules/quanlythanhvien/editMember.php?idmember=" +
-                id;
-            $.post(url, (data) => {
-                $("#view-edit-member").html(data);
-            });
-        })
-
-        $(document).on("click", '.close-modal', function() {
-            $("#member__add-model").remove();
-        })
-
-        $(document).on("click", '.modal__member-add-background', function() {
-            $("#member__add-model").remove();
-        })
-
-        // View detail member
-        $(document).on("click", '.detail-member', function() {
-            var id = $(this).val();
-            var url =
-                "http://localhost:3000/admin/modules/quanlythanhvien/viewDetailmember.php?idmember=" +
-                id;
-            $.post(url, (data) => {
-                $("#view-detail-member").html(data);
-                $('.model-close-btn i').click(() => {
-                    $('.model__view-detail-container').css("display", "none");
-                })
-            });
-        })
-
-        $(document).on("click", '.close-modal', function() {
-            $("#member__add-model").remove();
-        })
-
-        $(document).on("click", '.modal__member-add-background', function() {
-            $("#member__add-model").remove();
-        })
-
-
-
-        // Handle search
-        var pageIndexMemberSearch = 1;
-        $(document).on("keyup", '.search-bar', function() {
-            var searchInput = $(this).val();
-            if (searchInput.length > 0) {
+            var pageIndexMemberFilter = 1
+            $(document).on("click", '.filter-button.apply', function() {
+                var status = $('.filter_status').val();
+                var dated = $('.filter_dated').val();
                 $.ajax({
-                    url: "http://localhost:3000/admin/modules/quanlythanhvien/handleEvent/handleSearch.php?pageIndex=" +
-                        pageIndexMemberSearch,
+                    url: " admin/modules/quanlythanhvien/handleEvent/handleFilter.php?pageIndex=" +
+                        pageIndexMemberFilter,
                     data: {
-                        searchInput: searchInput,
+                        status: status,
+                        dated: dated
                     },
                     dataType: 'html',
                     method: "post",
@@ -241,20 +288,18 @@
                         $('#load_member_data').html(data)
                     }
                 })
-            } else {
-                view_data()
-            }
-        })
+            })
 
-        $(document).on("click", '.page-link.searchMember', function() {
-            pageIndexMemberSearch = $(this).attr("value");
-            var searchInput = $('.search-bar').val();
-            if (searchInput.length > 0) {
+            $(document).on("click", '.page-link.searchMember', function() {
+                pageIndexMemberFilter = $(this).attr("value");
+                var status = $('.filter_status').val();
+                var dated = $('.filter_dated').val();
                 $.ajax({
-                    url: "http://localhost:3000/admin/modules/quanlythanhvien/handleEvent/handleSearch.php?pageIndex=" +
-                        pageIndexMemberSearch,
+                    url: " admin/modules/quanlythanhvien/handleEvent/handleFilter.php?pageIndex=" +
+                        pageIndexMemberFilter,
                     data: {
-                        searchInput: searchInput,
+                        status: status,
+                        dated: dated
                     },
                     dataType: 'html',
                     method: "post",
@@ -263,61 +308,13 @@
                         $('#load_member_data').html(data)
                     }
                 })
-            } else {
-                view_data()
-            }
-        })
+            })
 
-        // Handle filter
-        $(".jsFilter").on("click", function() {
-            document.querySelector(".filter-menu-Member").classList.toggle("active");
-        });
-
-        var pageIndexMemberFilter = 1
-        $(document).on("click", '.filter-button.apply', function() {
-            var status = $('.filter_status').val();
-            var dated = $('.filter_dated').val();
-            $.ajax({
-                url: "http://localhost:3000/admin/modules/quanlythanhvien/handleEvent/handleFilter.php?pageIndex=" +
-                    pageIndexMemberFilter,
-                data: {
-                    status: status,
-                    dated: dated
-                },
-                dataType: 'html',
-                method: "post",
-                cache: true,
-                success: function(data) {
-                    $('#load_member_data').html(data)
-                }
+            $(document).on("click", '.filter-button.reset', function() {
+                $('.filter_status').val('2')
+                $('.filter_dated').val('2')
             })
         })
-
-        $(document).on("click", '.page-link.searchMember', function() {
-            pageIndexMemberFilter = $(this).attr("value");
-            var status = $('.filter_status').val();
-            var dated = $('.filter_dated').val();
-            $.ajax({
-                url: "http://localhost:3000/admin/modules/quanlythanhvien/handleEvent/handleFilter.php?pageIndex=" +
-                    pageIndexMemberFilter,
-                data: {
-                    status: status,
-                    dated: dated
-                },
-                dataType: 'html',
-                method: "post",
-                cache: true,
-                success: function(data) {
-                    $('#load_member_data').html(data)
-                }
-            })
-        })
-
-        $(document).on("click", '.filter-button.reset', function() {
-            $('.filter_status').val('2')
-            $('.filter_dated').val('2')
-        })
-    })
     </script>
 </body>
 

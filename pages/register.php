@@ -9,7 +9,7 @@
         <div class="spacer"></div>
 
         <div class="form-group col-lg-12 col-sm-12 col-md-12">
-            <label for="name" class="form-label">Tên đầy đủ</label>
+            <label for="name" class="form-label">Tên đăng nhập</label>
             <div class="form-input">
                 <input id="name" name="name" type="text" placeholder="VD: Nguyễn Văn A" class="form-control">
                 <div class="error-icon name-error"><i class="fa-solid fa-exclamation"></i></i></div>
@@ -18,7 +18,7 @@
             <span class="form-message name-error-message"></span>
         </div>
 
-        <div class="form-group col-lg-6 col-sm-12 col-md-6" style="padding-right:20px;">
+        <div class="form-group col-lg-12 col-sm-12 col-md-6" style="padding-right:20px;">
             <label for="email" class="form-label">Email</label>
             <div class="form-input">
                 <input id="email" name="email" type="email" placeholder="VD: email@domain.com" class="form-control">
@@ -26,17 +26,6 @@
                 <div class="valid-icon email-valid"><i class="fa-regular fa-circle-check"></i></div>
             </div>
             <span class="form-message email-error-message"></span>
-        </div>
-
-        <div class="form-group col-lg-6 col-sm-12 col-md-6">
-            <label for="phone-number" class="form-label">Số điện thoại</label>
-            <div class="form-input">
-                <input id="phone-number" name="phone-number" type="number" placeholder="VD: 0123456789"
-                    class="form-control">
-                <div class="error-icon phone-number-error"><i class="fa-solid fa-exclamation"></i></i></div>
-                <div class="valid-icon phone-number-valid"><i class="fa-regular fa-circle-check"></i></div>
-            </div>
-            <span class="form-message phone-number-error-message"></span>
         </div>
 
         <div class="form-group col-lg-6 col-sm-12 col-md-6" style="padding-right:20px;">
@@ -74,27 +63,16 @@ $(document).ready(() => {
         );
     };
 
-    const validatePhoneNumber = (phoneNumber) => {
-        var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
-        if (vnf_regex.test(phoneNumber) == false) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     $('#form-register-submit').click((e) => {
         e.preventDefault();
         var name = $('#name').val();
         var email = $('#email').val();
-        var phoneNumber = $('#phone-number').val();
         var password = $('#password').val();
         var passwordConfirmation = $('#password_confirmation').val();
         /** VALIDATE START **/
         let errors = {
             nameError: '',
             emailError: '',
-            phoneNumberError: '',
             passwordError: '',
             passwordConfirmationError: '',
         }
@@ -139,29 +117,6 @@ $(document).ready(() => {
             $('.email-error').css("display", "none");
             $('.email-valid').css("display", "block");
             $('.email-error-message').text('');
-        }
-
-        // Validate phone number
-        if (phoneNumber.length === 0) {
-            errors.phoneNumberError =
-                "Không được để trống số điện thoại!";
-            $('#phone-number').css("border-color", "#f33a58");
-            $('.phone-number-error').css("display", "block");
-            $('.phone-number-valid').css("display", "none");
-            $('.phone-number-error-message').text(errors.phoneNumberError);
-        } else if (validatePhoneNumber(phoneNumber) == false) {
-            errors.phoneNumberError =
-                "Số điện thoại không hợp lệ!";
-            $('#phone-number').css("border-color", "#f33a58");
-            $('.phone-number-error').css("display", "block");
-            $('.phone-number-valid').css("display", "none");
-            $('.phone-number-error-message').text(errors.phoneNumberError);
-        } else {
-            errors.phoneNumberErrorError = '';
-            $('#phone-number').css("border-color", "#008000ab");
-            $('.phone-number-error').css("display", "none");
-            $('.phone-number-valid').css("display", "block");
-            $('.phone-number-error-message').text('');
         }
 
         // Validate password
@@ -216,14 +171,13 @@ $(document).ready(() => {
         /** VALIDATE END **/
 
         /** SEND DATA **/
-        if (errors.nameError == '' && errors.emailError == '' && errors.phoneNumberError == '' && errors
+        if (errors.nameError == '' && errors.emailError == '' && errors
             .passwordError == '' && errors.passwordConfirmation == '') {
             $.ajax({
-                url: "http://localhost:3000/pages/handleEvent/handleRegister.php",
+                url: " pages/handleEvent/handleRegister.php",
                 data: {
                     name: name,
                     email: email,
-                    phoneNumber: phoneNumber,
                     password: password,
                 },
                 dataType: 'json',
@@ -236,19 +190,16 @@ $(document).ready(() => {
                             "error");
                         $('#name').val('')
                         $('#email').val('')
-                        $('#phone-number').val('')
                         $('#password').val('')
                         $('#password_confirmation').val('')
 
                         $('#name').css("border-color", "gray");
                         $('#email').css("border-color", "gray");
-                        $('#phone-number').css("border-color", "gray");
                         $('#password').css("border-color", "gray");
                         $('#password_confirmation').css("border-color", "gray");
 
                         $('.name-valid').css("display", "none");
                         $('.email-valid').css("display", "none");
-                        $('.phone-number-valid').css("display", "none");
                         $('.password-valid').css("display", "none");
                         $('.password_confirmation-valid').css("display", "none");
                     } else if (data.existEmail == 0) {

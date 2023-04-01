@@ -7,7 +7,7 @@ function checkPrivilege()
     );
 
     $privileges = implode("|", $privileges);
-    preg_match('/' . $privileges . '/', 'http://localhost:3000/admin/modules/quanlydanhmucsp/categoryListing.php', $matches);
+    preg_match('/' . $privileges . '/', ' admin/modules/quanlydanhmucsp/categoryListing.php', $matches);
     return !empty($matches);
 }
 

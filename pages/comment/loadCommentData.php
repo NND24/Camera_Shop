@@ -1,11 +1,8 @@
 <?php
 session_start();
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
-$idsanpham = $_GET['idsanpham'];
-$sql_user = "SELECT * FROM tbl_user WHERE id_user='$_SESSION[id_user]' LIMIT 1 ";
-$query_user = mysqli_query($mysqli, $sql_user);
-$row_user = mysqli_fetch_array($query_user);
 
+$idsanpham = $_GET['idsanpham'];
 $sql_comment = "SELECT * FROM tbl_comments, tbl_user WHERE tbl_comments.id_user=tbl_user.id_user AND tbl_comments.id_sanpham=$idsanpham LIMIT 10 ";
 $query_comment = mysqli_query($mysqli, $sql_comment);
 if (mysqli_num_rows($query_comment) > 0) {
@@ -42,9 +39,16 @@ if (mysqli_num_rows($query_comment) > 0) {
             </div>
             <div class="comment__footer">
                 <div class="comment__space"></div>
-                <?php if ($row_user['privilege'] == 1) { ?>
-                    <button class="comment__footer-answer" value="<?php echo $row_comment['id_comment'] ?>">Trả lời</button> &#8226;
-                <?php } ?>
+                <?php
+                if (isset($_SESSION['id_user'])) {
+                    $sql_user = "SELECT * FROM tbl_user WHERE id_user='$_SESSION[id_user]' LIMIT 1 ";
+                    $query_user = mysqli_query($mysqli, $sql_user);
+                    $row_user = mysqli_fetch_array($query_user);
+                    if ($row_user['privilege'] == 1) {
+                ?>
+                        <button class="comment__footer-answer" value="<?php echo $row_comment['id_comment'] ?>">Trả lời</button> &#8226;
+                <?php }
+                } ?>
                 <div class="comment__footer-date"><?php date_default_timezone_set('Asia/Ho_Chi_Minh');
                                                     echo date('d/m/Y', $row_comment['comment_date']) ?></div>
             </div>

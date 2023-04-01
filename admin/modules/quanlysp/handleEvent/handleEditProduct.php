@@ -13,10 +13,10 @@ $query_product_name = mysqli_query($mysqli, $sql_product_name);
 
 if ($row_product['tensanpham'] == $_POST['tensanpham']) {
     $tensanpham = $_POST['tensanpham'];
-    $giasp = $_POST['giasp'];
+    $giasp = round($_POST['giasp'], -3);
     $soluong = $_POST['soluong'];
     $giamgia = $_POST['giamgia'];
-    $giadagiam = $_POST['giasp'] - ($_POST['giasp'] * $_POST['giamgia']) / 100;
+    $giadagiam = $giasp - ($giasp * $_POST['giamgia']) / 100;
     $trangthai = $_POST['trangthai'];
     $tomtat = $_POST['tomtat'];
     $noidung = $_POST['noidung'];
@@ -56,7 +56,7 @@ if ($row_product['tensanpham'] == $_POST['tensanpham']) {
     }
     // Sua
     $sql_update = "UPDATE `tbl_sanpham` SET `tensanpham`='$tensanpham',`giasp`='$giasp',`soluong`='$soluong',`hinhanh`='$image',
-    `giamgia`='$giamgia',`giadagiam`='$giadagiam',`trangthaisp`='$trangthai',`tomtat`='$tomtat',`noidung`='$noidung',`id_danhmuc`='$danhmuc',`last_updated`='$last_updated' WHERE id_sanpham='$id'";
+    `giamgia`='$giamgia',`giadagiam`='round($giadagiam, -3)',`trangthaisp`='$trangthai',`tomtat`='$tomtat',`noidung`='$noidung',`id_danhmuc`='$danhmuc',`last_updated`='$last_updated' WHERE id_sanpham='$id'";
     $query_update = mysqli_query($mysqli, $sql_update);
 } else {
     if (mysqli_num_rows($query_product_name) > 0) {
@@ -64,10 +64,10 @@ if ($row_product['tensanpham'] == $_POST['tensanpham']) {
         echo json_encode($a);
     } else {
         $tensanpham = $_POST['tensanpham'];
-        $giasp = $_POST['giasp'];
+        $giasp = round($_POST['giasp'], -3);
         $soluong = $_POST['soluong'];
         $giamgia = $_POST['giamgia'];
-        $giadagiam = $_POST['giasp'] - ($_POST['giasp'] * $_POST['giamgia']) / 100;
+        $giadagiam = $giasp - ($giasp * $_POST['giamgia']) / 100;
         $trangthai = $_POST['trangthai'];
         $tomtat = $_POST['tomtat'];
         $noidung = $_POST['noidung'];
@@ -107,7 +107,7 @@ if ($row_product['tensanpham'] == $_POST['tensanpham']) {
         }
         // Sua
         $sql_update = "UPDATE `tbl_sanpham` SET `tensanpham`='$tensanpham',`giasp`='$giasp',`soluong`='$soluong',`hinhanh`='$image',
-        `giamgia`='$giamgia',`giadagiam`='$giadagiam',`trangthaisp`='$trangthai',`tomtat`='$tomtat',`noidung`='$noidung',`id_danhmuc`='$danhmuc',`last_updated`='$last_updated' WHERE id_sanpham='$id'";
+        `giamgia`='$giamgia',`giadagiam`='round($giadagiam, -3)',`trangthaisp`='$trangthai',`tomtat`='$tomtat',`noidung`='$noidung',`id_danhmuc`='$danhmuc',`last_updated`='$last_updated' WHERE id_sanpham='$id'";
         $query_update = mysqli_query($mysqli, $sql_update);
     }
 }

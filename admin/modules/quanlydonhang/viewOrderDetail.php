@@ -80,94 +80,93 @@
                         $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
                         $row_danhmuc = mysqli_fetch_array($query_danhmuc)
                     ?>
-                    <div class="row no-wrap border-bottom">
-                        <div class="row  no-wrap order align-items-center justify-content-between order__wrapper">
+                        <div class="row no-wrap border-bottom">
+                            <div class="row  no-wrap order align-items-center justify-content-between order__wrapper">
 
-                            <div class="col-lg-1 col-md-1 col-sm-2 col-2 order__img-product">
-                                <img class="img-fluid"
-                                    src="./modules/quanlysp/handleEvent/uploads/<?php echo $row_cart_detail['hinhanh'] ?>">
-                            </div>
-
-                            <div class="col-lg-6 col-md-6 col-sm-5 col-4 ">
-                                <div class="row text-muted order__name-category category__product-btn">
-                                    <?php echo $row_danhmuc['ten_danhmuc'] ?>
+                                <div class="col-lg-1 col-md-1 col-sm-2 col-2 order__img-product">
+                                    <img class="img-fluid" src="./modules/quanlysp/handleEvent/uploads/<?php echo $row_cart_detail['hinhanh'] ?>">
                                 </div>
-                                <div class="row order__name-product">
-                                    <?php echo $row_cart_detail['tensanpham'] ?>
-                                </div>
-                            </div>
 
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-3 justify-content-center order__price">
-                                <?php echo number_format($row_cart_detail['giasp'], 0, ',', '.') ?>đ
-                            </div>
-
-                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 order__price">
-                                <div class="quantity-wrapper">
-                                    <span><?php echo $row_cart_detail['soluongmua'] ?></span>
+                                <div class="col-lg-6 col-md-6 col-sm-5 col-4 ">
+                                    <div class="row text-muted order__name-category category__product-btn">
+                                        <?php echo $row_danhmuc['ten_danhmuc'] ?>
+                                    </div>
+                                    <div class="row order__name-product">
+                                        <?php echo $row_cart_detail['tensanpham'] ?>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-2 d-flex justify-content-end order__price">
-                                <?php echo number_format($thanhtien, 0, ',', '.')  ?>đ
+
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-3 justify-content-center order__price">
+                                    <?php echo number_format($row_cart_detail['giasp'], 0, ',', '.') ?>đ
+                                </div>
+
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-1 order__price">
+                                    <div class="quantity-wrapper">
+                                        <span><?php echo $row_cart_detail['soluongmua'] ?></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-2 d-flex justify-content-end order__price">
+                                    <?php echo number_format($thanhtien, 0, ',', '.')  ?>đ
+                                </div>
                             </div>
                         </div>
-                    </div>
                     <?php } ?>
                 </div>
                 <?php
                 if ($row_cart['cart_status'] == 0) {
                 ?>
-                <button id="duyetdonhang">Duyệt đơn hàng</button>
+                    <button id="duyetdonhang">Duyệt đơn hàng</button>
                 <?php } else { ?>
-                <button id="huydonhang">Hủy đơn hàng</button>
+                    <button id="huydonhang">Hủy đơn hàng</button>
                 <?php } ?>
             </div>
         </form>
         <div class="modal__background"></div>
     </div>
     <script>
-    $(document).ready(() => {
+        $(document).ready(() => {
 
-        $(document).on("click", '#duyetdonhang', function(e) {
-            var pageIndexOrderMain = 1
-            // View data
-            function view_data() {
-                $.post('http://localhost:3000/admin/modules/quanlydonhang/handleEvent/listOrderData.php?pageIndex=' +
-                    pageIndexOrderMain,
-                    function(data) {
-                        $('#load_order_data').html(data)
+            $(document).on("click", '#duyetdonhang', function(e) {
+                var pageIndexOrderMain = 1
+                // View data
+                function view_data() {
+                    $.post(' admin/modules/quanlydonhang/handleEvent/listOrderData.php?pageIndex=' +
+                        pageIndexOrderMain,
+                        function(data) {
+                            $('#load_order_data').html(data)
+                        })
+                }
+                view_data();
+
+                e.preventDefault();
+                $.post(' admin/modules/quanlydonhang/handleEvent/browseOrder.php?id_cart=' +
+                    <?php echo $_GET['id_cart'] ?> + '&action=duyet',
+                    function() {
+                        swal("OK!", "Duyệt thành công", "success");
+                        view_data();
                     })
-            }
-            view_data();
+            })
 
-            e.preventDefault();
-            $.post('http://localhost:3000/admin/modules/quanlydonhang/handleEvent/browseOrder.php?id_cart=' +
-                <?php echo $_GET['id_cart'] ?> + '&action=duyet',
-                function() {
-                    swal("OK!", "Duyệt thành công", "success");
-                    view_data();
-                })
-        })
+            $(document).on("click", '#huydonhang', function(e) {
+                var pageIndexOrderMain = 1
+                // View data
+                function view_data() {
+                    $.post(' admin/modules/quanlydonhang/handleEvent/listOrderData.php?pageIndex=' +
+                        pageIndexOrderMain,
+                        function(data) {
+                            $('#load_order_data').html(data)
+                        })
+                }
+                view_data();
 
-        $(document).on("click", '#huydonhang', function(e) {
-            var pageIndexOrderMain = 1
-            // View data
-            function view_data() {
-                $.post('http://localhost:3000/admin/modules/quanlydonhang/handleEvent/listOrderData.php?pageIndex=' +
-                    pageIndexOrderMain,
-                    function(data) {
-                        $('#load_order_data').html(data)
+                e.preventDefault();
+                $.post(' admin/modules/quanlydonhang/handleEvent/browseOrder.php?id_cart=' +
+                    <?php echo $_GET['id_cart'] ?> + '&query=huy',
+                    function() {
+                        swal("OK!", "Hủy thành công", "success");
+                        view_data();
                     })
-            }
-            view_data();
-
-            e.preventDefault();
-            $.post('http://localhost:3000/admin/modules/quanlydonhang/handleEvent/browseOrder.php?id_cart=' +
-                <?php echo $_GET['id_cart'] ?> + '&query=huy',
-                function() {
-                    swal("OK!", "Hủy thành công", "success");
-                    view_data();
-                })
+            })
         })
-    })
     </script>
 </div>

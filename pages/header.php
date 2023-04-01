@@ -38,9 +38,10 @@ include('./js/link.php');
                                 <?php
                                 while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
                                 ?>
-                                    <li>
-                                        <button class="category__product-btn" value="<?php echo $row_danhmuc['id_danhmuc'] ?>"><?php echo $row_danhmuc['ten_danhmuc'] ?></button>
-                                    </li>
+                                <li>
+                                    <button class="category__product-btn"
+                                        value="<?php echo $row_danhmuc['id_danhmuc'] ?>"><?php echo $row_danhmuc['ten_danhmuc'] ?></button>
+                                </li>
                                 <?php
                                 }
                                 ?>
@@ -59,7 +60,8 @@ include('./js/link.php');
                                 <div class="header_search_form">
                                     <input type="search" class="header_search_input" placeholder="Tìm camera...">
                                     <button class="header_search_button">
-                                        <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918770/search.png">
+                                        <img
+                                            src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918770/search.png">
                                     </button>
                                 </div>
                             </div>
@@ -77,30 +79,29 @@ include('./js/link.php');
                                 <i class="fa-solid fa-cart-shopping"></i>
                                 <?php
                                 $sosp = 0;
-                                if (isset($_SESSION['cart']) && isset($_SESSION['id_user'])) {
-                                    foreach ($_SESSION['cart'] as $cart_item) {
-                                        if ($cart_item['idUser'] == $_SESSION['id_user']) {
-                                            $sosp += $cart_item['soluong'];
-                                        }
+                                if (isset($_SESSION['id_user'])) {
+                                    $sql_cart = "SELECT * FROM tbl_cart WHERE id_user='$_SESSION[id_user]'";
+                                    $query_cart = mysqli_query($mysqli, $sql_cart);
+                                    while ($row_cart = mysqli_fetch_array($query_cart)) {
+                                        $sosp += $row_cart['amount'];
                                     }
                                 }
                                 if ($sosp > 0) {
                                 ?>
-                                    <div class="cart_count"><span><?php echo $sosp ?></span></div>
+                                <div class="cart_count"><span><?php echo $sosp ?></span></div>
                                 <?php } else { ?>
-                                    <div class="cart_count"><span>0</span></div>
+                                <div class="cart_count"><span>0</span></div>
                                 <?php } ?>
                             </a>
                         </div>
 
                         <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                             <div class="user__option">
-                                <?php if (isset($_SESSION['login'])) { ?>
-
-                                    <i class="fa-solid fa-user roi"></i>
-                                    <div id="load-user-modal"></div>
+                                <?php if (isset($_SESSION['id_user'])) { ?>
+                                <i class="fa-solid fa-user roi"></i>
+                                <div id="load-user-modal"></div>
                                 <?php } else { ?>
-                                    <i class="fa-solid fa-user chua"></i>
+                                <i class="fa-solid fa-user chua"></i>
                                 <?php } ?>
                             </div>
                         </div>
@@ -124,13 +125,14 @@ include('./js/link.php');
             <span>Danh mục sản phẩm</span>
             <ul>
                 <?php
-                $sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc ASC LIMIT 9";
+                $sql_danhmuc = "SELECT * FROM tbl_danhmuc WHERE category_status=1 ORDER BY id_danhmuc ASC LIMIT 9";
                 $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
                 while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
                 ?>
-                    <li>
-                        <button class="category__product-btn" value="<?php echo $row_danhmuc['id_danhmuc'] ?>"><?php echo $row_danhmuc['ten_danhmuc'] ?></button>
-                    </li>
+                <li>
+                    <button class="category__product-btn"
+                        value="<?php echo $row_danhmuc['id_danhmuc'] ?>"><?php echo $row_danhmuc['ten_danhmuc'] ?></button>
+                </li>
                 <?php
                 }
                 ?>
@@ -150,192 +152,230 @@ include('./js/link.php');
 
 <div id="view__login"></div>
 <script>
-    $(document).ready(() => {
-        $(window).on("load", () => {
-            $('.loader-wrapper').fadeOut()
-        })
+$(document).ready(() => {
+    $(window).on("load", () => {
+        $('.loader-wrapper').fadeOut()
+    })
 
-        $(document).on("click", '.standard_dropdown li', function() {
-            $(".standard_dropdown li > ul").css("display", "block");
-            $(".menu-background").css("display", "block");
-        })
+    $(document).on("click", '.standard_dropdown li', function() {
+        $(".standard_dropdown li > ul").css("display", "block");
+        $(".menu-background").css("display", "block");
+    })
 
-        $(document).on("click", '.menu-background', function() {
-            console.log('dasd')
-            $(".standard_dropdown li > ul").css("display", "none");
-            $(".menu-background").css("display", "none");
-        })
+    $(document).on("click", '.menu-background', function() {
+        console.log('dasd')
+        $(".standard_dropdown li > ul").css("display", "none");
+        $(".menu-background").css("display", "none");
+    })
 
-        $(document).on("click", '.header_open-menu', function() {
-            $(".main__menu").css("display", "block");
-        })
+    $(document).on("click", '.header_open-menu', function() {
+        $(".main__menu").css("display", "block");
+    })
 
-        $(document).on("click", '.main__menu-close', function() {
-            $(".main__menu").css("display", "none");
-        })
+    $(document).on("click", '.main__menu-close', function() {
+        $(".main__menu").css("display", "none");
+    })
 
-        $(document).on("click", '.main__menu-background', function() {
-            $(".main__menu").css("display", "none");
-        })
+    $(document).on("click", '.main__menu-background', function() {
+        $(".main__menu").css("display", "none");
+    })
 
-        $(document).on("click", '.category__product-btn', function() {
-            var id = $(this).val();
-            var url = "shopPage.php?id=" + id;
-            window.history.pushState("new", "title", url);
-            $(".container").load("shopPage.php?id=" + id);
-            $(window).scrollTop(0);
-            window.location.reload();
-        })
+    $(document).on("click", '.category__product-btn', function() {
+        var id = $(this).attr('value');
+        var url = "shopPage.php?id=" + id;
+        window.history.pushState("new", "title", url);
+        $(".container").load("shopPage.php?id=" + id);
+        $(window).scrollTop(0);
+        window.location.reload();
+    })
 
-        $(document).on("click", '.logo a', function() {
-            var url = "home.php";
-            window.history.pushState("new", "title", url);
-            $(".container").load("http://localhost:3000/home.php");
-            $(window).scrollTop(0);
-        })
+    $(document).on("click", '.logo a', function() {
+        var url = "home.php";
+        window.history.pushState("new", "title", url);
+        $(".container").load("home.php");
+        window.location.reload();
+        $(window).scrollTop(0);
+    })
 
-        $(document).on("click", '.user__option i.chua', function() {
-            $("#view__login").load("pages/login.php");
-        })
+    $(document).on("click", '.user__option i.chua', function() {
+        $("#view__login").load("pages/login.php");
+    })
 
-        $(document).on("click", '.user__option i.roi', function() {
-            $("#load-user-modal").load("pages/userOptionModal.php");
-        })
+    $(document).on("click", '.user__option i.roi', function() {
+        $("#load-user-modal").load("pages/userOptionModal.php");
+    })
 
-        $(document).on("click", '.user-modal-background', function() {
-            $(".user-modal-wrapper").remove()
-        })
-
-
-        $(document).on("click", '.register-btn', function() {
-            $("#view__login").load("pages/register.php");
-        })
-
-        $(document).on("click", '.login-btn', function() {
-            $("#view__login").load("pages/login.php");
-        })
-
-        $(document).on("click", '.logout', function() {
-            $.post('http://localhost:3000/pages/handleEvent/handleLogin.php?logout=' + 1, (data) => {
-                setTimeout(function() {
-                    window.location.reload();
-                }, 1000);
-            });
-
-        })
-
-        $(document).on("click", '.modal-background', function() {
-            $(".wrapper").remove();
-        })
-
-        $(document).on("click", '.close-login-modal', function() {
-            $(".wrapper").remove();
-        })
-
-        $(document).on("click", '.close-register-modal', function() {
-            $(".wrapper").remove();
-        })
-
-        $(document).on("click", '.scroll-to-bottom ', function() {
-            var height = $(document).height();
-            console.log(height)
-            height = height - 1070;
-            console.log(height)
-            $(window).scrollTop(height);
-            $('.scroll-to-bottom ').css("display", "none");
-            $('.scroll-to-top').css("display", "block");
-        })
-
-        $(document).on("click", '.scroll-to-top ', function() {
-            $(window).scrollTop(0);
-            $('.scroll-to-bottom ').css("display", "block");
-            $('.scroll-to-top ').css("display", "none");
-        })
-
-        window.onpopstate = function() {
-            window.location.reload();
-            $(window).scrollTop(0);
-        };
-
-        // Search
-        $(document).on("click", '.header_search_button ', function() {
-            var searchInput = $('.header_search_input').val();
-            $.ajax({
-                url: "http://localhost:3000/search.php",
-                data: {
-                    searchInput: searchInput,
-                },
-                dataType: 'html',
-                method: "post",
-                cache: true,
-                success: function(data) {
-                    let searchInputModified = searchInput.replace(/\s+/g, '-');
-                    var url = "search.php?tukhoa=" + searchInputModified;
-                    window.history.pushState("new", "title", url);
-                    $(".container").load("search.php?tukhoa=" + searchInputModified);
-                    $(window).scrollTop(0);
-                },
-            })
-        })
+    $(document).on("click", '.user-modal-background', function() {
+        $(".user-modal-wrapper").remove()
+    })
 
 
-        // Add to cart
-        var sosp = <?php echo $sosp ?>;
-        $(document).on("click", '.add-to-cart-btn', function() {
-            var productID = $(this).val();
-            sosp++;
-            $('.cart_count span').html(sosp)
-            $.ajax({
-                url: "http://localhost:3000/pages/Cart/handleAddToCart.php",
-                data: {
-                    id_sanpham: productID,
-                },
-                dataType: 'json',
-                method: "post",
-                cache: true,
-                success: function(data) {
+    $(document).on("click", '.register-btn', function() {
+        $("#view__login").load("pages/register.php");
+    })
 
-                },
-            })
-        })
+    $(document).on("click", '.login-btn', function() {
+        $("#view__login").load("pages/login.php");
+    })
 
-        $(document).on("click", '.add-to-cart-btn-not-login', function() {
-            swal("Bạn cần đăng nhập để thêm giỏ hàng",
-                "Vui lòng đăng nhập hoặc đăng ký tài khoản!",
-                "error");
-        })
-
-        $(document).on("click", '.add-to-cart-button', function() {
-            var productID = $(this).val();
-            sosp++;
-            $('.cart_count span').html(sosp)
-            $.ajax({
-                url: "http://localhost:3000/pages/Cart/handleAddToCart.php",
-                data: {
-                    id_sanpham: productID,
-                },
-                dataType: 'json',
-                method: "post",
-                cache: true,
-                success: function(data) {
-
-                },
-            })
-        })
-
-        $(document).on("click", '.add-to-cart-button-not-login', function() {
-            swal("Bạn cần đăng nhập để thêm giỏ hàng",
-                "Vui lòng đăng nhập hoặc đăng ký tài khoản!",
-                "error");
-        })
-
-        $(document).on("click", '.cart_icon', function() {
-            var url = "cart.php";
-            window.history.pushState("new", "title", url);
-            $(".container").load("cart.php");
-            window.location.reload();
-            $(window).scrollTop(0);
-        })
+    $(document).on("click", '.logout', function() {
+        $.post('pages/handleEvent/handleLogin.php?logout=' + 1, (data) => {
+            setTimeout(function() {
+                var url = "home.php";
+                window.history.pushState("new", "title", url);
+                $(".container").load("home.php");
+                window.location.reload();
+                $(window).scrollTop(0);
+            }, 1000);
+        });
 
     })
+
+    $(document).on("click", '.profile', function() {
+        var url = "profile.php";
+        window.history.pushState("new", "title", url);
+        $(".container").load("profile.php");
+        window.location.reload();
+        $(window).scrollTop(0);
+    })
+
+    $(document).on("click", '.modal-background', function() {
+        $(".wrapper").remove();
+    })
+
+    $(document).on("click", '.close-login-modal', function() {
+        $(".wrapper").remove();
+    })
+
+    $(document).on("click", '.close-register-modal', function() {
+        $(".wrapper").remove();
+    })
+
+    $(document).on("click", '.scroll-to-bottom ', function() {
+        var height = $(document).height();
+        console.log(height)
+        height = height - 1070;
+        console.log(height)
+        $(window).scrollTop(height);
+        $('.scroll-to-bottom ').css("display", "none");
+        $('.scroll-to-top').css("display", "block");
+    })
+
+    $(document).on("click", '.scroll-to-top ', function() {
+        $(window).scrollTop(0);
+        $('.scroll-to-bottom ').css("display", "block");
+        $('.scroll-to-top ').css("display", "none");
+    })
+
+    window.onpopstate = function() {
+        window.location.reload();
+        $(window).scrollTop(0);
+    };
+
+    // Search
+    $(document).on("click", '.header_search_button ', function() {
+        var searchInput = $('.header_search_input').val();
+        $.ajax({
+            url: "search.php",
+            data: {
+                searchInput: searchInput,
+            },
+            dataType: 'html',
+            method: "post",
+            cache: true,
+            success: function(data) {
+                let searchInputModified = searchInput.replace(/\s+/g, '-');
+                var url = "search.php?tukhoa=" + searchInputModified;
+                window.history.pushState("new", "title", url);
+                $(".container").load("search.php?tukhoa=" + searchInputModified);
+                $(window).scrollTop(0);
+            },
+        })
+    })
+
+    /* HANDLE CART START */
+    view_data()
+
+    function view_data() {
+        $.ajax({
+            url: "pages/Cart/handleCartData.php",
+            dataType: 'json',
+            method: "post",
+            cache: true,
+            success: function(data) {
+                $('.cart_count span').html(data.sosp);
+            },
+            error: function(data) {
+                $('.cart_count span').html(data.sosp);
+            }
+        })
+    }
+    // Add to cart
+    $(document).on("click", '.add-to-cart-btn', function(e) {
+        e.preventDefault()
+        var productID = $(this).val();
+        $.ajax({
+            url: "pages/Cart/handleAddToCart.php",
+            data: {
+                id_sanpham: productID,
+            },
+            dataType: 'json',
+            method: "post",
+            cache: true,
+            success: function(data) {
+                if (data.hethang == 1) {
+                    swal("Sản phẩm đã hết hàng",
+                        "Vui lòng chọn mua sản phẩm khác!",
+                        "error");
+                }
+                view_data()
+            },
+            error: function(data) {
+                view_data()
+            },
+        })
+    })
+
+    $(document).on("click", '.add-to-cart-btn-not-login', function() {
+        swal("Bạn cần đăng nhập để thêm giỏ hàng",
+            "Vui lòng đăng nhập hoặc đăng ký tài khoản!",
+            "error");
+    })
+
+    $(document).on("click", '.add-to-cart-button', function(e) {
+        e.preventDefault();
+        var productID = $(this).val();
+        $.ajax({
+            url: "pages/Cart/handleAddToCart.php",
+            data: {
+                id_sanpham: productID,
+            },
+            dataType: 'json',
+            method: "post",
+            cache: true,
+            success: function(data) {
+
+            },
+            error: function(data) {
+                view_data()
+            },
+        })
+    })
+
+    $(document).on("click", '.add-to-cart-button-not-login', function() {
+        swal("Bạn cần đăng nhập để thêm giỏ hàng",
+            "Vui lòng đăng nhập hoặc đăng ký tài khoản!",
+            "error");
+    })
+
+    // Open cart page
+    $(document).on("click", '.cart_icon', function() {
+        var url = "cart.php";
+        window.history.pushState("new", "title", url);
+        $(".container").load("cart.php");
+        window.location.reload();
+        $(window).scrollTop(0);
+    })
+    /* HANDLE CART START */
+})
 </script>

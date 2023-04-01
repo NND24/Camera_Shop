@@ -3,12 +3,12 @@ session_start();
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
 
 $tensanpham = $_POST['tensanpham'];
-$giasp = $_POST['giasp'];
+$giasp = round($_POST['giasp'], -3);
 $soluong = $_POST['soluong'];
 $filename = $_FILES['file']['name'];
 $image = time() . '_' . $filename;
 $giamgia = $_POST['giamgia'];
-$giadagiam = $_POST['giasp'] - ($_POST['giasp'] * $_POST['giamgia']) / 100;
+$giadagiam = $giasp - ($giasp * $_POST['giamgia']) / 100;
 $tomtat = $_POST['tomtat'];
 $noidung = $_POST['noidung'];
 $trangthai = $_POST['trangthai'];
@@ -45,7 +45,7 @@ if (mysqli_num_rows($query_product_name) > 0) {
     echo json_encode($b);
     $sql_them = "INSERT INTO tbl_sanpham(tensanpham, giasp, soluong, hinhanh, giamgia,giadagiam, tomtat,
  noidung, trangthaisp, id_danhmuc, created_time, last_updated) 
-VALUE('" . $tensanpham . "','" . $giasp . "','" . $soluong . "','" . $image . "','" . $giamgia . "','" . $giadagiam . "','" . $tomtat . "','" . $noidung . "',
+VALUE('" . $tensanpham . "','" . $giasp . "','" . $soluong . "','" . $image . "','" . $giamgia . "','" . round($giadagiam, -3)  . "','" . $tomtat . "','" . $noidung . "',
 '" . $trangthai . "','" . $danhmuc . "','" . time() . "','" . time() . "')";
     mysqli_query($mysqli, $sql_them);
 }
