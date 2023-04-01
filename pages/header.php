@@ -163,7 +163,6 @@ $(document).ready(() => {
     })
 
     $(document).on("click", '.menu-background', function() {
-        console.log('dasd')
         $(".standard_dropdown li > ul").css("display", "none");
         $(".menu-background").css("display", "none");
     })
@@ -253,9 +252,7 @@ $(document).ready(() => {
 
     $(document).on("click", '.scroll-to-bottom ', function() {
         var height = $(document).height();
-        console.log(height)
         height = height - 1070;
-        console.log(height)
         $(window).scrollTop(height);
         $('.scroll-to-bottom ').css("display", "none");
         $('.scroll-to-top').css("display", "block");
@@ -342,9 +339,15 @@ $(document).ready(() => {
             "error");
     })
 
+    $(document).on("click", '.buy_now-not-login', function() {
+        swal("Bạn cần đăng nhập để thêm giỏ hàng",
+            "Vui lòng đăng nhập hoặc đăng ký tài khoản!",
+            "error");
+    })
+
     $(document).on("click", '.add-to-cart-button', function(e) {
         e.preventDefault();
-        var productID = $(this).val();
+        var productID = $(this).attr("value");
         $.ajax({
             url: "pages/Cart/handleAddToCart.php",
             data: {
@@ -352,14 +355,13 @@ $(document).ready(() => {
             },
             dataType: 'json',
             method: "post",
-            cache: true,
-            success: function(data) {
-
-            },
-            error: function(data) {
-                view_data()
-            },
+            cache: true
         })
+        var url = "cart.php";
+        window.history.pushState("new", "title", url);
+        $(".container").load("cart.php");
+        window.location.reload();
+        $(window).scrollTop(0);
     })
 
     $(document).on("click", '.add-to-cart-button-not-login', function() {

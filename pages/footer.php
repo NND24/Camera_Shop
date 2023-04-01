@@ -1,7 +1,7 @@
 <footer class="footer">
     <div class="mid_footer">
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                 <div class="widget_ft">
                     <h4 class="title_menu"><span>GIỚI THIỆU</span></h4>
                     <p>
@@ -11,7 +11,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                 <div class="widget_ft">
                     <h4 class="title_menu"><span>ĐỊA CHỈ LIÊN HỆ</span></h4>
                     <div class="contact_footer">
@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                 <div class="widget_ft">
                     <h4 class="title_menu"><span>KẾT NỐI VỚI CHÚNG TÔI</span></h4>
                     <div class="facebook_page">

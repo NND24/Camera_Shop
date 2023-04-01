@@ -194,17 +194,25 @@
                             </div>
                             <?php } else { ?>
                             <div class="cart">
-                                <button class="add-to-cart-button-not-login"
-                                    value="<?php echo $row_chitiet['id_sanpham'] ?>">THÊM
+                                <button class="add-to-cart-button-not-login">THÊM
                                     VÀO GIỎ
                                     HÀNG</button>
                             </div>
                             <?php } ?>
 
-                            <a class="buy_now">
+                            <?php if (isset($_SESSION['id_user'])) { ?>
+                            <a class="buy_now add-to-cart-button" value="<?php echo $row_chitiet['id_sanpham'] ?>">
+                                <strong>MUA NGAY</strong>
+
+                                <span>Gọi điện xác nhận và giao hàng tận nơi</span>
+                            </a>
+                            <?php } else { ?>
+                            <a class="buy_now-not-login">
                                 <strong>MUA NGAY</strong>
                                 <span>Gọi điện xác nhận và giao hàng tận nơi</span>
                             </a>
+                            <?php } ?>
+
 
                             <div class="social_icon">
                                 <i class="fa-brands fa-facebook-f"></i>
@@ -769,7 +777,6 @@
         // Back to shop page
         $(document).on("click", '.view__category', function() {
             var id = $(this).attr("value");
-            console.log(id)
             var url = "shopPage.php?id=" + id;
             window.history.pushState("new", "title", url);
             $(".container").load("shopPage.php?id=" + id);
@@ -1020,20 +1027,40 @@
         })
 
         $(document).on("click", '.review__answer-btn', function() {
-            var reviewContent = $('#review').val()
+            var answerContent = $('.answer-review').val()
             $.ajax({
-                url: " pages/review/handleanswerReview.php",
+                url: " pages/review/handleAnswerReview.php",
                 data: {
-                    idReview: reviewId,
-                    starCount: starCount,
-                    reviewContent: reviewContent,
+                    answerContent: answerContent,
+                    reviewId: reviewId
                 },
                 dataType: 'json',
                 method: "post",
                 cache: true,
                 success: function(data) {
                     view_review_data()
-                    starCount = 0
+                },
+                error: function() {
+                    view_review_data()
+                }
+            })
+        })
+
+        // Delete answer review
+        $(document).on("click", '.answer-review-delete-btn', function() {
+            var idReview = $(this).val()
+
+            $.ajax({
+                url: " pages/review/handleDeleteAnswerReiview.php",
+                data: {
+                    idReview: idReview,
+                },
+                dataType: 'json',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    swal("OK!", "Xóa đánh giá thành công", "success");
+                    view_review_data()
                 },
                 error: function() {
                     view_review_data()
@@ -1159,6 +1186,57 @@
                     }
                 })
             }
+        })
+
+        // Answer comment
+        var commentId;
+        $(document).on("click", '.comment__footer-answer', function() {
+            commentId = $(this).val()
+            var id = <?php echo $_GET['id'] ?>;
+            $(".load__comment-modal").load("pages/comment/answerCommentModal.php?id=" + id +
+                '&idcomment=' + commentId);
+        })
+
+        $(document).on("click", '.comment__answer-btn', function() {
+            var answerContent = $('.answer-comment').val()
+            $.ajax({
+                url: " pages/comment/handleAnswerComment.php",
+                data: {
+                    answerContent: answerContent,
+                    commentId: commentId
+                },
+                dataType: 'json',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    view_comment_data()
+                },
+                error: function() {
+                    view_comment_data()
+                }
+            })
+        })
+
+        // Delete answer comment
+        $(document).on("click", '.answer-comment-delete-btn', function() {
+            var idComment = $(this).val()
+
+            $.ajax({
+                url: " pages/comment/handleDeleteAnswerComment.php",
+                data: {
+                    idComment: idComment,
+                },
+                dataType: 'json',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    swal("OK!", "Xóa đánh giá thành công", "success");
+                    view_comment_data()
+                },
+                error: function() {
+                    view_comment_data()
+                }
+            })
         })
 
         $(document).on("click", '#content', function() {

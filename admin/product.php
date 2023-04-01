@@ -31,7 +31,10 @@ ORDER BY id_sanpham DESC";
                     <input class="search-bar" placeholder="Search..." type="text">
                     <div class="app-content-actions-wrapper">
                         <div class="filter-button-wrapper">
-                            <button class="action-button filter jsFilter"><span>Filter</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter">
+                            <button class="action-button filter jsFilter"><span>Filter</span><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-filter">
                                     <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
                                 </svg></button>
                             <div class="filter-menu d-flex wrap" style=" width: 400px;flex-wrap: wrap;">
@@ -138,265 +141,264 @@ ORDER BY id_sanpham DESC";
     </div>
 
     <script>
-        $(document).ready(() => {
-            var pageIndexMain = 1
-            // View data
-            view_data();
+    $(document).ready(() => {
+        var pageIndexMain = 1
+        // View data
+        view_data();
 
-            function view_data() {
-                $.post(' admin/modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
+        function view_data() {
+            $.post(' admin/modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
+                pageIndexMain,
+                function(data) {
+                    $('#load_product_data').html(data)
+                })
+        }
+
+        $(document).on("click", '.page-link.main', function() {
+            pageIndexMain = $(this).attr("value");
+            $.ajax({
+                url: ' admin/modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
                     pageIndexMain,
-                    function(data) {
-                        $('#load_product_data').html(data)
-                    })
-            }
-
-            $(document).on("click", '.page-link.main', function() {
-                pageIndexMain = $(this).attr("value");
-                $.ajax({
-                    url: ' admin/modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
-                        pageIndexMain,
-                    dataType: 'html',
-                    method: "post",
-                    cache: true,
-                    success: function() {
-                        view_data();
-                    },
-                    error: function() {
-                        view_data();
-                    }
-                })
-            })
-
-            // Remove product
-            $(document).on("click", '.remove-product', function() {
-                var id = $(this).val();
-                var url =
-                    " admin/modules/quanlysp/handleEvent/handleDeleteProduct.php?idsanpham=" +
-                    id;
-                swal({
-                        title: "Bạn có chắc muốn xóa danh sách này không?",
-                        text: "Nếu có danh sách này sẽ bị xóa đi!",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            swal("Danh sách đã bị xóa!", {
-                                icon: "success",
-                            });
-                            $.post(url, (data) => {
-                                view_data();
-                            });
-                        }
-                    });
-            })
-
-            // Delete all product
-            $(document).on("click", '.delete-all-product', function() {
-                var url =
-                    " admin/modules/quanlysp/handleEvent/handleDeleteProduct.php?action=deleteAll";
-                swal({
-                        title: "Bạn có chắc muốn thực hiện thao tác không?",
-                        text: "Nếu có tất cả danh sách sẽ bị xóa đi!",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            swal("Tất cả danh sách đã bị xóa!", {
-                                icon: "success",
-                            });
-                            $.post(url, (data) => {
-                                view_data();
-                            });
-                        }
-                    });
-            })
-
-            // View detail category
-            $(document).on("click", '.detail-product', function() {
-                var id = $(this).val();
-                var url =
-                    " admin/modules/quanlysp/viewProductDetail.php?idsanpham=" +
-                    id;
-                $.post(url, (data) => {
-                    $("#view-detail-product").html(data);
-                });
-            })
-
-            $(document).on("click", '.close-modal', function() {
-                $("#product__detail-model").remove();
-            })
-
-            $(document).on("click", '.modal__background', function() {
-                $("#product__detail-model").remove();
-            })
-
-            // Edit product
-            $(document).on("click", '.edit-product', function() {
-                var id = $(this).val();
-                var url =
-                    " admin/modules/quanlysp/editProduct.php?idsanpham=" +
-                    id;
-                $.post(url, (data) => {
-                    $("#view-edit-product").html(data);
-                });
-            })
-
-            $(document).on("click", '.close-modal', function() {
-                $("#product__edit-model").remove();
-            })
-
-            $(document).on("click", '.modal__background', function() {
-                $("#product__edit-model").remove();
-            })
-
-            // Add product
-            $(document).on("click", '.add-product', function() {
-                var url =
-                    " admin/modules/quanlysp/addNewProduct.php";
-                $.post(url, (data) => {
-                    $("#view-add-product").html(data);
-                });
-            })
-
-            $(document).on("click", '.close-modal', function() {
-                $("#product__add-model").remove();
-            })
-
-            $(document).on("click", '.modal__background-add', function() {
-                $("#product__add-model").remove();
-            })
-
-            // Handle search
-            var pageIndexSearch = 1;
-            $(document).on("keyup", '.search-bar', function() {
-                var searchInput = $(this).val();
-                if (searchInput.length > 0) {
-                    $.ajax({
-                        url: " admin/modules/quanlysp/handleEvent/handleSearch.php?pageIndex=" +
-                            pageIndexSearch,
-                        data: {
-                            searchInput: searchInput,
-                        },
-                        dataType: 'html',
-                        method: "post",
-                        cache: true,
-                        success: function(data) {
-                            $('#load_product_data').html(data)
-                        }
-                    })
-                } else {
-                    view_data()
+                dataType: 'html',
+                method: "post",
+                cache: true,
+                success: function() {
+                    view_data();
+                },
+                error: function() {
+                    view_data();
                 }
-            })
-
-            $(document).on("click", '.page-link.search', function() {
-                pageIndexSearch = $(this).attr("value");
-                var searchInput = $('.search-bar').val();
-                if (searchInput.length > 0) {
-                    $.ajax({
-                        url: " admin/modules/quanlysp/handleEvent/handleSearch.php?pageIndex=" +
-                            pageIndexSearch,
-                        data: {
-                            searchInput: searchInput,
-                        },
-                        dataType: 'html',
-                        method: "post",
-                        cache: true,
-                        success: function(data) {
-                            $('#load_product_data').html(data)
-                        }
-                    })
-                } else {
-                    view_data()
-                }
-            })
-
-            // Handle filter
-            $(".jsFilter").on("click", function() {
-                document.querySelector(".filter-menu").classList.toggle("active");
-            });
-
-            var pageIndexFilter = 1
-            $('.filter-button.apply').click((e) => {
-                var status = $('.filter_status').val();
-                var name = $('.filter_name').val();
-                var price = $('.filter_price').val();
-                var amount = $('.filter_amount').val();
-                var discount = $('.filter_discount').val();
-                var soldAmount = $('.filter_sold-amount').val();
-                var rating = $('.filter_rating').val();
-                var dated = $('.filter_dated').val();
-                $.ajax({
-                    url: " admin/modules/quanlysp/handleEvent/handleFilter.php?pageIndex=" +
-                        pageIndexFilter,
-                    data: {
-                        status: status,
-                        name: name,
-                        price: price,
-                        amount: amount,
-                        discount: discount,
-                        soldAmount: soldAmount,
-                        rating: rating,
-                        dated: dated,
-                    },
-                    dataType: 'html',
-                    method: "post",
-                    cache: true,
-                    success: function(data) {
-                        console.log(data)
-                        $('#load_product_data').html(data)
-                    }
-                })
-            })
-
-            $(document).on("click", '.page-link.filter', function() {
-                pageIndexFilter = $(this).attr("value");
-                var status = $('.filter_status').val();
-                var name = $('.filter_name').val();
-                var price = $('.filter_price').val();
-                var amount = $('.filter_amount').val();
-                var discount = $('.filter_discount').val();
-                var soldAmount = $('.filter_sold-amount').val();
-                var rating = $('.filter_rating').val();
-                var dated = $('.filter_dated').val();
-                $.ajax({
-                    url: " admin/modules/quanlysp/handleEvent/handleFilter.php?pageIndex=" +
-                        pageIndexFilter,
-                    dataType: 'html',
-                    data: {
-                        status: status,
-                        name: name,
-                        price: price,
-                        amount: amount,
-                        discount: discount,
-                        soldAmount: soldAmount,
-                        rating: rating,
-                        dated: dated,
-                    },
-                    method: "post",
-                    cache: true,
-                    success: function(data) {
-                        $('#load_product_data').html(data)
-                    }
-                })
-            })
-
-            $('.filter-button.reset').click((e) => {
-                $('.filter_status').val('2');
-                $('.filter_name').val('2');
-                $('.filter_price').val('2');
-                $('.filter_amount').val('2');
-                $('.filter_discount').val('2');
-                $('.filter_sold-amount').val('2');
-                $('.filter_rating').val('2');
-                $('.filter_dated').val('2');
             })
         })
+
+        // Remove product
+        $(document).on("click", '.remove-product', function() {
+            var id = $(this).val();
+            var url =
+                " admin/modules/quanlysp/handleEvent/handleDeleteProduct.php?idsanpham=" +
+                id;
+            swal({
+                    title: "Bạn có chắc muốn xóa danh sách này không?",
+                    text: "Nếu có danh sách này sẽ bị xóa đi!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("Danh sách đã bị xóa!", {
+                            icon: "success",
+                        });
+                        $.post(url, (data) => {
+                            view_data();
+                        });
+                    }
+                });
+        })
+
+        // Delete all product
+        $(document).on("click", '.delete-all-product', function() {
+            var url =
+                " admin/modules/quanlysp/handleEvent/handleDeleteProduct.php?action=deleteAll";
+            swal({
+                    title: "Bạn có chắc muốn thực hiện thao tác không?",
+                    text: "Nếu có tất cả danh sách sẽ bị xóa đi!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("Tất cả danh sách đã bị xóa!", {
+                            icon: "success",
+                        });
+                        $.post(url, (data) => {
+                            view_data();
+                        });
+                    }
+                });
+        })
+
+        // View detail category
+        $(document).on("click", '.detail-product', function() {
+            var id = $(this).val();
+            var url =
+                " admin/modules/quanlysp/viewProductDetail.php?idsanpham=" +
+                id;
+            $.post(url, (data) => {
+                $("#view-detail-product").html(data);
+            });
+        })
+
+        $(document).on("click", '.close-modal', function() {
+            $("#product__detail-model").remove();
+        })
+
+        $(document).on("click", '.modal__background', function() {
+            $("#product__detail-model").remove();
+        })
+
+        // Edit product
+        $(document).on("click", '.edit-product', function() {
+            var id = $(this).val();
+            var url =
+                " admin/modules/quanlysp/editProduct.php?idsanpham=" +
+                id;
+            $.post(url, (data) => {
+                $("#view-edit-product").html(data);
+            });
+        })
+
+        $(document).on("click", '.close-modal', function() {
+            $("#product__edit-model").remove();
+        })
+
+        $(document).on("click", '.modal__background', function() {
+            $("#product__edit-model").remove();
+        })
+
+        // Add product
+        $(document).on("click", '.add-product', function() {
+            var url =
+                " admin/modules/quanlysp/addNewProduct.php";
+            $.post(url, (data) => {
+                $("#view-add-product").html(data);
+            });
+        })
+
+        $(document).on("click", '.close-modal', function() {
+            $("#product__add-model").remove();
+        })
+
+        $(document).on("click", '.modal__background-add', function() {
+            $("#product__add-model").remove();
+        })
+
+        // Handle search
+        var pageIndexSearch = 1;
+        $(document).on("keyup", '.search-bar', function() {
+            var searchInput = $(this).val();
+            if (searchInput.length > 0) {
+                $.ajax({
+                    url: " admin/modules/quanlysp/handleEvent/handleSearch.php?pageIndex=" +
+                        pageIndexSearch,
+                    data: {
+                        searchInput: searchInput,
+                    },
+                    dataType: 'html',
+                    method: "post",
+                    cache: true,
+                    success: function(data) {
+                        $('#load_product_data').html(data)
+                    }
+                })
+            } else {
+                view_data()
+            }
+        })
+
+        $(document).on("click", '.page-link.search', function() {
+            pageIndexSearch = $(this).attr("value");
+            var searchInput = $('.search-bar').val();
+            if (searchInput.length > 0) {
+                $.ajax({
+                    url: " admin/modules/quanlysp/handleEvent/handleSearch.php?pageIndex=" +
+                        pageIndexSearch,
+                    data: {
+                        searchInput: searchInput,
+                    },
+                    dataType: 'html',
+                    method: "post",
+                    cache: true,
+                    success: function(data) {
+                        $('#load_product_data').html(data)
+                    }
+                })
+            } else {
+                view_data()
+            }
+        })
+
+        // Handle filter
+        $(".jsFilter").on("click", function() {
+            document.querySelector(".filter-menu").classList.toggle("active");
+        });
+
+        var pageIndexFilter = 1
+        $('.filter-button.apply').click((e) => {
+            var status = $('.filter_status').val();
+            var name = $('.filter_name').val();
+            var price = $('.filter_price').val();
+            var amount = $('.filter_amount').val();
+            var discount = $('.filter_discount').val();
+            var soldAmount = $('.filter_sold-amount').val();
+            var rating = $('.filter_rating').val();
+            var dated = $('.filter_dated').val();
+            $.ajax({
+                url: " admin/modules/quanlysp/handleEvent/handleFilter.php?pageIndex=" +
+                    pageIndexFilter,
+                data: {
+                    status: status,
+                    name: name,
+                    price: price,
+                    amount: amount,
+                    discount: discount,
+                    soldAmount: soldAmount,
+                    rating: rating,
+                    dated: dated,
+                },
+                dataType: 'html',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    $('#load_product_data').html(data)
+                }
+            })
+        })
+
+        $(document).on("click", '.page-link.filter', function() {
+            pageIndexFilter = $(this).attr("value");
+            var status = $('.filter_status').val();
+            var name = $('.filter_name').val();
+            var price = $('.filter_price').val();
+            var amount = $('.filter_amount').val();
+            var discount = $('.filter_discount').val();
+            var soldAmount = $('.filter_sold-amount').val();
+            var rating = $('.filter_rating').val();
+            var dated = $('.filter_dated').val();
+            $.ajax({
+                url: " admin/modules/quanlysp/handleEvent/handleFilter.php?pageIndex=" +
+                    pageIndexFilter,
+                dataType: 'html',
+                data: {
+                    status: status,
+                    name: name,
+                    price: price,
+                    amount: amount,
+                    discount: discount,
+                    soldAmount: soldAmount,
+                    rating: rating,
+                    dated: dated,
+                },
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    $('#load_product_data').html(data)
+                }
+            })
+        })
+
+        $('.filter-button.reset').click((e) => {
+            $('.filter_status').val('2');
+            $('.filter_name').val('2');
+            $('.filter_price').val('2');
+            $('.filter_amount').val('2');
+            $('.filter_discount').val('2');
+            $('.filter_sold-amount').val('2');
+            $('.filter_rating').val('2');
+            $('.filter_dated').val('2');
+        })
+    })
     </script>
 </body>
 

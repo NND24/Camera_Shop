@@ -13,7 +13,7 @@ session_start();
     include('admin/config/config.php'); ?>
 </head>
 
-<body>
+<body class="container">
     <div class="container">
         <div class="main" id="main">
             <?php
@@ -181,7 +181,6 @@ session_start();
 
         $(document).on("click", '.page-link.cart', function() {
             pageIndexCart = $(this).attr("value");
-            console.log(pageIndexCart)
             $.ajax({
                 url: 'pages/Cart/listCart.php?pageIndex=' +
                     pageIndexCart + '&cartCount=' +
@@ -246,7 +245,6 @@ session_start();
         $(document).on("click", '.plus-quantity-btn', function() {
             view_data();
             var idProduct = $(this).attr('value');
-            console.log(idProduct)
             $.ajax({
                 url: "pages/Cart/handlePlusQuantity.php",
                 data: {
@@ -273,7 +271,6 @@ session_start();
 
         $(document).on("click", '.minus-quantity-btn', function() {
             var idProduct = $(this).attr('value');
-            console.log(idProduct)
             $.ajax({
                 url: "pages/Cart/handleMinusQuantity.php",
                 data: {

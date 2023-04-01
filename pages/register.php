@@ -184,7 +184,6 @@ $(document).ready(() => {
                 method: "post",
                 cache: true,
                 success: function(data) {
-                    console.log(data)
                     if (data.existEmail == 1) {
                         swal("Tài khoản đã tồn tại", "Vui đăng nhập hoặc lòng nhập lại",
                             "error");

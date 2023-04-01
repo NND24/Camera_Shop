@@ -1327,7 +1327,8 @@ ul.social__option-list {
   margin-bottom: 10px;
 }
 
-.buy_now {
+.buy_now,
+.buy-now-not-login {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -1343,11 +1344,13 @@ ul.social__option-list {
   cursor: pointer;
 }
 
-.buy_now strong {
+.buy_now,
+.buy-now-not-login strong {
   font-size: 16px;
 }
 
-.buy_now span {
+.buy_now,
+.buy-now-not-login span {
   font-size: 10px;
 }
 
@@ -2007,6 +2010,39 @@ span#countContent {
   margin-right: 5px;
 }
 
+.answer__wrapper {
+  background-color: #ddd;
+  padding: 10px;
+  border: 1px solid #ccc;
+  position: relative;
+  margin-top: 5px;
+}
+
+.answer__wrapper::before {
+  content: " ";
+  margin-left: -10px;
+  width: 20px;
+  height: 20px;
+  top: -6px;
+  left: 20px;
+  position: absolute;
+  pointer-events: none;
+  background-color: #ddd;
+  transform: rotate(45deg);
+}
+
+.review__admin {
+  background-color: #eebc49;
+  text-transform: uppercase;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  line-height: 13px;
+  height: 15px;
+  margin-left: 10px;
+  margin-top: 4px;
+}
+
 /* Product comment */
 .comment__product {
   background-color: white;
@@ -2176,6 +2212,12 @@ span#countContent {
 
 .product-count {
   margin-right: 4px;
+}
+
+.answer_review_content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 /* Quantity */

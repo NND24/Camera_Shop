@@ -63,17 +63,46 @@ if (mysqli_num_rows($query_review) > 0) {
     <div class="review__footer">
         <?php
                 if (isset($_SESSION['id_user'])) {
-                $sql_user = "SELECT * FROM tbl_user WHERE id_user='$_SESSION[id_user]' LIMIT 1 ";
-                $query_user = mysqli_query($mysqli, $sql_user);
-                $row_user = mysqli_fetch_array($query_user);
-                if ($row_user['privilege'] == 1) {
+                    $sql_user = "SELECT * FROM tbl_user WHERE id_user='$_SESSION[id_user]' LIMIT 1 ";
+                    $query_user = mysqli_query($mysqli, $sql_user);
+                    $row_user = mysqli_fetch_array($query_user);
+                    if ($row_user['privilege'] == 1) {
                 ?>
         <button class="review__footer-answer" value="<?php echo $row_review['id_review'] ?>">Trả lời</button> &#8226;
-        <?php } 
-                }?>
+        <?php }
+                } ?>
         <div class="review__footer-date"><?php date_default_timezone_set('Asia/Ho_Chi_Minh');
                                                     echo date('d/m/Y', $row_review['review_date']) ?></div>
     </div>
+
+    <?php
+            if (strlen($row_review['answer_review'])) {
+            ?>
+    <div class="answer__wrapper">
+        <div class="review__header">
+            <span class="review__header-name"><?php echo $row_review['name'] ?></span>
+            <span class="review__admin">Quản trị viên</span>
+
+        </div>
+        <div class="review__content">
+            <div class="answer_review_content row">
+                <span class="col-11"><?php echo $row_review['answer_review'] ?></span>
+                <?php
+                            if (isset($_SESSION['id_user']) && $_SESSION['id_user'] == $row_review['id_admin'] && $row_review['privilege'] = '1') {
+                            ?>
+                <button class="answer-review-delete-btn btn btn-danger col-1"
+                    value="<?php echo $row_review['id_review'] ?>">Xóa</button>
+                <?php
+                            }
+                            ?>
+            </div>
+        </div>
+        <div class="review__footer">
+            <div class="review__footer-date"><?php date_default_timezone_set('Asia/Ho_Chi_Minh');
+                                                            echo date('d/m/Y', $row_review['answer_date']) ?></div>
+        </div>
+    </div>
+    <?php } ?>
 </div>
 <?php
     }

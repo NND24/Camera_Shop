@@ -1,7 +1,6 @@
 <?php
 session_start();
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
-echo json_encode($_POST);
 
 $idProduct = $_POST['idProduct'];
 $idUser = $_SESSION['id_user'];
