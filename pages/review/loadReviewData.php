@@ -107,7 +107,6 @@ if (mysqli_num_rows($query_review) > 0) {
 <?php
     }
     ?>
-
 <?php
 } else {
 ?>

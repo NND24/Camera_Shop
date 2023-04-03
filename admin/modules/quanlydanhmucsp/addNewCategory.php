@@ -29,77 +29,77 @@
 </div>
 
 <script>
-    $(document).ready(() => {
-        CKEDITOR.replace('category-content')
-        // View data
-        var pageIndexMainCate = 1
+$(document).ready(() => {
+    CKEDITOR.replace('category-content')
+    // View data
+    var pageIndexMainCate = 1
 
-        function view_data() {
-            $.post(' admin/modules/quanlydanhmucsp/handleEvent/listCategoryData.php?pageIndex=' +
-                pageIndexMainCate,
-                function(
-                    data) {
-                    $('#load_category_data').html(data)
-                })
+    function view_data() {
+        $.post('modules/quanlydanhmucsp/handleEvent/listCategoryData.php?pageIndex=' +
+            pageIndexMainCate,
+            function(
+                data) {
+                $('#load_category_data').html(data)
+            })
+    }
+    // Handle add new category
+    $(document).on("click", '#themdanhmuc', function(e) {
+        e.preventDefault();
+        var tendanhmuc = $('.tendanhmuc').val();
+        var trangthai = $('.trangthai').val();
+        var content = CKEDITOR.instances['category-content'].getData();
+
+        let errors = {
+            nameError: '',
+            detailError: ''
         }
-        // Handle add new category
-        $(document).on("click", '#themdanhmuc', function(e) {
-            e.preventDefault();
-            var tendanhmuc = $('.tendanhmuc').val();
-            var trangthai = $('.trangthai').val();
-            var content = CKEDITOR.instances['category-content'].getData();
 
-            let errors = {
-                nameError: '',
-                detailError: ''
-            }
+        // Validate category name
+        if (tendanhmuc.length === 0) {
+            errors.nameError = 'Tên danh mục không được để trống'
+            swal("Vui lòng nhập lại", errors.nameError, "error");
+            $('.tendanhmuc').val('')
+            $('.tendanhmuc').css("border-color", "#ff000087");
+        } else {
+            errors.nameError = '';
+            $('.tendanhmuc').css("border-color", "#008000ab");
+        }
 
-            // Validate category name
-            if (tendanhmuc.length === 0) {
-                errors.nameError = 'Tên danh mục không được để trống'
-                swal("Vui lòng nhập lại", errors.nameError, "error");
-                $('.tendanhmuc').val('')
-                $('.tendanhmuc').css("border-color", "#ff000087");
-            } else {
-                errors.nameError = '';
-                $('.tendanhmuc').css("border-color", "#008000ab");
-            }
+        // Validate category detail
+        if (content.length === 0) {
+            errors.detailError = 'Nội dung danh mục không được để trống'
+            swal("Vui lòng nhập lại", errors.detailError, "error");
+            $('.cke_chrome').css("border-color", "#ff000087");
+        } else {
+            errors.detailError = ''
+            $('.errorDetail').text(errors.detailError);
+            $('.cke_chrome').css("border-color", "#008000ab");
+        }
 
-            // Validate category detail
-            if (content.length === 0) {
-                errors.detailError = 'Nội dung danh mục không được để trống'
-                swal("Vui lòng nhập lại", errors.detailError, "error");
-                $('.cke_chrome').css("border-color", "#ff000087");
-            } else {
-                errors.detailError = ''
-                $('.errorDetail').text(errors.detailError);
-                $('.cke_chrome').css("border-color", "#008000ab");
-            }
-
-            if (errors.detailError === '' && errors.nameError === '') {
-                $.ajax({
-                    url: " admin/modules/quanlydanhmucsp/handleEvent/handleAddCategory.php",
-                    data: {
-                        tendanhmuc: tendanhmuc,
-                        trangthai: trangthai,
-                        category_detail: content,
-                    },
-                    dataType: 'json',
-                    method: "post",
-                    cache: true,
-                    success: function(data) {
-                        if (data.existName === 1) {
-                            swal("Vui lòng nhập lại", 'Danh mục đã tồn tại', "error");
-                            $('.tendanhmuc').val('')
-                        } else {
-                            $('.tendanhmuc').val('')
-                            swal("OK!", "Thêm thành công", "success");
-                            view_data();
-                        }
+        if (errors.detailError === '' && errors.nameError === '') {
+            $.ajax({
+                url: "modules/quanlydanhmucsp/handleEvent/handleAddCategory.php",
+                data: {
+                    tendanhmuc: tendanhmuc,
+                    trangthai: trangthai,
+                    category_detail: content,
+                },
+                dataType: 'json',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    if (data.existName === 1) {
+                        swal("Vui lòng nhập lại", 'Danh mục đã tồn tại', "error");
+                        $('.tendanhmuc').val('')
+                    } else {
+                        $('.tendanhmuc').val('')
+                        swal("OK!", "Thêm thành công", "success");
+                        view_data();
                     }
-                })
-            }
+                }
+            })
+        }
 
-        })
     })
+})
 </script>

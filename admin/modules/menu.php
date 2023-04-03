@@ -4,7 +4,7 @@ $mysqli = new mysqli("localhost", "root", "", "camera_shop");
 if (!isset($_SESSION['dangnhap'])) {
     header('Location: login.php');
 }
-$sql = "SELECT * FROM tbl_admin WHERE email='" . $_SESSION['dangnhap'] . "' LIMIT 1";
+$sql = "SELECT * FROM tbl_admin WHERE id_admin='" . $_SESSION['dangnhap'] . "' LIMIT 1";
 $query = mysqli_query($mysqli, $sql);
 $row = mysqli_fetch_array($query);
 ?>
@@ -62,78 +62,84 @@ $row = mysqli_fetch_array($query);
 <div id="view-add-member"></div>
 
 <script>
-    $(document).ready(() => {
-        $(".list-gallery").click(() => {
-            const url = "category.php";
-            window.history.pushState("new", "title", url);
-            $("#main").load("category.php");
-        });
+$(document).ready(() => {
+    $(".dashboard").click(() => {
+        const url = "dashboard.php";
+        window.history.pushState("new", "title", url);
+        $("#main").load("dashboard.php");
+    });
 
-        $(".list-product").click(() => {
-            const url = "product.php";
-            window.history.pushState("new", "title", url);
-            $("#main").load("product.php");
-        });
+    $(".list-gallery").click(() => {
+        const url = "category.php";
+        window.history.pushState("new", "title", url);
+        $("#main").load("category.php");
+    });
 
-        $(".list-order").click(() => {
-            const url = "order.php";
-            window.history.pushState("new", "title", url);
-            $("#main").load("order.php");
-        });
+    $(".list-product").click(() => {
+        const url = "product.php";
+        window.history.pushState("new", "title", url);
+        $("#main").load("product.php");
+    });
 
-        $(".list-member").click(() => {
-            const url = "member.php";
-            window.history.pushState("new", "title", url);
-            $("#main").load("member.php");
-        });
+    $(".list-order").click(() => {
+        const url = "order.php";
+        window.history.pushState("new", "title", url);
+        $("#main").load("order.php");
+    });
 
-        // 
-        $('.sidebar-btn').click(() => {
-            document.querySelector(".sidebar").classList.toggle("active");
-        })
+    $(".list-member").click(() => {
+        const url = "member.php";
+        window.history.pushState("new", "title", url);
+        $("#main").load("member.php");
+    });
 
-        $('.header_avatar').click(() => {
-            document.querySelector(".header-modal").classList.toggle("active");
-        })
+    // 
+    $('.sidebar-btn').click(() => {
+        document.querySelector(".sidebar").classList.toggle("active");
+    })
 
-        $(document).on("click", '.logout', function(e) {
-            e.preventDefault();
-            $.ajax({
-                url: " admin/modules/handleLogin.php?dangxuat=1",
-                dataType: 'json',
-                method: "post",
-                cache: true,
-                success: function(data) {
-                    swal("OK!", "Đăng nhập thành công", "success");
-                    const url = "login.php";
-                    window.history.pushState("new", "title", url);
-                    $("#main").load("login.php");
+    $('.header_avatar').click(() => {
+        document.querySelector(".header-modal").classList.toggle("active");
+    })
 
-                },
-                error: function() {
-                    swal("OK!", "Đăng nhập thành công", "success");
-                    const url = "login.php";
-                    window.history.pushState("new", "title", url);
-                    $("#main").load("login.php");
-                }
-            })
-        })
+    $(document).on("click", '.logout', function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: "modules/handleLogin.php?dangxuat=1",
+            dataType: 'json',
+            method: "post",
+            cache: true,
+            success: function(data) {
+                swal("OK!", "Đăng nhập thành công", "success");
+                const url = "login.php";
+                window.history.pushState("new", "title", url);
+                $("#main").load("login.php");
 
-        $(document).on("click", '.manage', function() {
-            var id = $(this).val();
-            var url =
-                " admin/modules/quanlytaikhoan/manageAccount.php";
-            $.post(url, (data) => {
-                $("#view-add-member").html(data);
-            });
-        })
-
-        $(document).on("click", '.close-modal', function() {
-            $("#member__add-model").remove();
-        })
-
-        $(document).on("click", '.modal__member-add-background', function() {
-            $("#member__add-model").remove();
+            },
+            error: function() {
+                swal("OK!", "Đăng nhập thành công", "success");
+                const url = "login.php";
+                window.history.pushState("new", "title", url);
+                $("#main").load("login.php");
+            }
         })
     })
+
+    $(document).on("click", '.manage', function() {
+        var id = $(this).val();
+        var url =
+            "modules/quanlytaikhoan/manageAccount.php";
+        $.post(url, (data) => {
+            $("#view-add-member").html(data);
+        });
+    })
+
+    $(document).on("click", '.close-modal', function() {
+        $("#member__add-model").remove();
+    })
+
+    $(document).on("click", '.modal__member-add-background', function() {
+        $("#member__add-model").remove();
+    })
+})
 </script>

@@ -33,38 +33,38 @@
             </form>
 
             <script>
-                $(document).ready(() => {
-                    $(document).on("click", '.login', function(e) {
-                        e.preventDefault();
-                        var email = $('#email').val();
-                        var password = $('#password').val();
+            $(document).ready(() => {
+                $(document).on("click", '.login', function(e) {
+                    e.preventDefault();
+                    var email = $('#email').val();
+                    var password = $('#password').val();
 
-                        $.ajax({
-                            url: " admin/modules/quanlytaikhoan/handleLogin.php?dangnhap=1",
-                            data: {
-                                email: email,
-                                password: password,
-                            },
-                            dataType: 'json',
-                            method: "post",
-                            cache: true,
-                            success: function(data) {
-                                if (data.error == 1) {
-                                    swal("Vui lòng nhập lại",
-                                        "Email hoặc mật khẩu không đúng",
-                                        "error");
-                                    $('#email').val('')
-                                    $('#password').val('')
-                                } else {
-                                    swal("OK!", "Đăng nhập thành công", "success");
-                                    const url = "category.php";
-                                    window.history.pushState("new", "title", url);
-                                    $("#main").load("category.php");
-                                }
+                    $.ajax({
+                        url: "modules/quanlytaikhoan/handleLogin.php?dangnhap=1",
+                        data: {
+                            email: email,
+                            password: password,
+                        },
+                        dataType: 'json',
+                        method: "post",
+                        cache: true,
+                        success: function(data) {
+                            if (data.error == 1) {
+                                swal("Vui lòng nhập lại",
+                                    "Email hoặc mật khẩu không đúng",
+                                    "error");
+                                $('#email').val('')
+                                $('#password').val('')
+                            } else {
+                                swal("OK!", "Đăng nhập thành công", "success");
+                                const url = "dashboard.php";
+                                window.history.pushState("new", "title", url);
+                                $("#main").load("dashboard.php");
                             }
-                        })
+                        }
                     })
                 })
+            })
             </script>
         </div>
     </div>

@@ -12,7 +12,7 @@
         <div class="close-review-modal">
             <i class="fa-solid fa-xmark"></i>
         </div>
-        <textarea id="review" name="review" cols="45" rows="8" minlength="10" required=""
+        <textarea id="review" name="review" cols="45" rows="8" minlength="10"
             placeholder="Mời bạn chia sẻ thêm một số cảm nhận..." aria-required="true"></textarea>
         <div class="wrap-attaddsend"><span class="countContentReview">0</span> ký tự (Tối thiểu 10)
         </div>

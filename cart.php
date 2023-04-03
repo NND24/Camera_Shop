@@ -23,8 +23,6 @@ session_start();
                 <div class="row">
                     <div class="col-md-8 cart">
                         <?php
-
-
                         if (isset($_SESSION['id_user']) && mysqli_num_rows($query_cart) > 0) {
                             $sql_cart = "SELECT * FROM tbl_cart, tbl_sanpham WHERE tbl_cart.id_sanpham=tbl_sanpham.id_sanpham AND id_user='$_SESSION[id_user])'";
                             $query_cart = mysqli_query($mysqli, $sql_cart);
@@ -101,9 +99,12 @@ session_start();
                                 0đ</p>
                         </div>
                         <div class="pay-product">
+                            <?php
+                                if (isset($_SESSION['id_user']) && mysqli_num_rows($query_cart) > 0) {
+                                ?>
                             <div class="pay-product-btn">THANH
                                 TOÁN</div>
-
+                            <?php } ?>
                         </div>
                         <?php } else { ?>
                         <p class=" pb-2">Chi phí đơn hàng = Giá trị đơn hàng + phí vận chuyển + Thuế</p>

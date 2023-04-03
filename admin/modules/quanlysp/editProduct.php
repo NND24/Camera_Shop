@@ -122,7 +122,7 @@
                     var pageIndexMain = 1
                     // View data
                     function view_data() {
-                        $.post(' admin/modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
+                        $.post('modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
                             pageIndexMain,
                             function(data) {
                                 $('#load_product_data').html(data)
@@ -299,7 +299,7 @@
                 var pageIndexMain = 1
                 // View data
                 function view_data() {
-                    $.post(' admin/modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
+                    $.post('modules/quanlysp/handleEvent/listProductData.php?pageIndex=' +
                         pageIndexMain,
                         function(data) {
                             $('#load_product_data').html(data)

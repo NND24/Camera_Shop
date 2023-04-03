@@ -1021,9 +1021,7 @@
         var reviewId;
         $(document).on("click", '.review__footer-answer', function() {
             reviewId = $(this).val()
-            var id = <?php echo $_GET['id'] ?>;
-            $(".load__review-modal").load("pages/review/answerReviewModal.php?id=" + id +
-                '&idReview=' + reviewId);
+            $(".load__review-modal").load("pages/review/answerReviewModal.php");
         })
 
         $(document).on("click", '.review__answer-btn', function() {
@@ -1032,7 +1030,8 @@
                 url: " pages/review/handleAnswerReview.php",
                 data: {
                     answerContent: answerContent,
-                    reviewId: reviewId
+                    reviewId: reviewId,
+                    idAdmin: <?php echo $_SESSION['id_user'] ?>
                 },
                 dataType: 'json',
                 method: "post",
@@ -1192,9 +1191,7 @@
         var commentId;
         $(document).on("click", '.comment__footer-answer', function() {
             commentId = $(this).val()
-            var id = <?php echo $_GET['id'] ?>;
-            $(".load__comment-modal").load("pages/comment/answerCommentModal.php?id=" + id +
-                '&idcomment=' + commentId);
+            $(".load__comment-modal").load("pages/comment/answerCommentModal.php");
         })
 
         $(document).on("click", '.comment__answer-btn', function() {
@@ -1203,7 +1200,8 @@
                 url: " pages/comment/handleAnswerComment.php",
                 data: {
                     answerContent: answerContent,
-                    commentId: commentId
+                    commentId: commentId,
+                    idAdmin: <?php echo $_SESSION['id_user'] ?>
                 },
                 dataType: 'json',
                 method: "post",

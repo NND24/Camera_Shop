@@ -4,10 +4,10 @@ $item_per_page = 8;
 $current_page = $_GET['pageIndex'];
 $offset = ($current_page - 1) * $item_per_page;
 
-$sql_lietke_dh = "SELECT * FROM tbl_cart,tbl_user WHERE tbl_cart.id_khachhang=tbl_user.id_user ORDER BY tbl_cart.id_cart ASC  LIMIT " . $item_per_page . " OFFSET " . $offset . " ";
+$sql_lietke_dh = "SELECT * FROM tbl_order,tbl_user WHERE tbl_order.id_user=tbl_user.id_user ORDER BY tbl_order.id_order ASC  LIMIT " . $item_per_page . " OFFSET " . $offset . " ";
 $query_lietke_dh = mysqli_query($mysqli, $sql_lietke_dh);
 
-$totalRecords = mysqli_query($mysqli, "SELECT * FROM tbl_cart,tbl_user WHERE tbl_cart.id_khachhang=tbl_user.id_user");
+$totalRecords = mysqli_query($mysqli, "SELECT * FROM tbl_order,tbl_user WHERE tbl_order.id_user=tbl_user.id_user");
 $totalRecords = mysqli_num_rows($totalRecords);
 $totalPages = ceil($totalRecords / $item_per_page);
 $i = 0;
@@ -24,16 +24,16 @@ if (mysqli_num_rows($query_lietke_dh) > 0) {
     </div>
     <div class="product-cell col-2 category ">
         <p>
-            <td><?php echo $row['code_cart'] ?></td>
+            <td><?php echo $row['order_code'] ?></td>
         </p>
     </div>
     <div class="product-cell col-2 status-cell">
         <?php
-                if ($row['cart_status'] == 1) {
+                if ($row['order_status'] == 1) {
                 ?>
         <span class="status active">Đã duyệt</span>
         <?php
-                } else if ($row['cart_status'] == 0) {
+                } else if ($row['order_status'] == 0) {
                 ?>
         <span class="status">Chưa duyệt</span>
         <?php
@@ -42,18 +42,18 @@ if (mysqli_num_rows($query_lietke_dh) > 0) {
     </div>
     <div class="product-cell col sales">
         <?php date_default_timezone_set('Asia/Ho_Chi_Minh');
-                echo date('d/m/Y', $row['buy_time']) ?>
+                echo date('d/m/Y', $row['buyed_date']) ?>
     </div>
     <div class="product-cell col sales">
         <?php date_default_timezone_set('Asia/Ho_Chi_Minh');
-                echo date('d/m/Y', $row['browse_time']) ?>
+                echo date('d/m/Y', $row['browsed_date']) ?>
     </div>
     <div class="product-cell col-2 detail">
-        <button title="Xem chi tiết" class="detail-order" value="<?php echo $row['id_cart'] ?>"><span>Xem
+        <button title="Xem chi tiết" class="detail-order" value="<?php echo $row['id_order'] ?>"><span>Xem
                 chi tiết</span></button>
     </div>
     <div class="product-cell col-1 btn">
-        <button title="Xóa" class="remove-order" value="<?php echo $row['id_cart'] ?>"><i
+        <button title="Xóa" class="remove-order" value="<?php echo $row['id_order'] ?>"><i
                 class="fa-solid fa-trash"></i></button>
     </div>
 </div>

@@ -2271,11 +2271,12 @@ span#countContent {
 }
 
 .pay-product-btn {
-  background-color: palegreen;
+  background-color: #0e8ce4;
   padding: 10px 30px;
   border-radius: 6px;
   color: #fff;
-  margin-right: 20px;
+  width: 50%;
+  margin-left: auto;
   cursor: pointer;
 }
 

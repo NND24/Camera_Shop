@@ -23,7 +23,10 @@
                     <input class="search-bar" placeholder="Search..." type="text">
                     <div class="app-content-actions-wrapper">
                         <div class="filter-button-wrapper">
-                            <button class="action-button filter jsFilter"><span>Filter</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter">
+                            <button class="action-button filter jsFilter"><span>Filter</span><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-filter">
                                     <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
                                 </svg></button>
                             <div class="filter-menu">
@@ -57,102 +60,102 @@
         </div>
     </div>
     <script>
-        $(document).ready(() => {
-            var pageIndexOrderMain = 1
-            // View data
-            function view_data() {
-                $.post(' admin/modules/quanlydonhang/handleEvent/listOrderData.php?pageIndex=' +
-                    pageIndexOrderMain,
-                    function(data) {
-                        $('#load_order_data').html(data)
-                    })
-            }
-            view_data();
-
-            $(document).on("click", '.page-link.main-order', function() {
-                var pageIndexOrderMain = 1;
-                $.ajax({
-                    url: ' admin/modules/quanlydonhang/handleEvent/listOrderData.php?pageIndex=' +
-                        pageIndexOrderMain,
-                    dataType: 'html',
-                    method: "post",
-                    cache: true,
-                    success: function() {
-                        view_data();
-                    },
-                    error: function() {
-                        view_data();
-                    }
+    $(document).ready(() => {
+        var pageIndexOrderMain = 1
+        // View data
+        function view_data() {
+            $.post('modules/quanlydonhang/handleEvent/listOrderData.php?pageIndex=' +
+                pageIndexOrderMain,
+                function(data) {
+                    $('#load_order_data').html(data)
                 })
-            })
+        }
+        view_data();
 
-            // View detail order
-            $(document).on("click", '.detail-order', function() {
-                var id = $(this).val();
-                var url =
-                    " admin/modules/quanlydonhang/viewOrderDetail.php?id_cart=" +
-                    id;
-                $.post(url, (data) => {
-                    $("#view-detail-order").html(data);
-                });
-            })
-
-            $(document).on("click", '.close-modal', function() {
-                $("#order__detail-model").remove();
-            })
-
-            $(document).on("click", '.modal__background', function() {
-                $("#order__detail-model").remove();
-            })
-
-            // Remove order
-            $(document).on("click", '.remove-order', function() {
-                var id = $(this).val();
-                var url =
-                    " admin/modules/quanlydonhang/handleEvent/handleDeleteOrder.php?idsanpham=" +
-                    id;
-                swal({
-                        title: "Bạn có chắc muốn xóa đơn hàng này không?",
-                        text: "Nếu có đơn hàng này sẽ bị xóa đi!",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            swal("đơn hàng đã bị xóa!", {
-                                icon: "success",
-                            });
-                            $.post(url, (data) => {
-                                view_data();
-                            });
-                        }
-                    });
-            })
-
-            // Delete all order
-            $(document).on("click", '.delete-all-order', function() {
-                var url =
-                    " admin/modules/quanlydonhang/handleEvent/handleDeleteOrder.php?action=deleteAll";
-                swal({
-                        title: "Bạn có chắc muốn thực hiện thao tác không?",
-                        text: "Nếu có tất cả đơn hàng sẽ bị xóa đi!",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            swal("Tất cả đơn hàng đã bị xóa!", {
-                                icon: "success",
-                            });
-                            $.post(url, (data) => {
-                                view_data();
-                            });
-                        }
-                    });
+        $(document).on("click", '.page-link.main-order', function() {
+            var pageIndexOrderMain = 1;
+            $.ajax({
+                url: 'modules/quanlydonhang/handleEvent/listOrderData.php?pageIndex=' +
+                    pageIndexOrderMain,
+                dataType: 'html',
+                method: "post",
+                cache: true,
+                success: function() {
+                    view_data();
+                },
+                error: function() {
+                    view_data();
+                }
             })
         })
+
+        // View detail order
+        $(document).on("click", '.detail-order', function() {
+            var id = $(this).val();
+            var url =
+                "modules/quanlydonhang/viewOrderDetail.php?id_order=" +
+                id;
+            $.post(url, (data) => {
+                $("#view-detail-order").html(data);
+            });
+        })
+
+        $(document).on("click", '.close-modal', function() {
+            $("#order__detail-model").remove();
+        })
+
+        $(document).on("click", '.modal__background', function() {
+            $("#order__detail-model").remove();
+        })
+
+        // Remove order
+        $(document).on("click", '.remove-order', function() {
+            var id = $(this).val();
+            var url =
+                "modules/quanlydonhang/handleEvent/handleDeleteOrder.php?idsanpham=" +
+                id;
+            swal({
+                    title: "Bạn có chắc muốn xóa đơn hàng này không?",
+                    text: "Nếu có đơn hàng này sẽ bị xóa đi!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("đơn hàng đã bị xóa!", {
+                            icon: "success",
+                        });
+                        $.post(url, (data) => {
+                            view_data();
+                        });
+                    }
+                });
+        })
+
+        // Delete all order
+        $(document).on("click", '.delete-all-order', function() {
+            var url =
+                "modules/quanlydonhang/handleEvent/handleDeleteOrder.php?action=deleteAll";
+            swal({
+                    title: "Bạn có chắc muốn thực hiện thao tác không?",
+                    text: "Nếu có tất cả đơn hàng sẽ bị xóa đi!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("Tất cả đơn hàng đã bị xóa!", {
+                            icon: "success",
+                        });
+                        $.post(url, (data) => {
+                            view_data();
+                        });
+                    }
+                });
+        })
+    })
     </script>
 </body>
 
