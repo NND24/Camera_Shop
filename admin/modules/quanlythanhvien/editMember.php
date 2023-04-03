@@ -6,9 +6,9 @@ $row = mysqli_fetch_array($query)
 ?>
 <div id="member__add-model">
     <div class="model__container">
-        <form enctype="multipart/form-data">
+        <form>
             <div class="model__add-new">
-                <h3>Thêm thành viên</h3>
+                <h3>Sửa thành viên</h3>
                 <div class="close-modal">
                     <i class="fa-solid fa-xmark"></i>
                 </div>
@@ -43,7 +43,7 @@ $row = mysqli_fetch_array($query)
                 <button id="suathanhvien">Thêm thành viên</button>
             </div>
         </form>
-        <div class="modal__category-add-background"></div>
+        <div class="modal__background"></div>
     </div>
 </div>
 

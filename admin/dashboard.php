@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <div class="main-background"></div>
     <div class="app-container">
         <div class="main" id="main">
             <?php include('./modules/menu.php') ?>
@@ -80,14 +81,16 @@
                 </div>
 
                 <div class="chart-container">
-                    <h1 class="app-content-headerText">Bảng thống kê</h1>
-                    <select class="order-date-filter">
-                        <option>Lọc</option>
-                        <option value="7ngay">7 ngày qua</option>
-                        <option value="28ngay">28 ngày qua</option>
-                        <option value="90ngay">90 ngày qua</option>
-                        <option value="365ngay">365 ngày qua</option>
-                    </select>
+                    <div class="chart-header">
+                        <h1 class="app-content-headerText">Bảng thống kê</h1>
+                        <select class="order-date-filter">
+                            <option>Lọc</option>
+                            <option value="7ngay">7 ngày qua</option>
+                            <option value="28ngay">28 ngày qua</option>
+                            <option value="90ngay">90 ngày qua</option>
+                            <option value="365ngay">365 ngày qua</option>
+                        </select>
+                    </div>
                     <div id="myfirstchart" style="height: 250px;"></div>
                 </div>
             </div>
@@ -130,9 +133,9 @@
 
             xkey: 'date',
 
-            ykeys: ['date', 'order', 'sales', 'quantity'],
+            ykeys: ['sales', 'quantity'],
 
-            labels: ['Đơn hàng', 'Doanh thu', 'Số lượng bán ra']
+            labels: ['Doanh thu', 'Số lượng bán ra']
         });
 
         $(document).on("change", '.order-date-filter', function() {

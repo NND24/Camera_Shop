@@ -2,7 +2,7 @@
     <div class="model__container">
         <form enctype="multipart/form-data">
             <div class="model__add-new">
-                <h3>Sửa sản phẩm</h3>
+                <h3>Thêm sản phẩm</h3>
                 <div class="close-modal">
                     <i class="fa-solid fa-xmark"></i>
                 </div>
@@ -61,7 +61,7 @@
                 <button id="themsanpham">Thêm sản phẩm</button>
             </div>
         </form>
-        <div class="modal__background"></div>
+        <div class="modal__background modal__add-product"></div>
     </div>
 
 

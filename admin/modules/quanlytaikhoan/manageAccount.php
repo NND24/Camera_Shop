@@ -1,13 +1,13 @@
 <?php
 session_start();
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
-$sql = "SELECT * FROM tbl_admin WHERE email='" . $_SESSION['dangnhap'] . "' LIMIT 1";
+$sql = "SELECT * FROM tbl_admin WHERE id_admin='" . $_SESSION['dangnhap'] . "' LIMIT 1";
 $query = mysqli_query($mysqli, $sql);
 $row = mysqli_fetch_array($query);
 ?>
 <div id="member__add-model">
-    <div class="model__container">
-        <form enctype="multipart/form-data">
+    <div class="model__container member__model-container">
+        <form>
             <div class="model__add-new">
                 <h3>Quản lý tài khoản</h3>
                 <div class="close-modal">
@@ -48,7 +48,7 @@ $row = mysqli_fetch_array($query);
                 <button id="suamatkhau">Đổi mật khẩu</button>
             </div>
         </form>
-        <div class="modal__category-add-background"></div>
+        <div class="modal__background"></div>
     </div>
 </div>
 

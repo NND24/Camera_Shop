@@ -29,7 +29,6 @@ $char_data = array(); // Initialize the variable as an empty array
 while ($val = mysqli_fetch_array($query)) {
     $char_data[] = array(
         'date' => $val['ngaydat'],
-        'order' => $val['donhang'],
         'sales' => $val['doanhthu'],
         'quantity' => $val['soluongban'],
     );

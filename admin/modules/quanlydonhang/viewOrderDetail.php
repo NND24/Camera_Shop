@@ -142,7 +142,7 @@
                 <?php } ?>
             </div>
         </form>
-        <div class="modal__background"></div>
+        <div class="modal__background modal__add-order"></div>
     </div>
     <script>
     $(document).ready(() => {

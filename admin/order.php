@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <div class="main-background"></div>
     <div class="app-container">
         <div class="main" id="main">
             <?php include('./modules/menu.php') ?>
@@ -46,7 +47,7 @@
                         <div class="product-cell col-2 price">Tình trạng</div>
                         <div class="product-cell col price">Ngày mua hàng</div>
                         <div class="product-cell col price">Ngày duyệt đơn</div>
-                        <div class="product-cell col-2 price">Chi tiết</div>
+                        <div class="product-cell col-2 price">Duyệt đơn hàng</div>
                         <div class="product-cell col-1 price">Xóa</div>
                     </div>
                     <div id="load_order_data"></div>

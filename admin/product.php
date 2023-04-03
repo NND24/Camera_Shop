@@ -17,6 +17,7 @@ ORDER BY id_sanpham DESC";
     $query_lietke_sp = mysqli_query($mysqli, $sql_lietke_sp);
     ?>
 
+    <div class="main-background"></div>
     <div class="app-container">
         <div class="main" id="main">
             <?php include('./modules/menu.php') ?>

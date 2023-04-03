@@ -49,8 +49,8 @@ if (mysqli_num_rows($query_lietke_dh) > 0) {
                 echo date('d/m/Y', $row['browsed_date']) ?>
     </div>
     <div class="product-cell col-2 detail">
-        <button title="Xem chi tiết" class="detail-order" value="<?php echo $row['id_order'] ?>"><span>Xem
-                chi tiết</span></button>
+        <button title="Xem chi tiết" class="detail-order" value="<?php echo $row['id_order'] ?>"><span>Duyệt
+                đơn</span></button>
     </div>
     <div class="product-cell col-1 btn">
         <button title="Xóa" class="remove-order" value="<?php echo $row['id_order'] ?>"><i

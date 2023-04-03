@@ -59,7 +59,7 @@ $row = mysqli_fetch_array($query);
     </button>
 
 </div>
-<div id="view-add-member"></div>
+<div id="view-edit-account"></div>
 
 <script>
 $(document).ready(() => {
@@ -95,7 +95,7 @@ $(document).ready(() => {
 
     // 
     $('.sidebar-btn').click(() => {
-        document.querySelector(".sidebar").classList.toggle("active");
+        document.querySelector(".app-container").classList.toggle("active");
     })
 
     $('.header_avatar').click(() => {
@@ -130,7 +130,7 @@ $(document).ready(() => {
         var url =
             "modules/quanlytaikhoan/manageAccount.php";
         $.post(url, (data) => {
-            $("#view-add-member").html(data);
+            $("#view-edit-account").html(data);
         });
     })
 

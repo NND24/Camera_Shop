@@ -43,7 +43,7 @@ $row = mysqli_fetch_array($query)
                 </div>
             </div>
         </form>
-        <div class="modal__category-add-background"></div>
+        <div class="modal__background modal__add-category"></div>
     </div>
 </div>
 

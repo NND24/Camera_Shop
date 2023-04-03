@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <div class="main-background"></div>
     <div class="app-container">
         <div class="main" id="main">
             <?php include('./modules/menu.php') ?>
@@ -128,7 +129,7 @@
             $("#member__add-model").remove();
         })
 
-        $(document).on("click", '.modal__member-add-background', function() {
+        $(document).on("click", '.modal__background', function() {
             $("#member__add-model").remove();
         })
 
@@ -195,7 +196,7 @@
             $("#member__add-model").remove();
         })
 
-        $(document).on("click", '.modal__member-add-background', function() {
+        $(document).on("click", '.modal__background', function() {
             $("#member__add-model").remove();
         })
 
@@ -217,7 +218,7 @@
             $("#member__add-model").remove();
         })
 
-        $(document).on("click", '.modal__member-add-background', function() {
+        $(document).on("click", '.modal__background', function() {
             $("#member__add-model").remove();
         })
 
