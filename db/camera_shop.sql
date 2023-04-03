@@ -1,3 +1,22 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Apr 03, 2023 at 03:55 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Database: `camera_shop`
 --
@@ -5,89 +24,17 @@
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_danhmuc`
---
-
-DROP TABLE IF EXISTS `tbl_danhmuc`;
-CREATE TABLE IF NOT EXISTS `tbl_danhmuc` (
-  `id_danhmuc` int(11) NOT NULL AUTO_INCREMENT,
-  `ten_danhmuc` varchar(100) NOT NULL,
-  `id_danhmuc` int(11) NOT NULL,
-  `category_status` int(11) NOT NULL,
-  `category_detail` text NOT NULL,
-  `category_created_time` int(11) NOT NULL,
-  `category_last_updated` int(11) NOT NULL,
-  PRIMARY KEY (`id_danhmuc`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `tbl_danhmuc`
---
-
-INSERT INTO `tbl_danhmuc`(`id_danhmuc`, `ten_danhmuc`, `id_danhmuc`, `category_status`, `category_detail`, `category_created_time`, `category_last_updated`) VALUES
-('', 'Camera Yoosee', '1', '1', '', 1678438681, 1678438681),
-('', 'Camera Ezviz', '2', '1', '', 1678438681, 1678438681),
-('', 'Camera Imou', '3', '1', '', 1678438681, 1678438681),
-('', 'Camera Hikvision', '4', '1', '', 1678438681, 1678438681),
-('', 'Camera Vantech', '5', '1', '', 1678438681, 1678438681),
-('', 'Camera Kbvision', '6', '1', '', 1678438681, 1678438681),
-('', 'Camera Dahua', '7', '1', '', 1678438681, 1678438681),
-('', 'Camera Srihome', '8', '1', '', 1678438681, 1678438681),
-('', 'Camera KBONE', '9', '1', '', 1678438681, 1678438681)
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_sanpham`
---
-
-DROP TABLE IF EXISTS `tbl_sanpham`;
-CREATE TABLE IF NOT EXISTS `tbl_sanpham` (
-  `id_sanpham` int(11) NOT NULL AUTO_INCREMENT,
-  `tensanpham` varchar(250) NOT NULL,
-  `giasp` varchar(50) NOT NULL,
-  `soluong` int(11) NOT NULL,
-  `hinhanh` varchar(150) NOT NULL,
-  `giamgia` int(11) NOT NULL,
-  `giadagiam` int(11) NOT NULL,
-  `daban` int(11) NOT NULL,
-  `average_rating` double NOT NULL,
-  `trangthaisp` int(11) NOT NULL,
-  `tomtat` text NOT NULL,
-  `noidung` text NOT NULL,
-  `id_danhmuc` int(11) NOT NULL,
-  `created_time` int(11) NOT NULL,
-  `last_updated` int(11) NOT NULL,
-  PRIMARY KEY (`id_sanpham`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `tbl_sanpham`
---
-
-INSERT INTO `tbl_sanpham`(`id_sanpham`, `tensanpham`, `masp`, `giasp`, `soluong`, `hinhanh`, `giamgia`, `daban`, `trangthaisp`, `tomtat`, `noidung`, `id_danhmuc`, `created_time`, `last_updated`) VALUES
-('', 'Camera Yoosee', '1', '1', '', 1678438681, 1678438681),
-('', 'Camera Ezviz', '2', '1', '', 1678438681, 1678438681),
-('', 'Camera Imou', '3', '1', '', 1678438681, 1678438681),
-('', 'Camera Hikvision', '4', '1', '', 1678438681, 1678438681),
-('', 'Camera Vantech', '5', '1', '', 1678438681, 1678438681),
-('', 'Camera Kbvision', '6', '1', '', 1678438681, 1678438681),
-('', 'Camera Dahua', '7', '1', '', 1678438681, 1678438681),
-('', 'Camera Srihome', '8', '1', '', 1678438681, 1678438681),
-('', 'Camera KBONE', '9', '1', '', 1678438681, 1678438681)
-
---
--- Cấu trúc bảng cho bảng `district`
+-- Table structure for table `district`
 --
 
 CREATE TABLE `district` (
   `district_id` int(11) NOT NULL,
   `province_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='Quận huyện';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Quận huyện';
 
 --
--- Đang đổ dữ liệu cho bảng `district`
+-- Dumping data for table `district`
 --
 
 INSERT INTO `district` (`district_id`, `province_id`, `name`) VALUES
@@ -800,16 +747,16 @@ INSERT INTO `district` (`district_id`, `province_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `province`
+-- Table structure for table `province`
 --
 
 CREATE TABLE `province` (
   `province_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='Tỉnh thành';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tỉnh thành';
 
 --
--- Đang đổ dữ liệu cho bảng `province`
+-- Dumping data for table `province`
 --
 
 INSERT INTO `province` (`province_id`, `name`) VALUES
@@ -880,17 +827,325 @@ INSERT INTO `province` (`province_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `wards`
+-- Table structure for table `tbl_admin`
+--
+
+CREATE TABLE `tbl_admin` (
+  `id_admin` int(11) NOT NULL,
+  `duty` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `admin_status` int(11) NOT NULL,
+  `created_time` int(11) NOT NULL,
+  `last_updated` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_admin`
+--
+
+INSERT INTO `tbl_admin` (`id_admin`, `duty`, `username`, `email`, `password`, `admin_status`, `created_time`, `last_updated`) VALUES
+(1, 0, 'NND', '', '123456', 1, 0, 0),
+(2, 0, 'NN', '', '1', 1, 0, 0),
+(3, 0, 'Dat', 'dat@gmail.com', '0123456', 0, 1680072982, 1680179491),
+(4, 0, 'Bao', 'bao@gmail.com', '1234567', 0, 1680073253, 1680073253);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_cart`
+--
+
+CREATE TABLE `tbl_cart` (
+  `id_cart` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_sanpham` int(11) NOT NULL,
+  `amount` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_comments`
+--
+
+CREATE TABLE `tbl_comments` (
+  `id_comment` int(11) NOT NULL,
+  `id_sanpham` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_admin` int(11) NOT NULL,
+  `comment` varchar(200) NOT NULL,
+  `answer_comment` varchar(200) NOT NULL,
+  `comment_date` int(11) NOT NULL,
+  `answer_date` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_comments`
+--
+
+INSERT INTO `tbl_comments` (`id_comment`, `id_sanpham`, `id_user`, `id_admin`, `comment`, `answer_comment`, `comment_date`, `answer_date`) VALUES
+(2, 3, 1, 1, 'Không biết xài như nào', '            Xài như bình thường', 1679836828, 1680400072),
+(3, 17, 1, 1, 'Xài như lào nhỉ', '', 1680184498, 1680400630);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_danhmuc`
+--
+
+CREATE TABLE `tbl_danhmuc` (
+  `id_danhmuc` int(11) NOT NULL,
+  `ten_danhmuc` varchar(100) NOT NULL,
+  `category_status` int(11) NOT NULL,
+  `category_detail` text NOT NULL,
+  `category_created_time` int(11) NOT NULL,
+  `category_last_updated` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tbl_danhmuc`
+--
+
+INSERT INTO `tbl_danhmuc` (`id_danhmuc`, `ten_danhmuc`, `category_status`, `category_detail`, `category_created_time`, `category_last_updated`) VALUES
+(1, 'Camera Yoosee', 1, '<h2>Camera Yoosee</h2>\n\n<p>Camera Yoosee l&agrave; d&ograve;ng&nbsp;<strong><a href=\"https://camerawifi.com.vn/\">camera wifi</a></strong>&nbsp;b&aacute;n chạy nhất hiện nay. Nhờ c&aacute;c t&iacute;nh năng th&ocirc;ng minh dễ sử dụng. H&igrave;nh ảnh sắc n&eacute;t tốt độ ph&acirc;n giải cao. đặc biệt gi&aacute; th&agrave;nh rẻ. D&ograve;ng camera n&agrave;y nổi tiếng với 3 mẫu sản phẩm b&aacute;n chạy nhất hiện nay gồm:</p>\n\n<ul>\n	<li>Sản phẩm Camera 3 R&acirc;u</li>\n	<li>Sản phẩm camera ngo&agrave;i trời</li>\n	<li>Sản phẩm camera PTZ quay qu&eacute;t.</li>\n</ul>\n\n<h2><strong>T&iacute;nh năng camera</strong></h2>\n\n<ul>\n	<li>T&iacute;ch hợp&nbsp;<strong>camera wifi</strong>&nbsp;kết nối kh&ocirc;ng d&acirc;y si&ecirc;u nhanh.</li>\n	<li>Mắt camera quan s&aacute;t si&ecirc;u nhỏ</li>\n	<li>T&iacute;ch hợp kiểu d&aacute;ng nhỏ gọn</li>\n	<li>T&iacute;ch hợp quay li&ecirc;n tục 24/24h</li>\n	<li>H&igrave;nh ảnh chuẩn Full HD.</li>\n	<li>Hỗ trợ file&nbsp; xem lại Mp4.</li>\n	<li>Thu được cả &acirc;m thanh.</li>\n	<li>Đ&agrave;m thoại 2 chiều.</li>\n	<li>Đặc biệt kết nối wifi dễ d&agrave;ng. Điều khiển trực tiếp qua điện thoại.</li>\n	<li>Lắp đặt dễ d&agrave;ng. Một số d&ograve;ng t&iacute;ch hợp Pin hoạt động độc lập.</li>\n</ul>\n', 1678438681, 1680007184),
+(2, 'Camera Ezviz', 1, '', 1678438681, 1678438681),
+(3, 'Camera Imou', 1, '', 1678438681, 1678438681),
+(4, 'Camera Hikvision', 1, '', 1678438681, 1678438681),
+(5, 'Camera Vantech', 1, '', 1678438681, 1678438681),
+(6, 'Camera Kbvision', 1, '', 1678438681, 1678438681),
+(7, 'Camera Dahua', 1, '', 1678438681, 1678438681),
+(8, 'Camera Srihome', 1, '', 1678438681, 1678438681),
+(9, 'Camera KBONE', 1, '', 1678438681, 1678438681),
+(10, 'Camera bodoi', 0, '<p>asdas</p>\n', 1680004632, 1680009312),
+(11, 'Camera dep', 0, '<p>asd</p>\n', 1680004646, 1680009536),
+(12, 'Camera bluw', 0, '<p>asd</p>\n', 1680004655, 1680009564),
+(13, 'Camera 2', 0, '<p>asdasd</p>\n', 1680004751, 1680009625);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_order`
+--
+
+CREATE TABLE `tbl_order` (
+  `id_order` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `order_code` int(11) NOT NULL,
+  `order_status` int(11) NOT NULL,
+  `tendathang` varchar(200) NOT NULL,
+  `sodienthoaidathang` varchar(11) NOT NULL,
+  `province_id` int(11) NOT NULL,
+  `district_id` int(11) NOT NULL,
+  `wards_id` int(11) NOT NULL,
+  `address_detail` varchar(200) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  `buyed_date` int(11) NOT NULL,
+  `browsed_date` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_order`
+--
+
+INSERT INTO `tbl_order` (`id_order`, `id_user`, `order_code`, `order_status`, `tendathang`, `sodienthoaidathang`, `province_id`, `district_id`, `wards_id`, `address_detail`, `amount`, `total`, `buyed_date`, `browsed_date`) VALUES
+(3, 1, 30187631, 1, '', '', 0, 0, 0, '', 2, 807000, 1680316028, 1680446975),
+(4, 1, 69088183, 0, '', '', 42, 467, 7740, '', 2, 664000, 1680317203, 1680423375),
+(5, 1, 34414256, 0, 'Nguyễn Ngọc Đạt', '0935013553', 467, 7740, 0, '42', 1, 475000, 1680320679, 1680446425),
+(6, 1, 52853721, 0, 'Nguyễn Ngọc Đạt', '0935013553', 42, 467, 7740, 'Gần khách sạn Phúc Ban Mê', 1, 387000, 1680320775, 1680446463),
+(7, 1, 9021708, 0, 'Nguyễn Ngọc Đạt', '', 42, 467, 7740, 'Gần khách sạn Hiệp Phúc', 5, 1485000, 1680345609, 0),
+(8, 1, 94565772, 0, 'Nguyễn Ngọc Đạt', '', 42, 467, 7740, 'Gần khách sạn Hiệp Phúc', 5, 2108000, 1680445636, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_order_details`
+--
+
+CREATE TABLE `tbl_order_details` (
+  `id_order_details` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `order_code` int(11) NOT NULL,
+  `id_sanpham` int(11) NOT NULL,
+  `soluongmua` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_order_details`
+--
+
+INSERT INTO `tbl_order_details` (`id_order_details`, `id_user`, `order_code`, `id_sanpham`, `soluongmua`) VALUES
+(9, 1, 30187631, 2, 1),
+(10, 1, 30187631, 7, 1),
+(11, 1, 69088183, 2, 2),
+(12, 1, 34414256, 7, 1),
+(13, 1, 52853721, 3, 1),
+(14, 1, 9021708, 1, 5),
+(15, 1, 30187631, 2, 1),
+(16, 1, 30187631, 7, 1),
+(17, 1, 69088183, 2, 2),
+(18, 1, 34414256, 7, 1),
+(19, 1, 52853721, 3, 1),
+(20, 1, 9021708, 1, 5),
+(21, 1, 30187631, 2, 1),
+(22, 1, 30187631, 7, 1),
+(23, 1, 69088183, 2, 2),
+(24, 1, 34414256, 7, 1),
+(25, 1, 52853721, 3, 1),
+(26, 1, 9021708, 1, 5),
+(27, 1, 30187631, 2, 1),
+(28, 1, 30187631, 7, 1),
+(29, 1, 69088183, 2, 2),
+(30, 1, 34414256, 7, 1),
+(31, 1, 52853721, 3, 1),
+(32, 1, 9021708, 1, 5),
+(33, 1, 94565772, 4, 2),
+(34, 1, 94565772, 7, 1),
+(35, 1, 94565772, 3, 1),
+(36, 1, 94565772, 6, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_reviews`
+--
+
+CREATE TABLE `tbl_reviews` (
+  `id_review` int(11) NOT NULL,
+  `id_sanpham` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_admin` int(11) NOT NULL,
+  `rating` int(11) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `answer_review` varchar(200) NOT NULL,
+  `review_date` int(11) NOT NULL,
+  `answer_date` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_reviews`
+--
+
+INSERT INTO `tbl_reviews` (`id_review`, `id_sanpham`, `id_user`, `id_admin`, `rating`, `description`, `answer_review`, `review_date`, `answer_date`) VALUES
+(3, 3, 3, 3, 5, 'Tuyet voi!', '            Toi la admin 3 day', 1679321688, 1680398472),
+(4, 3, 3, 3, 5, 'Tuyet voi!', '', 1679321688, 1680403157);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_sanpham`
+--
+
+CREATE TABLE `tbl_sanpham` (
+  `id_sanpham` int(11) NOT NULL,
+  `id_danhmuc` int(11) NOT NULL,
+  `tensanpham` varchar(250) NOT NULL,
+  `giasp` varchar(50) NOT NULL,
+  `soluong` int(11) NOT NULL,
+  `hinhanh` varchar(150) NOT NULL,
+  `giamgia` int(11) NOT NULL,
+  `giadagiam` int(11) NOT NULL,
+  `daban` int(11) NOT NULL,
+  `average_rating` double NOT NULL,
+  `trangthaisp` int(11) NOT NULL,
+  `tomtat` text NOT NULL,
+  `noidung` text NOT NULL,
+  `created_time` int(11) NOT NULL,
+  `last_updated` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tbl_sanpham`
+--
+
+INSERT INTO `tbl_sanpham` (`id_sanpham`, `id_danhmuc`, `tensanpham`, `giasp`, `soluong`, `hinhanh`, `giamgia`, `giadagiam`, `daban`, `average_rating`, `trangthaisp`, `tomtat`, `noidung`, `created_time`, `last_updated`) VALUES
+(1, 1, 'Camera Yoosee 3 Râu 3M Ban Đêm Có Màu', '560000', 195, '1_yoosee-3-rau-3m-510x510.jpg', 47, 290000, 5, 4, 1, '<ul>\n	<li>Độ ph&acirc;n giải 3 Megapixel</li>\n	<li>&nbsp;Bảo h&agrave;nh 12 th&aacute;ng</li>\n	<li>&nbsp;Đ&agrave;m thoại 2 chiều qua điện thoại</li>\n	<li>&nbsp;Quay qu&eacute;t 360 độ</li>\n	<li>&nbsp;Ban đ&ecirc;m c&oacute; m&agrave;u</li>\n</ul>\n', '<h2>Camera Yoosee 3 R&acirc;u 3M Ban Đ&ecirc;m C&oacute; M&agrave;u</h2>\n\n<p><strong>Camera Yoosee 3 R&acirc;u 3 Megapixel</strong>&nbsp;l&agrave; d&ograve;ng&nbsp;<strong>camera wifi&nbsp;Robot</strong>. Của H&atilde;ng Yoosee China đ&acirc;y l&agrave; h&atilde;ng&nbsp;<strong><a href=\"https://camerawifi.com.vn/\">camera wifi</a></strong>&nbsp;c&oacute; gi&aacute; rẻ nhất tại thị trường. Sử dụng với App tr&ecirc;n mobile l&agrave; Yoosee. Đ&acirc;y l&agrave; d&ograve;ng&nbsp;<strong>camera Yoosee</strong>&nbsp;kh&ocirc;ng d&acirc;y được b&aacute;n chạy nhất hiện nay tr&ecirc;n thị trường. Đ&acirc;y l&agrave; d&ograve;ng camera c&oacute; độ n&eacute;t tốt đ&agrave;m thoại &acirc;m thanh 2 chiều tốt. T&iacute;nh ổn định cao cũng như phần mềm dễ sử dụng. Camera C&oacute; khả năng quan s&aacute;t ban đ&ecirc;m c&oacute; m&agrave;u với chế độ đ&egrave;n led th&ocirc;ng minh.</p>\n\n<h2>T&iacute;nh năng camera yoosee 3 r&acirc;u</h2>\n\n<p><img alt=\"Camera độ phân giải cao 3 megapixel\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/camera-yoosee-ong-kinh-3-megapixel.jpg\" style=\"height:1000px; width:1600px\" /></p>\n\n<p>Camera độ ph&acirc;n giải cao 3 megapixel</p>\n\n<p><img alt=\"Camera đàm thoại 2 chiều rõ ràng\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/camera-yoosee-tich-hop-dam-thoai-2-chieu.jpg\" style=\"height:1000px; width:1600px\" /></p>\n\n<p>Camera đ&agrave;m thoại 2 chiều r&otilde; r&agrave;ng</p>\n\n<p><img alt=\"camera điều khiển xoay dễ dàng\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/camera-dieu-khien-xoay-qua-dien-thoai-de-dang.jpg\" style=\"height:1000px; width:1600px\" /></p>\n\n<p>camera điều khiển xoay dễ d&agrave;ng</p>\n\n<p><img alt=\"Camera tích hợp nhìn đêm lên tới 10m\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/tich-hop-nhin-dem.jpg\" style=\"height:1000px; width:1600px\" /></p>\n\n<p>Camera t&iacute;ch hợp nh&igrave;n đ&ecirc;m l&ecirc;n tới 10m</p>\n\n<p><img alt=\"tích hợp báo động báo trộm qua điện thoại\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/tich-hop-bao-dong-bao-trom.jpg\" style=\"height:1000px; width:1600px\" /></p>\n\n<p>t&iacute;ch hợp b&aacute;o động b&aacute;o trộm qua điện thoại</p>\n\n<p><img alt=\"camera dễ dàng lắp đặt\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/camera-yoosee-de-dang-lap-dat.jpg\" style=\"height:1000px; width:1600px\" /></p>\n\n<p>camera dễ d&agrave;ng lắp đặt</p>\n\n<p><img alt=\"Lưu trữ dữ liệu camera dễ dàng từ 3 đến 10 ngày\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/luu-tru-du-lieu-tren-the-nho.jpg\" style=\"height:1000px; width:1600px\" /></p>\n\n<p>Lưu trữ dữ liệu camera dễ d&agrave;ng từ 3 đến 10 ng&agrave;y</p>\n\n<p>&nbsp;</p>\n\n<h2><strong>T&iacute;nh năng camera yoosee 3 r&acirc;u</strong></h2>\n\n<p><img alt=\"tính năng camera\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/camera-yoosee-3-rau-gia-re.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>t&iacute;nh năng camera</p>\n\n<ul>\n	<li>Cảm biến h&igrave;nh ảnh: 1080P độ ph&acirc;n giải 2.0 Megapixel</li>\n	<li>Hệ thống t&iacute;n hiệu: PAL/NTSC</li>\n	<li>Tốc độ video: 25 FPS hoặc 30 FPS</li>\n	<li>Ph&aacute;t hiện chuyển động: C&oacute;</li>\n	<li>Hỗ trợ chụp ảnh: C&oacute;</li>\n	<li>Hỗ trợ NVR: C&oacute;</li>\n	<li>Đầu v&agrave;o &acirc;m thanh: Microphone t&iacute;ch hợp</li>\n	<li>Đầu ra &acirc;m thanh: Microphone t&iacute;ch hợp, tai nghe gắn ngo&agrave;i</li>\n	<li>Hỗ trợ lưu trữ: 1 x Micro SD 128G</li>\n	<li>B&aacute;o động: Hỗ trợ b&aacute;o động qua điện thoại, email</li>\n	<li>B&aacute;o động Wireless: 64 sectors</li>\n	<li>Hỗ trợ Wireless: 802.11 b/g/n</li>\n	<li>Cổng giao tiếp Ethernet: RJ45 100m/ 1000m/ Base-TX</li>\n	<li>Ống k&iacute;nh: 3.6/2.8 mm</li>\n	<li>Hồng ngoại: 10 m</li>\n	<li>Nguồn đầu v&agrave;o: DC5V 2A</li>\n	<li>Nhiệt độ hoạt động: -10 độ đến 60 độ</li>\n	<li>Độ ẩm hoạt động: tối đa 90%</li>\n	<li>Bảo H&agrave;nh 12 th&aacute;ng !</li>\n</ul>\n\n<h2><strong>Th&ocirc;ng Số Kỹ Thuật Camera 3 r&acirc;u</strong></h2>\n\n<p><img alt=\"mặt sau của camera\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/mat-sau-camera-yosee.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>mặt sau của camera</p>\n\n<p><img alt=\"mặt trước camera\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/mat-truoc-camera.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>mặt trước camera</p>\n\n<p><img alt=\"khe cắm nguồn camera 5v\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/nguon-camera-yoosee.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>khe cắm nguồn camera 5v</p>\n\n<p><img alt=\"khe cắm thẻ nhớ và nút reset\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/nut-reset-camera-yoosee.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>khe cắm thẻ nhớ v&agrave; n&uacute;t reset</p>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/mat-duoi-camera.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<table style=\"width:588px\">\n	<tbody>\n		<tr>\n			<td><strong>T&ecirc;n sp</strong></td>\n			<td>Camera 3 r&acirc;u</td>\n		</tr>\n		<tr>\n			<td><strong>H&atilde;ng sản xuất</strong></td>\n			<td>Yoosee&nbsp;<strong><a href=\"https://camerayoosee.com.vn/\">https://camerayoosee.com.vn/</a></strong></td>\n		</tr>\n		<tr>\n			<td><strong>Loại camera</strong></td>\n			<td>IP Wifi lắp trong nh&agrave;</td>\n		</tr>\n		<tr>\n			<td><strong>G&oacute;c quay qu&eacute;t</strong></td>\n			<td>Quay qu&eacute;t quan s&aacute;t chiều ngang 355 độ, chiều dọc 120 độ</td>\n		</tr>\n		<tr>\n			<td><strong>Hỗ trợ thẻ nhớ</strong></td>\n			<td>32G</td>\n		</tr>\n		<tr>\n			<td><strong>Chip vi xử l&yacute;</strong></td>\n			<td>Hi3518E / GM8135</td>\n		</tr>\n		<tr>\n			<td><strong>Hệ điều h&agrave;nh</strong></td>\n			<td>Embedded Linux</td>\n		</tr>\n		<tr>\n			<td><strong>Cảm biến h&igrave;nh ảnh</strong></td>\n			<td>OV9712 CMOS</td>\n		</tr>\n		<tr>\n			<td><strong>Ống k&iacute;nh</strong></td>\n			<td>3,6mm g&oacute;c quan s&aacute;t rộng</td>\n		</tr>\n		<tr>\n			<td><strong>Độ ph&acirc;n giải</strong></td>\n			<td>2.0 Megapixel 1080P</td>\n		</tr>\n		<tr>\n			<td rowspan=\"8\"><strong>Chức năng nổi bật</strong></td>\n			<td>Ph&aacute;t hiện chuyển động b&aacute;m đuổi</td>\n		</tr>\n		<tr>\n			<td>Đ&agrave;m thoại 2 chiều</td>\n		</tr>\n		<tr>\n			<td>Ghi h&igrave;nh li&ecirc;n tục hoặc ghi h&igrave;nh khi ph&aacute;t hiện chuyển động</td>\n		</tr>\n		<tr>\n			<td>B&aacute;o động qua điện thoại khi kẻ lạ x&acirc;m nhập</td>\n		</tr>\n		<tr>\n			<td>Lưu trữ video tối đa 15 ng&agrave;y qua thẻ nhớ MicroSD</td>\n		</tr>\n		<tr>\n			<td>Kết nối wifi 802.11b/g/n</td>\n		</tr>\n		<tr>\n			<td>Điều khiển quay qu&eacute;t qua điện thoại</td>\n		</tr>\n		<tr>\n			<td>Led hồng ngoại quan s&aacute;t ban đ&ecirc;m</td>\n		</tr>\n		<tr>\n			<td><strong>Trọng lượng</strong></td>\n			<td>0,5kg</td>\n		</tr>\n		<tr>\n			<td><strong>C&ocirc;ng suất</strong></td>\n			<td>1,5W</td>\n		</tr>\n		<tr>\n			<td><strong>Nguồn</strong></td>\n			<td>DC 5V/2A</td>\n		</tr>\n	</tbody>\n</table>\n\n<h2><strong>Chức năng sản phẩm camera Yoosee 3 R&acirc;u</strong></h2>\n\n<p><img alt=\"chức năng của camera\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/chuc-nang-cua-camera-yoosee.jpg\" style=\"height:2410px; width:2560px\" /></p>\n\n<p>chức năng của camera</p>\n\n<ul>\n	<li>Khả năng lắp đặt linh hoạt dễ triển khai. lắp ốp trần, treo tường hay để b&agrave;n đều được.</li>\n</ul>\n\n<p><img alt=\"Camera yoosee 3 Râu lắp đặt dễ dàng\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/lap-dat-de-dang-voi-yoosee-3-rau.jpg\" style=\"height:600px; width:600px\" /></p>\n\n<p>C&aacute;c vị tr&iacute; lắp của camera</p>\n\n<ul>\n	<li>Khả năng quay 355 độ, l&ecirc;n xuống 120 độ</li>\n</ul>\n\n<p><img alt=\"Điều khiển quay quét qua điện thoại dễ dàng\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/camera-yoosee-quay-quet-355-do.jpg\" style=\"height:600px; width:600px\" /></p>\n\n<p>Điều khiển quay qu&eacute;t qua điện thoại dễ d&agrave;ng</p>\n\n<ul>\n	<li>Đ&agrave;m thoại 2 chiều bằng điện thoại</li>\n</ul>\n\n<p>&nbsp;</p>\n\n<p><img alt=\"Yoosee Đàm thoại dễ dàng 2 chiều bằng điện thoại\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/camera-yoosee-dam-thoai-2-chieu.jpg\" style=\"height:600px; width:600px\" /></p>\n\n<p>Yoosee Đ&agrave;m thoại dễ d&agrave;ng 2 chiều bằng điện thoại</p>\n\n<p><img alt=\"Camera yoosee 3 râu hỗ trợ phát hiện chuyển động cảnh báo qua email\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/bao-dong-khi-phat-hien-chuyen-dong-yoosee.jpg\" style=\"height:600px; width:600px\" /></p>\n\n<p>yoosee 3 r&acirc;u hỗ trợ ph&aacute;t hiện chuyển động cảnh b&aacute;o qua email</p>\n\n<p><img alt=\"Ống kính 3.6mm giúp camera có khả năng quan sát rộng\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/ong-kinh-camera-yoosee-rong.jpg\" style=\"height:600px; width:600px\" /></p>\n\n<p>Ống k&iacute;nh 3.6mm gi&uacute;p camera c&oacute; khả năng quan s&aacute;t rộng</p>\n\n<p><img alt=\"Ưng dụng đa dạng thực tế quan sát phù hợp nhiều nơi\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/camera-yoosee-ung-dung-quan-sat-moi-noi.jpg\" style=\"height:600px; width:600px\" /></p>\n\n<p>Ứng dụng đa dạng thực tế quan s&aacute;t ph&ugrave; hợp nhiều nơi</p>\n\n<h2><strong>H&igrave;nh ảnh thực tế sản phẩm camera Yoosee 3 R&acirc;u</strong>.</h2>\n\n<p><img alt=\"Nhìn ngang camera\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/hinh-anh-thuc-te-camera-yoosee-3-rau-2.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>H&igrave;nh ảnh thực tế sản phẩm</p>\n\n<p><img alt=\"Nhìn từ phía trên camera\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/hinh-anh-thuc-te-camera-yoosee-3-rau-3.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>Ph&iacute;a tr&ecirc;n của camera</p>\n\n<p><img alt=\"Đóng gói bao bì sản phẩm camera Yoosee\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/hinh-anh-thuc-te-camera-yoosee-3-rau-7.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>Đ&oacute;ng g&oacute;i bao b&igrave; sản phẩm</p>\n\n<p><img alt=\"Hình ảnh thực tế sản phẩm camera Yoosee 3 Râu.\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/hinh-anh-thuc-te-camera-yoosee-3-rau-6.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>H&igrave;nh ảnh thực tế sản phẩm</p>\n\n<p><img alt=\"Hình ảnh thực tế sản phẩm camera Yoosee 3 Râu.\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/hinh-anh-thuc-te-camera-yoosee-3-rau-5.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>H&igrave;nh ảnh thực tế sản phẩm, mặt trước của camera</p>\n\n<p><img alt=\"Mặt trước của camera\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/hinh-anh-thuc-te-camera-yoosee-3-rau-4.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>H&igrave;nh ảnh thực tế sản phẩm</p>\n\n<h2><strong>Đ&aacute;nh gi&aacute; Camera Yoosee 3 R&acirc;u c&oacute; tốt kh&ocirc;ng</strong></h2>\n\n<p><img alt=\"Đánh giá Camera Yoosee 3 Râu có tốt không\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/review-camera-yoosee-3-rau-tot-khong-1.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>h&igrave;nh ảnh đ&aacute;nh gi&aacute; sản phẩm</p>\n\n<p><img alt=\"Review Camera Yoosee 3 Râu\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/review-camera-yoosee-3-rau-tot-khong-2.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>th&acirc;n ngang sản phẩm</p>\n\n<p><img alt=\"Review Camera Yoosee 3 Râu\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/review-camera-yoosee-3-rau-tot-khong-3.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>Đ&egrave;n led hồng ngoại sản phẩm</p>\n\n<p><img alt=\"Nhìn từ trên xuống\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/review-camera-yoosee-3-rau-tot-khong-4.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>Nh&igrave;n từ tr&ecirc;n xuống</p>\n\n<p><img alt=\"Mặt trước của camera\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/review-camera-yoosee-3-rau-tot-khong-5.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>Mặt trước của camera</p>\n\n<h2><strong>H&igrave;nh ảnh lắp đặt thực tế camera yoosee 3 r&acirc;u gi&aacute; rẻ</strong></h2>\n\n<p><img alt=\"Hình ảnh lắp đặt thực tế camera yoosee giá rẻ\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/camera-yoosee-gia-re-1.jpg\" style=\"height:600px; width:800px\" /></p>\n\n<p>H&igrave;nh ảnh thực tế xem qua điện thoại</p>\n\n<p>&nbsp;</p>\n\n<p><img alt=\"Hình ảnh lắp đặt thực tế camera yoosee giá rẻ\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/camera-yoosee-gia-re-2.jpg\" style=\"height:600px; width:800px\" /></p>\n\n<p>Yoosee Gi&aacute; Rẻ</p>\n\n<p><img alt=\"Hình ảnh lắp đặt thực tế camera yoosee giá rẻ\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/camera-yoosee-gia-re-3.jpg\" style=\"height:600px; width:800px\" /></p>\n\n<p>h&igrave;nh ảnh b&agrave;n ng&agrave;y</p>\n\n<p><img alt=\"Hình ảnh ban đêm lắp camera yoosee giá rẻ\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/camera-yoosee-gia-re-4.jpg\" style=\"height:600px; width:800px\" /></p>\n\n<p>h&igrave;nh ảnh ban đ&ecirc;m</p>\n\n<p><img alt=\"Hình ảnh lắp đặt thực tế camera yoosee giá rẻ\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/camera-yoosee-gia-re-5.jpg\" style=\"height:640px; width:1280px\" /></p>\n\n<p><img alt=\"Hình ảnh lắp đặt thực tế camera yoosee giá rẻ\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/camera-yoosee-gia-re-6.jpg\" style=\"height:640px; width:1280px\" /></p>\n\n<h2><strong>C&aacute;c bước c&agrave;i đặt camera Yoosee&nbsp;</strong></h2>\n\n<p><img alt=\"4 Bước cài đặt camera wifi Yoosee qua điện thoại\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/cai-dat-camera-yoosee-3-rau.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>4 bước c&agrave;i đặt camera dễ d&agrave;ng qua điện thoại</p>\n\n<p>Do camera c&oacute; t&iacute;nh năng P2P hỗ trợ cắm l&agrave; chạy.</p>\n\n<ul>\n	<li><strong>Bước 1:</strong>&nbsp;Bật camera l&ecirc;n v&agrave; đợi khởi động xong</li>\n	<li><strong>Bước 2:&nbsp;</strong>Tải ứng dụng camera tr&ecirc;n điện thoại về</li>\n	<li><strong>Bước 3</strong>: Bật phần mềm tr&ecirc;n điện thoại + Qu&eacute;t QR Code.</li>\n	<li><strong>Bước 4:&nbsp;</strong>Đợi kết nối trong 60S l&agrave; xong.</li>\n	<li><strong><strong><strong><strong><em>VIDEO HƯỚNG DẪN C&Agrave;I ĐẶT !</em></strong></strong></strong></strong>\n	<p>&nbsp;</p>\n\n	<p>&nbsp;</p>\n	</li>\n</ul>\n\n<p><em>H&igrave;nh ảnh thực tế bởi bộ camera yoosee do camera wifi&nbsp; lắp đặt (đ&atilde; được sự cho ph&eacute;p của kh&aacute;ch h&agrave;ng)</em><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/b78fa139cc3d3063692c-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/a112978dfa8906d75f98-compressed-1-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/e7a38a2de7291b774238-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/f066def2b3f64fa816e7-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/871867a30aa7f6f9afb6-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/59979c01f1050d5b5414-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/9430e1f58cf170af29e0-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/449db075dd71212f7860-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/970214e779e385bddcf2-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/7b0ad18abc8e40d0199f-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /></p>\n\n<h2>Camera Yoosee 3 R&acirc;u C&oacute; Tốt kh&ocirc;ng</h2>\n\n<p><a href=\"https://benco.vn/wp-content/uploads/2019/11/1561_ung-dung-camera-yoosee-3-rau.jpg\"><img alt=\"Camera Yoosee 3 Râu Có Tốt không\" src=\"https://benco.vn/wp-content/uploads/2019/11/1561_ung-dung-camera-yoosee-3-rau.jpg\" style=\"height:800px; width:600px\" /></a></p>\n\n<p>Camera Yoosee 3 R&acirc;u C&oacute; Tốt kh&ocirc;ng</p>\n\n<p><a href=\"https://benco.vn/wp-content/uploads/2019/11/1561_thac-mac-khi-su-dung-camera-yoosee.jpg\"><img alt=\"Những thắc mắc khi mua camera yoosee 3 Râu\" src=\"https://benco.vn/wp-content/uploads/2019/11/1561_thac-mac-khi-su-dung-camera-yoosee.jpg\" style=\"height:400px; width:600px\" /></a></p>\n\n<p><a href=\"https://benco.vn/wp-content/uploads/2019/11/1561_2-cach-cai-dat-lai-mat-khau-cua-camera-yoosee.jpg\"><img alt=\"2 cách Cài đặt lấy lại mật khẩu Camera Yoosee\" src=\"https://benco.vn/wp-content/uploads/2019/11/1561_2-cach-cai-dat-lai-mat-khau-cua-camera-yoosee.jpg\" style=\"height:600px; width:800px\" /></a></p>\n\n<p><a href=\"https://benco.vn/wp-content/uploads/2019/11/1561_camera_yoosee_wifi_3_rau.jpg\"><img alt=\"1561_camera_yoosee_wifi_3_rau\" src=\"https://benco.vn/wp-content/uploads/2019/11/1561_camera_yoosee_wifi_3_rau.jpg\" style=\"height:600px; width:600px\" /></a></p>\n\n<p><a href=\"https://benco.vn/wp-content/uploads/2019/11/1561_ung-dung-camera-yoosee-3-rau.jpg\"><img alt=\"Ứng dụng của Camera Yoosee 3 Râu\" src=\"https://benco.vn/wp-content/uploads/2019/11/1561_ung-dung-camera-yoosee-3-rau.jpg\" style=\"height:800px; width:600px\" /></a></p>\n\n<p><a href=\"https://benco.vn/wp-content/uploads/2019/11/1561_thac-mac-khi-su-dung-camera-yoosee.jpg\"><img alt=\"Những thắc mắc khi mua camera yoosee 3 Râu\" src=\"https://benco.vn/wp-content/uploads/2019/11/1561_thac-mac-khi-su-dung-camera-yoosee.jpg\" style=\"height:400px; width:600px\" /></a></p>\n\n<p><a href=\"https://benco.vn/wp-content/uploads/2019/11/1561_2-cach-cai-dat-lai-mat-khau-cua-camera-yoosee.jpg\"><img alt=\"2 cách Cài đặt lấy lại mật khẩu Camera Yoosee\" src=\"https://benco.vn/wp-content/uploads/2019/11/1561_2-cach-cai-dat-lai-mat-khau-cua-camera-yoosee.jpg\" style=\"height:600px; width:800px\" /></a></p>\n\n<p><a href=\"https://benco.vn/wp-content/uploads/2019/11/1561_camera_yoosee_wifi_3_rau.jpg\"><img alt=\"1561_camera_yoosee_wifi_3_rau\" src=\"https://benco.vn/wp-content/uploads/2019/11/1561_camera_yoosee_wifi_3_rau.jpg\" style=\"height:600px; width:600px\" /></a></p>\n\n<p><a href=\"https://benco.vn/wp-content/uploads/2019/11/1561_ung-dung-camera-yoosee-3-rau.jpg\"><img alt=\"Ứng dụng của Camera Yoosee 3 Râu\" src=\"https://benco.vn/wp-content/uploads/2019/11/1561_ung-dung-camera-yoosee-3-rau.jpg\" style=\"height:800px; width:600px\" /></a></p>\n\n<p>Ph&oacute;ng to h&igrave;nh sản phẩm</p>\n\n<p><img alt=\"Camera Yoosee 3 Râu CHính Hãng\" src=\"https://benco.vn/wp-content/uploads/2019/11/1561_camera_yoosee_3_rau_chinh_hang.jpg\" style=\"height:700px; width:700px\" /></p>\n\n<p><small>H&igrave;nh sản phẩm</small>&nbsp;&nbsp;<small>Xem th&ocirc;ng số kỹ thuật</small></p>\n\n<p>Gi&aacute; sản phẩm:&nbsp;<del>650.000₫</del>&nbsp;<ins>349.000₫</ins></p>\n\n<p>KHUYẾN M&Atilde;I</p>\n\n<ul>\n	<li><img alt=\"?\" src=\"https://s.w.org/images/core/emoji/12.0.0-1/svg/1f4de.svg\" />Gọi tư vấn để c&oacute; gi&aacute; tốt hơn:&nbsp;<a href=\"tel:0901310777\">090.1310.777</a>&nbsp;(zalo)</li>\n	<li><img alt=\"⏩\" src=\"https://s.w.org/images/core/emoji/12.0.0-1/svg/23e9.svg\" />Miễn ph&iacute; vận chuyển nội th&agrave;nh với đơn h&agrave;ng 1 triệu trở l&ecirc;n</li>\n	<li><img alt=\"⏩\" src=\"https://s.w.org/images/core/emoji/12.0.0-1/svg/23e9.svg\" />T&iacute;ch hợp ph&aacute;t hiện chuyển động th&acirc;n nhiệt</li>\n	<li><img alt=\"⏩\" src=\"https://s.w.org/images/core/emoji/12.0.0-1/svg/23e9.svg\" />T&iacute;ch hợp M&iacute;c ghi &acirc;m thanh</li>\n	<li><img alt=\"⏩\" src=\"https://s.w.org/images/core/emoji/12.0.0-1/svg/23e9.svg\" />T&iacute;ch hợp b&aacute;o động trực tiếp th&ocirc;ng minh</li>\n	<li><img alt=\"⏩\" src=\"https://s.w.org/images/core/emoji/12.0.0-1/svg/23e9.svg\" />Miễn ph&iacute; xem tr&ecirc;n điện thoại trọn đời</li>\n	<li><img alt=\"?\" src=\"https://s.w.org/images/core/emoji/12.0.0-1/svg/1f449.svg\" />&nbsp;Bảo h&agrave;nh 1 đổi 1 trong thời gian bảo h&agrave;nh</li>\n</ul>\n\n<h3>DỊCH VỤ B&Aacute;N H&Agrave;NG</h3>\n\n<ul>\n	<li><strong>B&aacute;o</strong><strong>&nbsp;gi&aacute;, giao h&agrave;ng, thi c&ocirc;ng dịch vụ chu đ&aacute;o tận nơi sử dụng.</strong></li>\n	<li><strong>Sản phẩm ch&iacute;nh h&atilde;ng đầy đủ giấy tờ&nbsp;</strong></li>\n	<li>Miễn ph&iacute; giao h&agrave;ng với đơn h&agrave;ng từ 1tr</li>\n	<li>Lỗi đổi mới trong 1 th&aacute;ng ( 30 ng&agrave;y ) t&iacute;nh từ ng&agrave;y mua h&agrave;ng</li>\n	<li>Bảo h&agrave;nh v&agrave; đổi trả theo số điện thoại kh&aacute;ch h&agrave;ng</li>\n	<li>Đội ngũ tư vấn vi&ecirc;n chuy&ecirc;n nghiệp</li>\n	<li>Đội ngũ lắp đặt chuy&ecirc;n nghiệp an to&agrave;n chu đ&aacute;o nhanh</li>\n</ul>\n\n<p><img alt=\"Phụ kiện đi kèm theo sản phẩm\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/camera-yoosee-3-rau-2m-1.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>Phụ kiện đi k&egrave;m theo sản phẩm</p>\n\n<p><img alt=\"camera yoosee 3 râu 2 m\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/5.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>camera yoosee 3 r&acirc;u 2 m</p>\n\n<p><strong>Camera Yoosee C&oacute; Tốt Kh&ocirc;ng?</strong></p>\n\n<p><strong>&nbsp;Camera Yoosee c&oacute; tốt kh&ocirc;ng?</strong>&nbsp;Đ&acirc;y l&agrave; c&acirc;u hỏi của nhiều người hỏi mua d&ograve;ng camera gi&aacute; rẻ n&agrave;y. Trong thực tế th&igrave; Yoosee đ&aacute;p ứng kh&aacute; tốt về kh&ocirc;ng gian nhỏ, gia đ&igrave;nh cần 1-2 chiếc để quan s&aacute;t. c&aacute;c cty tập đo&agrave;n lớn như&nbsp;<a href=\"https://bachma.vn/\">Nội Thất Bạch M&atilde;</a>&nbsp;họ cũng sử dụng tại c&aacute;c showroom của họ.</p>\n\n<p><img alt=\"camera yoosee có tốt không\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/06/camera-yoosee-co-tot-khong-2.jpg\" style=\"height:2253px; width:2560px\" /></p>\n\n<p>camera yoosee c&oacute; tốt kh&ocirc;ng</p>\n\n<ul>\n	<li><strong>Camera yoosee</strong>&nbsp;được t&igrave;m kiếm nhiều nhất trong c&aacute;c d&ograve;ng camera wifi hiện nay tr&ecirc;n google. Với 18,000 Lượt t&igrave;m kiếm mỗi th&aacute;ng.</li>\n	<li>Sản phẩm c&oacute; gi&aacute; b&aacute;n rẻ nhất thị trường hiện nay</li>\n	<li>T&iacute;nh năng sản phẩm: Đầy đủ</li>\n	<li>Mua h&agrave;ng ch&iacute;nh h&atilde;ng từ Benco: Được bảo h&agrave;nh 12 th&aacute;ng 1 đổi 1</li>\n	<li>Độ ph&acirc;n giải: C&oacute; 3 chuẩn 720P, 960P v&agrave; 1080P quan s&aacute;t nh&igrave;n r&otilde; mặt người dễ d&agrave;ng.</li>\n	<li>Đ&agrave;m thoại &acirc;m thanh 2 chiều qua điện thoại dễ d&agrave;ng.</li>\n	<li>Đặc biết kết nối wifi kh&ocirc;ng d&acirc;y dễ d&agrave;ng.</li>\n	<li>T&iacute;nh năng P2P gi&uacute;p người d&ugrave;ng tự mua về c&agrave;i đặt m&agrave; kh&ocirc;ng cần c&agrave;i đặt g&igrave;.</li>\n	<li>Th&ecirc;m 1 ưu điểm nữa l&agrave; một số d&ograve;ng camera robot của yoosee c&ograve;n c&oacute; khả năng quay qu&eacute;t điều khiển qua điện thoại.</li>\n	<li>G&oacute;c quan s&aacute;t rất rộng.</li>\n</ul>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/06/2807_camera-wifi-yoosee-co-tot-khongCCC-640x400.jpg\" style=\"height:400px; width:640px\" /></p>\n\n<p>Camera Yoosee C&oacute; Tốt Kh&ocirc;ng?</p>\n\n<h2><strong>Chấm điểm cho Yoosee</strong></h2>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/06/camera-wifi-la-gi-co-tot-khong-1-533x400.jpg\" style=\"height:400px; width:533px\" /></p>\n\n<p>Chấm điểm cho camera Yoosee</p>\n\n<p>Chấm điểm cho camera Yoosee 3 r&acirc;u</p>\n\n<ul>\n	<li>&Acirc;m thanh đ&agrave;m thoại thực sự chưa tốt: Chấm 6 điểm nếu bạn muốn n&acirc;ng cấp &acirc;m thanh c&oacute; thể sử dụng d&ograve;ng cao cấp Danale của Mỹ &gt;&gt;&gt;</li>\n	<li>Độ bền sản phẩm: 7 điểm</li>\n	<li>T&iacute;nh năng sản phẩm: 9 điểm hầu như hỗ trợ tối đa người d&ugrave;ng, c&oacute; v&agrave;i t&iacute;nh năng th&ocirc;ng minh như b&aacute;m chuyển động. b&aacute;o động qua điện thoại.</li>\n	<li>Phần mềm App sử dụng: 9 Điểm rất tốt tối ưu</li>\n	<li>App C&agrave;i đặt: 8 Điểm c&oacute; hỗ trợ t&iacute;nh năng P2P tự động c&agrave;i đặt, tuy nhi&ecirc;n qu&aacute; tr&igrave;nh đợi c&agrave;i đặt chưa nhanh mất 1-2 ph&uacute;t.</li>\n	<li>T&iacute;nh năng quay qu&eacute;t: 7 điểm</li>\n	<li>Độ ph&acirc;n giải: 7 Điểm c&oacute; chế độ Full HD 1080P</li>\n	<li>Khả năng bắt wifi: 8 Điểm ổn định</li>\n	<li>Theo ch&uacute;ng t&ocirc;i đ&aacute;nh gi&aacute;: Với&nbsp;<strong>gi&aacute; tiền 349K</strong>&nbsp;th&igrave; chiếc camera n&agrave;y qu&aacute; rẻ với t&iacute;nh năng</li>\n</ul>\n\n<h2><strong>C&oacute; n&ecirc;n mua Camera Yoosee hay kh&ocirc;ng?</strong></h2>\n\n<p>Camera wifi đang ng&agrave;y c&agrave;ng trở th&agrave;nh một sản phẩm quan trọng trong c&ocirc;ng việc gi&aacute;m s&aacute;t an ninh. C&oacute; camera bạn sẽ lu&ocirc;n cảm thấy an t&acirc;m hơn rất nhiều trong c&ocirc;ng t&aacute;c quản l&yacute; t&agrave;i sản.&nbsp;gi&aacute;m s&aacute;t an ninh, ph&ograve;ng trộm cắp&hellip;Vậy khi mua camera wifi cần ch&uacute; &yacute; g&igrave;? V&agrave; c&oacute; n&ecirc;n mua&nbsp;<strong>camera Yoosee 3 r&acirc;u</strong>&nbsp;hay kh&ocirc;ng?</p>\n\n<p>B&agrave;i viết n&agrave;y sẽ gi&uacute;p bạn đ&aacute;nh gi&aacute; c&aacute;c sản phẩm camera wifi Yoosee, qua đ&oacute; gi&uacute;p bạn c&oacute; được những đ&aacute;nh gi&aacute; ch&iacute;nh x&aacute;c, chọn được nơi mua sản phẩm ph&ugrave; hợp, chất lượng. Những sự thật về camera wifi Yoose sẽ lần đầu ti&ecirc;n được tiết lộ trong nội dung b&agrave;i viết n&agrave;y.</p>\n\n<ul>\n	<li>Xem th&ecirc;m b&agrave;i viết &gt;&gt;&gt;&nbsp;<strong><a href=\"http://cameratuya.com/\">Camera Tuya</a></strong></li>\n</ul>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/06/camera-yoosee-quan-sat-qua-dien-thoai-co-tot-khong-CCCCS-533x400.jpg\" style=\"height:400px; width:533px\" /></p>\n\n<h2><strong>Camera Yoosee C&oacute; Tốt Kh&ocirc;ng?</strong></h2>\n\n<p>Tr&ecirc;n thị trường camera gi&aacute;m s&aacute;t an ninh hiện nay, c&aacute;c sản phẩm camera được quảng c&aacute;o với t&ecirc;n gọi camera Yoosee l&agrave; c&aacute;c sản phẩm đang b&aacute;n tr&agrave;n lan tr&ecirc;n thị trường. thậm ch&iacute; c&oacute; những nơi b&aacute;n rất chạy. Vậy bản chất camera wifi yoosee l&agrave; g&igrave;?</p>\n\n<p>Yoosee l&agrave; sản phẩm của h&atilde;ng&nbsp;<strong>camera yoosee</strong>&nbsp;của china. Sản phẩm được đặt theo t&ecirc;n App camera v&agrave; đang được cho l&agrave; b&aacute;n chạy nhất thị trường. Nhờ t&iacute;nh năng ưu việt v&agrave; đặc biệt gi&aacute; th&agrave;nh v&ocirc; c&ugrave;ng rẻ.</p>\n\n<h2><strong>&nbsp;Tại sao camera yoosee lại được ưa chuộng?</strong></h2>\n\n<ul>\n	<li>C&acirc;u chuyện nằm ở gi&aacute; b&aacute;n sản phẩm rẻ so với chất lượng t&iacute;nh năng.</li>\n	<li>T&iacute;nh năng ưu việt hơn c&aacute;c d&ograve;ng sản phẩm tương tự</li>\n	<li>Phần mềm App tối ưu cho người d&ugrave;ng dễ sử dụng.</li>\n	<li>Kh&ocirc;ng cần phải c&agrave;i đặt ai cũng c&agrave;i được.chỉ cần mua về hướng dẫn l&agrave; sử dụng được. C&agrave;i đặt được th&agrave;nh c&ocirc;ng.</li>\n</ul>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/f280b51bd81f24417d0e-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/a112978dfa8906d75f98-compressed-1-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/b78fa139cc3d3063692c-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/e7a38a2de7291b774238-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/f066def2b3f64fa816e7-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/970214e779e385bddcf2-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/871867a30aa7f6f9afb6-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/59979c01f1050d5b5414-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/9430e1f58cf170af29e0-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/449db075dd71212f7860-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /></p>\n', 1679924833, 1680345609),
+(2, 1, 'Camera Wifi Yoosee 3 Râu 3.0Mpx Cao Cấp – Ban Đêm Có Màu', '790000', 193, '2_camera-wifi-yoosee-3-rau-trong-nha-sieu-net-3-510x510.gif', 58, 332000, 3, 3, 1, '<ul>\n	<li>Camera wifi c&oacute; độ n&eacute;t cao 3.0 Megapixel (Si&ecirc;u n&eacute;t)</li>\n	<li>&nbsp;Bảo h&agrave;nh 12 th&aacute;ng 1 đổi 1 to&agrave;n quốc</li>\n	<li>&nbsp;Camera đ&agrave;m thoại 2 chiều</li>\n	<li>&nbsp;Xoay 360 độ điều khiển qua điện thoại</li>\n	<li>&nbsp;Quay ban đ&ecirc;m c&oacute; m&agrave;u</li>\n</ul>\n', '<h2>Camera Yoosee 3 R&acirc;u 3M Cao Cấp</h2>\n\n<p>Camera Yoosee 3 R&acirc;u 3M Cao Cấp l&agrave; d&ograve;ng camera wifi mới c&oacute; độ ph&acirc;n giải cao 3 Megaixel . Của H&atilde;ng&nbsp;<strong><a href=\"https://camerawifi.com.vn/camera-yoosee/\">Camera Yoosee</a></strong>&nbsp;China đ&acirc;y l&agrave; h&atilde;ng camera wifi c&oacute; gi&aacute; rẻ nhất tại thị trường. Sử dụng với App tr&ecirc;n mobile l&agrave; Yoosee. Đ&acirc;y l&agrave; d&ograve;ng camera Yoosee kh&ocirc;ng d&acirc;y được b&aacute;n chạy nhất hiện nay tr&ecirc;n thị trường hiện nay. Camera đầy đủ t&iacute;nh năng đ&agrave;m thoại 2 chiều, ph&aacute;t hiện chuyển động, xoay 360 độ.</p>\n\n<p><img alt=\"Camera Yoosee 3 Râu 3M Cao Cấp\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/02/camera-yoosee-3-rau-3-megapixel-1.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>h&igrave;nh ảnh sản phẩm</p>\n\n<ul>\n	<li>Ph&ugrave; hợp lắp đặt TRONG NH&Agrave;</li>\n	<li>Bản quốc tế xem từ xa kh&ocirc;ng bị giới hạn</li>\n	<li>Gi&aacute;m s&aacute;t từ xa qua điện thoại, m&aacute;y t&iacute;nh.</li>\n	<li>C&oacute; 3 anten wifi bắt s&oacute;ng tốt.</li>\n	<li>H&igrave;nh ảnh sắc n&eacute;t 3.0 Megapixel.</li>\n	<li>Điều Khiển Xoay 360 Độ, đ&agrave;m Thoại 2 Chiều.</li>\n	<li>B&aacute;o động khi c&oacute; người đột nhập.</li>\n	<li>Chế độ xoay theo người di chuyển.</li>\n	<li>Đ&egrave;n hồng ngoại quay đ&ecirc;m l&ecirc;n đến 10 m.</li>\n	<li>Quay đ&ecirc;m c&oacute; m&agrave;u<br />\n	Kết nối Wifi kh&ocirc;ng d&acirc;y.</li>\n	<li>Hỗ trợ khe cắm thẻ nhớ (max 128G).</li>\n	<li>Kh&ocirc;ng tốn điện h&agrave;ng th&aacute;ng (5v).</li>\n</ul>\n\n<h3>Thời gian lưu trữ với dung lượng thẻ</h3>\n\n<ul>\n	<li>Bạn c&oacute; thể mua thẻ nhớ, ph&ugrave; hợp với nhu cầu sử dụng:</li>\n	<li>Thẻ nhớ 16Gb, thời gian lưu trữ 2-3 ng&agrave;y</li>\n	<li>Thẻ nhớ 32Gb, thời gian lưu trữ 4-5 ng&agrave;y</li>\n	<li>Thẻ nhớ 64Gb, thời gian lưu trữ 7-8 ng&agrave;y</li>\n</ul>\n\n<h2>T&iacute;nh năng camera yoosee 3 r&acirc;u 3m</h2>\n\n<p><img alt=\"Camera không chỉ cho hình ảnh chất lượng cao mà còn được tích hợp mic và loa có thể nghe được rõ ràng.\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/02/tinh-nang-camera-yoosee-3-rau-3m-3.jpg\" style=\"height:500px; width:800px\" /></p>\n\n<p>Camera kh&ocirc;ng chỉ cho h&igrave;nh ảnh chất lượng cao m&agrave; c&ograve;n được t&iacute;ch hợp mic v&agrave; loa c&oacute; thể nghe được r&otilde; r&agrave;ng.</p>\n\n<p><img alt=\"Với khả năng quan sát toàn cảnh nhờ góc nhìn rộng, góc xoay ngang 355° và xoay dọc 90°. Nhờ vậy bạn có thể nhìn toàn bộ căn phòng dễ dàng.\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/02/tinh-nang-camera-yoosee-3-rau-3m-1.jpg\" style=\"height:500px; width:800px\" /></p>\n\n<p>Với khả năng quan s&aacute;t to&agrave;n cảnh nhờ g&oacute;c nh&igrave;n rộng, g&oacute;c xoay ngang 355&deg; v&agrave; xoay dọc 90&deg;. Nhờ vậy bạn c&oacute; thể nh&igrave;n to&agrave;n bộ căn ph&ograve;ng dễ d&agrave;ng.</p>\n\n<p><img alt=\"Được trang bị tính năng phát hiện và theo dõi chuyển động thông minh,sẽ an toàn hơn cho gia đình của bạn khi có chuyển khả nghi. Khi phát hiện thấy chuyển động thì ngay lập tức camera Yoosee 3 râu sẽ gửi thông báo đến phần mềm Yoosee trên điện thoại của bạn đảm bảo an toàn truyệt đối cho khu vực camera giám sát.\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/02/tinh-nang-camera-yoosee-3-rau-3m-2.jpg\" style=\"height:500px; width:800px\" /></p>\n\n<p>Được trang bị t&iacute;nh năng ph&aacute;t hiện v&agrave; theo d&otilde;i chuyển động th&ocirc;ng minh,sẽ an to&agrave;n hơn cho gia đ&igrave;nh của bạn khi c&oacute; chuyển khả nghi. Khi ph&aacute;t hiện thấy chuyển động th&igrave; ngay lập tức&nbsp;<strong><a href=\"https://camerawifi.com.vn/camera-yoosee-3-rau/\">camera Yoosee 3 r&acirc;u</a></strong>&nbsp;sẽ gửi th&ocirc;ng b&aacute;o đến phần mềm Yoosee tr&ecirc;n điện thoại của bạn đảm bảo an to&agrave;n truyệt đối cho khu vực camera gi&aacute;m s&aacute;t.</p>\n\n<p><img alt=\"Camera Yoosee 3 râu cho hình ảnh sắc nét 3.0 Megapixel - 1296P cả ngày lẫn đêm. \" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/02/tinh-nang-camera-yoosee-3-rau-3m-4.jpg\" style=\"height:500px; width:800px\" /></p>\n\n<p>Camera Yoosee 3 r&acirc;u cho h&igrave;nh ảnh sắc n&eacute;t 3.0 Megapixel &ndash; 1296P cả ng&agrave;y lẫn đ&ecirc;m.</p>\n\n<p>Một số h&igrave;nh ảnh thực tế camera wifi yoosee 3 r&acirc;u 3.0 megapixel</p>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/02/anh-thuc-te-camera-wifi-yoosee-3-rau-3mpx.gif\" style=\"height:400px; width:640px\" />&nbsp;<img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/02/camera-wifi-yoosee-3-rau-3.gif\" style=\"height:400px; width:640px\" />&nbsp;<img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/02/camera-wifi-yoosee-3-rau-trong-nha-sieu-net-ban-dem-co-mau.gif\" style=\"height:400px; width:640px\" />&nbsp;<img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/02/mat-ben-camera-wifi-3-rau-yoosee-3.gif\" style=\"height:400px; width:640px\" />&nbsp;<img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/02/mat-sau-camera-wifi-3-rau-yoosee-3.gif\" style=\"height:400px; width:640px\" /></p>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/02/khe-cam-the-nho-camera-yoosee-3-rau-3m.jpg\" style=\"height:800px; width:800px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/02/anh-thuc-te-camera-yoosee-3-rau-3m.jpg\" style=\"height:800px; width:800px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/02/cai-dat-camera-yoosee-3-rau-3m.jpg\" style=\"height:800px; width:800px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/02/camera-yoosee-3-rau-3-megapixel-2.jpg\" style=\"height:800px; width:800px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/02/hong-ngoai-camera-yoosee-3m.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<h3>BẠN C&Oacute; THỂ TH&Iacute;CH</h3>\n', 1679924999, 1680317203),
+(3, 1, 'Camera Yoosee 5M QC2', '790000', 1998, '3_Camera-Yoosee-Dome-5M-QC2-510x510.jpg', 51, 387000, 2, 2, 1, '<ul>\n	<li>Camera wifi c&oacute; độ n&eacute;t cao 3.0 Megapixel (Si&ecirc;u n&eacute;t)</li>\n	<li>&nbsp;Bảo h&agrave;nh 12 th&aacute;ng 1 đổi 1 to&agrave;n quốc</li>\n	<li>&nbsp;Camera đ&agrave;m thoại 2 chiều</li>\n	<li>&nbsp;Xoay 360 độ điều khiển qua điện thoại</li>\n	<li>&nbsp;Quay ban đ&ecirc;m c&oacute; m&agrave;u</li>\n</ul>\n', '<h2>Camera Yoosee 5M QC2</h2>\n\n<p>Camera Yoosee 5M QC2 đ&acirc;y l&agrave; mẫu&nbsp;<strong><a href=\"https://camerawifi.com.vn/\">camera wifi</a></strong>&nbsp;kh&ocirc;ng d&acirc;y của&nbsp;<strong><a href=\"https://camerayoosee.com.vn/\">h&atilde;ng Yoosee</a></strong>&nbsp;mới nhất hiện nay. Camera trang bị c&ocirc;ng nghệ hiện đại như: Độ ph&acirc;n giải cao 5 Megapixel, đ&agrave;m thoại 2 chiều. C&oacute; led nh&igrave;n ban đ&ecirc;m, điều khiển từ xa qua điện thoại.</p>\n\n<ul>\n	<li>Xem th&ecirc;m&nbsp;<strong><a href=\"https://camerawifi.com.vn/camera-yoosee-ngoai-troi-5-0mp-nhin-dem-co-mau-chong-nuoc-dam-thoai-2-chieu-mau-moi-2022/\">camera th&acirc;n yoosee 5.0</a></strong></li>\n</ul>\n\n<p><img alt=\"Camera Yoosee 5M QC2\" src=\"https://camerawifi.com.vn/wp-content/uploads/2023/02/Camera-Yoosee-Dome-5M-QC2.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>H&igrave;nh ảnh sản phẩm<img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2023/02/mat-sau-cua-camera.jpg\" style=\"height:800px; width:800px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2023/02/khe-cam-the-nho-camera-yoosee.jpg\" style=\"height:800px; width:800px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2023/02/dong-goi-camera-yoosee.jpg\" style=\"height:800px; width:800px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2023/02/camera-yoosee.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<h2>Th&ocirc;ng số kỹ thuật</h2>\n\n<ul>\n	<li>Cảm biến h&igrave;nh ảnh: độ ph&acirc;n giải 5.0 Megapixel</li>\n	<li>Hệ thống t&iacute;n hiệu: PAL/NTSC</li>\n	<li>Tốc độ video: 25 FPS hoặc 30 FPS</li>\n	<li>Ph&aacute;t hiện chuyển động: C&oacute;</li>\n	<li>Hỗ trợ chụp ảnh: C&oacute;</li>\n	<li>Hỗ trợ NVR: C&oacute;</li>\n	<li>Đầu v&agrave;o &acirc;m thanh: Microphone t&iacute;ch hợp</li>\n	<li>Đầu ra &acirc;m thanh: Microphone t&iacute;ch hợp, tai nghe gắn ngo&agrave;i</li>\n	<li>Hỗ trợ lưu trữ: 1 x Micro SD 128G</li>\n	<li>B&aacute;o động: Hỗ trợ b&aacute;o động qua điện thoại, email</li>\n	<li>B&aacute;o động Wireless: 64</li>\n	<li>Hỗ trợ Wireless: 802.11 b/g/n</li>\n	<li>Cổng giao tiếp Ethernet: RJ45 100m/ 1000m/ Base-TX</li>\n	<li>Ống k&iacute;nh: 3.6/2.8 mm</li>\n	<li>Hồng ngoại: 10 m</li>\n	<li>Nguồn đầu v&agrave;o: DC5V 2A</li>\n	<li>Nhiệt độ hoạt động: -10 độ đến 60 độ</li>\n	<li>Độ ẩm hoạt động: tối đa 90%</li>\n	<li>Bảo H&agrave;nh 12 th&aacute;ng !</li>\n</ul>\n', 1679925186, 1680445636),
+(4, 1, 'Camera Yoosee Bóng Đèn 5 Mp', '790000', 1997, '4_camera-yoosee-bong-den-5mp-510x510.jpg', 51, 387000, 2, 1, 1, '<ul>\n	<li>Camera wifi c&oacute; độ n&eacute;t cao 3.0 Megapixel (Si&ecirc;u n&eacute;t)</li>\n	<li>&nbsp;Bảo h&agrave;nh 12 th&aacute;ng 1 đổi 1 to&agrave;n quốc</li>\n	<li>&nbsp;Camera đ&agrave;m thoại 2 chiều</li>\n	<li>&nbsp;Xoay 360 độ điều khiển qua điện thoại</li>\n	<li>&nbsp;Quay ban đ&ecirc;m c&oacute; m&agrave;u</li>\n</ul>\n', '<h2>Camera Yoosee B&oacute;ng Đ&egrave;n 5 Mp</h2>\n\n<p>Camera Yoosee B&oacute;ng Đ&egrave;n 5 Mp&nbsp;. Đ&acirc;y l&agrave; d&ograve;ng&nbsp;<strong><a href=\"https://camerayoosee.com.vn/\">camera yoosee</a></strong>&nbsp;mới, với nhiều t&iacute;nh năng th&ocirc;ng minh như: Chuyển động theo chuyển động, khu&ocirc;n mặt. B&aacute;o động qua điện thoại hoặc b&aacute;o động trực tiếp qua camera khi ph&aacute;t hiện người. Ph&acirc;n phối bởi&nbsp;<strong><a href=\"https://camerawifi.com.vn/\">camera wifi</a></strong>.</p>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2023/03/camera-yoosee-dep.jpg\" style=\"height:2560px; width:1920px\" />&nbsp;<img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2023/03/camera-bong-den-sieu-net.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p><img alt=\"Camera Yoosee Bóng Đèn 5 Mp\" src=\"https://camerawifi.com.vn/wp-content/uploads/2023/03/camera-yoosee-bong-den-5mp.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>h&igrave;nh ảnh sản phẩm</p>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2023/03/khe-cam-the-nho.jpg\" style=\"height:800px; width:800px\" />&nbsp;<img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2023/03/mat-sau-cua-camera-bong-den.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<h2>Th&ocirc;ng số sản phẩm camera yoosee b&oacute;ng đ&egrave;n</h2>\n\n<ul>\n	<li>Ph&ugrave; hợp lắp đặt trong nh&agrave;</li>\n	<li>Bản quốc tế xem từ xa kh&ocirc;ng bị giới hạn</li>\n	<li>Gi&aacute;m s&aacute;t từ xa qua điện thoại, m&aacute;y t&iacute;nh.</li>\n	<li>H&igrave;nh ảnh sắc n&eacute;t 5.0 Megapixel.</li>\n	<li>Điều Khiển Xoay 360 Độ, đ&agrave;m Thoại 2 Chiều.</li>\n	<li>B&aacute;o động khi c&oacute; người đột nhập.</li>\n	<li>Chế độ xoay theo người di chuyển.</li>\n	<li>Đ&egrave;n hồng ngoại quay đ&ecirc;m l&ecirc;n đến 10 m.</li>\n	<li>Quay đ&ecirc;m c&oacute; m&agrave;u</li>\n	<li>Kết nối Wifi kh&ocirc;ng d&acirc;y.</li>\n	<li>Hỗ trợ khe cắm thẻ nhớ (max 128G).</li>\n	<li>Nguồn điện trực tiếp: 220V</li>\n	<li>Bảo h&agrave;nh 12 th&aacute;ng</li>\n	<li>Gi&aacute; chưa bao gồm thẻ nhớ</li>\n</ul>\n', 1679925307, 1680445636),
+(5, 1, 'Camera Tuya U2M PTZ 2M', '690000', 200000, '5_camera-tuya-tot-510x510.jpg', 35, 449000, 0, 5, 1, '<ul>\n	<li>Camera wifi c&oacute; độ n&eacute;t cao 3.0 Megapixel (Si&ecirc;u n&eacute;t)</li>\n	<li>&nbsp;Bảo h&agrave;nh 12 th&aacute;ng 1 đổi 1 to&agrave;n quốc</li>\n	<li>&nbsp;Camera đ&agrave;m thoại 2 chiều</li>\n	<li>&nbsp;Xoay 360 độ điều khiển qua điện thoại</li>\n	<li>&nbsp;Quay ban đ&ecirc;m c&oacute; m&agrave;u</li>\n</ul>\n', '<h2>Camera Tuya U2M PTZ 2M b&aacute;n chạy nhất</h2>\n\n<p><strong>Camera Tuya U2M</strong>&nbsp;PTZ 2M b&aacute;n chạy nhất đ&acirc;y l&agrave; mẫu&nbsp;<strong><a href=\"https://camerawifi.com.vn/\">camera wifi</a></strong>&nbsp;tốt b&aacute;n chạy nhất hiện nay. Nhờ độ ph&acirc;n giải cao. Camera hoạt động ổn định chất lượng tốt. &Acirc;m thanh đ&agrave;m thoại 2 chiều r&otilde; r&agrave;ng kh&ocirc;ng bị tạp &acirc;m. B&ecirc;n cạnh đ&oacute; camera trang bị nhiều t&iacute;nh năng th&ocirc;ng minh như chuyển động theo khu&ocirc;n mặt. b&aacute;o động b&aacute;o trộm qua điện thoại. Quan s&aacute;t ban đ&ecirc;m r&otilde; n&eacute;t. Camera sử dụng App th&ocirc;ng minh Tuya App dễ sử dụng cũng như kết hợp được với thiết bị điện th&ocirc;ng minh.</p>\n\n<p><img alt=\"Camera tuya\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/10/camera-tuya-tot.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>h&igrave;nh ảnh thực tế sản phẩm</p>\n\n<p><img alt=\"đóng gói sản phẩm camera tuya kèm theo\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/10/dong-goi-camera-tuya.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>phụ kiện k&egrave;m theo camera</p>\n\n<p><img alt=\"khe cắm thẻ nhớ camera\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/10/khe-cam-the-nho-camera-tuya.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>khe cắm thẻ nhớ camera</p>\n\n<p><img alt=\"mặt sau của camera\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/10/mat-sau-cua-camera.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>mặt sau của camera</p>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/10/camera-tuya-tot-nhat.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<h2>T&iacute;nh năng camera Tuya</h2>\n\n<p>L&agrave; chiếc camera quan s&aacute;t trong nh&agrave; của Tuya cực k&igrave; th&ocirc;ng minh th&iacute;ch hợp ứng dụng d&ugrave;ng để l&agrave;m hệ thống camera quan s&aacute;t trong nh&agrave; cho nh&agrave; ở, biệt thự, chung cư, bệnh viện, ng&acirc;n h&agrave;ng, trường học&hellip;</p>\n\n<p>Camera sử dụng app Tuya độ ph&acirc;n giải cao 1080P sẽ gi&uacute;p bạn gi&aacute;m s&aacute;t ng&ocirc;i nh&agrave; th&ocirc;ng minh của m&igrave;nh mọi l&uacute;c mọi nơi th&ocirc;ng qua điện thoại (c&oacute; kết nối internet), dễ d&agrave;ng điều khiển quay qu&eacute;t 360 độ c&ocirc;ng nghệ n&eacute;n cao cấp si&ecirc;u mượt, theo d&otilde;i điều khiển từ xa bằng điện thoại.</p>\n\n<p>Với trang bị khủng như vậy camera c&oacute; thể thu được h&igrave;nh ảnh với chất lượng cực tốt, h&igrave;nh ảnh r&otilde; r&agrave;ng, độ nhiễu thấp. Cho ph&eacute;p bạn theo d&otilde;i từ xa, hoặc xem lại với độ n&eacute;t cao.</p>\n\n<p><img alt=\"Camera có độ phân giải cao hình ảnh ban ngày ban đêm rõ nét\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/10/camera-quan-sat-ngay-dem.jpg\" style=\"height:1500px; width:1499px\" /></p>\n\n<p>Camera c&oacute; độ ph&acirc;n giải cao h&igrave;nh ảnh ban ng&agrave;y ban đ&ecirc;m r&otilde; n&eacute;t</p>\n\n<p><img alt=\"Camera xoay và điều khiển qua điện thoại dễ dàng\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/10/camera-tuya-xoay-355-do.jpg\" style=\"height:1500px; width:1499px\" /></p>\n\n<p>Camera xoay v&agrave; điều khiển qua điện thoại dễ d&agrave;ng</p>\n\n<p><img alt=\"Đàm thoại 2 chiều qua điện thoại\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/10/camera-tuya-dam-thoai-2-chieu.jpg\" style=\"height:1500px; width:1499px\" /></p>\n\n<p>Đ&agrave;m thoại 2 chiều qua điện thoại</p>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/10/kich-thuoc-camera-tuya.jpg\" style=\"height:800px; width:800px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/10/bao-trom-qua-dien-thoai.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<h2>Th&ocirc;ng số camera Tuya U2M</h2>\n\n<ul>\n	<li>Nguồn điện: adapter 5V 1A.</li>\n	<li>C&oacute; độ ph&acirc;n giải 1080p, hỗ trợ theo d&otilde;i ng&agrave;y đ&ecirc;m.</li>\n	<li>C&oacute; thể theo d&otilde;i, quản l&yacute; bằng điện thoại từ xa nh&agrave; (chỉ cần c&oacute; mạng wifi hoặc 3g l&agrave; c&oacute; thể sử dụng).</li>\n	<li>WiFi: 2.4GHz IEEE 802.11b/g/n.</li>\n	<li>Thấu k&iacute;nh: 3.6mm.</li>\n	<li>Khoảng c&aacute;ch hồng ngoại: 3- 6m.</li>\n	<li>App Tuya Smart hoặc Smart Life hỗ trợ hệ điều h&agrave;nh IOS v&agrave; Android.</li>\n	<li>G&oacute;c quay qu&eacute;t: 360 độ.</li>\n	<li>Độ ph&acirc;n giải: 1080P.</li>\n	<li>Ống k&iacute;nh: 2.8mm@F2.2.</li>\n	<li>T&iacute;ch hợp đ&egrave;n hồng ngoại th&ocirc;ng minh, tầm nh&igrave;n xa ban đ&ecirc;m 20 m&eacute;t.</li>\n	<li>Chuẩn video: H.264.</li>\n	<li>Chống ngược s&aacute;ng, giảm nhiễu, g&oacute;c qu&eacute;t rộng.</li>\n	<li>Hỗ trợ thẻ MicroSD đến 64G.</li>\n	<li>Trọng lượng: 500g.</li>\n	<li>H&atilde;ng Tuya</li>\n	<li>Bảo h&agrave;nh 12 th&aacute;ng</li>\n</ul>\n', 1679925382, 1679925382);
+INSERT INTO `tbl_sanpham` (`id_sanpham`, `id_danhmuc`, `tensanpham`, `giasp`, `soluong`, `hinhanh`, `giamgia`, `giadagiam`, `daban`, `average_rating`, `trangthaisp`, `tomtat`, `noidung`, `created_time`, `last_updated`) VALUES
+(6, 1, 'Camera Wifi Yoosee Thân Ngoài Trời Full HD 1080P – Ban Đêm Có Màu', '890000', 1999, '6_Camera-yoosee-than-ngoai-troi-6-510x510.jpg', 47, 472000, 1, 4, 1, '<ul>\n	<li>Camera độ ph&acirc;n giải Full HD 1080P H&igrave;nh ảnh sắc n&eacute;t</li>\n	<li>Quan s&aacute;t ban đ&ecirc;m c&oacute; m&agrave;u</li>\n	<li>Li&ecirc;n hệ để c&oacute; gi&aacute; tốt nhất</li>\n	<li>Bảo h&agrave;nh 12 th&aacute;ng 1 đổi 1</li>\n	<li>Kết nối kh&ocirc;ng d&acirc;y</li>\n</ul>\n', '<h2><strong>Camera Yoosee Ngo&agrave;i Trời</strong></h2>\n\n<p><em><strong>Camera Yoosee ngo&agrave;i trời</strong>&nbsp;l&agrave; l&agrave; d&ograve;ng camera th&acirc;n hồng ngoại kết nối kh&ocirc;ng d&acirc;y của h&atilde;ng&nbsp;&nbsp;<strong><a href=\"https://camerawifi.com.vn/camera-yoosee/\">camera yoosee</a></strong>. Tầm xa hồng ngoại nh&igrave;n đ&ecirc;m từ 20m đến 30m&nbsp;độ ph&acirc;n giải FULL HD 1080P. C&oacute; kết cấu thiết kế ti&ecirc;u chuẩn vỏ IP 66 chống mưa, chịu được thời tiết khắc nghiệt. V&agrave; c&oacute; khe cắm thẻ nhớ trực tiếp tr&ecirc;n camera.</em></p>\n\n<p>C&oacute; khe cắm thẻ nhớ v&agrave; Micro để đ&agrave;m thoại 2 chiều dễ d&agrave;ng. Chịu được nắng mưa khi lắp ngo&agrave;i trời.</p>\n\n<ul>\n	<li>Xem th&ecirc;m b&aacute;o gi&aacute; camera&nbsp;robot 3 r&acirc;u&nbsp;1080P chỉ&nbsp;<strong>369K</strong>&nbsp;&gt;&gt;&gt;&nbsp;<strong><a href=\"https://camerawifi.com.vn/camera-yoosee-3-rau/\">Camera Yoosee 3 R&acirc;u</a></strong></li>\n</ul>\n\n<p><img alt=\"Camera Yoosee Thân Ngoài Trời\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/05/z2204095509896_485b7795a2180a912d01e83e4ae7d08c.jpg\" style=\"height:2560px; width:2560px\" /></p>\n\n<p>Camera Yoosee Th&acirc;n Ngo&agrave;i Trời</p>\n\n<h2><strong>&nbsp;Th&ocirc;ng số camera th&acirc;n Yoosee wifi ngo&agrave;i trời 2 r&acirc;u full HD</strong></h2>\n\n<ul>\n	<li>Camera yoosee wifi 2 r&acirc;u thu ph&aacute;t t&iacute;n hiệu &acirc;m thanh h&igrave;nh ảnh</li>\n	<li>Độ ph&acirc;n giải FULL HD 1080P</li>\n	<li>Cảm biến h&igrave;nh ảnh Sony 1/3inch cho g&oacute;c quan s&aacute;t rộng l&ecirc;n tới 90 độ</li>\n	<li>Ti&ecirc;u chuẩn vỏ ngo&agrave;i trời IP66 chống mưa nắng rất tốt.</li>\n	<li>Khoảng c&aacute;ch thu ph&aacute;t wifi từ 10m-50m. T&ugrave;y từng điều kiện thực tế</li>\n	<li>Tầm xa hồng ngoại l&ecirc;n tới&nbsp;20m đến 30m</li>\n	<li>Khả năng đ&agrave;m thoại 2 chiều</li>\n	<li>B&aacute;o động qua điện thoại</li>\n	<li>Nhiều người truy cập c&ugrave;ng l&uacute;c</li>\n</ul>\n\n<p><img alt=\"Camera Yoosee Thân Ngoài Trời\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/05/Camera-yoosee-than-ngoai-troi-4.jpg\" style=\"height:2560px; width:2560px\" /></p>\n\n<p>H&igrave;nh ảnh thực tế sản phẩm</p>\n\n<h2><strong>T&iacute;nh năng&nbsp; Camera hồng ngoại Yoosee WIFI ngo&agrave;i trời</strong></h2>\n\n<p><img alt=\"Tính năng sản phẩm camera hồng ngoại Yoosee WIFI ngoài trời\" src=\"https://benco.vn/wp-content/uploads/2019/11/1567_camera-than-yoosee-chong-trom.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<ul>\n	<li>Khả năng b&aacute;o động chống trộm qua điện thoại</li>\n</ul>\n\n<p><img alt=\"Hồng ngoại camera thân wifi yoosee 2 râu ngoài trời\" src=\"https://benco.vn/wp-content/uploads/2019/11/1567_hong_ngoai_camera_than_wifi_yoosee.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<ul>\n	<li>Nh&igrave;n đ&ecirc;m r&otilde; n&eacute;t với c&ocirc;ng nghệ Smart IR th&ocirc;ng minh</li>\n	<li>Hồng ngoại nh&igrave;n xa</li>\n</ul>\n\n<p><img alt=\"Công nghệ P2P cắm là chạy của Yoosee 2 Râu\" src=\"https://benco.vn/wp-content/uploads/2019/11/1567_cam-la-chay-p2p-cua-camera-wif-yoosee.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>&nbsp;</p>\n\n<ul>\n	<li>T&iacute;nh năng P2P cắm l&agrave; chạy của Yoosee</li>\n</ul>\n\n<p><img alt=\"1567_camera-yoosee-quan-sat-ro-net\" src=\"https://benco.vn/wp-content/uploads/2019/11/1567_camera-yoosee-quan-sat-ro-net.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<ul>\n	<li>&nbsp;Quan s&aacute;t r&otilde; n&eacute;t chất lượng</li>\n</ul>\n\n<p><img alt=\"Đàm thoại 2 chiều Yoosee\" src=\"https://benco.vn/wp-content/uploads/2019/11/1567_camera-than-yoosee-2-rau-dam-thoai-2-chieu.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<h2><strong>Ứng dụng Camera wifi th&acirc;n ngo&agrave;i trời Yoosee</strong></h2>\n\n<p><img alt=\"Ứng dụng Camera wifi thân ngoài trời Yoosee\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/05/ung-dung-quan-ly-giam-sat-online-tren-dien-thoai.jpg\" style=\"height:2560px; width:2560px\" /></p>\n\n<p>Ứng dụng quản l&yacute; gi&aacute;m s&aacute;t online tr&ecirc;n điện thoại dễ d&agrave;ng</p>\n\n<ul>\n	<li>Ứng dụng quan s&aacute;t văn ph&ograve;ng</li>\n	<li>Ứng dụng quan s&aacute;t kho h&agrave;ng-kho b&atilde;i</li>\n	<li>Lắp đặt ngo&agrave;i trời chịu mưa gi&oacute;</li>\n	<li>Ứng dụng quan s&aacute;t gia đ&igrave;nh</li>\n	<li>Ứng dụng lắp shop thời trang</li>\n	<li>Ứng dụng lắp n&ocirc;ng trại, trang trại</li>\n	<li>Ứng dụng lắp đặt quan s&aacute;t an ninh t&iacute;ch hợp b&aacute;o động</li>\n</ul>\n\n<h2><strong>H&igrave;nh ảnh thực tế camera wifi th&acirc;n yoosee ngo&agrave;i trời</strong></h2>\n\n<p>Đ&oacute;ng g&oacute;i camera đầy đủ phụ kiện, nguồn, ch&acirc;n đế s&aacute;ch hướng dẫn sử dụng.</p>\n\n<p><img alt=\"Camera Yoosee Ngoài Trời\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/05/camera-yoosee-ngoai-troi-1.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>H&igrave;nh ảnh thực tế sản phẩm</p>\n\n<p><img alt=\"mặt trên của camera\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/05/camera-yoosee-ngoai-troi-2.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>mặt tr&ecirc;n của camera</p>\n\n<p><img alt=\"Camera có ăng ten bắt sóng wifi\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/05/camera-yoosee-ngoai-troi-3.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>Camera c&oacute; ăng ten bắt s&oacute;ng wifi</p>\n\n<p><img alt=\"đèn hông ngoại camera quan sát ban đêm\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/05/camera-yoosee-ngoai-troi-4.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>đ&egrave;n h&ocirc;ng ngoại camera quan s&aacute;t ban đ&ecirc;m</p>\n\n<p><img alt=\"mặt ngang của camera\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/05/camera-yoosee-ngoai-troi-5.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>mặt ngang của camera</p>\n\n<p><img alt=\"Camera Yoosee Ngoài Trời\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/05/camera-yoosee-ngoai-troi-6.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>đ&oacute;ng g&oacute;i bao b&igrave; sản phẩm</p>\n\n<p><img alt=\"hình ảnh sản phẩm tại showroom camera wifi\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/05/camera-yoosee-ngoai-troi-7.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>h&igrave;nh ảnh sản phẩm tại showroom camera wifi</p>\n\n<p><img alt=\"mặt trước của camera \" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/05/camera-yoosee-ngoai-troi-8.jpg\" style=\"height:1280px; width:1280px\" /></p>\n\n<p>mặt trước của camera</p>\n\n<p>&nbsp;</p>\n\n<p><img alt=\"Hình ảnh quan sát bên ngoài rõ nét của camera thân wifi ngoài trời yoose\" src=\"https://benco.vn/wp-content/uploads/2019/11/hinh-anh-ban-ngay-cua-camera-wifi-than-ngoai-troi.jpg\" style=\"height:600px; width:800px\" /></p>\n\n<p>H&igrave;nh ảnh quan s&aacute;t b&ecirc;n ngo&agrave;i r&otilde; n&eacute;t</p>\n\n<p><img alt=\"Hình ảnh ban đêm của camera \" src=\"https://benco.vn/wp-content/uploads/2019/11/hinh-anh-quan-sat-ban-dem-camera-hong-ngoai-wifi-ngoai-troi-yoosee.jpg\" style=\"height:600px; width:800px\" /></p>\n\n<p>H&igrave;nh ảnh ban đ&ecirc;m của camera</p>\n\n<h2><strong>&nbsp;Ảnh lắp đặt thực tế camera wifi yoosee ngo&agrave;i trời</strong></h2>\n\n<ul>\n	<li>Ảnh lắp thực tế tại nh&agrave; xưởng</li>\n	<li>Lắp thực tế tại khu vực ngo&agrave;i trời</li>\n	<li>Lắp thực tế ứng dụng tại nh&agrave; m&aacute;y kho b&atilde;i</li>\n</ul>\n\n<p><img alt=\"Ảnh lắp đặt thực tế camera yoosee ngoài trời.\" src=\"https://benco.vn/wp-content/uploads/2019/11/1567_hinhanhlapcamerayooseengoaitroi4.jpg\" style=\"height:720px; width:960px\" /><img alt=\"Ảnh lắp đặt thực tế camera yoosee ngoài trời.\" src=\"https://benco.vn/wp-content/uploads/2019/11/1567_hinhanhlapcamerayooseengoaitroi3.jpg\" style=\"height:720px; width:960px\" /><img alt=\"Ảnh lắp đặt thực tế camera yoosee ngoài trời.\" src=\"https://benco.vn/wp-content/uploads/2019/11/1567_hinhanhlapcamerayooseengoaitroi1.jpg\" style=\"height:720px; width:960px\" /></p>\n\n<p>&nbsp;</p>\n\n<h2><strong>Ứng Dụng App Camera Yoosee Ngo&agrave;i Trời wifi</strong></h2>\n\n<p>Dưới đ&acirc;y l&agrave; h&igrave;nh ảnh v&agrave; đường link tải ứng dụng App Yoosee tr&ecirc;n điện thoại. Hiện App đ&atilde; hỗ trợ tiếng Việt. Xem lại tr&ecirc;n điện thoại. điều chỉnh h&igrave;nh ảnh, đ&agrave;m thoại 2 chiều trực tiếp tr&ecirc;n điện thoại. Rất dễ c&agrave;i đặt v&agrave; sử dụng.</p>\n\n<p>Lưu &yacute;: đều hỗ trợ cả Android v&agrave; Ios</p>\n\n<p><img alt=\"App Điện Thoại Camera Yoosee Ngoài Trời\" src=\"https://benco.vn/wp-content/uploads/2019/11/1567_ung-dung-app-xem-qua-dien-thoai-cua-camera-yoosee-ngoai-troi.jpg\" style=\"height:600px; width:600px\" /></p>\n\n<ul>\n	<li>Link tải App Yoosee Tr&ecirc;n Android &gt;&gt;&gt;&nbsp;<strong><a href=\"https://play.google.com/store/apps/details?id=com.yoosee&amp;hl=vi\">https://play.google.com/store/apps/details?id=com.yoosee&amp;hl=vi</a></strong></li>\n	<li>Link tải App Yoosee Tr&ecirc;n IOS &gt;&gt;&gt;&nbsp;<strong><a href=\"https://apps.apple.com/vn/app/yoosee/id981863450?l=vi\">https://apps.apple.com/vn/app/yoosee/id981863450?l=vi</a></strong></li>\n	<li>App ứng dụng 100% tiếng việt dễ c&agrave;i đặt.</li>\n</ul>\n\n<h2><strong>7 Bước C&agrave;i Đặt Camera Yoosee Ngo&agrave;i Trời Wifi</strong></h2>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/05/Camera-yoosee-than-ngoai-troi-1.jpg\" style=\"height:2560px; width:2560px\" /></p>\n\n<p>Camera Yoosee Th&acirc;n Ngo&agrave;i Trời</p>\n\n<ul>\n	<li><strong>Bước 1</strong>: Click v&agrave;o phần mềm YooSee. Nếu chưa c&oacute; t&agrave;i khoản bạn h&atilde;y nhấn &ldquo;Đăng k&yacute;&rdquo; để tạo t&agrave;i khoản mới</li>\n	<li><strong>Bước 2</strong>: Nhập Email v&agrave; mật khẩu m&agrave; bạn muốn đăng k&yacute;. Sau đ&oacute; bấm &ldquo;Đăng k&yacute;&rdquo;. Sau khi đăng k&yacute; th&agrave;nh c&ocirc;ng phần mềm sẽ tự động quay trở lại</li>\n	<li><strong>Bước 4.</strong>&nbsp;Bạn ấn &ldquo;Đăng nhập&rdquo; để sử dụng phần mềm.</li>\n	<li><strong>Bước 5</strong>: Cắm nguồn cho Camera v&agrave; đợi Camera khởi động xong.</li>\n	<li><strong>Bước 6:</strong>&nbsp;Tr&ecirc;n phần mềm bấm v&agrave;o biểu tượng (+). Click &ldquo;Th&ecirc;m thiết bị mới&rdquo;: Ở đ&acirc;y bạn sẽ c&oacute; 2 c&aacute;ch kết nối thường được sử dụng đ&oacute; l&agrave;: Sử dụng wifi hoặc Sử dụng d&acirc;y mạng để kết nối Camera với điện thoại.</li>\n	<li><strong>Bước 7</strong>: Sử dụng d&acirc;y mạng để kết nối Camera.</li>\n	<li>Tại đ&acirc;y bạn chọn đ&uacute;ng ID của camera (ID xem dưới đ&aacute;y camera)</li>\n	<li>H&atilde;y đặt t&ecirc;n cho thiết bị: (Nhập t&ecirc;n bạn muốn đặt cho Camera)</li>\n	<li>Vui l&ograve;ng nhập mật khẩu cho thiết bị: (Mật khẩu mặc định: 123)</li>\n	<li>Nhấn &ldquo;Lưu&rdquo;</li>\n</ul>\n\n<h2><strong>C&agrave;i đặt camera yoosee ngo&agrave;i trời với mạng wifi</strong></h2>\n\n<ul>\n	<li>Chọn biểu tượng h&igrave;nh s&oacute;ng Wifi. Nhập mật khẩu wifi đang sử dụng</li>\n	<li>Điện thoại sẽ ph&aacute;t ra &acirc;m thanh đầy Wifi cho Camera.</li>\n	<li>Sau khi nghe t&iacute;n hiệu th&ocirc;ng b&aacute;o c&agrave;i đặt wifi th&agrave;nh c&ocirc;ng.</li>\n	<li>(Nhập T&ecirc;n v&agrave; mật khẩu camera tương tự như tr&ecirc;n) Nếu c&agrave;i đặt Wifi thất bại &ndash;</li>\n	<li>h&atilde;y Reset lại camera v&agrave; thao t&aacute;c lại từ đầu,</li>\n	<li>đồng thời kiểm tra t&iacute;n hiệu mạng v&agrave; tr&aacute;nh tiếng ồn.</li>\n	<li>Để Reset Camera: bạn Nhấn v&agrave; giữ v&agrave;o n&uacute;t Reset khoảng 5-10s chờ wifi ph&aacute;t ra t&iacute;n hiệu đ&atilde; Reset th&igrave; nhả tay ra.II.</li>\n</ul>\n\n<h2><strong>Đổi mật khẩu camera Yoosee Ngo&agrave;i Trời wifi</strong></h2>\n\n<p>Trong trường hợp bạn bị qu&ecirc;n mật khẩu hoặc đổi mật khẩu th&igrave; l&agrave;m theo thao t&aacute;c dưới đ&acirc;y.</p>\n\n<p><img alt=\"Đổi mật khẩu camera Yoosee Ngoài Trời\" src=\"https://benco.vn/wp-content/uploads/2019/11/1567_huong-dan-doi-mat-khau-camera-yoosee-ngoai-troi.jpg\" style=\"height:600px; width:800px\" /></p>\n\n<ul>\n	<li>Tr&ecirc;n phần mềm hiển thị camera:</li>\n	<li>Bấm biểu tượng C&agrave;i đặt =&gt; C&agrave;i đặt an to&agrave;n =&gt; Mật khẩu quản l&yacute; v&agrave; nhập mật khẩu mới cho Camera.</li>\n	<li>Sau khi c&agrave;i đặt bằng d&acirc;y cho wifi bạn nhớ c&agrave;i đặt wifi cho Camera để Camera c&oacute; thể hoạt động bằng wifi m&agrave; kh&ocirc;ng cần d&ugrave;ng d&acirc;y mạng.</li>\n</ul>\n\n<h2><strong>&nbsp;C&aacute;c lưu &yacute; khi lắp camera wifi yoosee ngo&agrave;i trời</strong></h2>\n\n<p><img alt=\" Các lưu ý khi lắp camera wifi yoosee ngoài trời\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/05/Camera-yoosee-than-ngoai-troi-3.jpg\" style=\"height:2560px; width:2560px\" /></p>\n\n<p>C&aacute;c lưu &yacute; khi lắp camera wifi yoosee ngo&agrave;i trời</p>\n\n<ul>\n	<li>Khoảng c&aacute;ch lắp wifi đến camera, để đảm bảo t&iacute;n hiệu thu ph&aacute;t t&iacute;n hiệu tốt. c&aacute;c x&aacute;c định được v&ugrave;ng phủ s&oacute;ng wifi.</li>\n	<li>Vị tr&iacute; lắp cũng rất quan trọng tr&aacute;nh nơi bị dễ bị phản hồng ngoại hoặc ngược s&aacute;ng.</li>\n	<li>Camera h&igrave;nh ảnh bị nh&ograve;e th&igrave; xử l&yacute; thế n&agrave;o? Trường hợp n&agrave;y bạn kiểm tra xem ống k&iacute;nh c&oacute; bị bẩn hoặc bị nước v&ocirc; kh&ocirc;ng? Nếu kh&ocirc;ng xử l&yacute; được h&atilde;y gọi dịch vụ bảo h&agrave;nh 08.4568.1080</li>\n	<li>Tr&aacute;nh lắp bị che hồng ngoại dẫn đến phản hồng ngoại</li>\n	<li>Ch&uacute; &yacute; đến khoảng c&aacute;ch kết nối wifi để đảm bảo t&iacute;n hiệu.</li>\n	<li>VIDEO HƯỚNG DẪN C&Agrave;I ĐẶT CỰC DỄ ACE THAM KHẢO :</li>\n	<li>\n	<p>&nbsp;</p>\n	</li>\n</ul>\n\n<p>&nbsp;</p>\n\n<h2>Camera Ngo&agrave;i Trời Yoosee Th&acirc;n Hồng Ngoại</h2>\n\n<p>Đ&acirc;y l&agrave; d&ograve;ng camera th&acirc;n hồng ngoại kết nối kh&ocirc;ng d&acirc;y wifi của h&agrave;ng Yoosee. Tầm xa hồng ngoại nh&igrave;n từ 40m-80M độ ph&acirc;n giải FULL HD.</p>\n\n<p>C&oacute; khe cắm thẻ nhớ v&agrave; Micro để đ&agrave;m thoại 2 chiều dễ d&agrave;ng. Chịu được nắng mưa khi lắp ngo&agrave;i trời. Đ&agrave;m thoại 2 chiều</p>\n\n<p>Xem th&ecirc;m&nbsp;<a href=\"https://benco.vn/camera-wifi-yoosee-3-rau-full-hd\"><strong>camera Yoosee 3 R&acirc;u</strong></a></p>\n\n<p>Hoặc t&igrave;m hiểu th&ecirc;m về d&ograve;ng sản phẩm Yoosee tại link sau &gt;&gt;&gt;&nbsp;<strong>Camera Yoosee</strong></p>\n\n<p><img alt=\"Camera Yoosee Ngoài Trời Chịu Mưa Nắng\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/07/camera-yoosee-ngoai-troi-hong-ngoai.jpg\" style=\"height:798px; width:798px\" /></p>\n\n<p>Camera Yoosee Ngo&agrave;i Trời Chịu Mưa Nắng</p>\n\n<h2>Camera WIFI Th&acirc;n Yoosee Hồng Ngoại</h2>\n\n<p>Đ&acirc;y l&agrave; d&ograve;ng camera th&acirc;n hồng ngoại kết nối kh&ocirc;ng d&acirc;y wifi của h&agrave;ng Yoosee. Tầm xa hồng ngoại nh&igrave;n từ 40m-80M độ ph&acirc;n giải FULL HD.</p>\n\n<p>C&oacute; khe cắm thẻ nhớ v&agrave; Micro để đ&agrave;m thoại 2 chiều dễ d&agrave;ng. Chịu được nắng mưa khi lắp ngo&agrave;i trời.</p>\n\n<p>Xem th&ecirc;m b&aacute;o gi&aacute; camera yoosee 3 r&acirc;u 1080P chỉ 389K &gt;&gt;&gt;</p>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/07/1567_review_camera_yoosee_ngoai_troi.jpg\" style=\"height:1070px; width:802px\" /></p>\n\n<p>B&oacute;c hộp camera yoosee ngo&agrave;i trời</p>\n\n<p>&nbsp;</p>\n\n<h2><strong>Th&ocirc;ng số kỹ thuật camera th&acirc;n Yoosee&nbsp;</strong></h2>\n\n<ol>\n	<li>Camera wifi 2 r&acirc;u thu ph&aacute;t t&iacute;n hiệu &acirc;m thanh h&igrave;nh ảnh</li>\n	<li>Độ ph&acirc;n giải FULL HD 1080P</li>\n	<li>Cảm biến h&igrave;nh ảnh Sony 1/3inch cho g&oacute;c quan s&aacute;t rộng l&ecirc;n tới 90 độ</li>\n	<li>Ti&ecirc;u chuẩn vỏ ngo&agrave;i trời IP67 chống mưa nắng rất tốt.</li>\n	<li>Khoảng c&aacute;ch thu ph&aacute;t wifi từ 10m-50m. T&ugrave;y từng điều kiện thực tế</li>\n	<li>Tầm xa hồng ngoại l&ecirc;n tới 80m</li>\n	<li>Khả năng đ&agrave;m thoại 2 chiều</li>\n	<li>B&aacute;o động qua điện thoại</li>\n	<li>Nhiều người truy cập c&ugrave;ng l&uacute;c</li>\n</ol>\n\n<h2><strong>T&iacute;nh năng camera hồng ngoại Yoosee</strong></h2>\n\n<p>Khả năng b&aacute;o động chống trộm qua điện thoại</p>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/07/1567_camera-than-yoosee-chong-trom.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>Nh&igrave;n đ&ecirc;m r&otilde; n&eacute;t với c&ocirc;ng nghệ Smart IR th&ocirc;ng minh</p>\n\n<p>Hồng ngoại nh&igrave;n xa</p>\n\n<p>Hồng ngoại camera th&acirc;n wifi yoosee 2 r&acirc;u</p>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/07/1567_hong-ngoai-camera-than-wifi-yoosee.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>C&ocirc;ng nghệ P2P cắm l&agrave; chạy của Yoosee 2 R&acirc;u</p>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/07/1567_cam-la-chay-p2p-cua-camera-wif-yoosee.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>&nbsp;</p>\n\n<p>&nbsp;</p>\n\n<p>Quan s&aacute;t r&otilde; n&eacute;t chất lượng</p>\n\n<p>&nbsp;</p>\n\n<ul>\n	<li><img alt=\"Cấu tạo và nguyên lý hoạt động của camera không dây\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/07/cau-tao-camera-khong-day.jpg\" style=\"height:600px; width:800px\" /></li>\n</ul>\n\n<h2><strong>Ứng dụng Camera wifi th&acirc;n Yoosee</strong></h2>\n\n<ul>\n	<li>Ứng dụng quan s&aacute;t văn ph&ograve;ng</li>\n	<li>Ứng dụng quan s&aacute;t kho h&agrave;ng-kho b&atilde;i</li>\n	<li>Lắp đặt ngo&agrave;i trời chịu mưa gi&oacute;</li>\n</ul>\n\n<h2><strong>H&igrave;nh ảnh thực tế camera th&acirc;n yoosee&nbsp;</strong></h2>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/07/1567_review_camera_yoosee_ngoai_troi-1.jpg\" style=\"height:1071px; width:803px\" /></p>\n\n<p>B&oacute;c hộp sản phẩm</p>\n\n<h2><strong>Review camera yoosee th&acirc;n ngo&agrave;i trời&nbsp;</strong></h2>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/07/1567_dong-goi-camera-yoosee-2-rau.jpg\" style=\"height:600px; width:800px\" /></p>\n\n<p>Đ&oacute;ng g&oacute;i camera yoosee 2 r&acirc;u wifi</p>\n\n<p>&nbsp;</p>\n\n<h2><strong>Ảnh lắp đặt thực tế camera yoosee ng</strong><strong>o&agrave;i trời.</strong></h2>\n\n<p>H&igrave;nh ảnh thực tế cửa h&agrave;ng tạp h&oacute;a</p>\n\n<p><img alt=\"Hình ảnh thực tế cửa hàng tạp hóa\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/07/lap-dat-camera-wifi-1.jpg\" style=\"height:870px; width:870px\" /></p>\n\n<p>H&igrave;nh ảnh thực tế lắp nh&agrave; d&acirc;n</p>\n\n<p><img alt=\"Hình ảnh lắp đặt thực tế camera yoosee giá rẻ\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/06/camera-yoosee-gia-re-2.jpg\" style=\"height:669px; width:892px\" /></p>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2019/07/1567_hinhanhlapcamerayooseengoaitroi3.jpg\" style=\"height:720px; width:960px\" /></p>\n\n<p>Ảnh lắp đặt thực tế camera yoosee cho nh&agrave; xưởng</p>\n\n<p>&nbsp;</p>\n\n<p>&nbsp;</p>\n\n<p><em>H&igrave;nh ảnh thực tế bởi bộ camera yoosee do camera wifi&nbsp; lắp đặt (đ&atilde; được sự cho ph&eacute;p của kh&aacute;ch h&agrave;ng)<img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/f280b51bd81f24417d0e-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/b78fa139cc3d3063692c-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/e7a38a2de7291b774238-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/f066def2b3f64fa816e7-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/a112978dfa8906d75f98-compressed-1-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/449db075dd71212f7860-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/9430e1f58cf170af29e0-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/59979c01f1050d5b5414-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/871867a30aa7f6f9afb6-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/970214e779e385bddcf2-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2020/07/7b0ad18abc8e40d0199f-compressed-711x400.jpg\" style=\"height:400px; width:711px\" /></em></p>\n', 1679925477, 1680445636),
+(7, 1, 'Camera Wifi Yoosee Ngoài Trời 5.0 Megapixel – 4 Râu- Ban Đêm Có Màu (Mẫu Hot 2022)', '990000', 1996, '6_Camera-yoosee-than-ngoai-troi-6-510x510.jpg', 52, 475000, 3, 3, 1, '<ul>\n	<li>Lắp đặt được ngo&agrave;i trời</li>\n	<li>Camera độ ph&acirc;n giải 5.0 Megapixel Si&ecirc;u n&eacute;t</li>\n	<li>Quan s&aacute;t ban đ&ecirc;m c&oacute; m&agrave;u</li>\n	<li>Đ&agrave;m thoại 2 chiều</li>\n	<li>Bảo h&agrave;nh 12 th&aacute;ng 1 đổi 1</li>\n	<li>Kết nối kh&ocirc;ng d&acirc;y qua wifi</li>\n</ul>\n', '<h2><strong>Camera Wifi Yoosee Ngo&agrave;i Trời 5.0 Megapixel &ndash; 4 R&acirc;u- Ban Đ&ecirc;m C&oacute; M&agrave;u</strong></h2>\n\n<p><em><strong>Camera Yoosee ngo&agrave;i trời</strong>&nbsp;l&agrave; l&agrave; d&ograve;ng camera th&acirc;n hồng ngoại kết nối kh&ocirc;ng d&acirc;y của h&atilde;ng&nbsp;&nbsp;<strong><a href=\"https://camerawifi.com.vn/camera-yoosee/\">camera yoosee</a></strong>. Tầm xa hồng ngoại nh&igrave;n đ&ecirc;m từ 20m đến 30m độ ph&acirc;n giải 5.0 Megapixel. C&oacute; kết cấu thiết kế ti&ecirc;u chuẩn vỏ IP 66 chống mưa, chịu được thời tiết khắc nghiệt. V&agrave; c&oacute; khe cắm thẻ nhớ trực tiếp tr&ecirc;n camera.</em></p>\n\n<p>C&oacute; khe cắm thẻ nhớ v&agrave; Micro để đ&agrave;m thoại 2 chiều dễ d&agrave;ng. Chịu được nắng mưa khi lắp ngo&agrave;i trời.</p>\n\n<ul>\n	<li>Xem th&ecirc;m b&aacute;o gi&aacute; camera&nbsp;robot 3 r&acirc;u&nbsp;1080P chỉ&nbsp;<strong>349K</strong>&nbsp;&gt;&gt;&gt;&nbsp;<strong><a href=\"https://camerawifi.com.vn/camera-yoosee-3-rau/\">Camera Yoosee 3 R&acirc;u</a></strong></li>\n</ul>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/04/camera-wifi-yoosee-ngoai-troi-5mpx-soi-dem-co-mau.gif\" style=\"height:568px; width:568px\" /></p>\n\n<h2><strong>&nbsp;Th&ocirc;ng số camera th&acirc;n Yoosee wifi ngo&agrave;i trời 4 r&acirc;u 5.0 Megapixel</strong></h2>\n\n<ul>\n	<li>&ndash; Cảm biến h&igrave;nh ảnh: Chuẩn Full HD 5.0Mpx CMOS 4.0mm<br />\n	&ndash; Hệ thống t&iacute;n hiệu: PAL/NTSC<br />\n	&ndash; Độ ph&acirc;n giải video: 2560P * 1920P<br />\n	&ndash; Tốc độ video: 25 FPS hoặc 30 FPS<br />\n	&ndash; Cảnh b&aacute;o chuyển động chống chộm: C&oacute;<br />\n	&ndash; Hỗ trợ chụp ảnh: C&oacute;<br />\n	&ndash; Hỗ trợ NVR: C&oacute;<br />\n	&ndash; Đầu v&agrave;o &acirc;m thanh: Microphone t&iacute;ch hợp<br />\n	&ndash; Hỗ trợ lưu trữ: 1 x Micro SD<br />\n	&ndash; B&aacute;o động: Hỗ trợ b&aacute;o động qua điện thoại, email b&aacute;o động<br />\n	&ndash; Ống k&iacute;nh: 4.0mm<br />\n	&ndash; Hồng ngoại: 20m<br />\n	&ndash; Chống nước: IP 67<br />\n	&ndash; Nguồn đầu v&agrave;o: DC12V 2A<br />\n	&ndash; BỘ SẢN PHẨM BAO GỒM: Camera Yoosee 5.0Mpx 36Led 4 R&acirc;u + Ch&acirc;n đế + Nguồn sạc + V&iacute;t bắt + S&aacute;ch hướng dẫn<br />\n	&ndash; Bảo h&agrave;nh 06 th&aacute;ng (Lỗi kỹ thuật 1 đổi 1 trong 6 th&aacute;ng )</li>\n</ul>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/04/camera-yoosee-ngoai-troi.gif\" style=\"height:800px; width:800px\" /></p>\n\n<h2><strong>T&iacute;nh năng&nbsp; Camera hồng ngoại Yoosee WIFI ngo&agrave;i trời</strong></h2>\n\n<p><img alt=\"Tính năng sản phẩm camera hồng ngoại Yoosee WIFI ngoài trời\" src=\"https://benco.vn/wp-content/uploads/2019/11/1567_camera-than-yoosee-chong-trom.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<ul>\n	<li>Khả năng b&aacute;o động chống trộm qua điện thoại</li>\n</ul>\n\n<p><img alt=\"Hồng ngoại camera thân wifi yoosee 2 râu ngoài trời\" src=\"https://benco.vn/wp-content/uploads/2019/11/1567_hong_ngoai_camera_than_wifi_yoosee.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<ul>\n	<li>Nh&igrave;n đ&ecirc;m r&otilde; n&eacute;t với c&ocirc;ng nghệ Smart IR th&ocirc;ng minh</li>\n	<li>Hồng ngoại nh&igrave;n xa</li>\n</ul>\n\n<p><img alt=\"Công nghệ P2P cắm là chạy của Yoosee 2 Râu\" src=\"https://benco.vn/wp-content/uploads/2019/11/1567_cam-la-chay-p2p-cua-camera-wif-yoosee.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<p>&nbsp;</p>\n\n<ul>\n	<li>T&iacute;nh năng P2P cắm l&agrave; chạy của Yoosee</li>\n</ul>\n\n<p><img alt=\"1567_camera-yoosee-quan-sat-ro-net\" src=\"https://benco.vn/wp-content/uploads/2019/11/1567_camera-yoosee-quan-sat-ro-net.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<ul>\n	<li>&nbsp;Quan s&aacute;t r&otilde; n&eacute;t chất lượng</li>\n</ul>\n\n<p><img alt=\"Đàm thoại 2 chiều Yoosee\" src=\"https://benco.vn/wp-content/uploads/2019/11/1567_camera-than-yoosee-2-rau-dam-thoai-2-chieu.jpg\" style=\"height:800px; width:800px\" /></p>\n\n<h2><strong>Ứng dụng Camera wifi th&acirc;n ngo&agrave;i trời Yoosee</strong></h2>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/04/camera-yoosee-ngoai-troi-sieu-net-dem-co-mau-5.0mpx.gif\" style=\"height:800px; width:800px\" /></p>\n\n<ul>\n	<li>Ứng dụng quan s&aacute;t văn ph&ograve;ng</li>\n	<li>Ứng dụng quan s&aacute;t kho h&agrave;ng-kho b&atilde;i</li>\n	<li>Lắp đặt ngo&agrave;i trời chịu mưa gi&oacute;</li>\n	<li>Ứng dụng quan s&aacute;t gia đ&igrave;nh</li>\n	<li>Ứng dụng lắp shop thời trang</li>\n	<li>Ứng dụng lắp n&ocirc;ng trại, trang trại</li>\n	<li>Ứng dụng lắp đặt quan s&aacute;t an ninh t&iacute;ch hợp b&aacute;o động</li>\n</ul>\n\n<h2><strong>H&igrave;nh ảnh thực tế camera wifi th&acirc;n yoosee ngo&agrave;i trời</strong></h2>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/04/phu-kien-camera-yoosee-di-kem.gif\" style=\"height:1920px; width:2560px\" /></p>\n\n<p>Đầy đủ phụ kiện: nguồn camera + ch&acirc;n đế + ốc v&iacute;t + s&aacute;ch hướng dẫn&nbsp; sử dụng</p>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/04/camera-ngoai-troi-yoosee-5-megapixel.gif\" style=\"height:887px; width:890px\" /></p>\n\n<p><img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/04/camera-wifi-yoosee-ngoai-troi-4-rau-5.gif\" style=\"height:400px; width:400px\" />&nbsp;<img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/04/camera-wifi-yoosee-ngoai-troi-mat-sau.gif\" style=\"height:400px; width:400px\" />&nbsp;<img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/04/cong-cam-mang-nut-reset-nut-cam-nguon-camea-wifi-yoosee.gif\" style=\"height:400px; width:400px\" />&nbsp;<img alt=\"\" src=\"https://camerawifi.com.vn/wp-content/uploads/2022/04/loa-va-khe-cam-the-nho-camera-yoosee-ngoai-troi.gif\" style=\"height:400px; width:400px\" /></p>\n\n<p>Đ&oacute;ng g&oacute;i camera đầy đủ phụ kiện, nguồn, ch&acirc;n đế s&aacute;ch hướng dẫn sử dụng.</p>\n\n<ul>\n	<li><strong>Bước 1</strong>: Click v&agrave;o phần mềm YooSee. Nếu chưa c&oacute; t&agrave;i khoản bạn h&atilde;y nhấn &ldquo;Đăng k&yacute;&rdquo; để tạo t&agrave;i khoản mới</li>\n	<li><strong>Bước 2</strong>: Nhập Email v&agrave; mật khẩu m&agrave; bạn muốn đăng k&yacute;. Sau đ&oacute; bấm &ldquo;Đăng k&yacute;&rdquo;. Sau khi đăng k&yacute; th&agrave;nh c&ocirc;ng phần mềm sẽ tự động quay trở lại</li>\n	<li><strong>Bước 4.</strong>&nbsp;Bạn ấn &ldquo;Đăng nhập&rdquo; để sử dụng phần mềm.</li>\n	<li><strong>Bước 5</strong>: Cắm nguồn cho Camera v&agrave; đợi Camera khởi động xong.</li>\n	<li><strong>Bước 6:</strong>&nbsp;Tr&ecirc;n phần mềm bấm v&agrave;o biểu tượng (+). Click &ldquo;Th&ecirc;m thiết bị mới&rdquo;: Ở đ&acirc;y bạn sẽ c&oacute; 2 c&aacute;ch kết nối thường được sử dụng đ&oacute; l&agrave;: Sử dụng wifi hoặc Sử dụng d&acirc;y mạng để kết nối Camera với điện thoại.</li>\n	<li><strong>Bước 7</strong>: Sử dụng d&acirc;y mạng để kết nối Camera.</li>\n	<li>Tại đ&acirc;y bạn chọn đ&uacute;ng ID của camera (ID xem dưới đ&aacute;y camera)</li>\n	<li>H&atilde;y đặt t&ecirc;n cho thiết bị: (Nhập t&ecirc;n bạn muốn đặt cho Camera)</li>\n	<li>Vui l&ograve;ng nhập mật khẩu cho thiết bị: (Mật khẩu mặc định: 123)</li>\n	<li>Nhấn &ldquo;Lưu&rdquo;</li>\n</ul>\n\n<h2><strong>C&agrave;i đặt camera yoosee ngo&agrave;i trời với mạng wifi</strong></h2>\n\n<ul>\n	<li>Chọn biểu tượng h&igrave;nh s&oacute;ng Wifi. Nhập mật khẩu wifi đang sử dụng</li>\n	<li>Điện thoại sẽ ph&aacute;t ra &acirc;m thanh đầy Wifi cho Camera.</li>\n	<li>Sau khi nghe t&iacute;n hiệu th&ocirc;ng b&aacute;o c&agrave;i đặt wifi th&agrave;nh c&ocirc;ng.</li>\n	<li>(Nhập T&ecirc;n v&agrave; mật khẩu camera tương tự như tr&ecirc;n) Nếu c&agrave;i đặt Wifi thất bại &ndash;</li>\n	<li>h&atilde;y Reset lại camera v&agrave; thao t&aacute;c lại từ đầu,</li>\n	<li>đồng thời kiểm tra t&iacute;n hiệu mạng v&agrave; tr&aacute;nh tiếng ồn.</li>\n	<li>Để Reset Camera: bạn Nhấn v&agrave; giữ v&agrave;o n&uacute;t Reset khoảng 5-10s chờ wifi ph&aacute;t ra t&iacute;n hiệu đ&atilde; Reset th&igrave; nhả tay ra.II.</li>\n</ul>\n', 1679925769, 1680445636),
+(9, 1, 'Camera Imous ', '300000', 100, '1679935489_camera-tuya-tot-510x510.jpg', 25, 225000, 0, 2, 1, '<p>asdasda</p>\r\n', '<p>asdasd</p>\r\n', 1679926809, 1679969784),
+(10, 1, 'Camera dep ', '300000', 101, '1679971680_Camera-yoosee-than-ngoai-troi-6-510x510.jpg', 25, 225000, 0, 1, 1, '<p>asdasd</p>\r\n', '<p>aasdasd</p>\r\n', 1679928659, 1679973278),
+(13, 1, 'Camera A', '100000', 1, '1679989417_camera-wifi-yoosee-ngoai-troi-5mpx-soi-dem-co-mau.gif', 1, 99000, 2, 4, 1, '<p>FSDF</p>\r\n', '<p>SDFSDF</p>\r\n', 1679989417, 1680269837),
+(14, 1, 'Camera B ', '200000', 1, '1679989499_camera-tuya-tot-510x510.jpg', 2, 196000, 2, 3, 1, '<p>ASDA</p>\r\n', '<p>QWEQ</p>\r\n', 1679989499, 1680269837),
+(15, 1, 'Camera C', '350000', 1, '1679989523_camera-wifi-yoosee-3-rau-trong-nha-sieu-net-3-510x510.gif', 2, 343000, 2, 2, 1, '<p>ASDA</p>\r\n', '<p>ASDAD</p>\r\n', 1679989523, 1680269837),
+(16, 1, 'Camera D', '400000', 2, '1679989543_camera-yoosee-bong-den-5mp-510x510.jpg', 4, 384000, 2, 1, 1, '<p>ASDSAD</p>\r\n', '<p>XZVZV</p>\r\n', 1679989543, 1680269837),
+(17, 1, 'Camera E', '100000', 500, '1679998014_camera-yoosee-bong-den-5mp-510x510.jpg', 20, 80000, 0, 0, 1, '<p>asdad</p>\r\n', '<p>asdasda</p>\r\n', 1679998014, 1679998014);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_tkdonhang`
+--
+
+CREATE TABLE `tbl_tkdonhang` (
+  `id_tkdonhang` int(11) NOT NULL,
+  `ngaydat` varchar(30) NOT NULL,
+  `donhang` int(11) NOT NULL,
+  `doanhthu` varchar(100) NOT NULL,
+  `soluongban` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_tkdonhang`
+--
+
+INSERT INTO `tbl_tkdonhang` (`id_tkdonhang`, `ngaydat`, `donhang`, `doanhthu`, `soluongban`) VALUES
+(1, '2023-04-01', 0, '3818000', 11),
+(2, '2023-04-02', 0, '2108000', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_user`
+--
+
+CREATE TABLE `tbl_user` (
+  `id_user` int(11) NOT NULL,
+  `privilege` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `phonenumber` varchar(11) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `tendathang` varchar(100) NOT NULL,
+  `province_id` int(11) NOT NULL,
+  `district_id` int(11) NOT NULL,
+  `wards_id` int(11) NOT NULL,
+  `address_detail` varchar(200) NOT NULL,
+  `created_time` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_user`
+--
+
+INSERT INTO `tbl_user` (`id_user`, `privilege`, `name`, `email`, `phonenumber`, `password`, `tendathang`, `province_id`, `district_id`, `wards_id`, `address_detail`, `created_time`) VALUES
+(1, 1, 'Nguyễn Đạt', 'ngocdatnguyen2404@gmail.com', '0935013553', '0123456', 'Nguyễn Ngọc Đạt', 42, 467, 7740, 'Gần khách sạn Hiệp Phúc', 0),
+(2, 0, 'Nguyễn Ngọc Đạt', 'seiryuukurogane12@gmail.com', '0935013553', '1234567', 'Nguyễn Ngọc Đạt', 0, 0, 0, 'Đăk Lăk, Buôn Ma Thuột, Eatu', 0),
+(3, 0, ' Ngọc Đạt', 'seiryuukurogane@gmail.com', '0935013553', '1234567', 'Nguyễn Ngọc Đạt', 0, 0, 0, 'Đăk Lăk, Buôn Ma Thuột, Eatu', 0),
+(4, 0, 'Dat Nguyen', 'seiryuukurogane24@gmail.com', '0935013553', '1234567', 'Nguyễn Ngọc Đạt', 0, 0, 0, 'Đăk Lăk, Buôn Ma Thuột, Eatu', 0),
+(5, 0, 'John Nguyen', 'dat@gmail.com', '0935013553', '1234567', 'Nguyễn Ngọc Đạt', 0, 0, 0, 'Đăk Lăk, Buôn Ma Thuột, Eatu', 0),
+(7, 0, 'Bảo Phạm', 'bao@gmail.com', '0935013554', '1234567', 'Phạm Phú Bảo', 2, 32, 589, '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wards`
 --
 
 CREATE TABLE `wards` (
   `wards_id` int(11) NOT NULL,
   `district_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='Xã Phường';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Xã Phường';
 
 --
--- Đang đổ dữ liệu cho bảng `wards`
+-- Dumping data for table `wards`
 --
 
 INSERT INTO `wards` (`wards_id`, `district_id`, `name`) VALUES
@@ -11483,3 +11738,136 @@ INSERT INTO `wards` (`wards_id`, `district_id`, `name`) VALUES
 (10582, 705, 'Thị trấn Rạch Gốc'),
 (10583, 705, 'Xã Tân Ân'),
 (10584, 705, 'Xã Đất Mũi');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `tbl_admin`
+--
+ALTER TABLE `tbl_admin`
+  ADD PRIMARY KEY (`id_admin`);
+
+--
+-- Indexes for table `tbl_cart`
+--
+ALTER TABLE `tbl_cart`
+  ADD PRIMARY KEY (`id_cart`);
+
+--
+-- Indexes for table `tbl_comments`
+--
+ALTER TABLE `tbl_comments`
+  ADD PRIMARY KEY (`id_comment`);
+
+--
+-- Indexes for table `tbl_danhmuc`
+--
+ALTER TABLE `tbl_danhmuc`
+  ADD PRIMARY KEY (`id_danhmuc`);
+
+--
+-- Indexes for table `tbl_order`
+--
+ALTER TABLE `tbl_order`
+  ADD PRIMARY KEY (`id_order`);
+
+--
+-- Indexes for table `tbl_order_details`
+--
+ALTER TABLE `tbl_order_details`
+  ADD PRIMARY KEY (`id_order_details`);
+
+--
+-- Indexes for table `tbl_reviews`
+--
+ALTER TABLE `tbl_reviews`
+  ADD PRIMARY KEY (`id_review`);
+
+--
+-- Indexes for table `tbl_sanpham`
+--
+ALTER TABLE `tbl_sanpham`
+  ADD PRIMARY KEY (`id_sanpham`);
+
+--
+-- Indexes for table `tbl_tkdonhang`
+--
+ALTER TABLE `tbl_tkdonhang`
+  ADD PRIMARY KEY (`id_tkdonhang`);
+
+--
+-- Indexes for table `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  ADD PRIMARY KEY (`id_user`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tbl_admin`
+--
+ALTER TABLE `tbl_admin`
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tbl_cart`
+--
+ALTER TABLE `tbl_cart`
+  MODIFY `id_cart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+
+--
+-- AUTO_INCREMENT for table `tbl_comments`
+--
+ALTER TABLE `tbl_comments`
+  MODIFY `id_comment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_danhmuc`
+--
+ALTER TABLE `tbl_danhmuc`
+  MODIFY `id_danhmuc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `tbl_order`
+--
+ALTER TABLE `tbl_order`
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `tbl_order_details`
+--
+ALTER TABLE `tbl_order_details`
+  MODIFY `id_order_details` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- AUTO_INCREMENT for table `tbl_reviews`
+--
+ALTER TABLE `tbl_reviews`
+  MODIFY `id_review` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `tbl_sanpham`
+--
+ALTER TABLE `tbl_sanpham`
+  MODIFY `id_sanpham` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `tbl_tkdonhang`
+--
+ALTER TABLE `tbl_tkdonhang`
+  MODIFY `id_tkdonhang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
