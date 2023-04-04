@@ -39,7 +39,8 @@ if (mysqli_num_rows($query_lietke_member) > 0) {
     <div class="product-cell col stock"><?php echo date('d/m/Y', $row['last_updated']) ?>
     </div>
     <div class="product-cell col-2 detail">
-        <button title="Xem chi tiết" class="detail-member" value="<?php echo $row['id_admin'] ?>"><span>Phân
+        <button title="Xem chi tiết" class="detail-member decentralization-member"
+            value="<?php echo $row['id_admin'] ?>"><span>Phân
                 quyền</span></button>
     </div>
     <div class="product-cell col-1 btn">
@@ -109,7 +110,6 @@ if (mysqli_num_rows($query_lietke_member) > 0) {
             <?php
                 }
                 ?>
-
         </ul>
     </nav>
 </div>

@@ -35,19 +35,13 @@
                                     <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
                                 </svg></button>
                             <div class="filter-menu-cate">
-                                <label>Trạng thái</label>
-                                <select class="filter_status">
-                                    <option value="2">Tất cả trạng thái</option>
-                                    <option value="1">Kích hoạt</option>
-                                    <option value="0">Ẩn</option>
+                                <label>Chức vụ</label>
+                                <select class="filter_duty">
+                                    <option value="2">Tất cả</option>
+                                    <option value="1">Quản lý</option>
+                                    <option value="0">Nhân viên</option>
                                 </select>
 
-                                <label>Ngày đăng</label>
-                                <select class="filter_dated">
-                                    <option value="2">Tất cả</option>
-                                    <option value="1">Mới nhất</option>
-                                    <option value="0">Cũ nhất</option>
-                                </select>
                                 <div class="filter-menu-buttons">
                                     <button type="reset" class="filter-button reset">
                                         Reset
@@ -76,7 +70,7 @@
                     </div>
                     <div id="load_member_data"></div>
                     <div id="view-add-member"></div>
-                    <div id="view-detail-member"></div>
+                    <div id="view-decentralization-member"></div>
                     <div id="view-edit-member"></div>
                 </div>
             </div>
@@ -200,17 +194,14 @@
             $("#member__add-model").remove();
         })
 
-        // View detail member
-        $(document).on("click", '.detail-member', function() {
+        // Decentralization member
+        $(document).on("click", '.decentralization-member', function() {
             var id = $(this).val();
             var url =
-                "modules/quanlythanhvien/viewDetailmember.php?idmember=" +
+                "modules/quanlythanhvien/viewDecentralizationMember.php?idmember=" +
                 id;
             $.post(url, (data) => {
-                $("#view-detail-member").html(data);
-                $('.model-close-btn i').click(() => {
-                    $('.model__view-detail-container').css("display", "none");
-                })
+                $("#view-decentralization-member").html(data);
             });
         })
 
@@ -221,8 +212,6 @@
         $(document).on("click", '.modal__background', function() {
             $("#member__add-model").remove();
         })
-
-
 
         // Handle search
         var pageIndexMemberSearch = 1;
@@ -271,19 +260,17 @@
 
         // Handle filter
         $(".jsFilter").on("click", function() {
-            document.querySelector(".filter-menu-Member").classList.toggle("active");
+            document.querySelector(".filter-menu-cate").classList.toggle("active");
         });
 
         var pageIndexMemberFilter = 1
         $(document).on("click", '.filter-button.apply', function() {
-            var status = $('.filter_status').val();
-            var dated = $('.filter_dated').val();
+            var duty = $('.filter_duty').val();
             $.ajax({
                 url: "modules/quanlythanhvien/handleEvent/handleFilter.php?pageIndex=" +
                     pageIndexMemberFilter,
                 data: {
-                    status: status,
-                    dated: dated
+                    duty: duty,
                 },
                 dataType: 'html',
                 method: "post",
@@ -294,16 +281,14 @@
             })
         })
 
-        $(document).on("click", '.page-link.searchMember', function() {
+        $(document).on("click", '.page-link.search', function() {
             pageIndexMemberFilter = $(this).attr("value");
-            var status = $('.filter_status').val();
-            var dated = $('.filter_dated').val();
+            var duty = $('.filter_duty').val();
             $.ajax({
                 url: "modules/quanlythanhvien/handleEvent/handleFilter.php?pageIndex=" +
                     pageIndexMemberFilter,
                 data: {
-                    status: status,
-                    dated: dated
+                    duty: duty,
                 },
                 dataType: 'html',
                 method: "post",
@@ -315,7 +300,7 @@
         })
 
         $(document).on("click", '.filter-button.reset', function() {
-            $('.filter_status').val('2')
+            $('.filter_duty').val('2')
             $('.filter_dated').val('2')
         })
     })

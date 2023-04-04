@@ -17,13 +17,13 @@ $row = mysqli_fetch_array($query)
                     <input type="text" class="username" value="<?php echo $row['username'] ?>">
                 </div>
                 <div class="model__content">
-                    <label class="col-2">email: </label>
+                    <label class="col-2">Email: </label>
                     <input type="text" class="email" value="<?php echo $row['email'] ?>">
                 </div>
                 <div class="model__content">
                     <label class="col-2">Chức vụ: </label>
                     <select class="duty">
-                        <?php if ($row['email'] == 1) {  ?>
+                        <?php if ($row['duty'] == 1) {  ?>
                         <option value="1" selected>Nhân viên</option>
                         <option value="0">Quản lý</option>
                         <?php } else { ?>
@@ -32,15 +32,7 @@ $row = mysqli_fetch_array($query)
                         <?php } ?>
                     </select>
                 </div>
-                <div class="model__content">
-                    <label class="col-2">Mật khẩu: </label>
-                    <input type="password" class="password">
-                </div>
-                <div class="model__content">
-                    <label class="col-2">Nhập lại mật khẩu: </label>
-                    <input type="password" class="password_confirmation">
-                </div>
-                <button id="suathanhvien">Thêm thành viên</button>
+                <button id="suathanhvien">Sửa thành viên</button>
             </div>
         </form>
         <div class="modal__background"></div>
@@ -50,72 +42,77 @@ $row = mysqli_fetch_array($query)
 
 <script>
 $(document).ready(() => {
-    CKEDITOR.replace('edit-category')
-
     // View data
     var pageIndexMainCate = 1
 
     function view_data() {
-        $.post('modules/quanlydanhmucsp/handleEvent/listCategoryData.php?pageIndex=' +
+        $.post('modules/quanlythanhvien/handleEvent/listMemberData.php?pageIndex=' +
             pageIndexMainCate,
             function(
                 data) {
-                $('#load_category_data').html(data)
+                $('#load_member_data').html(data)
             })
     }
 
-    // Handle edit category
+    const validateEmail = (email) => {
+        return email.match(
+            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+    };
+
+    // Handle edit member
     $(document).on("click", '#suathanhvien', function(e) {
         e.preventDefault();
-        var tendanhmuc = $('.tendanhmuc').val();
-        var trangthai = $('.trangthai').val();
-        var content = CKEDITOR.instances['edit-category'].getData();
-
+        var username = $('.username').val();
+        var email = $('.email').val();
+        var duty = $('.duty').val();
         let errors = {
             nameError: '',
-            detailError: ''
+            emailError: '',
         }
 
-        // Validate category name
-        if (tendanhmuc.length === 0) {
+        // Validate member name
+        if (username.length === 0) {
             errors.nameError = 'Tên danh mục không được để trống'
             swal("Vui lòng nhập lại", errors.nameError, "error");
-            $('.tendanhmuc').val('')
-            $('.tendanhmuc').css("border-color", "#ff000087");
+            $('.username').val('')
+            $('.username').css("border-color", "#ff000087");
         } else {
             errors.nameError = '';
-            $('.tendanhmuc').css("border-color", "#008000ab");
+            $('.username').css("border-color", "#008000ab");
         }
 
-        // Validate category detail
-        if (content.length === 0) {
-            errors.detailError = 'Nội dung danh mục không được để trống'
-            swal("Vui lòng nhập lại", errors.detailError, "error");
-            $('.cke_chrome').css("border-color", "#ff000087");
+        // Validate email
+        if (email.length === 0) {
+            errors.emailError = "Không được để trống email!";
+            $('.email').css("border-color", "#f33a58");
+            swal("Vui lòng nhập lại", errors.emailError, "error");
+        } else if (!validateEmail(email)) {
+            errors.emailError = "Email không hợp lệ!";
+            $('.email').css("border-color", "#f33a58");
+            swal("Vui lòng nhập lại", errors.emailError, "error");
         } else {
-            errors.detailError = ''
-            $('.errorDetail').text(errors.detailError);
-            $('.cke_chrome').css("border-color", "#008000ab");
+            errors.emailError = '';
+            $('#email').css("border-color", "#008000ab");
         }
 
-        if (errors.detailError === '' && errors.nameError === '') {
+        if (errors.nameError == '' && errors.emailError == '') {
             $.ajax({
-                url: "modules/quanlydanhmucsp/handleEvent/handleEditCategory.php",
+                url: "modules/quanlythanhvien/handleEvent/handleEditMember.php",
                 data: {
-                    tendanhmuc: tendanhmuc,
-                    trangthai: trangthai,
-                    category_detail: content,
-                    iddanhmuc: <?php echo $_GET['iddanhmuc'] ?>,
+                    username: username,
+                    email: email,
+                    duty: duty,
+                    idmember: <?php echo $_GET['idmember'] ?>,
                 },
                 dataType: 'json',
                 method: "post",
                 cache: true,
                 success: function(data) {
-                    if (data.existName == 1) {
-                        swal("Vui lòng nhập lại", 'Danh mục đã tồn tại', "error");
-                        $('.tendanhmuc').val('')
+                    if (data.existEmail == 1) {
+                        swal("Vui lòng nhập lại", 'Thành viên đã tồn tại', "error");
                     } else {
-                        swal("OK!", "Thêm thành công", "success");
+                        swal("OK!", "Sửa thành công", "success");
                         view_data();
                     }
                 }

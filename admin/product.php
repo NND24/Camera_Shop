@@ -39,7 +39,7 @@ ORDER BY id_sanpham DESC";
                                     <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
                                 </svg></button>
                             <div class="filter-menu d-flex wrap" style=" width: 400px;flex-wrap: wrap;">
-                                <div class=" col-6 " style="padding-right: 10px;">
+                                <div class="col-12">
                                     <label>Trạng thái</label>
                                     <select class="filter_status">
                                         <option value="2">Tất cả</option>
@@ -47,62 +47,79 @@ ORDER BY id_sanpham DESC";
                                         <option value="0">Ẩn</option>
                                     </select>
                                 </div>
-                                <div class="col-6">
-                                    <label>Tên </label>
-                                    <select class="filter_name">
-                                        <option value="2">Tất cả</option>
-                                        <option value="1">Từ A-Z</option>
-                                        <option value="0">Từ Z-A</option>
-                                    </select>
+                                <div class="col-12 row filter-input-wrap">
+                                    <div class=" col-6 d-flex no-wrap">
+                                        <input type="radio" class="filter__order" name="filter__order" value="0"
+                                            id="name-de">
+                                        <label for="name-de">Tên: Giảm dần</label>
+                                    </div>
+                                    <div class=" col-6 d-flex no-wrap">
+                                        <input type="radio" class="filter__order" name="filter__order" value="1"
+                                            id="name-in">
+                                        <label for="name-in">Tên: Tăng dần</label>
+                                    </div>
                                 </div>
-                                <div class="col-6" style="padding-right: 10px;">
-                                    <label>Giá </label>
-                                    <select class="filter_price">
-                                        <option value="2">Tất cả</option>
-                                        <option value="1">Tăng dần</option>
-                                        <option value="0">Giảm dần</option>
-                                    </select>
+                                <div class="col-12 row filter-input-wrap">
+                                    <div class=" col-6 d-flex no-wrap">
+                                        <input type="radio" class="filter__order" name="filter__order" value="2"
+                                            id="amount-de">
+                                        <label for="amount-de">Số lượng: Giảm dần</label>
+                                    </div>
+                                    <div class=" col-6 d-flex no-wrap">
+                                        <input type="radio" class="filter__order" name="filter__order" value="3"
+                                            id="amount-in">
+                                        <label for="amount-in">Số lượng: Tăng dần</label>
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <label>Số lượng</label>
-                                    <select class="filter_amount">
-                                        <option value="2">Tất cả</option>
-                                        <option value="1">Tăng dần</option>
-                                        <option value="0">Giảm dần</option>
-                                    </select>
+                                <div class="col-12 row filter-input-wrap">
+                                    <div class=" col-6 d-flex no-wrap">
+                                        <input type="radio" class="filter__order" name="filter__order" value="4"
+                                            id="discount-de">
+                                        <label for="discount-de">Giảm giá: Giảm dần</label>
+                                    </div>
+                                    <div class=" col-6 d-flex no-wrap">
+                                        <input type="radio" class="filter__order" name="filter__order" value="5"
+                                            id="discount-in">
+                                        <label for="discount-in">Giảm giá: Tăng dần</label>
+                                    </div>
                                 </div>
-                                <div class="col-6" style="padding-right: 10px;">
-                                    <label>Giảm giá</label>
-                                    <select class="filter_discount">
-                                        <option value="2">Tất cả</option>
-                                        <option value="1">Tăng dần</option>
-                                        <option value="0">Giảm dần</option>
-                                    </select>
+                                <div class="col-12 row filter-input-wrap">
+                                    <div class=" col-6 d-flex no-wrap">
+                                        <input type="radio" class="filter__order" name="filter__order" value="6"
+                                            id="sold-de">
+                                        <label for="sold-de">Số lượng bán: Giảm dần</label>
+                                    </div>
+                                    <div class=" col-6 d-flex no-wrap">
+                                        <input type="radio" class="filter__order" name="filter__order" value="7"
+                                            id="sold-in">
+                                        <label for="sold-in">Số lượng bán: Tăng dần</label>
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <label>Số lượng đã bán</label>
-                                    <select class="filter_sold-amount">
-                                        <option value="2">Tất cả</option>
-                                        <option value="1">Tăng dần</option>
-                                        <option value="0">Giảm dần</option>
-                                    </select>
+                                <div class="col-12 row filter-input-wrap">
+                                    <div class=" col-6 d-flex no-wrap">
+                                        <input type="radio" class="filter__order" name="filter__order" value="8"
+                                            id="rating-de">
+                                        <label for="rating-de">Đánh giá: Giảm dần</label>
+                                    </div>
+                                    <div class=" col-6 d-flex no-wrap">
+                                        <input type="radio" class="filter__order" name="filter__order" value="9"
+                                            id="rating-in">
+                                        <label for="rating-in">Đánh giá: Tăng dần</label>
+                                    </div>
                                 </div>
-                                <div class="col-6" style="padding-right: 10px;">
-                                    <label>Đánh giá</label>
-                                    <select class="filter_rating">
-                                        <option value="2">Tất cả</option>
-                                        <option value="1">Tăng dần</option>
-                                        <option value="0">Giảm dần</option>
-                                    </select>
+                                <div class="col-12 row filter-input-wrap">
+                                    <div class=" col-6 d-flex no-wrap">
+                                        <input type="radio" class="filter__order" name="filter__order" value="10"
+                                            id="date-de">
+                                        <label for="date-de">Ngày đăng: Cũ nhất</label>
+                                    </div>
+                                    <div class=" col-6 d-flex no-wrap">
+                                        <input type="radio" class="filter__order" name="filter__order" value="11"
+                                            id="date-in">
+                                        <label for="date-in">Ngày đăng: Mới nhất</label>
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <label>Ngày đăng</label>
-                                    <select class="filter_dated">
-                                        <option value="2">Tất cả</option>
-                                        <option value="1">Mới nhất</option>
-                                        <option value="0">Cũ nhất</option>
-                                    </select>
-                                </div>
+
                                 <div class="filter-menu-buttons">
                                     <button class="filter-button reset">
                                         Reset
@@ -111,6 +128,7 @@ ORDER BY id_sanpham DESC";
                                         Apply
                                     </button>
                                 </div>
+
                             </div>
                         </div>
                         <div class="filter-button-wrapper">
@@ -325,28 +343,20 @@ ORDER BY id_sanpham DESC";
             document.querySelector(".filter-menu").classList.toggle("active");
         });
 
+        var filter = -1;
+        $(document).on("change", '.filter__order', function() {
+            filter = $(this).val();
+        })
+
         var pageIndexFilter = 1
         $('.filter-button.apply').click((e) => {
             var status = $('.filter_status').val();
-            var name = $('.filter_name').val();
-            var price = $('.filter_price').val();
-            var amount = $('.filter_amount').val();
-            var discount = $('.filter_discount').val();
-            var soldAmount = $('.filter_sold-amount').val();
-            var rating = $('.filter_rating').val();
-            var dated = $('.filter_dated').val();
             $.ajax({
                 url: "modules/quanlysp/handleEvent/handleFilter.php?pageIndex=" +
                     pageIndexFilter,
                 data: {
                     status: status,
-                    name: name,
-                    price: price,
-                    amount: amount,
-                    discount: discount,
-                    soldAmount: soldAmount,
-                    rating: rating,
-                    dated: dated,
+                    filter: filter,
                 },
                 dataType: 'html',
                 method: "post",
@@ -360,26 +370,13 @@ ORDER BY id_sanpham DESC";
         $(document).on("click", '.page-link.filter', function() {
             pageIndexFilter = $(this).attr("value");
             var status = $('.filter_status').val();
-            var name = $('.filter_name').val();
-            var price = $('.filter_price').val();
-            var amount = $('.filter_amount').val();
-            var discount = $('.filter_discount').val();
-            var soldAmount = $('.filter_sold-amount').val();
-            var rating = $('.filter_rating').val();
-            var dated = $('.filter_dated').val();
             $.ajax({
                 url: "modules/quanlysp/handleEvent/handleFilter.php?pageIndex=" +
                     pageIndexFilter,
                 dataType: 'html',
                 data: {
                     status: status,
-                    name: name,
-                    price: price,
-                    amount: amount,
-                    discount: discount,
-                    soldAmount: soldAmount,
-                    rating: rating,
-                    dated: dated,
+                    filter: filter,
                 },
                 method: "post",
                 cache: true,
@@ -391,13 +388,7 @@ ORDER BY id_sanpham DESC";
 
         $('.filter-button.reset').click((e) => {
             $('.filter_status').val('2');
-            $('.filter_name').val('2');
-            $('.filter_price').val('2');
-            $('.filter_amount').val('2');
-            $('.filter_discount').val('2');
-            $('.filter_sold-amount').val('2');
-            $('.filter_rating').val('2');
-            $('.filter_dated').val('2');
+            filter = -1
         })
     })
     </script>

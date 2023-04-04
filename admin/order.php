@@ -21,7 +21,13 @@
                 </div>
 
                 <div class="app-content-actions">
-                    <input class="search-bar" placeholder="Search..." type="text">
+                    <!-- <input class="search-bar" placeholder="Search..." type="text"> -->
+                    <label class="search-label" for="">Từ ngày: </label>
+                    <input class="search-bar time-search time-search-from" type="date" name="" id="">
+
+                    <label class="search-label" for="">Đến ngày:</label>
+                    <input class="search-bar time-search time-search-to" type="date" name="" id="">
+                    <button class="app-content-headerButton time-search-btn">Lọc</button>
                     <div class="app-content-actions-wrapper">
                         <div class="filter-button-wrapper">
                             <button class="action-button filter jsFilter"><span>Filter</span><svg
@@ -30,8 +36,48 @@
                                     stroke-linejoin="round" class="feather feather-filter">
                                     <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
                                 </svg></button>
-                            <div class="filter-menu">
+                            <div class="filter-menu d-flex wrap" style=" width: 400px;flex-wrap: wrap;">
+                                <div class="col-12">
+                                    <label>Tình trạng</label>
+                                    <select class="filter_status">
+                                        <option value="2">Tất cả</option>
+                                        <option value="1">Đã duyệt</option>
+                                        <option value="0">Chưa duyệt</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 row filter-input-wrap">
+                                    <div class=" col-6 d-flex no-wrap">
+                                        <input type="radio" class="filter__order" name="filter__order" value="0"
+                                            id="name-de">
+                                        <label for="name-de">Tổng tiền: Giảm dần</label>
+                                    </div>
+                                    <div class=" col-6 d-flex no-wrap">
+                                        <input type="radio" class="filter__order" name="filter__order" value="1"
+                                            id="name-in">
+                                        <label for="name-in">Tổng tiền: Tăng dần</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 row filter-input-wrap">
+                                    <div class=" col-6 d-flex no-wrap">
+                                        <input type="radio" class="filter__order" name="filter__order" value="2"
+                                            id="amount-de">
+                                        <label for="amount-de">Số lượng: Giảm dần</label>
+                                    </div>
+                                    <div class=" col-6 d-flex no-wrap">
+                                        <input type="radio" class="filter__order" name="filter__order" value="3"
+                                            id="amount-in">
+                                        <label for="amount-in">Số lượng: Tăng dần</label>
+                                    </div>
+                                </div>
 
+                                <div class="filter-menu-buttons">
+                                    <button class="filter-button reset">
+                                        Reset
+                                    </button>
+                                    <button class="filter-button apply">
+                                        Apply
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <div class="filter-button-wrapper">
@@ -155,6 +201,104 @@
                         });
                     }
                 });
+        })
+
+        // Handle filter
+        $(".jsFilter").on("click", function() {
+            document.querySelector(".filter-menu").classList.toggle("active");
+        });
+
+        var filter = -1;
+        $(document).on("change", '.filter__order', function() {
+            filter = $(this).val();
+        })
+
+        var pageIndexFilter = 1
+        $('.filter-button.apply').click((e) => {
+            var status = $('.filter_status').val();
+            $.ajax({
+                url: "modules/quanlydonhang/handleEvent/handleFilter.php?pageIndex=" +
+                    pageIndexFilter,
+                data: {
+                    status: status,
+                    filter: filter,
+                },
+                dataType: 'html',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    $('#load_order_data').html(data)
+                }
+            })
+        })
+
+        $(document).on("click", '.page-link.filter', function() {
+            pageIndexFilter = $(this).attr("value");
+            var status = $('.filter_status').val();
+            $.ajax({
+                url: "modules/quanlydonhang/handleEvent/handleFilter.php?pageIndex=" +
+                    pageIndexFilter,
+                dataType: 'html',
+                data: {
+                    status: status,
+                    filter: filter,
+                },
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    $('#load_order_data').html(data)
+                }
+            })
+        })
+
+        $('.filter-button.reset').click((e) => {
+            $('.filter_status').val('2');
+            filter = -1
+        })
+
+        // Filter by time
+        var pageIndexSearch = 1
+        $(document).on("click", '.time-search-btn', function() {
+            var timeFrom = $('.time-search-from').val();
+            var timeTo = $('.time-search-to').val();
+            if (timeFrom.length > 0 || timeTo.length > 0) {
+                $.ajax({
+                    url: "modules/quanlydonhang/handleEvent/handleFilterTime.php?pageIndex=" +
+                        pageIndexSearch,
+                    data: {
+                        timeFrom: timeFrom,
+                        timeTo: timeTo,
+                    },
+                    dataType: 'html',
+                    method: "post",
+                    cache: true,
+                    success: function(data) {
+                        $('#load_order_data').html(data)
+                    }
+                })
+            } else {
+                view_data()
+            }
+        })
+
+        $(document).on("click", '.page-link.search', function() {
+            pageIndexSearch = $(this).attr("value");
+            var timeFrom = $('.time-search-from').val();
+            var timeTo = $('.time-search-to').val();
+            $.ajax({
+                url: "modules/quanlydonhang/handleEvent/handleFilterTime.php?pageIndex=" +
+                    pageIndexSearch,
+                dataType: 'html',
+                data: {
+                    timeFrom: timeFrom,
+                    timeTo: timeTo,
+                },
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    $('#load_order_data').html(data)
+                }
+            })
         })
     })
     </script>

@@ -27,7 +27,7 @@
     <div class="model__container">
         <form>
             <div class="model__add-new">
-                <h3>Chi tiết đơn hàng</h3>
+                <h3>Duyệt đơn hàng</h3>
                 <div class="close-modal">
                     <i class="fa-solid fa-xmark"></i>
                 </div>

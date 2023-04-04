@@ -1,6 +1,5 @@
 <?php
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
-//echo json_encode($_POST);
 
 if (isset($_POST['searchInput'])) {
     $item_per_page = 7;

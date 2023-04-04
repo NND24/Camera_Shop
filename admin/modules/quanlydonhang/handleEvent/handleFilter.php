@@ -1,80 +1,76 @@
 <?php
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
-$item_per_page = 7;
+$item_per_page = 8;
 $current_page = $_GET['pageIndex'];
 $offset = ($current_page - 1) * $item_per_page;
 
 $status = $_POST['status'];
 $filter = $_POST['filter'];
 
-$sql_sp = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
-AND (($status = 0 AND tbl_sanpham.trangthaisp = 0)
-OR   ($status = 1 AND tbl_sanpham.trangthaisp = 1)
-OR   ($status = 2 AND (tbl_sanpham.trangthaisp = 0  OR tbl_sanpham.trangthaisp = 1)))
+$sql_lietke_dh = "SELECT * FROM tbl_order,tbl_user WHERE tbl_order.id_user=tbl_user.id_user 
+AND (($status = 0 AND tbl_order.order_status = 0)
+OR   ($status = 1 AND tbl_order.order_status = 1)
+OR   ($status = 2 AND (tbl_order.order_status = 0  OR tbl_order.order_status = 1)))
 ORDER BY 
-    CASE WHEN $filter = -1 THEN id_sanpham END DESC,
-    CASE WHEN $filter = 0 THEN tensanpham END DESC,
-    CASE WHEN $filter = 1 THEN tensanpham END ASC,
-    CASE WHEN $filter = 2 THEN giadagiam END DESC,
-    CASE WHEN $filter = 3 THEN giadagiam END ASC,
-    CASE WHEN $filter = 4 THEN soluong END DESC,
-    CASE WHEN $filter = 5 THEN soluong END ASC,
-    CASE WHEN $filter = 6 THEN giamgia END DESC,
-    CASE WHEN $filter = 7 THEN giamgia END ASC,
-    CASE WHEN $filter = 8 THEN daban END DESC,
-    CASE WHEN $filter = 9 THEN daban END ASC,
-    CASE WHEN $filter = 10 THEN average_rating END DESC,
-    CASE WHEN $filter = 11 THEN average_rating END ASC,
-    CASE WHEN $filter = 12 THEN last_updated END ASC,
-    CASE WHEN $filter = 13 THEN last_updated END DESC
+    CASE WHEN $filter = -1 THEN id_order END DESC,
+    CASE WHEN $filter = 0 THEN total END DESC,
+    CASE WHEN $filter = 1 THEN total END ASC,
+    CASE WHEN $filter = 2 THEN amount END DESC,
+    CASE WHEN $filter = 3 THEN amount END ASC  
 LIMIT " . $item_per_page . " OFFSET " . $offset . " ";
-$query_sp = mysqli_query($mysqli, $sql_sp);
+$query_lietke_dh = mysqli_query($mysqli, $sql_lietke_dh);
 
-$totalRecords = mysqli_query($mysqli, "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc
-AND (($status = 0 AND tbl_sanpham.trangthaisp = 0)
-OR   ($status = 1 AND tbl_sanpham.trangthaisp = 1)
-OR   ($status = 2 AND (tbl_sanpham.trangthaisp = 0  OR tbl_sanpham.trangthaisp = 1)))");
+$totalRecords = mysqli_query($mysqli, "SELECT * FROM tbl_order,tbl_user WHERE tbl_order.id_user=tbl_user.id_user
+AND (($status = 0 AND tbl_order.order_status = 0)
+OR   ($status = 1 AND tbl_order.order_status = 1)
+OR   ($status = 2 AND (tbl_order.order_status = 0  OR tbl_order.order_status = 1)))");
 $totalRecords = mysqli_num_rows($totalRecords);
 $totalPages = ceil($totalRecords / $item_per_page);
-if (mysqli_num_rows($query_sp) > 0) {
-    while ($row = mysqli_fetch_array($query_sp)) {
+$i = 0;
+if (mysqli_num_rows($query_lietke_dh) > 0) {
+    while ($row = mysqli_fetch_array($query_lietke_dh)) {
+        $i++;
 ?>
 <div class="products-row">
-    <div class="product-cell col-2-4 image">
-        <img src="modules/quanlysp/handleEvent/uploads/<?php echo $row['hinhanh'] ?>" alt="product">
-        <span title="<?php echo $row['tensanpham'] ?>"><?php echo $row['tensanpham'] ?></span>
+
+    <div class="product-cell col-1">
+        <p>
+            <td><?php echo $i ?></td>
+        </p>
     </div>
-    <div class="product-cell col-1-8 category ">
-        <p><?php echo $row['ten_danhmuc'] ?></p>
+    <div class="product-cell col-2 category ">
+        <p>
+            <td><?php echo $row['order_code'] ?></td>
+        </p>
     </div>
-    <div class="product-cell col-1-5 status-cell">
+    <div class="product-cell col-2 status-cell">
         <?php
-                if ($row['trangthaisp'] == 1) {
+                if ($row['order_status'] == 1) {
                 ?>
-        <span class="status active">Kích hoạt</span>
+        <span class="status active">Đã duyệt</span>
         <?php
-                } else if ($row['trangthaisp'] == 0) {
+                } else if ($row['order_status'] == 0) {
                 ?>
-        <span class="status">Ẩn</span>
+        <span class="status">Chưa duyệt</span>
         <?php
                 }
                 ?>
     </div>
-    <div class="product-cell col-2 sales">
+    <div class="product-cell col sales">
         <?php date_default_timezone_set('Asia/Ho_Chi_Minh');
-                echo date('d/m/Y H:i', $row['created_time']) ?></div>
-    <div class="product-cell col-2 stock"><?php echo date('d/m/Y H:i', $row['last_updated']) ?></div>
-    <div class="product-cell col-1-8 detail">
-        <button title="Xem chi tiết" class="detail-product" value="<?php echo $row['id_sanpham'] ?>"><span>Xem
-                chi tiết</span></button>
+                echo date('d/m/Y', $row['buyed_date']) ?>
     </div>
-    <div class="product-cell col btn">
-        <button title="Xóa" class="remove-product" value="<?php echo $row['id_sanpham'] ?>"><i
+    <div class="product-cell col sales">
+        <?php date_default_timezone_set('Asia/Ho_Chi_Minh');
+                echo date('d/m/Y', $row['browsed_date']) ?>
+    </div>
+    <div class="product-cell col-2 detail">
+        <button title="Xem chi tiết" class="detail-order" value="<?php echo $row['id_order'] ?>"><span>Duyệt
+                đơn</span></button>
+    </div>
+    <div class="product-cell col-1 btn">
+        <button title="Xóa" class="remove-order" value="<?php echo $row['id_order'] ?>"><i
                 class="fa-solid fa-trash"></i></button>
-    </div>
-    <div class="product-cell col btn">
-        <button title="Sửa" class="edit-product" value="<?php echo $row['id_sanpham'] ?>"><i
-                class="fa-regular fa-pen-to-square"></i></button>
     </div>
 </div>
 <?php
@@ -142,7 +138,7 @@ if (mysqli_num_rows($query_sp) > 0) {
 <?php
 } else {
 ?>
-<h1 class="empty-row">Chưa có sản phẩm nào</h1>
+<h1 class="empty-row">Chưa có đơn hàng nào</h1>
 <?php
 }
 ?>
