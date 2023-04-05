@@ -7,6 +7,10 @@ if (!isset($_SESSION['dangnhap'])) {
 $sql = "SELECT * FROM tbl_admin WHERE id_admin='" . $_SESSION['dangnhap'] . "' LIMIT 1";
 $query = mysqli_query($mysqli, $sql);
 $row = mysqli_fetch_array($query);
+
+$sql_privilege = "SELECT * FROM tbl_privilege WHERE id_admin='" . $_SESSION['dangnhap'] . "' LIMIT 1";
+$query_privilege = mysqli_query($mysqli, $sql_privilege);
+$row_privilege = mysqli_fetch_array($query_privilege)
 ?>
 <div class="sidebar">
     <button class="sidebar-btn">
@@ -37,27 +41,52 @@ $row = mysqli_fetch_array($query);
         </div>
     </div>
 
+
     <button class="sidebar-list-item">
         <a class="dashboard">Thống kê</a>
         <img class="dashboard" title="Thống kê" src="../../images/icon/menu.png" alt="">
     </button>
+
+    <?php
+    if ($row_privilege['list_category'] == 1) {
+    ?>
     <button class="sidebar-list-item">
         <a class="list-gallery">Quản lý danh mục</a>
         <img class="list-gallery" title="Quản lý danh mục" src="../../images/icon/menu.png" alt="">
     </button>
+    <?php
+    }
+    ?>
+    <?php
+    if ($row_privilege['list_product'] == 1) {
+    ?>
     <button class="sidebar-list-item ">
         <a class="list-product">Quản lý sản phẩm</a>
         <img class="list-product" title="Quản lý sản phẩm" src="../../images/icon/supply-chain.png" alt="">
     </button>
+    <?php
+    }
+    ?>
+    <?php
+    if ($row_privilege['list_order'] == 1) {
+    ?>
     <button class="sidebar-list-item">
         <a class="list-order">Quản lý đơn hàng</a>
         <img class="list-order" title="Quản lý đơn hàng" src="../../images/icon/ecommerce.png" alt="">
     </button>
+    <?php
+    }
+    ?>
+    <?php
+    if (($row_privilege['list_member'] == 1 && $row['duty'] == 1) || $row['duty'] == 0) {
+    ?>
     <button class="sidebar-list-item">
         <a class="list-member">Quản lý thành viên</a>
         <img class="list-member" title="Quản lý thành viên" src="../../images/icon/management.png" alt="">
     </button>
-
+    <?php
+    }
+    ?>
 </div>
 <div id="view-edit-account"></div>
 

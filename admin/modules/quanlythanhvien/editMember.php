@@ -32,7 +32,9 @@ $row = mysqli_fetch_array($query)
                         <?php } ?>
                     </select>
                 </div>
-                <button id="suathanhvien">Sửa thành viên</button>
+                <div class="model__button">
+                    <button id="suathanhvien">Sửa thành viên</button>
+                </div>
             </div>
         </form>
         <div class="modal__background"></div>

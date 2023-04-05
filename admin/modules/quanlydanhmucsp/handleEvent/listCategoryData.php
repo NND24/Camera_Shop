@@ -1,4 +1,5 @@
 <?php
+session_start();
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
 $item_per_page = 10;
 $current_page = $_GET['pageIndex'];
@@ -6,6 +7,10 @@ $offset = ($current_page - 1) * $item_per_page;
 
 $sql_lietke_danhmucsp = "SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc ASC LIMIT " . $item_per_page . " OFFSET " . $offset . "";
 $query_lietke_danhmucsp = mysqli_query($mysqli, $sql_lietke_danhmucsp);
+
+$sql_privilege = "SELECT * FROM tbl_privilege WHERE id_admin='" . $_SESSION['dangnhap'] . "' LIMIT 1";
+$query_privilege = mysqli_query($mysqli, $sql_privilege);
+$row_privilege = mysqli_fetch_array($query_privilege);
 
 $totalRecords = mysqli_query($mysqli, "SELECT * FROM tbl_danhmuc");
 $totalRecords = mysqli_num_rows($totalRecords);
@@ -43,18 +48,30 @@ if (mysqli_num_rows($query_lietke_danhmucsp) > 0) {
     </div>
     <div class="product-cell col stock"><?php echo date('d/m/Y', $row['category_last_updated']) ?>
     </div>
+    <?php
+            if ($row_privilege['detail_category'] == 1) {
+            ?>
     <div class="product-cell col-1-8 detail">
         <button title="Xem chi tiết" class="detail-category" value="<?php echo $row['id_danhmuc'] ?>"><span>Xem
                 chi tiết</span></button>
     </div>
+    <?php } ?>
+    <?php
+            if ($row_privilege['delete_category'] == 1) {
+            ?>
     <div class="product-cell col-1 btn">
         <button title="Xóa" class="remove-category" value="<?php echo $row['id_danhmuc'] ?>"><i
                 class="fa-solid fa-trash"></i></button>
     </div>
+    <?php } ?>
+    <?php
+            if ($row_privilege['edit_category'] == 1) {
+            ?>
     <div class="product-cell col-1 btn">
         <button title="Sửa" class="edit-category" value="<?php echo $row['id_danhmuc'] ?>"><i
                 class="fa-regular fa-pen-to-square"></i></button>
     </div>
+    <?php } ?>
 </div>
 <?php
     }

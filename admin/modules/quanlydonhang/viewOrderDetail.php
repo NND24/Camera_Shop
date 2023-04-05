@@ -136,9 +136,13 @@
                 <?php
                 if ($row_order['order_status'] == 0) {
                 ?>
+                <div class="model__button">
+                </div>
                 <button id="duyetdonhang">Duyệt đơn hàng</button>
                 <?php } else { ?>
-                <button id="huydonhang">Hủy đơn hàng</button>
+                <div class="model__button">
+                    <button id="huydonhang">Hủy đơn hàng</button>
+                </div>
                 <?php } ?>
             </div>
         </form>

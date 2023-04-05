@@ -29,7 +29,9 @@
                     <label class="col-2">Nhập lại mật khẩu: </label>
                     <input type="password" class="password_confirmation">
                 </div>
-                <button id="themthanhvien">Thêm thành viên</button>
+                <div class="model__button">
+                    <button id="themthanhvien">Thêm thành viên</button>
+                </div>
             </div>
         </form>
         <div class="modal__background"></div>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
 $item_per_page = 10;
 $current_page = $_GET['pageIndex'];
@@ -12,6 +13,14 @@ OR   ($duty = 1 AND tbl_admin.duty = 0)
 OR   ($duty = 2 AND (tbl_admin.duty = 0  OR tbl_admin.duty = 1)))
 ORDER BY id_admin ASC LIMIT " . $item_per_page . " OFFSET " . $offset . "";
 $query_lietke_member = mysqli_query($mysqli, $sql_lietke_member);
+
+$sql_admin = "SELECT * FROM tbl_admin WHERE id_admin='" . $_SESSION['dangnhap'] . "' LIMIT 1";
+$query_admin = mysqli_query($mysqli, $sql_admin);
+$row_admin = mysqli_fetch_array($query_admin);
+
+$sql_privilege = "SELECT * FROM tbl_privilege WHERE id_admin='" . $_SESSION['dangnhap'] . "' LIMIT 1";
+$query_privilege = mysqli_query($mysqli, $sql_privilege);
+$row_privilege = mysqli_fetch_array($query_privilege);
 
 $totalRecords = mysqli_query($mysqli, "SELECT * FROM tbl_admin WHERE 
  (($duty = 0 AND tbl_admin.duty = 1)
@@ -47,18 +56,32 @@ if (mysqli_num_rows($query_lietke_member) > 0) {
     </div>
     <div class="product-cell col stock"><?php echo date('d/m/Y', $row['last_updated']) ?>
     </div>
+
+    <?php
+            if ($row_privilege['detail_member'] == 1 || $row_admin['duty'] == 0) {
+            ?>
     <div class="product-cell col-2 detail">
-        <button title="Xem chi tiết" class="detail-member" value="<?php echo $row['id_admin'] ?>"><span>Phân
+        <button title="Xem chi tiết" class="detail-member privilege-member"
+            value="<?php echo $row['id_admin'] ?>"><span>Phân
                 quyền</span></button>
     </div>
+    <?php } ?>
+    <?php
+            if ($row_privilege['delete_member'] == 1) {
+            ?>
     <div class="product-cell col-1 btn">
         <button title="Xóa" class="remove-member" value="<?php echo $row['id_admin'] ?>"><i
                 class="fa-solid fa-trash"></i></button>
     </div>
+    <?php } ?>
+    <?php
+            if ($row_privilege['edit_member'] == 1) {
+            ?>
     <div class="product-cell col-1 btn">
         <button title="Sửa" class="edit-member" value="<?php echo $row['id_admin'] ?>"><i
                 class="fa-regular fa-pen-to-square"></i></button>
     </div>
+    <?php } ?>
 </div>
 <?php
     }

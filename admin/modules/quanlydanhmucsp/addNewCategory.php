@@ -21,7 +21,9 @@
                     <label>Chi tiết danh mục: </label>
                     <textarea name="category-content" class="category-content" id="category-content"></textarea>
                 </div>
-                <button id="themdanhmuc">Thêm danh mục sản phẩm</button>
+                <div class="model__button">
+                    <button id="themdanhmuc">Thêm danh mục sản phẩm</button>
+                </div>
             </div>
         </form>
         <div class="modal__background modal__add-category"></div>

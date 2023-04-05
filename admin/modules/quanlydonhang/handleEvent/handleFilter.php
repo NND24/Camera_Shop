@@ -1,4 +1,5 @@
 <?php
+session_start();
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
 $item_per_page = 8;
 $current_page = $_GET['pageIndex'];
@@ -19,6 +20,10 @@ ORDER BY
     CASE WHEN $filter = 3 THEN amount END ASC  
 LIMIT " . $item_per_page . " OFFSET " . $offset . " ";
 $query_lietke_dh = mysqli_query($mysqli, $sql_lietke_dh);
+
+$sql_privilege = "SELECT * FROM tbl_privilege WHERE id_admin='" . $_SESSION['dangnhap'] . "' LIMIT 1";
+$query_privilege = mysqli_query($mysqli, $sql_privilege);
+$row_privilege = mysqli_fetch_array($query_privilege);
 
 $totalRecords = mysqli_query($mysqli, "SELECT * FROM tbl_order,tbl_user WHERE tbl_order.id_user=tbl_user.id_user
 AND (($status = 0 AND tbl_order.order_status = 0)
@@ -64,14 +69,23 @@ if (mysqli_num_rows($query_lietke_dh) > 0) {
         <?php date_default_timezone_set('Asia/Ho_Chi_Minh');
                 echo date('d/m/Y', $row['browsed_date']) ?>
     </div>
+
+    <?php
+            if ($row_privilege['detail_order'] == 1) {
+            ?>
     <div class="product-cell col-2 detail">
         <button title="Xem chi tiết" class="detail-order" value="<?php echo $row['id_order'] ?>"><span>Duyệt
                 đơn</span></button>
     </div>
+    <?php } ?>
+    <?php
+            if ($row_privilege['delete_order'] == 1) {
+            ?>
     <div class="product-cell col-1 btn">
         <button title="Xóa" class="remove-order" value="<?php echo $row['id_order'] ?>"><i
                 class="fa-solid fa-trash"></i></button>
     </div>
+    <?php } ?>
 </div>
 <?php
     }

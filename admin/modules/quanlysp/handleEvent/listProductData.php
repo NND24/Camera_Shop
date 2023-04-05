@@ -1,4 +1,5 @@
 <?php
+session_start();
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
 $item_per_page = 7;
 $current_page = $_GET['pageIndex'];
@@ -7,6 +8,14 @@ $offset = ($current_page - 1) * $item_per_page;
 $sql_lietke_sp = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
 ORDER BY id_sanpham DESC LIMIT " . $item_per_page . " OFFSET " . $offset . " ";
 $query_lietke_sp = mysqli_query($mysqli, $sql_lietke_sp);
+
+$sql_privilege = "SELECT * FROM tbl_privilege WHERE id_admin='" . $_SESSION['dangnhap'] . "' LIMIT 1";
+$query_privilege = mysqli_query($mysqli, $sql_privilege);
+$row_privilege = mysqli_fetch_array($query_privilege);
+
+$sql_privilege = "SELECT * FROM tbl_privilege WHERE id_admin='" . $_SESSION['dangnhap'] . "' LIMIT 1";
+$query_privilege = mysqli_query($mysqli, $sql_privilege);
+$row_privilege = mysqli_fetch_array($query_privilege);
 
 $totalRecords = mysqli_query($mysqli, "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc");
 $totalRecords = mysqli_num_rows($totalRecords);
@@ -52,18 +61,30 @@ if (mysqli_num_rows($query_lietke_sp) > 0) {
         <?php date_default_timezone_set('Asia/Ho_Chi_Minh');
                 echo date('d/m/Y', $row['created_time']) ?></div>
     <div class="product-cell col-1-8 stock"><?php echo date('d/m/Y', $row['last_updated']) ?></div>
+    <?php
+            if ($row_privilege['detail_product'] == 1) {
+            ?>
     <div class="product-cell col-1-8 detail">
         <button title="Xem chi tiết" class="detail-product" value="<?php echo $row['id_sanpham'] ?>"><span>Xem
                 chi tiết</span></button>
     </div>
+    <?php } ?>
+    <?php
+            if ($row_privilege['delete_product'] == 1) {
+            ?>
     <div class="product-cell col btn">
         <button title="Xóa" class="remove-product" value="<?php echo $row['id_sanpham'] ?>"><i
                 class="fa-solid fa-trash"></i></button>
     </div>
+    <?php } ?>
+    <?php
+            if ($row_privilege['edit_product'] == 1) {
+            ?>
     <div class="product-cell col btn">
         <button title="Sửa" class="edit-product" value="<?php echo $row['id_sanpham'] ?>"><i
                 class="fa-regular fa-pen-to-square"></i></button>
     </div>
+    <?php } ?>
 </div>
 <?php
     }

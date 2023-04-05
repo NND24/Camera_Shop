@@ -39,7 +39,9 @@ $row = mysqli_fetch_array($query)
                     <textarea id="edit-category"><?php echo $row['category_detail'] ?></textarea>
                 </div>
                 <div class="model__content">
-                    <button id="suadanhmuc">Sửa danh mục sản phẩm</button>
+                    <div class="model__button">
+                        <button id="suadanhmuc">Sửa danh mục sản phẩm</button>
+                    </div>
                 </div>
             </div>
         </form>

@@ -1,16 +1,21 @@
 <?php
+session_start();
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
 $item_per_page = 7;
 $current_page = $_GET['pageIndex'];
 $offset = ($current_page - 1) * $item_per_page;
 
 $status = $_POST['status'];
+$category = $_POST['category'];
 $filter = $_POST['filter'];
 
 $sql_sp = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
-AND (($status = 0 AND tbl_sanpham.trangthaisp = 0)
-OR   ($status = 1 AND tbl_sanpham.trangthaisp = 1)
-OR   ($status = 2 AND (tbl_sanpham.trangthaisp = 0  OR tbl_sanpham.trangthaisp = 1)))
+AND (($status = 0 AND tbl_sanpham.trangthaisp = 0 AND $category = 0)
+OR   ($status = 0 AND tbl_sanpham.trangthaisp = 0 AND tbl_sanpham.id_danhmuc = $category AND $category != 0)
+OR   ($status = 1 AND tbl_sanpham.trangthaisp = 1 AND $category = 0)
+OR   ($status = 1 AND tbl_sanpham.trangthaisp = 1 AND tbl_sanpham.id_danhmuc = $category AND $category != 0)
+OR   ($status = 2 AND (tbl_sanpham.trangthaisp = 0  OR tbl_sanpham.trangthaisp = 1) AND $category = 0)
+OR   ($status = 2 AND (tbl_sanpham.trangthaisp = 0  OR tbl_sanpham.trangthaisp = 1) AND tbl_sanpham.id_danhmuc = $category AND $category != 0))
 ORDER BY 
     CASE WHEN $filter = -1 THEN id_sanpham END DESC,
     CASE WHEN $filter = 0 THEN tensanpham END DESC,
@@ -30,17 +35,24 @@ ORDER BY
 LIMIT " . $item_per_page . " OFFSET " . $offset . " ";
 $query_sp = mysqli_query($mysqli, $sql_sp);
 
+$sql_privilege = "SELECT * FROM tbl_privilege WHERE id_admin='" . $_SESSION['dangnhap'] . "' LIMIT 1";
+$query_privilege = mysqli_query($mysqli, $sql_privilege);
+$row_privilege = mysqli_fetch_array($query_privilege);
+
 $totalRecords = mysqli_query($mysqli, "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc
-AND (($status = 0 AND tbl_sanpham.trangthaisp = 0)
-OR   ($status = 1 AND tbl_sanpham.trangthaisp = 1)
-OR   ($status = 2 AND (tbl_sanpham.trangthaisp = 0  OR tbl_sanpham.trangthaisp = 1)))");
+AND (($status = 0 AND tbl_sanpham.trangthaisp = 0 AND $category = 0)
+OR   ($status = 0 AND tbl_sanpham.trangthaisp = 0 AND $category = 0 AND tbl_sanpham.id_danhmuc = $category AND $category != 0)
+OR   ($status = 1 AND tbl_sanpham.trangthaisp = 1 AND $category = 0)
+OR   ($status = 1 AND tbl_sanpham.trangthaisp = 1 AND tbl_sanpham.id_danhmuc = $category AND $category != 0)
+OR   ($status = 2 AND (tbl_sanpham.trangthaisp = 0  OR tbl_sanpham.trangthaisp = 1) AND $category = 0)
+OR   ($status = 2 AND (tbl_sanpham.trangthaisp = 0  OR tbl_sanpham.trangthaisp = 1) AND tbl_sanpham.id_danhmuc = $category AND $category != 0))");
 $totalRecords = mysqli_num_rows($totalRecords);
 $totalPages = ceil($totalRecords / $item_per_page);
 if (mysqli_num_rows($query_sp) > 0) {
     while ($row = mysqli_fetch_array($query_sp)) {
 ?>
 <div class="products-row">
-    <div class="product-cell col-2-4 image">
+    <div class="product-cell col-1-8 image">
         <img src="modules/quanlysp/handleEvent/uploads/<?php echo $row['hinhanh'] ?>" alt="product">
         <span title="<?php echo $row['tensanpham'] ?>"><?php echo $row['tensanpham'] ?></span>
     </div>
@@ -60,22 +72,48 @@ if (mysqli_num_rows($query_sp) > 0) {
                 }
                 ?>
     </div>
-    <div class="product-cell col-2 sales">
+    <div class="product-cell col-1-5 status-cell">
+        <?php
+                if ($row['soluong'] > 0) {
+                ?>
+        <span class="status active">Còn hàng</span>
+        <?php
+                } else if ($row['soluong'] <= 0) {
+                ?>
+        <span class="status">Hết hàng</span>
+        <?php
+                }
+                ?>
+    </div>
+    <div class="product-cell col-1-8 sales">
         <?php date_default_timezone_set('Asia/Ho_Chi_Minh');
-                echo date('d/m/Y H:i', $row['created_time']) ?></div>
-    <div class="product-cell col-2 stock"><?php echo date('d/m/Y H:i', $row['last_updated']) ?></div>
+                echo date('d/m/Y', $row['created_time']) ?></div>
+    <div class="product-cell col-1-8 stock"><?php echo date('d/m/Y', $row['last_updated']) ?></div>
+
+    <?php
+            if ($row_privilege['detail_product'] == 1) {
+            ?>
     <div class="product-cell col-1-8 detail">
         <button title="Xem chi tiết" class="detail-product" value="<?php echo $row['id_sanpham'] ?>"><span>Xem
                 chi tiết</span></button>
     </div>
+    <?php } ?>
+    <?php
+            if ($row_privilege['delete_product'] == 1) {
+            ?>
     <div class="product-cell col btn">
         <button title="Xóa" class="remove-product" value="<?php echo $row['id_sanpham'] ?>"><i
                 class="fa-solid fa-trash"></i></button>
     </div>
+    <?php } ?>
+    <?php
+            if ($row_privilege['edit_product'] == 1) {
+            ?>
     <div class="product-cell col btn">
         <button title="Sửa" class="edit-product" value="<?php echo $row['id_sanpham'] ?>"><i
                 class="fa-regular fa-pen-to-square"></i></button>
     </div>
+    <?php } ?>
 </div>
 <?php
     }

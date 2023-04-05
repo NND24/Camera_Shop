@@ -140,7 +140,7 @@ input {
 .app-content {
   padding: 16px;
   margin-left: auto;
-  width: calc(100% - 225px);
+  width: calc(100% - 231px);
   background-color: var(--app-bg);
   height: 100%;
   max-height: 100%;
@@ -654,6 +654,10 @@ select.active {
   background-color: transparent;
 }
 
+.modal__view-privilege {
+  height: 100%;
+}
+
 .model__view-detail,
 .model__edit-category {
   background-color: #fff;
@@ -673,6 +677,18 @@ select.active {
   z-index: 100;
 }
 
+.model__button {
+  width: 100%;
+  display: flex;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.model__add-new button {
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+
 .model__content {
   padding-bottom: 20px;
 }
@@ -682,13 +698,18 @@ select.active {
   margin-right: 140px;
 }
 
+.model__content .checkbox {
+  width: 15px;
+  margin-right: 0px;
+}
+
 /* Sidebar */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
-  width: 225px;
+  width: 231px;
   height: 100vh;
   background-color: var(--sidebar);
   /* box-shadow: rgba(99, 99, 99) 2px 0px 8px 0px; */
@@ -883,7 +904,7 @@ select.active {
   bottom: 0px;
   right: 0;
   height: 76px;
-  width: calc(100% - 225px);
+  width: calc(100% - 231px);
   background-color: var(--app-bg);
 }
 

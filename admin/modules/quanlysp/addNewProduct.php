@@ -58,7 +58,9 @@
                     <label>Chi tiết sản phẩm: </label>
                     <textarea id="product-detail"></textarea>
                 </div>
-                <button id="themsanpham">Thêm sản phẩm</button>
+                <div class="model__button">
+                    <button id="themsanpham">Thêm sản phẩm</button>
+                </div>
             </div>
         </form>
         <div class="modal__background modal__add-product"></div>
@@ -187,14 +189,14 @@
             }
 
             // Validate product brief
-            if (tomtat.length === 0) {
-                errors.briefError = "Tóm tắt sản phẩm không được để trống";
-                swal("Vui lòng nhập lại", errors.briefError, "error");
-                $('.cke_chrome').css("border-color", "#ff000087");
-            } else {
-                errors.briefError = '';
-                $('.cke_chrome').css("border-color", "#008000ab");
-            }
+            // if (tomtat.length === 0) {
+            //     errors.briefError = "Tóm tắt sản phẩm không được để trống";
+            //     swal("Vui lòng nhập lại", errors.briefError, "error");
+            //     $('.cke_chrome').css("border-color", "#ff000087");
+            // } else {
+            //     errors.briefError = '';
+            //     $('.cke_chrome').css("border-color", "#008000ab");
+            // }
 
             // Validate product detail
             if (noidung.length === 0) {
@@ -210,7 +212,7 @@
             if (errors.nameError == '' && errors.priceError == '' && errors
                 .amountError == '' &&
                 errors
-                .discountError == '' && errors.briefError == '' && errors.detailError ==
+                .discountError == '' && errors.detailError ==
                 '') {
                 //Send image
                 var form_data = new FormData();
