@@ -1328,7 +1328,7 @@ ul.social__option-list {
 }
 
 .buy_now,
-.buy-now-not-login {
+.buy_now-not-login {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -1345,12 +1345,12 @@ ul.social__option-list {
 }
 
 .buy_now,
-.buy-now-not-login strong {
+.buy_now-not-login strong {
   font-size: 16px;
 }
 
 .buy_now,
-.buy-now-not-login span {
+.buy_now-not-login span {
   font-size: 10px;
 }
 
@@ -1562,6 +1562,10 @@ ul.social__option-list {
 .sidebar__product-wrapper .sidebar__product-img img {
   width: 90px;
   cursor: pointer;
+}
+
+.sidebar__product-text {
+  margin-left: 4px;
 }
 
 .sidebar__product-text .category-title {
@@ -2023,7 +2027,7 @@ span#countContent {
   margin-left: -10px;
   width: 20px;
   height: 20px;
-  top: -6px;
+  top: -4px;
   left: 20px;
   position: absolute;
   pointer-events: none;
@@ -2443,7 +2447,7 @@ span#countContent {
 
 .form-control {
   height: 40px;
-  padding: 8px 45px 8px 12px !important;
+  padding: 8px 12px !important;
   border: 1px solid #b3b3b3;
   border-radius: 3px;
   outline: none;

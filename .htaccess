@@ -1,5 +1,0 @@
-RewriteEngine On
-
-RewriteRule "index.html" "index.php"
-
-RewriteRule "^danh-muc/([0-9]+)$" "index.php?quanly=danhmucsanpham&id=$1"

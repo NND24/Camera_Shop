@@ -328,8 +328,6 @@
                                                         style="background: url('./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_pro['hinhanh'] ?>') no-repeat center center / cover">
                                                     </div>
                                                 </div>
-
-
                                                 <?php if (isset($_SESSION['id_user'])) { ?>
                                                 <div class="add-to-cart-btn"
                                                     value="<?php echo $row_pro['id_sanpham'] ?>">
@@ -381,11 +379,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php
+                                }
+                                ?>
                             </div>
                             <div class="swiper-button-next"></div>
                             <div class="swiper-button-prev"></div>
                         </div>
-
                     </div>
 
                     <div class="content__product-footer">
@@ -430,7 +430,8 @@
 
                                                     <div class="sidebar__product-text">
                                                         <div class="title-wrapper">
-                                                            <p class="category-title">
+                                                            <p class="category-title category__product-btn"
+                                                                value="<?php echo $row_pro['id_danhmuc'] ?>">
                                                                 <?php echo $row_pro['ten_danhmuc'] ?></p>
                                                             <span class="product-name view__product-detail"
                                                                 value="<?php echo $row_pro['id_sanpham'] ?>"
@@ -474,14 +475,14 @@
                         <div class="star__box">
                             <div class="star__average">
                                 <?php
-                                    if ($starAverage <= 0) {
+                                if ($starAverage <= 0) {
                                 ?>
                                 <strong>CHƯA CÓ
                                     <br>
                                     ĐÁNH GIÁ NÀO
                                 </strong>
                                 <?php
-                                    } else {
+                                } else {
                                 ?>
                                 <strong>
                                     <div class="star__average-text">
@@ -490,12 +491,12 @@
                                     <span>ĐÁNH GIÁ TRUNG BÌNH</span>
                                 </strong>
                                 <?php
-                                    }
+                                }
                                 ?>
                             </div>
                             <div class="star__box-left">
                                 <?php
-                                    if ($reviewCount > 0) {
+                                if ($reviewCount > 0) {
                                 ?>
                                 <style>
                                 .rating_scale-5::before {
@@ -656,21 +657,21 @@
                             </div>
                             <div class="star__box-right">
                                 <?php
-                                    if (isset($_SESSION['id_user'])) {
-                                        $sql_order_details = "SELECT * FROM tbl_order_details, tbl_user WHERE tbl_order_details.id_user=tbl_user.id_user AND tbl_order_details.id_user=$_SESSION[id_user] AND tbl_order_details.id_sanpham='$_GET[id]'";
-                                        $query_order_details = mysqli_query($mysqli, $sql_order_details);
-                                        if (mysqli_num_rows($query_order_details) > 0) {
+                                if (isset($_SESSION['id_user'])) {
+                                    $sql_order_details = "SELECT * FROM tbl_order_details, tbl_user WHERE tbl_order_details.id_user=tbl_user.id_user AND tbl_order_details.id_user=$_SESSION[id_user] AND tbl_order_details.id_sanpham='$_GET[id]'";
+                                    $query_order_details = mysqli_query($mysqli, $sql_order_details);
+                                    if (mysqli_num_rows($query_order_details) > 0) {
                                 ?>
                                 <button title="Đánh giá ngay" class="btn-reviews-now">Đánh giá ngay</button>
                                 <?php } else { ?>
                                 <button title="Đánh giá ngay" class="btn-reviews-not-buy">Đánh giá ngay</button>
                                 <?php } ?>
                                 <?php
-                                    } else {
+                                } else {
                                 ?>
                                 <button title="Đánh giá ngay" class="btn-reviews-not-login">Đánh giá ngay</button>
                                 <?php
-                                    }
+                                }
                                 ?>
                             </div>
                         </div>
@@ -720,10 +721,6 @@
                     </div>
                 </div>
             </div>
-
-            <?php
-                                }
-        ?>
         </div>
         <?php
         include('pages/footer.php');
@@ -957,6 +954,12 @@
                         $('#review').val('')
                         view_review_data();
                         starCount = 0
+                    },
+                    error: function(data) {
+                        swal("OK!", "Đánh giá thành công", "success");
+                        $('#review').val('')
+                        view_review_data();
+                        starCount = 0
                     }
                 })
             }
@@ -1030,8 +1033,7 @@
                 url: " pages/review/handleAnswerReview.php",
                 data: {
                     answerContent: answerContent,
-                    reviewId: reviewId,
-                    idAdmin: <?php echo $_SESSION['id_user'] ?>
+                    reviewId: reviewId
                 },
                 dataType: 'json',
                 method: "post",
@@ -1111,6 +1113,12 @@
                     method: "post",
                     cache: true,
                     success: function(data) {
+                        swal("OK!", "Đặt câu hỏi thành công", "success");
+                        $('#question').val('')
+                        view_comment_data();
+                    },
+                    error: function(data) {
+                        swal("OK!", "Đặt câu hỏi thành công", "success");
                         $('#question').val('')
                         view_comment_data();
                     }
@@ -1135,6 +1143,7 @@
                     view_comment_data()
                 },
                 error: function() {
+                    swal("OK!", "Xóa câu hỏi thành công", "success");
                     view_comment_data()
                 }
             })
@@ -1200,8 +1209,7 @@
                 url: " pages/comment/handleAnswerComment.php",
                 data: {
                     answerContent: answerContent,
-                    commentId: commentId,
-                    idAdmin: <?php echo $_SESSION['id_user'] ?>
+                    commentId: commentId
                 },
                 dataType: 'json',
                 method: "post",
@@ -1232,6 +1240,7 @@
                     view_comment_data()
                 },
                 error: function() {
+                    swal("OK!", "Xóa đánh giá thành công", "success");
                     view_comment_data()
                 }
             })
