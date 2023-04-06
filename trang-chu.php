@@ -351,9 +351,9 @@
         $(document).ready(() => {
             $(document).on("click", '.view__product-detail', function() {
                 var idDetail = $(this).attr("value");
-                var url = "chitietsanpham.php?id=" + idDetail;
+                var url = "san-pham.php?id=" + idDetail;
                 window.history.pushState("new", "title", url);
-                $(".container").load("chitietsanpham.php?id=" + idDetail);
+                $(".container").load("san-pham.php?id=" + idDetail);
                 $(window).scrollTop(0);
                 window.location.reload();
             })
@@ -361,9 +361,9 @@
             // View all
             $(document).on("click", '.view__all-product-with-category', function() {
                 var idAll = $(this).attr("value");
-                var url = "shopPage.php?id=" + idAll;
+                var url = "danh-muc.php?id=" + idAll;
                 window.history.pushState("new", "title", url);
-                $(".container").load("shopPage.php?id=" + idAll);
+                $(".container").load("danh-muc.php?id=" + idAll);
                 $(window).scrollTop(0);
                 window.location.reload();
             })

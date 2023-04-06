@@ -122,17 +122,17 @@
             // View product detail
             $(document).on("click", '.view__product-detail', function() {
                 var id = $(this).attr("value");
-                var url = "chitietsanpham.php?id=" + id;
+                var url = "san-pham.php?id=" + id;
                 window.history.pushState("new", "title", url);
-                $(".container").load("chitietsanpham.php?id=" + id);
+                $(".container").load("san-pham.php?id=" + id);
                 $(window).scrollTop(0);
                 window.location.reload();
             })
 
             $(document).on("click", '.view__home', function() {
-                var url = "home.php";
+                var url = "trang-chu.php";
                 window.history.pushState("new", "title", url);
-                $(".container").load("home.php");
+                $(".container").load("trang-chu.php");
                 $(window).scrollTop(0);
             })
 
