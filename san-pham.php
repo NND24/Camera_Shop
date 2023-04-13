@@ -1049,14 +1049,36 @@
             /* COMMENT START */
 
             // View comment data
+            var pageIndexComment = 1
+
             function view_comment_data() {
-                $.post(' pages/comment/loadCommentData.php?idsanpham=' +
-                    <?php echo $_GET['id'] ?>,
+                $.post('pages/comment/loadCommentData.php?idsanpham=' +
+                    '<?php echo $_GET['id'] ?>&pageIndex=' + pageIndexComment,
                     function(data) {
                         $('#load__comment-data').html(data)
                     })
             }
             view_comment_data()
+
+            $(document).on("click", '.page-link.main', function() {
+                pageIndexComment = $(this).attr("value");
+                $.ajax({
+                    url: 'pages/comment/loadCommentData.php?idsanpham=' +
+                        '<?php echo $_GET['id'] ?>&pageIndex=' + pageIndexComment,
+                    data: {
+                        pageIndex: pageIndexComment,
+                    },
+                    dataType: 'html',
+                    method: "post",
+                    cache: true,
+                    success: function(data) {
+                        view_comment_data();
+                    },
+                    error: function() {
+                        view_comment_data();
+                    }
+                })
+            })
 
             $(document).on("click", '.comment__submit', function() {
                 var comment = $('#question').val()

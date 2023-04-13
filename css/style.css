@@ -2536,6 +2536,32 @@ span#countContent {
   font-size: 25px;
 }
 
+.form-checkbox {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.form-checkbox label {
+  margin-bottom: 0 !important;
+  margin-right: 50px;
+}
+
+.form-checkbox label::before {
+  content: "";
+  right: 142px;
+  position: absolute;
+  width: 1px;
+  height: 18px;
+  background-color: #000;
+}
+
+.form-checkbox a:hover {
+  color: #03a0e2;
+  cursor: pointer;
+}
+
 /** LOGIN & REGISTER END **/
 
 /* MAIN MENU */

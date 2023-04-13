@@ -41,7 +41,6 @@ $row_privilege = mysqli_fetch_array($query_privilege)
         </div>
     </div>
 
-
     <button class="sidebar-list-item">
         <a class="dashboard">Thống kê</a>
         <img class="dashboard" title="Thống kê" src="../../images/icon/menu.png" alt="">
@@ -87,6 +86,16 @@ $row_privilege = mysqli_fetch_array($query_privilege)
     <?php
     }
     ?>
+    <?php
+    if (true) {
+    ?>
+    <button class="sidebar-list-item">
+        <a class="list-user">Quản lý khách hàng</a>
+        <img class="list-user" title="Quản lý khách hàng" src="../../images/icon/ecommerce.png" alt="">
+    </button>
+    <?php
+    }
+    ?>
 </div>
 <div id="view-edit-account"></div>
 
@@ -120,6 +129,12 @@ $(document).ready(() => {
         const url = "member.php";
         window.history.pushState("new", "title", url);
         $("#main").load("member.php");
+    });
+
+    $(".list-user").click(() => {
+        const url = "user.php";
+        window.history.pushState("new", "title", url);
+        $("#main").load("user.php");
     });
 
     // 

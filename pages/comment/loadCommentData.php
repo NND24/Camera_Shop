@@ -1,10 +1,17 @@
 <?php
 session_start();
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
+$item_per_page = 10;
+$current_page = $_GET['pageIndex'];
+$offset = ($current_page - 1) * $item_per_page;
 
 $idsanpham = $_GET['idsanpham'];
-$sql_comment = "SELECT * FROM tbl_comments, tbl_user WHERE tbl_comments.id_user=tbl_user.id_user AND tbl_comments.id_sanpham=$idsanpham LIMIT 10 ";
+$sql_comment = "SELECT * FROM tbl_comments, tbl_user WHERE tbl_comments.id_user=tbl_user.id_user AND tbl_comments.id_sanpham=$idsanpham LIMIT " . $item_per_page . " OFFSET " . $offset . " ";
 $query_comment = mysqli_query($mysqli, $sql_comment);
+
+$totalRecords = mysqli_query($mysqli, "SELECT * FROM tbl_comments, tbl_user WHERE tbl_comments.id_user=tbl_user.id_user AND tbl_comments.id_sanpham=$idsanpham");
+$totalRecords = mysqli_num_rows($totalRecords);
+$totalPages = ceil($totalRecords / $item_per_page);
 if (mysqli_num_rows($query_comment) > 0) {
     while ($row_comment = mysqli_fetch_array($query_comment)) {
 ?>
@@ -86,7 +93,65 @@ if (mysqli_num_rows($query_comment) > 0) {
 <?php
     }
     ?>
+<div class="pagination__wrapper ">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <?php
+                        if ($current_page > 3) {
+                            $first_page = 1;
+                        ?>
+            <li class="page-item">
+                <a class="page-link main first-page-shopPage" value="<?php echo $first_page ?>"><i
+                        class="fa-solid fa-angles-left"></i></a>
+            </li>
+            <?php
+                        }
+                        if ($current_page > 1) {
+                            $prev_page = $current_page - 1;
+                        ?>
+            <li class="page-item">
+                <a class="page-link main prev-page-shopPage" value="<?php echo $current_page - 1 ?>"><i
+                        class="fa-solid fa-angle-left"></i></a>
+            </li>
+            <?php } ?>
 
+            <?php for ($num = 1; $num <= $totalPages; $num++) { ?>
+            <?php if ($num != $current_page) { ?>
+            <?php if ($num > $current_page - 3 && $num < $current_page + 3) { ?>
+            <li class="page-item <?php echo ($current_page == $num) ? 'active' : '' ?>"><a class="page-link main"
+                    value="<?php echo $num ?>"><?php echo $num ?></a></li>
+            <?php } ?>
+            <?php } else { ?>
+            <li class="page-item <?php echo ($current_page == $num) ? 'active' : '' ?>"><a class="page-link main"
+                    value="<?php echo $num ?>"><?php echo $num ?></a></li>
+            <?php } ?>
+            <?php } ?>
+
+
+            <?php
+                        if ($current_page < $totalPages - 1) {
+                            $next_page = $current_page + 1;
+                        ?>
+            <li class=" page-item">
+                <a class="page-link main next-page-shopPage" value="<?php echo $current_page + 1 ?>"><i
+                        class="fa-solid fa-angle-right"></i></a>
+            </li>
+            <?php
+                        }
+                        if ($current_page < $totalPages - 3) {
+                            $end_page = $totalPages;
+                        ?>
+            <li class="page-item">
+                <a class="page-link main last-page-shopPage" value="<?php echo $end_page ?>"><i
+                        class="fa-solid fa-angles-right"></i></a>
+            </li>
+            <?php
+                        }
+                        ?>
+
+        </ul>
+    </nav>
+</div>
 <?php
 } else {
 ?>

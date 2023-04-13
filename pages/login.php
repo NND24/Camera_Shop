@@ -2,7 +2,7 @@
 include('../admin/config/config.php'); ?>
 
 <div class="wrapper login">
-    <form action="" method="POST" autocomplete="off" class="form" id="form-2">
+    <form autocomplete="off" class="form" id="form-2">
         <div class="close-login-modal">
             <i class="fa-solid fa-xmark"></i>
         </div>
@@ -13,21 +13,27 @@ include('../admin/config/config.php'); ?>
         <div class="form-group">
             <label for="email" class="form-label">Email</label>
             <div class="form-input">
-                <input id="email" name="email" type="text" placeholder="Nhập email" class="form-control">
+                <input id="email" type="text" placeholder="Nhập email" class="form-control">
                 <div class="error-icon email-error"><i class="fa-solid fa-exclamation"></i></i></div>
                 <div class="valid-icon email-valid"><i class="fa-regular fa-circle-check"></i></div>
             </div>
-            <span class="form-message"></span>
         </div>
 
         <div class="form-group">
             <label for="password" class="form-label">Mật khẩu</label>
             <div class="form-input">
-                <input id="password" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
+                <input id="password" type="password" placeholder="Nhập mật khẩu" class="form-control" required>
                 <div class="error-icon password-error"><i class="fa-solid fa-exclamation"></i></i></div>
                 <div class="valid-icon password-valid"><i class="fa-regular fa-circle-check"></i></div>
             </div>
-            <span class="form-message"></span>
+        </div>
+
+        <div class="form-group">
+            <div class="form-checkbox">
+                <input id="show-password" type="checkbox">
+                <label for="show-password">Hiển thị mật khẩu</label>
+                <a class="change-password">Quên mật khẩu?</a>
+            </div>
         </div>
 
         <button class="form-submit" id="form-login-submit">Đăng nhập</button>
@@ -38,7 +44,22 @@ include('../admin/config/config.php'); ?>
 
 <script>
 $(document).ready(() => {
-    $('#form-login-submit').click((e) => {
+    $(document).on("click", '#show-password', function() {
+        var passwordInput = $('#password');
+        var showPassword = $('#show-password');
+        if (showPassword.prop('checked')) {
+            passwordInput.attr('type', 'text');
+        } else {
+            passwordInput.attr('type', 'password');
+        }
+    });
+
+    $(document).on("click", '.change-password', function() {
+        $("#view__login").load("pages/quen-mat-khau.php");
+    })
+
+
+    $(document).on("click", '#form-login-submit', function(e) {
         e.preventDefault();
         var email = $('#email').val();
         var password = $('#password').val();
