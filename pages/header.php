@@ -11,7 +11,7 @@ include('./js/link.php');
     <!-- Header Main -->
     <div class="header_main">
         <div class="header_container">
-            <d class="row no-wrap">
+            <div class="row no-wrap">
 
 
                 <!-- Logo -->
@@ -34,7 +34,6 @@ include('./js/link.php');
                         <li class="has_subs">
                             <a><i class="fa-solid fa-bars"></i><span>Danh mục</span></a>
                             <ul>
-
                                 <?php
                                 while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
                                 ?>
@@ -52,7 +51,7 @@ include('./js/link.php');
 
 
                 <!-- Search -->
-                <div class="col-lg-6 col-md-7 col-1  ">
+                <div class="col-lg-6 col-md-7 col-1">
                     <div class="header_search">
                         <div class="header_search_content">
                             <div class="header_search_form_container">
@@ -68,7 +67,7 @@ include('./js/link.php');
                 </div>
 
                 <!-- Nav option -->
-                <div class="col-lg-2 col-md-2 col-8  ">
+                <div class="col-lg-2 col-md-2 col-8">
                     <div class="option_container d-flex flex-row align-items-center justify-content-end">
                         <!-- Cart -->
 
@@ -106,8 +105,8 @@ include('./js/link.php');
 
                     </div>
                 </div>
+            </div>
         </div>
-    </div>
     </div>
 
     <div class="main__menu">

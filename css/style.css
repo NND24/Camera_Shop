@@ -2557,7 +2557,7 @@ span#countContent {
   background-color: #000;
 }
 
-.form-checkbox a:hover {
+.form-checkbox .change-password:hover {
   color: #03a0e2;
   cursor: pointer;
 }

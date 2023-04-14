@@ -1574,3 +1574,46 @@ span#countContent {
   text-align: center;
   cursor: pointer;
 }
+
+.forgot-password {
+  display: none;
+}
+
+.confirm-password-wrapper {
+  display: none;
+}
+
+.confirm-password-wrapper label {
+  width: 100%;
+}
+
+.form-checkbox {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.form-checkbox label {
+  margin-bottom: 0 !important;
+  margin-right: 50px;
+  font-size: 16px;
+}
+
+.form-checkbox label::before {
+  content: "";
+  right: 142px;
+  position: absolute;
+  width: 1px;
+  height: 18px;
+  background-color: #000;
+}
+
+.form-checkbox .change-password {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.form-checkbox .change-password:hover {
+  color: #03a0e2;
+}
