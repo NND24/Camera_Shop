@@ -211,9 +211,11 @@
 
                         // Validate product brief
                         if (tomtat.length === 0) {
-                            errors.briefError = "Tóm tắt sản phẩm không được để trống";
-                            swal("Vui lòng nhập lại", errors.briefError, "error");
-                            $('.cke_chrome').css("border-color", "#ff000087");
+                            // errors.briefError = "Tóm tắt sản phẩm không được để trống";
+                            // swal("Vui lòng nhập lại", errors.briefError, "error");
+                            // $('.cke_chrome').css("border-color", "#ff000087");
+                            errors.briefError = '';
+                            $('.cke_chrome').css("border-color", "#008000ab");
                         } else {
                             errors.briefError = '';
                             $('.cke_chrome').css("border-color", "#008000ab");
@@ -368,9 +370,11 @@
 
                     // Validate product brief
                     if (tomtat.length === 0) {
-                        errors.briefError = "Tóm tắt sản phẩm không được để trống";
-                        swal("Vui lòng nhập lại", errors.briefError, "error");
-                        $('.cke_chrome').css("border-color", "#ff000087");
+                        // errors.briefError = "Tóm tắt sản phẩm không được để trống";
+                        // swal("Vui lòng nhập lại", errors.briefError, "error");
+                        // $('.cke_chrome').css("border-color", "#ff000087");
+                        errors.briefError = '';
+                        $('.cke_chrome').css("border-color", "#008000ab");
                     } else {
                         errors.briefError = '';
                         $('.cke_chrome').css("border-color", "#008000ab");
