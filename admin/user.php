@@ -250,7 +250,7 @@
                         var searchInput = $(this).val();
                         if (searchInput.length > 0) {
                             $.ajax({
-                                url: "modules/quanlydanhmucsp/handleEvent/handletim-kiem.php?pageIndex=" +
+                                url: "modules/quanlydanhmucsp/handleEvent/handleSearch.php?pageIndex=" +
                                     pageIndexCateSearch,
                                 data: {
                                     searchInput: searchInput,
@@ -272,7 +272,7 @@
                         var searchInput = $('.search-bar').val();
                         if (searchInput.length > 0) {
                             $.ajax({
-                                url: "modules/quanlydanhmucsp/handleEvent/handletim-kiem.php?pageIndex=" +
+                                url: "modules/quanlydanhmucsp/handleEvent/handleSearch.php?pageIndex=" +
                                     pageIndexCateSearch,
                                 data: {
                                     searchInput: searchInput,
