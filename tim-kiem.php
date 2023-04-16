@@ -126,28 +126,6 @@ $mysqli = new mysqli("localhost", "root", "", "camera_shop");
 
     <script>
         $(document).ready(() => {
-            // window.onscroll = function() {
-            //     if (document.documentElement.scrollTop > 50) {
-            //         $('.container').addClass('active');
-            //     } else {
-            //         $('.container').removeClass('active');
-            //     }
-            // };
-
-            // Load more description
-            $(document).on("click", '.load-more', function() {
-                $('.term__description').css('height', '100%');
-                $('.load-more').css('display', 'none')
-                $('.collapse').css('display', 'block')
-            })
-
-            // Collapse description
-            $(document).on("click", '.collapse', function() {
-                $('.term__description').css('height', '200px');
-                $('.load-more').css('display', 'block')
-                $('.collapse').css('display', 'none')
-            })
-
             // View product detail
             $(document).on("click", '.view__product-detail', function() {
                 var id = $(this).attr("value");
@@ -158,6 +136,7 @@ $mysqli = new mysqli("localhost", "root", "", "camera_shop");
                 window.location.reload();
             })
 
+            // Quay ve trang chu
             $(document).on("click", '.view__home', function() {
                 var url = "trang-chu.php";
                 window.history.pushState("new", "title", url);

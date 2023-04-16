@@ -308,7 +308,7 @@ include('./js/link.php');
             e.preventDefault()
             var productID = $(this).val();
             $.ajax({
-                url: "pages/Cart/handleAddTogio-hang.php",
+                url: "pages/Cart/handleAddToCart.php",
                 data: {
                     id_sanpham: productID,
                 },
@@ -345,13 +345,49 @@ include('./js/link.php');
             e.preventDefault();
             var productID = $(this).attr("value");
             $.ajax({
-                url: "pages/Cart/handleAddTogio-hang.php",
+                url: "pages/Cart/handleAddToCart.php",
                 data: {
                     id_sanpham: productID,
                 },
                 dataType: 'json',
                 method: "post",
-                cache: true
+                cache: true,
+                success: function(data) {
+                    if (data.hethang == 1) {
+                        swal("Sản phẩm đã hết hàng",
+                            "Vui lòng chọn mua sản phẩm khác!",
+                            "error");
+                    }
+                    view_data()
+                },
+                error: function(data) {
+                    view_data()
+                },
+            })
+        })
+
+        $(document).on("click", '.add-to-cart-button-now', function(e) {
+            e.preventDefault();
+            var productID = $(this).attr("value");
+            $.ajax({
+                url: "pages/Cart/handleAddToCart.php",
+                data: {
+                    id_sanpham: productID,
+                },
+                dataType: 'json',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    if (data.hethang == 1) {
+                        swal("Sản phẩm đã hết hàng",
+                            "Vui lòng chọn mua sản phẩm khác!",
+                            "error");
+                    }
+                    view_data()
+                },
+                error: function(data) {
+                    view_data()
+                },
             })
             var url = "gio-hang.php";
             window.history.pushState("new", "title", url);

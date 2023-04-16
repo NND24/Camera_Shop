@@ -33,12 +33,13 @@
                                         <?php
                                         while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
                                         ?>
-                                            <li>
-                                                <button class="category__product-btn" value="<?php echo $row_danhmuc['id_danhmuc'] ?>">
-                                                    <i class="fa-solid fa-chevron-right"></i>
-                                                    <?php echo $row_danhmuc['ten_danhmuc'] ?>
-                                                </button>
-                                            </li>
+                                        <li>
+                                            <button class="category__product-btn"
+                                                value="<?php echo $row_danhmuc['id_danhmuc'] ?>">
+                                                <i class="fa-solid fa-chevron-right"></i>
+                                                <?php echo $row_danhmuc['ten_danhmuc'] ?>
+                                            </button>
+                                        </li>
 
                                         <?php
                                         }
@@ -98,56 +99,65 @@
                                     $query_product_discount = mysqli_query($mysqli, $sql_product_discount);
                                     while ($row_product_discount = mysqli_fetch_array($query_product_discount)) {
                                     ?>
-                                        <div class="col col-lg-2-4 col-md-3 col-6 mb-10">
-                                            <div class="row__item item--product">
-                                                <div class="row__item-container">
-                                                    <?php if ($row_product_discount['giamgia'] > 0) { ?>
-                                                        <div class="discount-banner">
-                                                            Giảm <?php echo $row_product_discount['giamgia'] ?>%
+                                    <div class="col col-lg-2-4 col-md-3 col-6 mb-10">
+                                        <div class="row__item item--product">
+                                            <div class="row__item-container">
+                                                <?php if ($row_product_discount['giamgia'] > 0) { ?>
+                                                <div class="discount-banner">
+                                                    Giảm <?php echo $row_product_discount['giamgia'] ?>%
+                                                </div>
+                                                <?php } ?>
+                                                <div class="row__item-display br-5">
+                                                    <div class="view__product-detail"
+                                                        value="<?php echo $row_product_discount['id_sanpham'] ?>">
+                                                        <div class="row__item-img"
+                                                            style="background: url('./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_product_discount['hinhanh'] ?>') no-repeat center center / cover">
                                                         </div>
-                                                    <?php } ?>
-                                                    <div class="row__item-display br-5">
-                                                        <div class="view__product-detail" value="<?php echo $row_product_discount['id_sanpham'] ?>">
-                                                            <div class="row__item-img" style="background: url('./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_product_discount['hinhanh'] ?>') no-repeat center center / cover">
-                                                            </div>
-                                                        </div>
-                                                        <?php if (isset($_SESSION['id_user'])) { ?>
-                                                            <button class="add-to-cart-btn" value="<?php echo $row_product_discount['id_sanpham'] ?>">
-                                                                <i class="fa-solid fa-cart-plus"></i>
-                                                                <span>Thêm vào giỏ hàng</span>
-                                                            </button>
-                                                        <?php } else { ?>
-                                                            <button class="add-to-cart-btn-not-login" value="<?php echo $row_product_discount['id_sanpham'] ?>">
-                                                                <i class="fa-solid fa-cart-plus"></i>
-                                                                <span>Thêm vào giỏ hàng</span>
-                                                            </button>
-                                                        <?php } ?>
                                                     </div>
-                                                    <div class="row__item-info">
-                                                        <div class="view__product-detail" value="<?php echo $row_product_discount['id_sanpham'] ?>">
-                                                            <div class="row__info-name">
-                                                                <span style="cursor:pointer;"><?php echo $row_product_discount['tensanpham'] ?></span>
-                                                            </div>
+                                                    <?php if (isset($_SESSION['id_user'])) { ?>
+                                                    <button class="add-to-cart-btn"
+                                                        value="<?php echo $row_product_discount['id_sanpham'] ?>">
+                                                        <i class="fa-solid fa-cart-plus"></i>
+                                                        <span>Thêm vào giỏ hàng</span>
+                                                    </button>
+                                                    <?php } else { ?>
+                                                    <button class="add-to-cart-btn-not-login"
+                                                        value="<?php echo $row_product_discount['id_sanpham'] ?>">
+                                                        <i class="fa-solid fa-cart-plus"></i>
+                                                        <span>Thêm vào giỏ hàng</span>
+                                                    </button>
+                                                    <?php } ?>
+                                                </div>
+                                                <div class="row__item-info">
+                                                    <div class="view__product-detail"
+                                                        value="<?php echo $row_product_discount['id_sanpham'] ?>">
+                                                        <div class="row__info-name">
+                                                            <span
+                                                                style="cursor:pointer;"><?php echo $row_product_discount['tensanpham'] ?></span>
                                                         </div>
-                                                        <div class="price__wrapper">
-                                                            <?php
+                                                    </div>
+                                                    <div class="price__wrapper">
+                                                        <?php
                                                             if ($row_product_discount['giamgia'] > 0) {
                                                             ?>
-                                                                <span class="price-discount"><?php echo number_format($row_product_discount['giasp'] - ($row_product_discount['giasp'] * $row_product_discount['giamgia']) / 100, 0, ',', '.') ?>đ</span>
-                                                                <span class="price-normal-discount"><?php echo number_format($row_product_discount['giasp'], 0, ',', '.') ?>đ</span>
-                                                            <?php
+                                                        <span
+                                                            class="price-discount"><?php echo number_format($row_product_discount['giasp'] - ($row_product_discount['giasp'] * $row_product_discount['giamgia']) / 100, 0, ',', '.') ?>đ</span>
+                                                        <span
+                                                            class="price-normal-discount"><?php echo number_format($row_product_discount['giasp'], 0, ',', '.') ?>đ</span>
+                                                        <?php
                                                             } else {
                                                             ?>
-                                                                <span class="price-normal"><?php echo number_format($row_product_discount['giasp'], 0, ',', '.') ?>đ</span>
-                                                            <?php
+                                                        <span
+                                                            class="price-normal"><?php echo number_format($row_product_discount['giasp'], 0, ',', '.') ?>đ</span>
+                                                        <?php
                                                             }
                                                             ?>
-                                                        </div>
-
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                     <?php
                                     }
                                     ?>
@@ -168,56 +178,65 @@
                                     $query_product_sold = mysqli_query($mysqli, $sql_product_sold);
                                     while ($row_product_sold = mysqli_fetch_array($query_product_sold)) {
                                     ?>
-                                        <div class="col col-lg-2-4 col-md-3 col-6 mb-10">
-                                            <div class="row__item item--product">
-                                                <div class="row__item-container">
-                                                    <?php if ($row_product_sold['giamgia'] > 0) { ?>
-                                                        <div class="discount-banner">
-                                                            Giảm <?php echo $row_product_sold['giamgia'] ?>%
+                                    <div class="col col-lg-2-4 col-md-3 col-6 mb-10">
+                                        <div class="row__item item--product">
+                                            <div class="row__item-container">
+                                                <?php if ($row_product_sold['giamgia'] > 0) { ?>
+                                                <div class="discount-banner">
+                                                    Giảm <?php echo $row_product_sold['giamgia'] ?>%
+                                                </div>
+                                                <?php } ?>
+                                                <div class="row__item-display br-5">
+                                                    <div class="view__product-detail"
+                                                        value="<?php echo $row_product_sold['id_sanpham'] ?>">
+                                                        <div class="row__item-img"
+                                                            style="background: url('./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_product_sold['hinhanh'] ?>') no-repeat center center / cover">
                                                         </div>
-                                                    <?php } ?>
-                                                    <div class="row__item-display br-5">
-                                                        <div class="view__product-detail" value="<?php echo $row_product_sold['id_sanpham'] ?>">
-                                                            <div class="row__item-img" style="background: url('./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_product_sold['hinhanh'] ?>') no-repeat center center / cover">
-                                                            </div>
-                                                        </div>
-                                                        <?php if (isset($_SESSION['id_user'])) { ?>
-                                                            <button class="add-to-cart-btn" value="<?php echo $row_product_sold['id_sanpham'] ?>">
-                                                                <i class="fa-solid fa-cart-plus"></i>
-                                                                <span>Thêm vào giỏ hàng</span>
-                                                            </button>
-                                                        <?php } else { ?>
-                                                            <button class="add-to-cart-btn-not-login" value="<?php echo $row_product_sold['id_sanpham'] ?>">
-                                                                <i class="fa-solid fa-cart-plus"></i>
-                                                                <span>Thêm vào giỏ hàng</span>
-                                                            </button>
-                                                        <?php } ?>
                                                     </div>
-                                                    <div class="row__item-info">
-                                                        <div class="view__product-detail" value="<?php echo $row_product_sold['id_sanpham'] ?>">
-                                                            <div class="row__info-name">
-                                                                <span style="cursor:pointer;"><?php echo $row_product_sold['tensanpham'] ?></span>
-                                                            </div>
+                                                    <?php if (isset($_SESSION['id_user'])) { ?>
+                                                    <button class="add-to-cart-btn"
+                                                        value="<?php echo $row_product_sold['id_sanpham'] ?>">
+                                                        <i class="fa-solid fa-cart-plus"></i>
+                                                        <span>Thêm vào giỏ hàng</span>
+                                                    </button>
+                                                    <?php } else { ?>
+                                                    <button class="add-to-cart-btn-not-login"
+                                                        value="<?php echo $row_product_sold['id_sanpham'] ?>">
+                                                        <i class="fa-solid fa-cart-plus"></i>
+                                                        <span>Thêm vào giỏ hàng</span>
+                                                    </button>
+                                                    <?php } ?>
+                                                </div>
+                                                <div class="row__item-info">
+                                                    <div class="view__product-detail"
+                                                        value="<?php echo $row_product_sold['id_sanpham'] ?>">
+                                                        <div class="row__info-name">
+                                                            <span
+                                                                style="cursor:pointer;"><?php echo $row_product_sold['tensanpham'] ?></span>
                                                         </div>
-                                                        <div class="price__wrapper">
-                                                            <?php
+                                                    </div>
+                                                    <div class="price__wrapper">
+                                                        <?php
                                                             if ($row_product_sold['giamgia'] > 0) {
                                                             ?>
-                                                                <span class="price-discount"><?php echo number_format($row_product_sold['giasp'] - ($row_product_sold['giasp'] * $row_product_sold['giamgia']) / 100, 0, ',', '.') ?>đ</span>
-                                                                <span class="price-normal-discount"><?php echo number_format($row_product_sold['giasp'], 0, ',', '.') ?>đ</span>
-                                                            <?php
+                                                        <span
+                                                            class="price-discount"><?php echo number_format($row_product_sold['giasp'] - ($row_product_sold['giasp'] * $row_product_sold['giamgia']) / 100, 0, ',', '.') ?>đ</span>
+                                                        <span
+                                                            class="price-normal-discount"><?php echo number_format($row_product_sold['giasp'], 0, ',', '.') ?>đ</span>
+                                                        <?php
                                                             } else {
                                                             ?>
-                                                                <span class="price-normal"><?php echo number_format($row_product_sold['giasp'], 0, ',', '.') ?>đ</span>
-                                                            <?php
+                                                        <span
+                                                            class="price-normal"><?php echo number_format($row_product_sold['giasp'], 0, ',', '.') ?>đ</span>
+                                                        <?php
                                                             }
                                                             ?>
-                                                        </div>
-
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                     <?php
                                     }
                                     ?>
@@ -235,80 +254,91 @@
                         $query_product = mysqli_query($mysqli, $sql_product);
                         if (mysqli_num_rows($query_product) > 0) {
                     ?>
-                            <section class="section box__product">
-                                <div class="section_content row">
-                                    <div class="col col-lg-12 col-md-12 col-12">
-                                        <div class="container__header">
-                                            <h2 class="container__header-title"><?php echo $row_category['ten_danhmuc'] ?></h2>
-                                            <div class="view-all">
-                                                <div class="view__all-product-with-category" value="<?php echo $row_category['id_danhmuc'] ?>">Xem tất cả<i class="fa-solid fa-chevron-right"></i></div>
-                                            </div>
-                                        </div>
+                    <section class="section box__product">
+                        <div class="section_content row">
+                            <div class="col col-lg-12 col-md-12 col-12">
+                                <div class="container__header">
+                                    <h2 class="container__header-title"><?php echo $row_category['ten_danhmuc'] ?></h2>
+                                    <div class="view-all">
+                                        <div class="view__all-product-with-category"
+                                            value="<?php echo $row_category['id_danhmuc'] ?>">Xem tất cả<i
+                                                class="fa-solid fa-chevron-right"></i></div>
                                     </div>
-                                    <div class="col col-lg-12 col-md-12 col-12">
-                                        <div class="row no-wrap product--container">
-                                            <?php
+                                </div>
+                            </div>
+                            <div class="col col-lg-12 col-md-12 col-12">
+                                <div class="row no-wrap product--container">
+                                    <?php
 
                                             while ($row_product = mysqli_fetch_array($query_product)) {
                                             ?>
-                                                <div class="col col-lg-2-4 col-md-3 col-6 mb-10">
-                                                    <div class="row__item item--product">
-                                                        <div class="row__item-container">
-                                                            <?php if ($row_product['giamgia'] > 0) { ?>
-                                                                <div class="discount-banner">
-                                                                    Giảm <?php echo $row_product['giamgia'] ?>%
-                                                                </div>
-                                                            <?php } ?>
-                                                            <div class="row__item-display br-5">
-                                                                <div class="view__product-detail" value="<?php echo $row_product['id_sanpham'] ?>">
-                                                                    <div class="row__item-img" style="background: url('./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_product['hinhanh'] ?>') no-repeat center center / cover">
-                                                                    </div>
-                                                                </div>
-                                                                <?php if (isset($_SESSION['id_user'])) { ?>
-                                                                    <button class="add-to-cart-btn" value="<?php echo $row_product['id_sanpham'] ?>">
-                                                                        <i class="fa-solid fa-cart-plus"></i>
-                                                                        <span>Thêm vào giỏ hàng</span>
-                                                                    </button>
-                                                                <?php } else { ?>
-                                                                    <button class="add-to-cart-btn-not-login" value="<?php echo $row_product['id_sanpham'] ?>">
-                                                                        <i class="fa-solid fa-cart-plus"></i>
-                                                                        <span>Thêm vào giỏ hàng</span>
-                                                                    </button>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <div class="row__item-info">
-                                                                <div class="view__product-detail" value="<?php echo $row_product['id_sanpham'] ?>">
-                                                                    <div class="row__info-name">
-                                                                        <span style="cursor:pointer;"><?php echo $row_product['tensanpham'] ?></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="price__wrapper">
-                                                                    <?php
-                                                                    if ($row_product['giamgia'] > 0) {
-                                                                    ?>
-                                                                        <span class="price-discount"><?php echo number_format($row_product['giasp'] - ($row_product['giasp'] * $row_product['giamgia']) / 100, 0, ',', '.') ?>đ</span>
-                                                                        <span class="price-normal-discount"><?php echo number_format($row_product['giasp'], 0, ',', '.') ?>đ</span>
-                                                                    <?php
-                                                                    } else {
-                                                                    ?>
-                                                                        <span class="price-normal"><?php echo number_format($row_product['giasp'], 0, ',', '.') ?>đ</span>
-                                                                    <?php
-                                                                    }
-                                                                    ?>
-                                                                </div>
-
-                                                            </div>
+                                    <div class="col col-lg-2-4 col-md-3 col-6 mb-10">
+                                        <div class="row__item item--product">
+                                            <div class="row__item-container">
+                                                <?php if ($row_product['giamgia'] > 0) { ?>
+                                                <div class="discount-banner">
+                                                    Giảm <?php echo $row_product['giamgia'] ?>%
+                                                </div>
+                                                <?php } ?>
+                                                <div class="row__item-display br-5">
+                                                    <div class="view__product-detail"
+                                                        value="<?php echo $row_product['id_sanpham'] ?>">
+                                                        <div class="row__item-img"
+                                                            style="background: url('./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_product['hinhanh'] ?>') no-repeat center center / cover">
                                                         </div>
                                                     </div>
+                                                    <?php if (isset($_SESSION['id_user'])) { ?>
+                                                    <button class="add-to-cart-btn"
+                                                        value="<?php echo $row_product['id_sanpham'] ?>">
+                                                        <i class="fa-solid fa-cart-plus"></i>
+                                                        <span>Thêm vào giỏ hàng</span>
+                                                    </button>
+                                                    <?php } else { ?>
+                                                    <button class="add-to-cart-btn-not-login"
+                                                        value="<?php echo $row_product['id_sanpham'] ?>">
+                                                        <i class="fa-solid fa-cart-plus"></i>
+                                                        <span>Thêm vào giỏ hàng</span>
+                                                    </button>
+                                                    <?php } ?>
                                                 </div>
-                                            <?php
-                                            }
-                                            ?>
+                                                <div class="row__item-info">
+                                                    <div class="view__product-detail"
+                                                        value="<?php echo $row_product['id_sanpham'] ?>">
+                                                        <div class="row__info-name">
+                                                            <span
+                                                                style="cursor:pointer;"><?php echo $row_product['tensanpham'] ?></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="price__wrapper">
+                                                        <?php
+                                                                    if ($row_product['giamgia'] > 0) {
+                                                                    ?>
+                                                        <span
+                                                            class="price-discount"><?php echo number_format($row_product['giasp'] - ($row_product['giasp'] * $row_product['giamgia']) / 100, 0, ',', '.') ?>đ</span>
+                                                        <span
+                                                            class="price-normal-discount"><?php echo number_format($row_product['giasp'], 0, ',', '.') ?>đ</span>
+                                                        <?php
+                                                                    } else {
+                                                                    ?>
+                                                        <span
+                                                            class="price-normal"><?php echo number_format($row_product['giasp'], 0, ',', '.') ?>đ</span>
+                                                        <?php
+                                                                    }
+                                                                    ?>
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                    <?php
+                                            }
+                                            ?>
                                 </div>
-                            </section>
-                        <?php
+                            </div>
+                        </div>
+                    </section>
+                    <?php
                         }
                         ?>
                     <?php
@@ -332,6 +362,8 @@
 
     <!-- Swiper JS -->
     <script>
+    $(document).ready(() => {
+        // Hien thi silde anh
         var swiper = new Swiper(".mySwiper", {
             loop: true,
             autoplay: {
@@ -348,26 +380,26 @@
             },
         });
 
-        $(document).ready(() => {
-            $(document).on("click", '.view__product-detail', function() {
-                var idDetail = $(this).attr("value");
-                var url = "san-pham.php?id=" + idDetail;
-                window.history.pushState("new", "title", url);
-                $(".container").load("san-pham.php?id=" + idDetail);
-                $(window).scrollTop(0);
-                window.location.reload();
-            })
-
-            // View all
-            $(document).on("click", '.view__all-product-with-category', function() {
-                var idAll = $(this).attr("value");
-                var url = "danh-muc.php?id=" + idAll;
-                window.history.pushState("new", "title", url);
-                $(".container").load("danh-muc.php?id=" + idAll);
-                $(window).scrollTop(0);
-                window.location.reload();
-            })
+        // Hien thi trang san pham
+        $(document).on("click", '.view__product-detail', function() {
+            var idDetail = $(this).attr("value");
+            var url = "san-pham.php?id=" + idDetail;
+            window.history.pushState("new", "title", url);
+            $(".container").load("san-pham.php?id=" + idDetail);
+            $(window).scrollTop(0);
+            window.location.reload();
         })
+
+        // Hien thi san pham theo danh muc
+        $(document).on("click", '.view__all-product-with-category', function() {
+            var idAll = $(this).attr("value");
+            var url = "danh-muc.php?id=" + idAll;
+            window.history.pushState("new", "title", url);
+            $(".container").load("danh-muc.php?id=" + idAll);
+            $(window).scrollTop(0);
+            window.location.reload();
+        })
+    })
     </script>
 </body>
 
