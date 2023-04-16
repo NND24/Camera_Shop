@@ -51,7 +51,7 @@ if (mysqli_num_rows($query_lietke_dh) > 0) {
     </div>
     <div class="product-cell col sales">
         <?php date_default_timezone_set('Asia/Ho_Chi_Minh');
-                echo date('d/m/Y', $row['browsed_date']) ?>
+                echo  $row['browsed_date'] == 0 ?  "Chưa được duyệt" :  date('d/m/Y', $row['browsed_date']) ?>
     </div>
     <?php
             if ($row_privilege['detail_order'] == 1) {

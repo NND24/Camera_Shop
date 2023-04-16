@@ -496,7 +496,8 @@ select.active {
 .detail-category,
 .detail-product,
 .detail-order,
-.detail-member {
+.detail-member,
+.detail-user {
   background-color: transparent;
   border: none;
 }
@@ -883,7 +884,9 @@ select.active {
 .edit-product,
 .remove-order,
 .remove-member,
-.edit-member {
+.edit-member,
+.remove-user,
+.edit-user {
   background-color: transparent;
   border: none;
   color: #fff;
@@ -1576,6 +1579,10 @@ span#countContent {
 }
 
 .forgot-password {
+  display: none;
+}
+
+.back-login {
   display: none;
 }
 

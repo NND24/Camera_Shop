@@ -15,23 +15,16 @@
         <div class="main" id="main">
             <?php include('./modules/menu.php') ?>
             <?php
-            $sql_privilege = "SELECT * FROM tbl_privilege WHERE id_admin='" . $_SESSION['dangnhap'] . "' LIMIT 1";
-            $query_privilege = mysqli_query($mysqli, $sql_privilege);
-            $row_privilege = mysqli_fetch_array($query_privilege);
+            // $sql_privilege = "SELECT * FROM tbl_privilege WHERE id_admin='" . $_SESSION['dangnhap'] . "' LIMIT 1";
+            // $query_privilege = mysqli_query($mysqli, $sql_privilege);
+            // $row_privilege = mysqli_fetch_array($query_privilege);
             ?>
             <div class="app-content">
                 <?php
-                if ($row_privilege['list_user'] == 1) {
+                // if ($row_privilege['list_user'] == 1) {
                 ?>
                 <div class="app-content-header">
-                    <h1 class="app-content-headerText">khach hang</h1>
-                    <?php
-                        if ($row_privilege['add_user'] == 1) {
-                        ?>
-                    <button class="app-content-headerButton add-new-user-btn">
-                        Thêm khach hang
-                    </button>
-                    <?php } ?>
+                    <h1 class="app-content-headerText">Khách hàng</h1>
                 </div>
 
                 <div class="app-content-actions">
@@ -47,13 +40,6 @@
                                     <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
                                 </svg></button>
                             <div class="filter-menu-cate">
-                                <label>Trạng thái</label>
-                                <select class="filter_status">
-                                    <option value="2">Tất cả trạng thái</option>
-                                    <option value="1">Kích hoạt</option>
-                                    <option value="0">Ẩn</option>
-                                </select>
-
                                 <label>Ngày đăng</label>
                                 <select class="filter_dated">
                                     <option value="2">Tất cả</option>
@@ -71,37 +57,35 @@
                             </div>
                         </div>
                         <?php
-                            if ($row_privilege['delete_all_user'] == 1) {
-                            ?>
+                        //if ($row_privilege['delete_all_user'] == 1) {
+                        ?>
                         <div class="filter-button-wrapper">
-                            <button class="action-button delete-all-user">Xóa tất cả khach hang</button>
+                            <button class="action-button delete-all-product">Xóa tất cả khách hàng</button>
                         </div>
-                        <?php } ?>
+                        <?php // } 
+                        ?>
                     </div>
                 </div>
 
                 <div class="products-area-wrapper tableView">
                     <div class="products-header">
                         <div class="product-cell col-1-5 image">Thứ tự</div>
-                        <div class="product-cell col-2 user">Tên khach hang</div>
-                        <div class="product-cell col status-cell">Trạng thái</div>
+                        <div class="product-cell col user">Tên khách hàng</div>
+                        <div class="product-cell col user">Số điện thoại</div>
                         <div class="product-cell col sales">Ngày tạo</div>
-                        <div class="product-cell col stock">Ngày cập nhật</div>
                         <?php
-                            if ($row_privilege['detail_user'] == 1) {
-                            ?>
-                        <div class="product-cell col-1-8 price">Chi tiết</div>
-                        <?php } ?>
+                        //if ($row_privilege['detail_user'] == 1) {
+                        ?>
+                        <div class="product-cell col price">Chi tiết</div>
+                        <?php // } 
+                        ?>
                         <?php
-                            if ($row_privilege['delete_user'] == 1) {
-                            ?>
+                        // if ($row_privilege['delete_user'] == 1) {
+                        ?>
                         <div class="product-cell col-1 price">Xóa</div>
-                        <?php } ?>
-                        <?php
-                            if ($row_privilege['edit_user'] == 1) {
-                            ?>
-                        <div class="product-cell col-1 price">Sửa</div>
-                        <?php } ?>
+                        <?php // } 
+                        ?>
+
                     </div>
                     <div id="load_user_data"></div>
                     <div id="view-add-user"></div>
@@ -115,7 +99,7 @@
                     view_data();
                     // View data
                     function view_data() {
-                        $.post('modules/quanlydanhmucsp/handleEvent/listuserData.php?pageIndex=' +
+                        $.post('modules/quanlykhachhang/handleEvent/listuserData.php?pageIndex=' +
                             pageIndexMainCate,
                             function(
                                 data) {
@@ -126,7 +110,7 @@
                     $(document).on("click", '.page-link.mainCate', function() {
                         pageIndexMainCate = $(this).attr("value");
                         $.ajax({
-                            url: 'modules/quanlydanhmucsp/handleEvent/listuserData.php?pageIndex=' +
+                            url: 'modules/quanlykhachhang/handleEvent/listuserData.php?pageIndex=' +
                                 pageIndexMainCate,
                             dataType: 'html',
                             method: "post",
@@ -140,32 +124,14 @@
                         })
                     })
 
-                    // Add user
-                    $(document).on("click", '.add-new-user-btn', function() {
-                        var id = $(this).val();
-                        var url =
-                            "modules/quanlydanhmucsp/addNewuser.php";
-                        $.post(url, (data) => {
-                            $("#view-add-user").html(data);
-                        });
-                    })
-
-                    $(document).on("click", '.close-modal', function() {
-                        $("#user__add-model").remove();
-                    })
-
-                    $(document).on("click", '.modal__background', function() {
-                        $("#user__add-model").remove();
-                    })
-
                     // Remove user
                     $(document).on("click", '.remove-user', function() {
                         var id = $(this).val();
                         var url =
-                            "modules/quanlydanhmucsp/handleEvent/handleDeleteuser.php?iddanhmuc=" +
+                            "modules/quanlykhachhang/handleEvent/handleDeleteUser.php?iduser=" +
                             id;
                         swal({
-                                title: "Bạn có chắc muốn xóa khach hang này không?",
+                                title: "Bạn có chắc muốn xóa khách hàng này không?",
                                 text: "Nếu có khach hang này sẽ bị xóa đi!",
                                 icon: "warning",
                                 buttons: true,
@@ -173,7 +139,7 @@
                             })
                             .then((willDelete) => {
                                 if (willDelete) {
-                                    swal("khach hang đã bị xóa!", {
+                                    swal("khách hàng đã bị xóa!", {
                                         icon: "success",
                                     });
                                     $.post(url, (data) => {
@@ -186,17 +152,17 @@
                     // Delete all user
                     $(document).on("click", '.delete-all-user', function() {
                         var url =
-                            "modules/quanlydanhmucsp/handleEvent/handleDeleteuser.php?action=deleteAll";
+                            "modules/quanlykhachhang/handleEvent/handleDeleteUser.php?action=deleteAll";
                         swal({
                                 title: "Bạn có chắc muốn thực hiện thao tác không?",
-                                text: "Nếu có tất cả khach hang sẽ bị xóa đi!",
+                                text: "Nếu có tất cả khách hàng sẽ bị xóa đi!",
                                 icon: "warning",
                                 buttons: true,
                                 dangerMode: true,
                             })
                             .then((willDelete) => {
                                 if (willDelete) {
-                                    swal("Tất cả khach hang đã bị xóa!", {
+                                    swal("Tất cả khách hàng đã bị xóa!", {
                                         icon: "success",
                                     });
                                     $.post(url, (data) => {
@@ -210,7 +176,7 @@
                     $(document).on("click", '.detail-user', function() {
                         var id = $(this).val();
                         var url =
-                            "modules/quanlydanhmucsp/viewDetailuser.php?iddanhmuc=" +
+                            "modules/quanlykhachhang/viewDetailUser.php?idUser=" +
                             id;
                         $.post(url, (data) => {
                             $("#view-detail-user").html(data);
@@ -218,30 +184,11 @@
                     })
 
                     $(document).on("click", '.close-modal', function() {
-                        $("#user__add-model").remove();
+                        $("#category__add-model").remove();
                     })
 
                     $(document).on("click", '.modal__background', function() {
-                        $("#user__add-model").remove();
-                    })
-
-                    // Edit user
-                    $(document).on("click", '.edit-user', function() {
-                        var id = $(this).val();
-                        var url =
-                            "modules/quanlydanhmucsp/edituser.php?iddanhmuc=" +
-                            id;
-                        $.post(url, (data) => {
-                            $("#view-edit-user").html(data);
-                        });
-                    })
-
-                    $(document).on("click", '.close-modal', function() {
-                        $("#user__add-model").remove();
-                    })
-
-                    $(document).on("click", '.modal__background', function() {
-                        $("#user__add-model").remove();
+                        $("#category__add-model").remove();
                     })
 
                     // Handle search
@@ -250,7 +197,7 @@
                         var searchInput = $(this).val();
                         if (searchInput.length > 0) {
                             $.ajax({
-                                url: "modules/quanlydanhmucsp/handleEvent/handleSearch.php?pageIndex=" +
+                                url: "modules/quanlykhachhang/handleEvent/handleSearch.php?pageIndex=" +
                                     pageIndexCateSearch,
                                 data: {
                                     searchInput: searchInput,
@@ -272,7 +219,7 @@
                         var searchInput = $('.search-bar').val();
                         if (searchInput.length > 0) {
                             $.ajax({
-                                url: "modules/quanlydanhmucsp/handleEvent/handleSearch.php?pageIndex=" +
+                                url: "modules/quanlykhachhang/handleEvent/handleSearch.php?pageIndex=" +
                                     pageIndexCateSearch,
                                 data: {
                                     searchInput: searchInput,
@@ -296,13 +243,11 @@
 
                     var pageIndexCateFilter = 1
                     $(document).on("click", '.filter-button.apply', function() {
-                        var status = $('.filter_status').val();
                         var dated = $('.filter_dated').val();
                         $.ajax({
-                            url: "modules/quanlydanhmucsp/handleEvent/handleFilter.php?pageIndex=" +
+                            url: "modules/quanlykhachhang/handleEvent/handleFilter.php?pageIndex=" +
                                 pageIndexCateFilter,
                             data: {
-                                status: status,
                                 dated: dated
                             },
                             dataType: 'html',
@@ -316,13 +261,11 @@
 
                     $(document).on("click", '.page-link.searchCate', function() {
                         pageIndexCateFilter = $(this).attr("value");
-                        var status = $('.filter_status').val();
                         var dated = $('.filter_dated').val();
                         $.ajax({
-                            url: "modules/quanlydanhmucsp/handleEvent/handleFilter.php?pageIndex=" +
+                            url: "modules/quanlykhachhang/handleEvent/handleFilter.php?pageIndex=" +
                                 pageIndexCateFilter,
                             data: {
-                                status: status,
                                 dated: dated
                             },
                             dataType: 'html',
@@ -341,10 +284,11 @@
                 })
                 </script>
                 <?php
-                } else {
+                // } else {
                 ?>
-                <h1 style="color:#fff;">Bạn không có quyền thực hiện chức năng này</h1>
-                <?php } ?>
+                <!-- <h1 style="color:#fff;">Bạn không có quyền thực hiện chức năng này</h1> -->
+                <?php //} 
+                ?>
             </div>
         </div>
     </div>

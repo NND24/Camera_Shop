@@ -1,87 +1,67 @@
 <?php
 session_start();
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
-$item_per_page = 10;
+$item_per_page = 8;
 $current_page = $_GET['pageIndex'];
 $offset = ($current_page - 1) * $item_per_page;
 
-$status = $_POST['status'];
 $dated = $_POST['dated'];
 
-$sql_danhmucsp = "SELECT * FROM tbl_danhmuc WHERE (($status = 0 AND category_status = 0) 
-OR ($status = 1 AND category_status = 1) OR ($status = 2 AND (category_status = 0  OR category_status = 1)))
-ORDER BY 
-    CASE WHEN $dated = 0 THEN category_last_updated END ASC,
-    CASE WHEN $dated = 1 THEN category_last_updated END DESC,
-    CASE WHEN $dated = 2 THEN category_last_updated END ASC
+$sql_user = "SELECT * FROM tbl_user ORDER BY 
+    CASE WHEN $dated = 0 THEN created_time END ASC,
+    CASE WHEN $dated = 1 THEN created_time END DESC,
+    CASE WHEN $dated = 2 THEN created_time END ASC
 LIMIT " . $item_per_page . " OFFSET " . $offset . "";
-$query_danhmucsp = mysqli_query($mysqli, $sql_danhmucsp);
+$query_user = mysqli_query($mysqli, $sql_user);
 
-$sql_privilege = "SELECT * FROM tbl_privilege WHERE id_admin='" . $_SESSION['dangnhap'] . "' LIMIT 1";
-$query_privilege = mysqli_query($mysqli, $sql_privilege);
-$row_privilege = mysqli_fetch_array($query_privilege);
+// $sql_privilege = "SELECT * FROM tbl_privilege WHERE id_admin='" . $_SESSION['dangnhap'] . "' LIMIT 1";
+// $query_privilege = mysqli_query($mysqli, $sql_privilege);
+// $row_privilege = mysqli_fetch_array($query_privilege);
 
-$totalRecords = mysqli_query($mysqli, "SELECT * FROM tbl_danhmuc WHERE (($status = 0 AND category_status = 0) 
-OR ($status = 1 AND category_status = 1) OR ($status = 2 AND (category_status = 0  OR category_status = 1)))");
+$totalRecords = mysqli_query($mysqli, "SELECT * FROM tbl_user ");
 $totalRecords = mysqli_num_rows($totalRecords);
 $totalPages = ceil($totalRecords / $item_per_page);
 $i = 0;
-if (mysqli_num_rows($query_danhmucsp) > 0) {
-    while ($row = mysqli_fetch_array($query_danhmucsp)) {
+if (mysqli_num_rows($query_user) > 0) {
+    while ($row = mysqli_fetch_array($query_user)) {
         $i++
 ?>
 <div class="products-row">
-    <div class="product-cell col-1-5 id_danhmuc-danhmuc ">
+    <div class="product-cell col-1-5">
         <p><?php echo $i ?></p>
     </div>
-    <div class="product-cell col-2 category ">
-        <p><?php echo $row['ten_danhmuc'] ?></p>
+    <div class="product-cell col user ">
+        <p><?php echo $row['name'] ?></p>
     </div>
-    <div class="product-cell col status-cell">
 
-        <?php
-                if ($row['category_status'] == 1) {
-                ?>
-        <span class="status active">Kích hoạt</span>
-        <?php
-                } else {
-                ?>
-        <span class="status">Ẩn</span>
-        <?php
-                }
-                ?>
+    <div class="product-cell col user ">
+        <p><?php echo $row['phonenumber'] ?></p>
     </div>
+
     <div class="product-cell col sales"><?php
                                                 date_default_timezone_set('Asia/Ho_Chi_Minh');
-                                                echo date('d/m/Y H:i', $row['category_created_time'])
+                                                echo date('d/m/Y', $row['created_time'])
                                                 ?>
     </div>
-    <div class="product-cell col stock"><?php echo date('d/m/Y H:i', $row['category_last_updated']) ?>
-    </div>
+
     <?php
-            if ($row_privilege['detail_category'] == 1) {
+            //  if ($row_privilege['detail_user'] == 1) {
             ?>
-    <div class="product-cell col-1-8 detail">
-        <button title="Xem chi tiết" class="detail-category" value="<?php echo $row['id_danhmuc'] ?>"><span>Xem
+    <div class="product-cell col detail">
+        <button title="Xem chi tiết" class="detail-user" value="<?php echo $row['id_user'] ?>"><span>Xem
                 chi tiết</span></button>
     </div>
-    <?php } ?>
+    <?php //} 
+            ?>
     <?php
-            if ($row_privilege['delete_category'] == 1) {
+            // if ($row_privilege['delete_user'] == 1) {
             ?>
     <div class="product-cell col-1 btn">
-        <button title="Xóa" class="remove-category" value="<?php echo $row['id_danhmuc'] ?>"><i
+        <button title="Xóa" class="remove-user" value="<?php echo $row['id_user'] ?>"><i
                 class="fa-solid fa-trash"></i></button>
     </div>
-    <?php } ?>
-    <?php
-            if ($row_privilege['edit_category'] == 1) {
+    <?php //} 
             ?>
-    <div class="product-cell col-1 btn">
-        <button title="Sửa" class="edit-category" value="<?php echo $row['id_danhmuc'] ?>"><i
-                class="fa-regular fa-pen-to-square"></i></button>
-    </div>
-    <?php } ?>
 </div>
 <?php
     }
