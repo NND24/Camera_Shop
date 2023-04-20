@@ -73,7 +73,7 @@
                         <?php
                         if ($starAverage > 0) {
                         ?>
-                            <span class="average_rate"><?php echo  $starAverage ?></span>
+                        <span class="average_rate"><?php echo  $starAverage ?></span>
                         <?php } ?>
                         <div class="star_rating">
                             <?php
@@ -83,33 +83,33 @@
                             <?php
                             } else if ($starAverage > 0 && $starAverage < 2) {
                             ?>
-                                <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
                             <?php
                             } else if ($starAverage >= 2 && $starAverage < 3) {
                             ?>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
                             <?php
                             } else if ($starAverage >= 3 && $starAverage < 4) {
                             ?>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
                             <?php
                             } else if ($starAverage >= 4 && $starAverage < 5) {
                             ?>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
                             <?php
                             } else {
                             ?>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
                             <?php
                             }
                             ?>
@@ -125,10 +125,14 @@
                 <div class="product_main-container">
                     <div class="row">
                         <div class="col-lg-5 col-md-6 col-sm-12 product_category">
-                            <img class="product_thumbnail" src="./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_chitiet['hinhanh'] ?>" alt="">
+                            <img class="product_thumbnail"
+                                src="./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_chitiet['hinhanh'] ?>"
+                                alt="">
                         </div>
                         <div class="product_preview">
-                            <img class="product_thumbnail-preview" src="./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_chitiet['hinhanh'] ?>" alt="">
+                            <img class="product_thumbnail-preview"
+                                src="./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_chitiet['hinhanh'] ?>"
+                                alt="">
                         </div>
 
                         <div class="col-lg-4  col-md-6 col-sm-12 product_summary">
@@ -137,36 +141,39 @@
                                 <?php
                                 if ($row_chitiet['giamgia'] > 0) {
                                 ?>
-                                    <span class="price_on_sale"><?php echo number_format($row_chitiet['giadagiam'], 0, ',', '.') ?>đ</span>
-                                    <span class="price_original"><?php echo number_format($row_chitiet['giasp'], 0, ',', '.') ?>đ</span>
+                                <span
+                                    class="price_on_sale"><?php echo number_format($row_chitiet['giadagiam'], 0, ',', '.') ?>đ</span>
+                                <span
+                                    class="price_original"><?php echo number_format($row_chitiet['giasp'], 0, ',', '.') ?>đ</span>
                                 <?php
                                 } else {
                                 ?>
-                                    <span class="price_on_sale"><?php echo number_format($row_chitiet['giasp'], 0, ',', '.') ?>đ</span>
+                                <span
+                                    class="price_on_sale"><?php echo number_format($row_chitiet['giasp'], 0, ',', '.') ?>đ</span>
                                 <?php
                                 }
                                 ?>
                             </div>
                             <?php if ($row_chitiet['giamgia'] > 0) { ?>
-                                <div class="price_wrapper">
-                                    <h4>Giảm: </h4>
-                                    <div class="price_on_sale">
+                            <div class="price_wrapper">
+                                <h4>Giảm: </h4>
+                                <div class="price_on_sale">
 
-                                        <?php echo $row_chitiet['giamgia'] ?>%
-                                    </div>
+                                    <?php echo $row_chitiet['giamgia'] ?>%
                                 </div>
+                            </div>
                             <?php } ?>
                             <div class="status__wrapper">
                                 <h4>Tình trạng:</h4>
                                 <?php
                                 if ($row_chitiet['soluong'] == 0) {
                                 ?>
-                                    <span class="product_status">Hết hàng</span>
+                                <span class="product_status">Hết hàng</span>
 
                                 <?php
                                 } else {
                                 ?>
-                                    <span class="product_status">Còn hàng</span>
+                                <span class="product_status">Còn hàng</span>
                                 <?php
                                 }
                                 ?>
@@ -180,30 +187,30 @@
 
 
                             <?php if (isset($_SESSION['id_user'])) { ?>
-                                <div class="cart">
-                                    <button class="add-to-cart-button" value="<?php echo $row_chitiet['id_sanpham'] ?>">THÊM
-                                        VÀO GIỎ
-                                        HÀNG</button>
-                                </div>
+                            <div class="cart">
+                                <button class="add-to-cart-button" value="<?php echo $row_chitiet['id_sanpham'] ?>">THÊM
+                                    VÀO GIỎ
+                                    HÀNG</button>
+                            </div>
                             <?php } else { ?>
-                                <div class="cart">
-                                    <button class="add-to-cart-button-not-login">THÊM
-                                        VÀO GIỎ
-                                        HÀNG</button>
-                                </div>
+                            <div class="cart">
+                                <button class="add-to-cart-button-not-login">THÊM
+                                    VÀO GIỎ
+                                    HÀNG</button>
+                            </div>
                             <?php } ?>
 
                             <?php if (isset($_SESSION['id_user'])) { ?>
-                                <a class="buy_now add-to-cart-button-now" value="<?php echo $row_chitiet['id_sanpham'] ?>">
-                                    <strong>MUA NGAY</strong>
+                            <a class="buy_now add-to-cart-button-now" value="<?php echo $row_chitiet['id_sanpham'] ?>">
+                                <strong>MUA NGAY</strong>
 
-                                    <span>Gọi điện xác nhận và giao hàng tận nơi</span>
-                                </a>
+                                <span>Gọi điện xác nhận và giao hàng tận nơi</span>
+                            </a>
                             <?php } else { ?>
-                                <a class="buy_now-not-login">
-                                    <strong>MUA NGAY</strong>
-                                    <span>Gọi điện xác nhận và giao hàng tận nơi</span>
-                                </a>
+                            <a class="buy_now-not-login">
+                                <strong>MUA NGAY</strong>
+                                <span>Gọi điện xác nhận và giao hàng tận nơi</span>
+                            </a>
                             <?php } ?>
 
 
@@ -217,7 +224,8 @@
 
                             <div class="content_after_share">
                                 <p>Tư vấn bán hàng liên hệ:</p>
-                                <span style="color: #ff0000;"><a style="color: #ff0000;" title="Tư vấn bán hàng" href="tel:0123.456.789">0123.456.789</a></span>
+                                <span style="color: #ff0000;"><a style="color: #ff0000;" title="Tư vấn bán hàng"
+                                        href="tel:0123.456.789">0123.456.789</a></span>
                             </div>
                         </div>
 
@@ -305,63 +313,72 @@
                                 $query_pro = mysqli_query($mysqli, $sql_pro);
                                 while ($row_pro = mysqli_fetch_array($query_pro)) {
                                 ?>
-                                    <div class="swiper-slide">
-                                        <div class="row__item item--product">
-                                            <div class="row__item-container">
-                                                <?php if ($row_pro['giamgia'] > 0) { ?>
-                                                    <div class="discount-banner">
-                                                        Giảm <?php echo $row_pro['giamgia'] ?>%
+                                <div class="swiper-slide">
+                                    <div class="row__item item--product">
+                                        <div class="row__item-container">
+                                            <?php if ($row_pro['giamgia'] > 0) { ?>
+                                            <div class="discount-banner">
+                                                Giảm <?php echo $row_pro['giamgia'] ?>%
+                                            </div>
+                                            <?php } ?>
+                                            <div class="row__item-display br-5">
+                                                <div class="view__product-detail"
+                                                    value="<?php echo $row_pro['id_sanpham'] ?>">
+                                                    <div class="row__item-img"
+                                                        style="background: url('./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_pro['hinhanh'] ?>') no-repeat center center / cover">
                                                     </div>
-                                                <?php } ?>
-                                                <div class="row__item-display br-5">
-                                                    <div class="view__product-detail" value="<?php echo $row_pro['id_sanpham'] ?>">
-                                                        <div class="row__item-img" style="background: url('./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_pro['hinhanh'] ?>') no-repeat center center / cover">
-                                                        </div>
-                                                    </div>
-                                                    <?php if (isset($_SESSION['id_user'])) { ?>
-                                                        <div class="add-to-cart-btn" value="<?php echo $row_pro['id_sanpham'] ?>">
-                                                            <i class="fa-solid fa-cart-plus" style="
-                                                                left: 21px;
-                                                            "></i>
-                                                            <span style="
-                                                                font-size: 1rem;
-                                                            ">Thêm vào giỏ hàng</span>
-                                                        </div>
-                                                    <?php } else { ?>
-                                                        <div class="add-to-cart-btn-not-login" value="<?php echo $row_pro['id_sanpham'] ?>">
-                                                            <i class="fa-solid fa-cart-plus" style="
-                                                                left: 21px;
-                                                            "></i>
-                                                            <span style="
-                                                                font-size: 1rem;
-                                                            ">Thêm vào giỏ hàng</span>
-                                                        </div>
-                                                    <?php } ?>
                                                 </div>
-                                                <div class="row__item-info">
-                                                    <div class="view__product-detail" value="<?php echo $row_pro['id_sanpham'] ?>">
-                                                        <div class="row__info-name">
-                                                            <span style="cursor:pointer;"><?php echo $row_pro['tensanpham'] ?></span>
-                                                        </div>
+                                                <?php if (isset($_SESSION['id_user'])) { ?>
+                                                <div class="add-to-cart-btn"
+                                                    value="<?php echo $row_pro['id_sanpham'] ?>">
+                                                    <i class="fa-solid fa-cart-plus" style="
+                                                                left: 21px;
+                                                            "></i>
+                                                    <span style="
+                                                                font-size: 1rem;
+                                                            ">Thêm vào giỏ hàng</span>
+                                                </div>
+                                                <?php } else { ?>
+                                                <div class="add-to-cart-btn-not-login"
+                                                    value="<?php echo $row_pro['id_sanpham'] ?>">
+                                                    <i class="fa-solid fa-cart-plus" style="
+                                                                left: 21px;
+                                                            "></i>
+                                                    <span style="
+                                                                font-size: 1rem;
+                                                            ">Thêm vào giỏ hàng</span>
+                                                </div>
+                                                <?php } ?>
+                                            </div>
+                                            <div class="row__item-info">
+                                                <div class="view__product-detail"
+                                                    value="<?php echo $row_pro['id_sanpham'] ?>">
+                                                    <div class="row__info-name">
+                                                        <span
+                                                            style="cursor:pointer;"><?php echo $row_pro['tensanpham'] ?></span>
                                                     </div>
-                                                    <div class="price__wrapper">
-                                                        <?php
+                                                </div>
+                                                <div class="price__wrapper">
+                                                    <?php
                                                         if ($row_pro['giamgia'] > 0) {
                                                         ?>
-                                                            <span class="price-discount"><?php echo number_format($row_pro['giadagiam'], 0, ',', '.') ?>đ</span>
-                                                            <span class="price-normal-discount"><?php echo number_format($row_pro['giasp'], 0, ',', '.') ?>đ</span>
-                                                        <?php
+                                                    <span
+                                                        class="price-discount"><?php echo number_format($row_pro['giadagiam'], 0, ',', '.') ?>đ</span>
+                                                    <span
+                                                        class="price-normal-discount"><?php echo number_format($row_pro['giasp'], 0, ',', '.') ?>đ</span>
+                                                    <?php
                                                         } else {
                                                         ?>
-                                                            <span class="price-normal"><?php echo number_format($row_pro['giasp'], 0, ',', '.') ?>đ</span>
-                                                        <?php
+                                                    <span
+                                                        class="price-normal"><?php echo number_format($row_pro['giasp'], 0, ',', '.') ?>đ</span>
+                                                    <?php
                                                         }
                                                         ?>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                                 <?php
                                 }
                                 ?>
@@ -402,37 +419,46 @@
                                             $query_pro = mysqli_query($mysqli, $sql_pro);
                                             while ($row_pro = mysqli_fetch_array($query_pro)) {
                                             ?>
-                                                <div class="col" style="padding: 0;">
-                                                    <div class="sidebar__product-wrapper ">
-                                                        <div class="sidebar__product-img view__product-detail" value="<?php echo $row_pro['id_sanpham'] ?>">
-                                                            <img alt="<?php echo $row_pro['ten_danhmuc'] ?>" src="./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_pro['hinhanh'] ?>" alt="">
-                                                        </div>
+                                            <div class="col" style="padding: 0;">
+                                                <div class="sidebar__product-wrapper ">
+                                                    <div class="sidebar__product-img view__product-detail"
+                                                        value="<?php echo $row_pro['id_sanpham'] ?>">
+                                                        <img alt="<?php echo $row_pro['ten_danhmuc'] ?>"
+                                                            src="./admin/modules/quanlysp/handleEvent/uploads/<?php echo $row_pro['hinhanh'] ?>"
+                                                            alt="">
+                                                    </div>
 
-                                                        <div class="sidebar__product-text">
-                                                            <div class="title-wrapper">
-                                                                <p class="category-title category__product-btn" value="<?php echo $row_pro['id_danhmuc'] ?>">
-                                                                    <?php echo $row_pro['ten_danhmuc'] ?></p>
-                                                                <span class="product-name view__product-detail" value="<?php echo $row_pro['id_sanpham'] ?>" title="<?php echo $row_pro['tensanpham'] ?>">
-                                                                    <?php echo $row_pro['tensanpham'] ?>
-                                                                </span>
-                                                            </div>
-                                                            <div class="price-wrapper">
-                                                                <?php
+                                                    <div class="sidebar__product-text">
+                                                        <div class="title-wrapper">
+                                                            <p class="category-title category__product-btn"
+                                                                value="<?php echo $row_pro['id_danhmuc'] ?>">
+                                                                <?php echo $row_pro['ten_danhmuc'] ?></p>
+                                                            <span class="product-name view__product-detail"
+                                                                value="<?php echo $row_pro['id_sanpham'] ?>"
+                                                                title="<?php echo $row_pro['tensanpham'] ?>">
+                                                                <?php echo $row_pro['tensanpham'] ?>
+                                                            </span>
+                                                        </div>
+                                                        <div class="price-wrapper">
+                                                            <?php
                                                                 if ($row_pro['giamgia'] > 0) {
                                                                 ?>
-                                                                    <span class="price-discount"><?php echo number_format($row_pro['giadagiam'], 0, ',', '.') ?>đ</span>
-                                                                    <span class="price-normal-discount"><?php echo number_format($row_pro['giasp'], 0, ',', '.') ?>đ</span>
-                                                                <?php
+                                                            <span
+                                                                class="price-discount"><?php echo number_format($row_pro['giadagiam'], 0, ',', '.') ?>đ</span>
+                                                            <span
+                                                                class="price-normal-discount"><?php echo number_format($row_pro['giasp'], 0, ',', '.') ?>đ</span>
+                                                            <?php
                                                                 } else {
                                                                 ?>
-                                                                    <span class="price-normal"><?php echo number_format($row_pro['giasp'], 0, ',', '.') ?>đ</span>
-                                                                <?php
+                                                            <span
+                                                                class="price-normal"><?php echo number_format($row_pro['giasp'], 0, ',', '.') ?>đ</span>
+                                                            <?php
                                                                 }
                                                                 ?>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
                                             <?php
                                             }
                                             ?>
@@ -451,19 +477,19 @@
                                 <?php
                                 if ($starAverage <= 0) {
                                 ?>
-                                    <strong>CHƯA CÓ
-                                        <br>
-                                        ĐÁNH GIÁ NÀO
-                                    </strong>
+                                <strong>CHƯA CÓ
+                                    <br>
+                                    ĐÁNH GIÁ NÀO
+                                </strong>
                                 <?php
                                 } else {
                                 ?>
-                                    <strong>
-                                        <div class="star__average-text">
-                                            <?php echo $starAverage ?> <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <span>ĐÁNH GIÁ TRUNG BÌNH</span>
-                                    </strong>
+                                <strong>
+                                    <div class="star__average-text">
+                                        <?php echo $starAverage ?> <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <span>ĐÁNH GIÁ TRUNG BÌNH</span>
+                                </strong>
                                 <?php
                                 }
                                 ?>
@@ -472,161 +498,169 @@
                                 <?php
                                 if ($reviewCount > 0) {
                                 ?>
-                                    <style>
-                                        .rating_scale-5::before {
-                                            content: "";
-                                            height: 100%;
-                                            width: <?php echo round(($star_5 / $reviewCount) * 100, 2) ?>%;
-                                            display: block;
-                                            background-color: #ffbe00;
-                                        }
+                                <style>
+                                :root {
+                                    --rating-scale-5-width: <?php echo round(($star_5 / $reviewCount) * 100, 2) ?>%;
+                                    --rating-scale-4-width: <?php echo round(($star_4 / $reviewCount) * 100, 2) ?>%;
+                                    --rating-scale-3-width: <?php echo round(($star_3 / $reviewCount) * 100, 2) ?>%;
+                                    --rating-scale-2-width: <?php echo round(($star_2 / $reviewCount) * 100, 2) ?>%;
+                                    --rating-scale-1-width: <?php echo round(($star_1 / $reviewCount) * 100, 2) ?>%;
+                                }
 
-                                        .rating_scale-4::before {
-                                            content: "";
-                                            height: 100%;
-                                            width: <?php echo round(($star_4 / $reviewCount) * 100, 2) ?>%;
-                                            display: block;
-                                            background-color: #ffbe00;
-                                        }
+                                .rating_scale-5::before {
+                                    content: "";
+                                    height: 100%;
+                                    width: var(--rating-scale-5-width);
+                                    display: block;
+                                    background-color: #ffbe00;
+                                }
 
-                                        .rating_scale-3::before {
-                                            content: "";
-                                            height: 100%;
-                                            width: <?php echo round(($star_3 / $reviewCount) * 100, 2) ?>%;
-                                            display: block;
-                                            background-color: #ffbe00;
-                                        }
+                                .rating_scale-4::before {
+                                    content: "";
+                                    height: 100%;
+                                    width: var(--rating-scale-4-width);
+                                    display: block;
+                                    background-color: #ffbe00;
+                                }
 
-                                        .rating_scale-2::before {
-                                            content: "";
-                                            height: 100%;
-                                            width: <?php echo round(($star_2 / $reviewCount) * 100, 2) ?>%;
-                                            display: block;
-                                            background-color: #ffbe00;
-                                        }
+                                .rating_scale-3::before {
+                                    content: "";
+                                    height: 100%;
+                                    width: var(--rating-scale-3-width);
+                                    display: block;
+                                    background-color: #ffbe00;
+                                }
 
-                                        .rating_scale-1::before {
-                                            content: "";
-                                            height: 100%;
-                                            width: <?php echo round(($star_1 / $reviewCount) * 100, 2) ?>%;
-                                            display: block;
-                                            background-color: #ffbe00;
-                                        }
-                                    </style>
-                                    <div class="reviews_bar">
-                                        <div class="review-row">
-                                            <div class="stars_value">5 <i class="fa-solid fa-star"></i></div>
-                                            <div class="rating_bar">
-                                                <div class="rating_scale rating_scale-5"></div>
-                                            </div>
-                                            <span class="nums_review">
-                                                <b><?php echo round(($star_5 / $reviewCount) * 100, 2)  ?>%</b>
-                                                | <?php echo $star_5 ?> đánh giá
-                                            </span>
+                                .rating_scale-2::before {
+                                    content: "";
+                                    height: 100%;
+                                    width: var(--rating-scale-2-width);
+                                    display: block;
+                                    background-color: #ffbe00;
+                                }
+
+                                .rating_scale-1::before {
+                                    content: "";
+                                    height: 100%;
+                                    width: var(--rating-scale-1-width);
+                                    display: block;
+                                    background-color: #ffbe00;
+                                }
+                                </style>
+                                <div class="reviews_bar">
+                                    <div class="review-row">
+                                        <div class="stars_value">5 <i class="fa-solid fa-star"></i></div>
+                                        <div class="rating_bar">
+                                            <div class="rating_scale rating_scale-5"></div>
                                         </div>
-
-                                        <div class="review-row">
-                                            <div class="stars_value">4 <i class="fa-solid fa-star"></i></div>
-                                            <div class="rating_bar">
-                                                <div class="rating_scale rating_scale-4"></div>
-                                            </div>
-                                            <span class="nums_review">
-                                                <b><?php echo round(($star_4 / $reviewCount) * 100, 2)  ?>%</b>
-                                                | <?php echo $star_4 ?> đánh giá
-                                            </span>
-                                        </div>
-
-                                        <div class="review-row">
-                                            <div class="stars_value">3 <i class="fa-solid fa-star"></i></div>
-                                            <div class="rating_bar">
-                                                <div class="rating_scale rating_scale-3"></div>
-                                            </div>
-                                            <span class="nums_review">
-                                                <b><?php echo round(($star_3 / $reviewCount) * 100, 2)  ?>%</b>
-                                                | <?php echo $star_3 ?> đánh giá
-                                            </span>
-                                        </div>
-
-                                        <div class="review-row">
-                                            <div class="stars_value">2 <i class="fa-solid fa-star"></i></div>
-                                            <div class="rating_bar">
-                                                <div class="rating_scale rating_scale-2"></div>
-                                            </div>
-                                            <span class="nums_review">
-                                                <b><?php echo round(($star_2 / $reviewCount) * 100, 2)  ?>%</b>
-                                                | <?php echo $star_2 ?> đánh giá
-                                            </span>
-                                        </div>
-
-                                        <div class="review-row">
-                                            <div class="stars_value">1 <i class="fa-solid fa-star"></i></div>
-                                            <div class="rating_bar">
-                                                <div class="rating_scale rating_scale-1"></div>
-                                            </div>
-                                            <span class="nums_review">
-                                                <b><?php echo round(($star_1 / $reviewCount) * 100, 2)  ?>%</b>
-                                                | <?php echo $star_1 ?> đánh giá
-                                            </span>
-                                        </div>
+                                        <span class="nums_review">
+                                            <b><?php echo round(($star_5 / $reviewCount) * 100, 2)  ?>%</b>
+                                            | <?php echo $star_5 ?> đánh giá
+                                        </span>
                                     </div>
+
+                                    <div class="review-row">
+                                        <div class="stars_value">4 <i class="fa-solid fa-star"></i></div>
+                                        <div class="rating_bar">
+                                            <div class="rating_scale rating_scale-4"></div>
+                                        </div>
+                                        <span class="nums_review">
+                                            <b><?php echo round(($star_4 / $reviewCount) * 100, 2)  ?>%</b>
+                                            | <?php echo $star_4 ?> đánh giá
+                                        </span>
+                                    </div>
+
+                                    <div class="review-row">
+                                        <div class="stars_value">3 <i class="fa-solid fa-star"></i></div>
+                                        <div class="rating_bar">
+                                            <div class="rating_scale rating_scale-3"></div>
+                                        </div>
+                                        <span class="nums_review">
+                                            <b><?php echo round(($star_3 / $reviewCount) * 100, 2)  ?>%</b>
+                                            | <?php echo $star_3 ?> đánh giá
+                                        </span>
+                                    </div>
+
+                                    <div class="review-row">
+                                        <div class="stars_value">2 <i class="fa-solid fa-star"></i></div>
+                                        <div class="rating_bar">
+                                            <div class="rating_scale rating_scale-2"></div>
+                                        </div>
+                                        <span class="nums_review">
+                                            <b><?php echo round(($star_2 / $reviewCount) * 100, 2)  ?>%</b>
+                                            | <?php echo $star_2 ?> đánh giá
+                                        </span>
+                                    </div>
+
+                                    <div class="review-row">
+                                        <div class="stars_value">1 <i class="fa-solid fa-star"></i></div>
+                                        <div class="rating_bar">
+                                            <div class="rating_scale rating_scale-1"></div>
+                                        </div>
+                                        <span class="nums_review">
+                                            <b><?php echo round(($star_1 / $reviewCount) * 100, 2)  ?>%</b>
+                                            | <?php echo $star_1 ?> đánh giá
+                                        </span>
+                                    </div>
+                                </div>
 
                                 <?php } else { ?>
-                                    <div class="reviews_bar">
-                                        <div class="review-row">
-                                            <div class="stars_value">5 <i class="fa-solid fa-star"></i></div>
-                                            <div class="rating_bar">
-                                                <div class="rating_scale rating_scale-5"></div>
-                                            </div>
-                                            <span class="nums_review">
-                                                <b>0%</b>
-                                                | 0 đánh giá
-                                            </span>
+                                <div class="reviews_bar">
+                                    <div class="review-row">
+                                        <div class="stars_value">5 <i class="fa-solid fa-star"></i></div>
+                                        <div class="rating_bar">
+                                            <div class="rating_scale rating_scale-5"></div>
                                         </div>
-
-                                        <div class="review-row">
-                                            <div class="stars_value">4 <i class="fa-solid fa-star"></i></div>
-                                            <div class="rating_bar">
-                                                <div class="rating_scale rating_scale-4"></div>
-                                            </div>
-                                            <span class="nums_review">
-                                                <b>0%</b>
-                                                | 0 đánh giá
-                                            </span>
-                                        </div>
-
-                                        <div class="review-row">
-                                            <div class="stars_value">3 <i class="fa-solid fa-star"></i></div>
-                                            <div class="rating_bar">
-                                                <div class="rating_scale rating_scale-3"></div>
-                                            </div>
-                                            <span class="nums_review">
-                                                <b>0%</b>
-                                                | 0 đánh giá
-                                            </span>
-                                        </div>
-
-                                        <div class="review-row">
-                                            <div class="stars_value">2 <i class="fa-solid fa-star"></i></div>
-                                            <div class="rating_bar">
-                                                <div class="rating_scale rating_scale-2"></div>
-                                            </div>
-                                            <span class="nums_review">
-                                                <b>0%</b>
-                                                | 0 đánh giá
-                                            </span>
-                                        </div>
-
-                                        <div class="review-row">
-                                            <div class="stars_value">1 <i class="fa-solid fa-star"></i></div>
-                                            <div class="rating_bar">
-                                                <div class="rating_scale rating_scale-1"></div>
-                                            </div>
-                                            <span class="nums_review">
-                                                <b>0%</b>
-                                                | 0 đánh giá
-                                            </span>
-                                        </div>
+                                        <span class="nums_review">
+                                            <b>0%</b>
+                                            | 0 đánh giá
+                                        </span>
                                     </div>
+
+                                    <div class="review-row">
+                                        <div class="stars_value">4 <i class="fa-solid fa-star"></i></div>
+                                        <div class="rating_bar">
+                                            <div class="rating_scale rating_scale-4"></div>
+                                        </div>
+                                        <span class="nums_review">
+                                            <b>0%</b>
+                                            | 0 đánh giá
+                                        </span>
+                                    </div>
+
+                                    <div class="review-row">
+                                        <div class="stars_value">3 <i class="fa-solid fa-star"></i></div>
+                                        <div class="rating_bar">
+                                            <div class="rating_scale rating_scale-3"></div>
+                                        </div>
+                                        <span class="nums_review">
+                                            <b>0%</b>
+                                            | 0 đánh giá
+                                        </span>
+                                    </div>
+
+                                    <div class="review-row">
+                                        <div class="stars_value">2 <i class="fa-solid fa-star"></i></div>
+                                        <div class="rating_bar">
+                                            <div class="rating_scale rating_scale-2"></div>
+                                        </div>
+                                        <span class="nums_review">
+                                            <b>0%</b>
+                                            | 0 đánh giá
+                                        </span>
+                                    </div>
+
+                                    <div class="review-row">
+                                        <div class="stars_value">1 <i class="fa-solid fa-star"></i></div>
+                                        <div class="rating_bar">
+                                            <div class="rating_scale rating_scale-1"></div>
+                                        </div>
+                                        <span class="nums_review">
+                                            <b>0%</b>
+                                            | 0 đánh giá
+                                        </span>
+                                    </div>
+                                </div>
                                 <?php } ?>
                             </div>
                             <div class="star__box-right">
@@ -636,14 +670,14 @@
                                     $query_order_details = mysqli_query($mysqli, $sql_order_details);
                                     if (mysqli_num_rows($query_order_details) > 0) {
                                 ?>
-                                        <button title="Đánh giá ngay" class="btn-reviews-now">Đánh giá ngay</button>
-                                    <?php } else { ?>
-                                        <button title="Đánh giá ngay" class="btn-reviews-not-buy">Đánh giá ngay</button>
-                                    <?php } ?>
+                                <button title="Đánh giá ngay" class="btn-reviews-now">Đánh giá ngay</button>
+                                <?php } else { ?>
+                                <button title="Đánh giá ngay" class="btn-reviews-not-buy">Đánh giá ngay</button>
+                                <?php } ?>
                                 <?php
                                 } else {
                                 ?>
-                                    <button title="Đánh giá ngay" class="btn-reviews-not-login">Đánh giá ngay</button>
+                                <button title="Đánh giá ngay" class="btn-reviews-not-login">Đánh giá ngay</button>
                                 <?php
                                 }
                                 ?>
@@ -661,7 +695,8 @@
                         <div class="comment__form">
                             <form action="" method="post">
                                 <div class="comment__input">
-                                    <textarea placeholder="Mời bạn tham gia thảo luận, vui lòng nhập tiếng Việt có dấu." name="" id="question" cols="30" rows="10"></textarea>
+                                    <textarea placeholder="Mời bạn tham gia thảo luận, vui lòng nhập tiếng Việt có dấu."
+                                        name="" id="question" cols="30" rows="10"></textarea>
                                     <div class="wrap-attaddsend-comment"><span class="countContent">0</span> ký tự (Tối
                                         thiểu
                                         10)
@@ -672,15 +707,15 @@
                                         <?php
                                         if (isset($_SESSION['id_user'])) {
                                         ?>
-                                            <div class="comment__submit">
-                                                Gửi
-                                            </div>
+                                        <div class="comment__submit">
+                                            Gửi
+                                        </div>
                                         <?php
                                         } else {
                                         ?>
-                                            <div class="comment__submit-not-login">
-                                                Gửi
-                                            </div>
+                                        <div class="comment__submit-not-login">
+                                            Gửi
+                                        </div>
                                         <?php
                                         }
                                         ?>
@@ -715,548 +750,548 @@
 
     <!-- Initialize Swiper -->
     <script>
-        var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 4,
-            spaceBetween: 15,
-            loop: true,
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 4,
+        spaceBetween: 15,
+        loop: true,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+            0: {
+                slidesPerView: 2,
+                spaceBetween: 10,
             },
-            breakpoints: {
-                0: {
-                    slidesPerView: 2,
-                    spaceBetween: 10,
-                },
-                425: {
-                    slidesPerView: 2,
-                    spaceBetween: 10,
-                },
-                768: {
-                    slidesPerView: 4,
-                    spaceBetween: 10,
-                },
-                1024: {
-                    slidesPerView: 5,
-                    spaceBetween: 15,
-                },
+            425: {
+                slidesPerView: 2,
+                spaceBetween: 10,
             },
-        });
+            768: {
+                slidesPerView: 4,
+                spaceBetween: 10,
+            },
+            1024: {
+                slidesPerView: 5,
+                spaceBetween: 15,
+            },
+        },
+    });
 
-        $(document).ready(() => {
-            // Back to shop page
-            $(document).on("click", '.view__category', function() {
-                var id = $(this).attr("value");
-                var url = "danh-muc.php?id=" + id;
-                window.history.pushState("new", "title", url);
-                $(".container").load("danh-muc.php?id=" + id);
-            })
+    $(document).ready(() => {
+        // Back to shop page
+        $(document).on("click", '.view__category', function() {
+            var id = $(this).attr("value");
+            var url = "danh-muc.php?id=" + id;
+            window.history.pushState("new", "title", url);
+            $(".container").load("danh-muc.php?id=" + id);
+        })
 
-            // Back to home
-            $(document).on("click", '.view__home', function() {
-                var url = "trang-chu.php"
-                window.history.pushState("new", "title", url);
-                $(".container").load("trang-chu.php");
-            })
+        // Back to home
+        $(document).on("click", '.view__home', function() {
+            var url = "trang-chu.php"
+            window.history.pushState("new", "title", url);
+            $(".container").load("trang-chu.php");
+        })
 
-            // Preview product
-            $(document).on("click", '.product_thumbnail', function() {
-                $('.product_preview').css("display", "block")
-            })
+        // Preview product
+        $(document).on("click", '.product_thumbnail', function() {
+            $('.product_preview').css("display", "block")
+        })
 
-            $(document).on("click", '.product_preview', function() {
-                $('.product_preview').css("display", "none")
-            })
+        $(document).on("click", '.product_preview', function() {
+            $('.product_preview').css("display", "none")
+        })
 
-            // View product detail
-            $(document).on("click", '.view__product-detail', function() {
-                var id = $(this).attr("value");
-                var url = "san-pham.php?id=" + id;
-                window.history.pushState("new", "title", url);
-                $(".container").load("san-pham.php?id=" + id);
-                $(window).scrollTop(0);
-                window.location.reload();
-            })
+        // View product detail
+        $(document).on("click", '.view__product-detail', function() {
+            var id = $(this).attr("value");
+            var url = "san-pham.php?id=" + id;
+            window.history.pushState("new", "title", url);
+            $(".container").load("san-pham.php?id=" + id);
+            $(window).scrollTop(0);
+            window.location.reload();
+        })
 
-            // Load more description
-            $(document).on("click", '.product__footer-content .load-more', function() {
-                $('.product__tab-content').css('height', '100%');
-                $('.product__footer-content .load-more').css('display', 'none')
-                $('.product__footer-content .collapse').css('display', 'block')
-            })
+        // Load more description
+        $(document).on("click", '.product__footer-content .load-more', function() {
+            $('.product__tab-content').css('height', '100%');
+            $('.product__footer-content .load-more').css('display', 'none')
+            $('.product__footer-content .collapse').css('display', 'block')
+        })
 
-            // Collapse description
-            $(document).on("click", '.product__footer-content .collapse', function() {
-                $('.product__tab-content').css('height', '560px');
-                $('.product__footer-content .load-more').css('display', 'block')
-                $('.product__footer-content .collapse').css('display', 'none')
-            })
+        // Collapse description
+        $(document).on("click", '.product__footer-content .collapse', function() {
+            $('.product__tab-content').css('height', '560px');
+            $('.product__footer-content .load-more').css('display', 'block')
+            $('.product__footer-content .collapse').css('display', 'none')
+        })
 
-            /* REVIEW STAR ANIMATION START */
+        /* REVIEW STAR ANIMATION START */
 
-            $(document).on("click", '.star-wrapper .s1', function() {
-                $('.star-wrapper .s1').css("color", "#fe9727")
-                $('.star-wrapper .s2').css("color", "grey")
-                $('.star-wrapper .s3').css("color", "grey")
-                $('.star-wrapper .s4').css("color", "grey")
-                $('.star-wrapper .s5').css("color", "grey")
-            })
+        $(document).on("click", '.star-wrapper .s1', function() {
+            $('.star-wrapper .s1').css("color", "#fe9727")
+            $('.star-wrapper .s2').css("color", "grey")
+            $('.star-wrapper .s3').css("color", "grey")
+            $('.star-wrapper .s4').css("color", "grey")
+            $('.star-wrapper .s5').css("color", "grey")
+        })
 
-            $(document).on("click", '.star-wrapper .s2', function() {
-                $('.star-wrapper .s1').css("color", "#fe9727")
-                $('.star-wrapper .s2').css("color", "#fe9727")
-                $('.star-wrapper .s3').css("color", "grey")
-                $('.star-wrapper .s4').css("color", "grey")
-                $('.star-wrapper .s5').css("color", "grey")
-            })
+        $(document).on("click", '.star-wrapper .s2', function() {
+            $('.star-wrapper .s1').css("color", "#fe9727")
+            $('.star-wrapper .s2').css("color", "#fe9727")
+            $('.star-wrapper .s3').css("color", "grey")
+            $('.star-wrapper .s4').css("color", "grey")
+            $('.star-wrapper .s5').css("color", "grey")
+        })
 
-            $(document).on("click", '.star-wrapper .s3', function() {
-                $('.star-wrapper .s1').css("color", "#fe9727")
-                $('.star-wrapper .s2').css("color", "#fe9727")
-                $('.star-wrapper .s3').css("color", "#fe9727")
-                $('.star-wrapper .s4').css("color", "grey")
-                $('.star-wrapper .s5').css("color", "grey")
-            })
+        $(document).on("click", '.star-wrapper .s3', function() {
+            $('.star-wrapper .s1').css("color", "#fe9727")
+            $('.star-wrapper .s2').css("color", "#fe9727")
+            $('.star-wrapper .s3').css("color", "#fe9727")
+            $('.star-wrapper .s4').css("color", "grey")
+            $('.star-wrapper .s5').css("color", "grey")
+        })
 
-            $(document).on("click", '.star-wrapper .s4', function() {
-                $('.star-wrapper .s1').css("color", "#fe9727")
-                $('.star-wrapper .s2').css("color", "#fe9727")
-                $('.star-wrapper .s3').css("color", "#fe9727")
-                $('.star-wrapper .s4').css("color", "#fe9727")
-                $('.star-wrapper .s5').css("color", "grey")
-            })
+        $(document).on("click", '.star-wrapper .s4', function() {
+            $('.star-wrapper .s1').css("color", "#fe9727")
+            $('.star-wrapper .s2').css("color", "#fe9727")
+            $('.star-wrapper .s3').css("color", "#fe9727")
+            $('.star-wrapper .s4').css("color", "#fe9727")
+            $('.star-wrapper .s5').css("color", "grey")
+        })
 
-            $(document).on("click", '.star-wrapper .s5', function() {
-                $('.star-wrapper .s1').css("color", "#fe9727")
-                $('.star-wrapper .s2').css("color", "#fe9727")
-                $('.star-wrapper .s3').css("color", "#fe9727")
-                $('.star-wrapper .s4').css("color", "#fe9727")
-                $('.star-wrapper .s5').css("color", "#fe9727")
-            })
+        $(document).on("click", '.star-wrapper .s5', function() {
+            $('.star-wrapper .s1').css("color", "#fe9727")
+            $('.star-wrapper .s2').css("color", "#fe9727")
+            $('.star-wrapper .s3').css("color", "#fe9727")
+            $('.star-wrapper .s4').css("color", "#fe9727")
+            $('.star-wrapper .s5').css("color", "#fe9727")
+        })
 
-            /* REVIEW STAR ANIMATION END */
+        /* REVIEW STAR ANIMATION END */
 
-            // Open review modal
-            $(document).on("click", '.btn-reviews-now', function() {
-                var id = <?php echo $_GET['id'] ?>;
-                $(".load__review-modal").load("pages/review/reviewModal.php?id=" + id);
-            })
+        // Open review modal
+        $(document).on("click", '.btn-reviews-now', function() {
+            var id = <?php echo $_GET['id'] ?>;
+            $(".load__review-modal").load("pages/review/reviewModal.php?id=" + id);
+        })
 
-            $(document).on("click", '.btn-reviews-not-login', function() {
-                swal("Bạn cần đăng nhập để đánh giá",
-                    "Vui lòng đăng nhập hoặc đăng ký tài khoản!",
-                    "error");
-            })
+        $(document).on("click", '.btn-reviews-not-login', function() {
+            swal("Bạn cần đăng nhập để đánh giá",
+                "Vui lòng đăng nhập hoặc đăng ký tài khoản!",
+                "error");
+        })
 
-            $(document).on("click", '.btn-reviews-not-buy', function() {
-                swal("Quý khách chưa mua sản phẩm này",
-                    "Vui lòng mua sản phẩm để tiếp tục đánh giá!",
-                    "error");
-            })
+        $(document).on("click", '.btn-reviews-not-buy', function() {
+            swal("Quý khách chưa mua sản phẩm này",
+                "Vui lòng mua sản phẩm để tiếp tục đánh giá!",
+                "error");
+        })
 
-            $(document).on("click", '.comment__submit-not-login', function() {
-                swal("Bạn cần đăng nhập để đánh giá",
-                    "Vui lòng đăng nhập hoặc đăng ký tài khoản!",
-                    "error");
-            })
+        $(document).on("click", '.comment__submit-not-login', function() {
+            swal("Bạn cần đăng nhập để đánh giá",
+                "Vui lòng đăng nhập hoặc đăng ký tài khoản!",
+                "error");
+        })
 
 
-            // View review modal
-            $(document).on("click", '.close-review-modal', function() {
-                $(".review-modal-container").remove();
-            })
+        // View review modal
+        $(document).on("click", '.close-review-modal', function() {
+            $(".review-modal-container").remove();
+        })
 
-            $(document).on("click", '.review-modal-background', function() {
-                $(".review-modal-container").remove();
-            })
+        $(document).on("click", '.review-modal-background', function() {
+            $(".review-modal-container").remove();
+        })
 
-            // View review data
-            function view_review_data() {
-                $.post(' pages/review/loadReviewData.php?idsanpham=' +
-                    <?php echo $_GET['id'] ?>,
-                    function(data) {
-                        $('#load__review-data').html(data)
-                    })
-            }
-            view_review_data()
-
-            /* HANDLE REVIEW START */
-            var starCount = 0
-            $(document).on("click", '.star-wrapper .fa-star', function() {
-                starCount = $(this).attr('value');
-            })
-
-            $(document).on("click", '.review-btn', function() {
-                var reviewContent = $('#review').val()
-                var idProduct = <?php echo $_GET['id'] ?>;
-                let errors = {
-                    reviewContentError: '',
-                    starCountError: '',
-                }
-
-                if (reviewContent.length === 0) {
-                    errors.reviewContentError = "Nội dung đánh giá không được để trống!";
-                    swal("Vui lòng nhập lại", errors.reviewContentError, "error");
-                } else if (reviewContent.length <= 10) {
-                    errors.reviewContentError = "Nội dung đánh giá phải nhiều hơn 10 ký tự!";
-                    swal("Vui lòng nhập lại", errors.reviewContentError, "error");
-                } else {
-                    errors.reviewContentError = '';
-                }
-
-                if (starCount == 0) {
-                    errors.starCountError = "Quý khách vui lòng chọn số sao muốn đánh giá!";
-                    swal("Vui lòng chọn lại", errors.starCountError, "error");
-                } else {
-                    errors.starCountError = '';
-                }
-
-                if (errors.reviewContentError == '' && errors.starCountError == '') {
-                    $.ajax({
-                        url: " pages/review/handleReview.php",
-                        data: {
-                            starCount: starCount,
-                            reviewContent: reviewContent,
-                            idProduct: idProduct,
-                        },
-                        dataType: 'json',
-                        method: "post",
-                        cache: true,
-                        success: function(data) {
-                            swal("OK!", "Đánh giá thành công", "success");
-                            $('#review').val('')
-                            view_review_data();
-                            starCount = 0
-                        },
-                        error: function(data) {
-                            swal("OK!", "Đánh giá thành công", "success");
-                            $('#review').val('')
-                            view_review_data();
-                            starCount = 0
-                        }
-                    })
-                }
-            })
-            /* HANDLE REVIEW END */
-
-            // Delete review
-            $(document).on("click", '.review__delete-btn', function() {
-                var idReview = $(this).val()
-
-                $.ajax({
-                    url: " pages/review/handleDeleteReview.php",
-                    data: {
-                        idReview: idReview,
-                    },
-                    dataType: 'json',
-                    method: "post",
-                    cache: true,
-                    success: function(data) {
-                        swal("OK!", "Xóa đánh giá thành công", "success");
-                        view_review_data()
-                    },
-                    error: function() {
-                        view_review_data()
-                    }
+        // View review data
+        function view_review_data() {
+            $.post(' pages/review/loadReviewData.php?idsanpham=' +
+                <?php echo $_GET['id'] ?>,
+                function(data) {
+                    $('#load__review-data').html(data)
                 })
-            })
+        }
+        view_review_data()
 
-            // Edit review
-            var idReview;
-            $(document).on("click", '.review__edit-modal-btn', function() {
-                idReview = $(this).val()
-                var id = <?php echo $_GET['id'] ?>;
-                $(".load__review-modal").load("pages/review/editReviewModal.php?id=" + id +
-                    '&idReview=' + idReview);
-            })
+        /* HANDLE REVIEW START */
+        var starCount = 0
+        $(document).on("click", '.star-wrapper .fa-star', function() {
+            starCount = $(this).attr('value');
+        })
 
-            $(document).on("click", '.review__edit-btn', function() {
-                var reviewContent = $('#review').val()
+        $(document).on("click", '.review-btn', function() {
+            var reviewContent = $('#review').val()
+            var idProduct = <?php echo $_GET['id'] ?>;
+            let errors = {
+                reviewContentError: '',
+                starCountError: '',
+            }
+
+            if (reviewContent.length === 0) {
+                errors.reviewContentError = "Nội dung đánh giá không được để trống!";
+                swal("Vui lòng nhập lại", errors.reviewContentError, "error");
+            } else if (reviewContent.length <= 10) {
+                errors.reviewContentError = "Nội dung đánh giá phải nhiều hơn 10 ký tự!";
+                swal("Vui lòng nhập lại", errors.reviewContentError, "error");
+            } else {
+                errors.reviewContentError = '';
+            }
+
+            if (starCount == 0) {
+                errors.starCountError = "Quý khách vui lòng chọn số sao muốn đánh giá!";
+                swal("Vui lòng chọn lại", errors.starCountError, "error");
+            } else {
+                errors.starCountError = '';
+            }
+
+            if (errors.reviewContentError == '' && errors.starCountError == '') {
                 $.ajax({
-                    url: " pages/review/handleEditReview.php",
+                    url: " pages/review/handleReview.php",
                     data: {
-                        idReview: idReview,
                         starCount: starCount,
                         reviewContent: reviewContent,
+                        idProduct: idProduct,
                     },
                     dataType: 'json',
                     method: "post",
                     cache: true,
                     success: function(data) {
-                        view_review_data()
+                        swal("OK!", "Đánh giá thành công", "success");
+                        $('#review').val('')
+                        view_review_data();
                         starCount = 0
                     },
-                    error: function() {
-                        swal("OK!", "Sửa đánh giá thành công", "success");
-                        view_review_data()
+                    error: function(data) {
+                        swal("OK!", "Đánh giá thành công", "success");
+                        $('#review').val('')
+                        view_review_data();
+                        starCount = 0
                     }
                 })
-            })
-
-            // Answer review
-            var reviewId;
-            $(document).on("click", '.review__footer-answer', function() {
-                reviewId = $(this).val()
-                $(".load__review-modal").load("pages/review/answerReviewModal.php");
-            })
-
-            $(document).on("click", '.review__answer-btn', function() {
-                var answerContent = $('.answer-review').val()
-                $.ajax({
-                    url: " pages/review/handleAnswerReview.php",
-                    data: {
-                        answerContent: answerContent,
-                        reviewId: reviewId
-                    },
-                    dataType: 'json',
-                    method: "post",
-                    cache: true,
-                    success: function(data) {
-                        view_review_data()
-                    },
-                    error: function() {
-                        view_review_data()
-                    }
-                })
-            })
-
-            // Delete answer review
-            $(document).on("click", '.answer-review-delete-btn', function() {
-                var idReview = $(this).val()
-
-                $.ajax({
-                    url: " pages/review/handleDeleteAnswerReiview.php",
-                    data: {
-                        idReview: idReview,
-                    },
-                    dataType: 'json',
-                    method: "post",
-                    cache: true,
-                    success: function(data) {
-                        swal("OK!", "Xóa đánh giá thành công", "success");
-                        view_review_data()
-                    },
-                    error: function() {
-                        view_review_data()
-                    }
-                })
-            })
-
-            $(document).on("keyup", '#review', function() {
-                var content = $(this).val();
-                $('.countContentReview').html(content.length)
-            })
-            /* COMMENT START */
-
-            // View comment data
-            var pageIndexComment = 1
-
-            function view_comment_data() {
-                $.post('pages/comment/loadCommentData.php?idsanpham=' +
-                    '<?php echo $_GET['id'] ?>&pageIndex=' + pageIndexComment,
-                    function(data) {
-                        $('#load__comment-data').html(data)
-                    })
             }
-            view_comment_data()
-
-            $(document).on("click", '.page-link.main', function() {
-                pageIndexComment = $(this).attr("value");
-                $.ajax({
-                    url: 'pages/comment/loadCommentData.php?idsanpham=' +
-                        '<?php echo $_GET['id'] ?>&pageIndex=' + pageIndexComment,
-                    data: {
-                        pageIndex: pageIndexComment,
-                    },
-                    dataType: 'html',
-                    method: "post",
-                    cache: true,
-                    success: function(data) {
-                        view_comment_data();
-                    },
-                    error: function() {
-                        view_comment_data();
-                    }
-                })
-            })
-
-            $(document).on("click", '.comment__submit', function() {
-                var comment = $('#question').val()
-                var idProduct = <?php echo $_GET['id'] ?>;
-                let errors = {
-                    commentError: '',
-                }
-
-                if (comment.length === 0) {
-                    errors.commentError = "Nội dung đánh giá không được để trống!";
-                    swal("Vui lòng nhập lại", errors.commentError, "error");
-                } else if (comment.length <= 10) {
-                    errors.commentError = "Nội dung đánh giá phải nhiều hơn 10 ký tự!";
-                    swal("Vui lòng nhập lại", errors.commentError, "error");
-                } else {
-                    errors.commentError = '';
-                }
-
-                if (errors.commentError == '') {
-                    $.ajax({
-                        url: " pages/comment/handleComment.php",
-                        data: {
-                            comment: comment,
-                            idProduct: idProduct,
-                        },
-                        dataType: 'json',
-                        method: "post",
-                        cache: true,
-                        success: function(data) {
-                            swal("OK!", "Đặt câu hỏi thành công", "success");
-                            $('#question').val('')
-                            view_comment_data();
-                        },
-                        error: function(data) {
-                            swal("OK!", "Đặt câu hỏi thành công", "success");
-                            $('#question').val('')
-                            view_comment_data();
-                        }
-                    })
-                }
-            })
-
-            // Delete comment
-            $(document).on("click", '.comment__delete-btn', function() {
-                var idComment = $(this).val()
-
-                $.ajax({
-                    url: " pages/comment/handleDeleteComment.php",
-                    data: {
-                        idComment: idComment,
-                    },
-                    dataType: 'json',
-                    method: "post",
-                    cache: true,
-                    success: function(data) {
-                        swal("OK!", "Xóa câu hỏi thành công", "success");
-                        view_comment_data()
-                    },
-                    error: function() {
-                        swal("OK!", "Xóa câu hỏi thành công", "success");
-                        view_comment_data()
-                    }
-                })
-            })
-
-            // Edit comment
-            var idComment;
-            $(document).on("click", '.comment__edit-modal-btn', function() {
-                idComment = $(this).val()
-                var id = <?php echo $_GET['id'] ?>;
-                $(".load__comment-modal").load("pages/comment/editCommentModal.php?id=" + id +
-                    '&idComment=' + idComment);
-            })
-
-            $(document).on("click", '.comment__edit-btn', function() {
-                var comment = $('.edit-comment').val()
-                let errors = {
-                    commentError: '',
-                }
-
-                if (comment.length == 0) {
-                    errors.commentError = "Nội dung đánh giá không được để trống!";
-                    swal("Vui lòng nhập lại", errors.commentError, "error");
-                } else if (comment.length <= 10) {
-                    errors.commentError = "Nội dung đánh giá phải nhiều hơn 10 ký tự!";
-                    swal("Vui lòng nhập lại", errors.commentError, "error");
-                } else {
-                    errors.commentError = '';
-                }
-
-                if (errors.commentError == '') {
-                    $.ajax({
-                        url: " pages/comment/handleEditComment.php",
-                        data: {
-                            idComment: idComment,
-                            comment: comment,
-                        },
-                        dataType: 'json',
-                        method: "post",
-                        cache: true,
-                        success: function(data) {
-                            swal("OK!", "Sửa câu hỏi thành công", "success");
-                            view_comment_data()
-                        },
-                        error: function() {
-                            swal("OK!", "Sửa câu hỏi thành công", "success");
-                            view_comment_data()
-                        }
-                    })
-                }
-            })
-
-            // Answer comment
-            var commentId;
-            $(document).on("click", '.comment__footer-answer', function() {
-                commentId = $(this).val()
-                $(".load__comment-modal").load("pages/comment/answerCommentModal.php");
-            })
-
-            $(document).on("click", '.comment__answer-btn', function() {
-                var answerContent = $('.answer-comment').val()
-                $.ajax({
-                    url: " pages/comment/handleAnswerComment.php",
-                    data: {
-                        answerContent: answerContent,
-                        commentId: commentId
-                    },
-                    dataType: 'json',
-                    method: "post",
-                    cache: true,
-                    success: function(data) {
-                        view_comment_data()
-                    },
-                    error: function() {
-                        view_comment_data()
-                    }
-                })
-            })
-
-            // Delete answer comment
-            $(document).on("click", '.answer-comment-delete-btn', function() {
-                var idComment = $(this).val()
-
-                $.ajax({
-                    url: " pages/comment/handleDeleteAnswerComment.php",
-                    data: {
-                        idComment: idComment,
-                    },
-                    dataType: 'json',
-                    method: "post",
-                    cache: true,
-                    success: function(data) {
-                        swal("OK!", "Xóa đánh giá thành công", "success");
-                        view_comment_data()
-                    },
-                    error: function() {
-                        swal("OK!", "Xóa đánh giá thành công", "success");
-                        view_comment_data()
-                    }
-                })
-            })
-
-            $(document).on("click", '#content', function() {
-                var content = $(this).val();
-            })
-
-            $(document).on("keyup", '#question', function() {
-                var content = $(this).val();
-                $('.countContent').html(content.length)
-            })
-
-            $(document).on("keyup", '.edit-comment', function() {
-                var content = $(this).val();
-                $('.countContentEditReview').html(content.length)
-            })
-
-            /* COMMENT END */
         })
+        /* HANDLE REVIEW END */
+
+        // Delete review
+        $(document).on("click", '.review__delete-btn', function() {
+            var idReview = $(this).val()
+
+            $.ajax({
+                url: " pages/review/handleDeleteReview.php",
+                data: {
+                    idReview: idReview,
+                },
+                dataType: 'json',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    swal("OK!", "Xóa đánh giá thành công", "success");
+                    view_review_data()
+                },
+                error: function() {
+                    view_review_data()
+                }
+            })
+        })
+
+        // Edit review
+        var idReview;
+        $(document).on("click", '.review__edit-modal-btn', function() {
+            idReview = $(this).val()
+            var id = <?php echo $_GET['id'] ?>;
+            $(".load__review-modal").load("pages/review/editReviewModal.php?id=" + id +
+                '&idReview=' + idReview);
+        })
+
+        $(document).on("click", '.review__edit-btn', function() {
+            var reviewContent = $('#review').val()
+            $.ajax({
+                url: " pages/review/handleEditReview.php",
+                data: {
+                    idReview: idReview,
+                    starCount: starCount,
+                    reviewContent: reviewContent,
+                },
+                dataType: 'json',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    view_review_data()
+                    starCount = 0
+                },
+                error: function() {
+                    swal("OK!", "Sửa đánh giá thành công", "success");
+                    view_review_data()
+                }
+            })
+        })
+
+        // Answer review
+        var reviewId;
+        $(document).on("click", '.review__footer-answer', function() {
+            reviewId = $(this).val()
+            $(".load__review-modal").load("pages/review/answerReviewModal.php");
+        })
+
+        $(document).on("click", '.review__answer-btn', function() {
+            var answerContent = $('.answer-review').val()
+            $.ajax({
+                url: " pages/review/handleAnswerReview.php",
+                data: {
+                    answerContent: answerContent,
+                    reviewId: reviewId
+                },
+                dataType: 'json',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    view_review_data()
+                },
+                error: function() {
+                    view_review_data()
+                }
+            })
+        })
+
+        // Delete answer review
+        $(document).on("click", '.answer-review-delete-btn', function() {
+            var idReview = $(this).val()
+
+            $.ajax({
+                url: " pages/review/handleDeleteAnswerReiview.php",
+                data: {
+                    idReview: idReview,
+                },
+                dataType: 'json',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    swal("OK!", "Xóa đánh giá thành công", "success");
+                    view_review_data()
+                },
+                error: function() {
+                    view_review_data()
+                }
+            })
+        })
+
+        $(document).on("keyup", '#review', function() {
+            var content = $(this).val();
+            $('.countContentReview').html(content.length)
+        })
+        /* COMMENT START */
+
+        // View comment data
+        var pageIndexComment = 1
+
+        function view_comment_data() {
+            $.post('pages/comment/loadCommentData.php?idsanpham=' +
+                '<?php echo $_GET['id'] ?>&pageIndex=' + pageIndexComment,
+                function(data) {
+                    $('#load__comment-data').html(data)
+                })
+        }
+        view_comment_data()
+
+        $(document).on("click", '.page-link.main', function() {
+            pageIndexComment = $(this).attr("value");
+            $.ajax({
+                url: 'pages/comment/loadCommentData.php?idsanpham=' +
+                    '<?php echo $_GET['id'] ?>&pageIndex=' + pageIndexComment,
+                data: {
+                    pageIndex: pageIndexComment,
+                },
+                dataType: 'html',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    view_comment_data();
+                },
+                error: function() {
+                    view_comment_data();
+                }
+            })
+        })
+
+        $(document).on("click", '.comment__submit', function() {
+            var comment = $('#question').val()
+            var idProduct = <?php echo $_GET['id'] ?>;
+            let errors = {
+                commentError: '',
+            }
+
+            if (comment.length === 0) {
+                errors.commentError = "Nội dung đánh giá không được để trống!";
+                swal("Vui lòng nhập lại", errors.commentError, "error");
+            } else if (comment.length <= 10) {
+                errors.commentError = "Nội dung đánh giá phải nhiều hơn 10 ký tự!";
+                swal("Vui lòng nhập lại", errors.commentError, "error");
+            } else {
+                errors.commentError = '';
+            }
+
+            if (errors.commentError == '') {
+                $.ajax({
+                    url: " pages/comment/handleComment.php",
+                    data: {
+                        comment: comment,
+                        idProduct: idProduct,
+                    },
+                    dataType: 'json',
+                    method: "post",
+                    cache: true,
+                    success: function(data) {
+                        swal("OK!", "Đặt câu hỏi thành công", "success");
+                        $('#question').val('')
+                        view_comment_data();
+                    },
+                    error: function(data) {
+                        swal("OK!", "Đặt câu hỏi thành công", "success");
+                        $('#question').val('')
+                        view_comment_data();
+                    }
+                })
+            }
+        })
+
+        // Delete comment
+        $(document).on("click", '.comment__delete-btn', function() {
+            var idComment = $(this).val()
+
+            $.ajax({
+                url: " pages/comment/handleDeleteComment.php",
+                data: {
+                    idComment: idComment,
+                },
+                dataType: 'json',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    swal("OK!", "Xóa câu hỏi thành công", "success");
+                    view_comment_data()
+                },
+                error: function() {
+                    swal("OK!", "Xóa câu hỏi thành công", "success");
+                    view_comment_data()
+                }
+            })
+        })
+
+        // Edit comment
+        var idComment;
+        $(document).on("click", '.comment__edit-modal-btn', function() {
+            idComment = $(this).val()
+            var id = <?php echo $_GET['id'] ?>;
+            $(".load__comment-modal").load("pages/comment/editCommentModal.php?id=" + id +
+                '&idComment=' + idComment);
+        })
+
+        $(document).on("click", '.comment__edit-btn', function() {
+            var comment = $('.edit-comment').val()
+            let errors = {
+                commentError: '',
+            }
+
+            if (comment.length == 0) {
+                errors.commentError = "Nội dung đánh giá không được để trống!";
+                swal("Vui lòng nhập lại", errors.commentError, "error");
+            } else if (comment.length <= 10) {
+                errors.commentError = "Nội dung đánh giá phải nhiều hơn 10 ký tự!";
+                swal("Vui lòng nhập lại", errors.commentError, "error");
+            } else {
+                errors.commentError = '';
+            }
+
+            if (errors.commentError == '') {
+                $.ajax({
+                    url: " pages/comment/handleEditComment.php",
+                    data: {
+                        idComment: idComment,
+                        comment: comment,
+                    },
+                    dataType: 'json',
+                    method: "post",
+                    cache: true,
+                    success: function(data) {
+                        swal("OK!", "Sửa câu hỏi thành công", "success");
+                        view_comment_data()
+                    },
+                    error: function() {
+                        swal("OK!", "Sửa câu hỏi thành công", "success");
+                        view_comment_data()
+                    }
+                })
+            }
+        })
+
+        // Answer comment
+        var commentId;
+        $(document).on("click", '.comment__footer-answer', function() {
+            commentId = $(this).val()
+            $(".load__comment-modal").load("pages/comment/answerCommentModal.php");
+        })
+
+        $(document).on("click", '.comment__answer-btn', function() {
+            var answerContent = $('.answer-comment').val()
+            $.ajax({
+                url: " pages/comment/handleAnswerComment.php",
+                data: {
+                    answerContent: answerContent,
+                    commentId: commentId
+                },
+                dataType: 'json',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    view_comment_data()
+                },
+                error: function() {
+                    view_comment_data()
+                }
+            })
+        })
+
+        // Delete answer comment
+        $(document).on("click", '.answer-comment-delete-btn', function() {
+            var idComment = $(this).val()
+
+            $.ajax({
+                url: " pages/comment/handleDeleteAnswerComment.php",
+                data: {
+                    idComment: idComment,
+                },
+                dataType: 'json',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    swal("OK!", "Xóa đánh giá thành công", "success");
+                    view_comment_data()
+                },
+                error: function() {
+                    swal("OK!", "Xóa đánh giá thành công", "success");
+                    view_comment_data()
+                }
+            })
+        })
+
+        $(document).on("click", '#content', function() {
+            var content = $(this).val();
+        })
+
+        $(document).on("keyup", '#question', function() {
+            var content = $(this).val();
+            $('.countContent').html(content.length)
+        })
+
+        $(document).on("keyup", '.edit-comment', function() {
+            var content = $(this).val();
+            $('.countContentEditReview').html(content.length)
+        })
+
+        /* COMMENT END */
+    })
     </script>
 </body>
 

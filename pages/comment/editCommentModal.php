@@ -11,9 +11,7 @@
         <div class="close-review-modal">
             <i class="fa-solid fa-xmark"></i>
         </div>
-        <textarea class="edit-comment" cols="45" rows="8" minlength="10" required=""
-            placeholder="Mời bạn chia sẻ thêm một số cảm nhận..." aria-required="true">
-                <?php echo trim($row_comment['comment']); ?>
+        <textarea class="edit-comment" cols="45" rows="8" minlength="10" placeholder="Mời bạn chia sẻ thêm một số cảm nhận..." aria-required="true"><?php echo trim($row_comment['comment']); ?>
             </textarea>
         <div class="wrap-attaddsend-comment"><span class="countContentEditReview">0</span> ký tự (Tối
             thiểu
