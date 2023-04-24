@@ -43,10 +43,10 @@ ORDER BY id_sanpham DESC";
                 </div>
 
                 <div class="app-content-actions">
-                    <input class="search-bar" placeholder="Search..." type="text">
+                    <input class="search-bar" placeholder="Tìm kiếm..." type="text">
                     <div class="app-content-actions-wrapper">
                         <div class="filter-button-wrapper">
-                            <button class="action-button filter jsFilter"><span>Filter</span><svg
+                            <button class="action-button filter jsFilter"><span>Lọc</span><svg
                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-filter">
@@ -239,7 +239,20 @@ ORDER BY id_sanpham DESC";
                                 title: "Bạn có chắc muốn xóa danh sách này không?",
                                 text: "Nếu có danh sách này sẽ bị xóa đi!",
                                 icon: "warning",
-                                buttons: true,
+                                buttons: {
+                                    cancel: {
+                                        text: "Thoát",
+                                        value: null,
+                                        visible: true,
+                                        closeModal: true,
+                                    },
+                                    confirm: {
+                                        text: "Chấp nhận",
+                                        value: true,
+                                        visible: true,
+                                        closeModal: true
+                                    }
+                                },
                                 dangerMode: true,
                             })
                             .then((willDelete) => {
@@ -262,7 +275,20 @@ ORDER BY id_sanpham DESC";
                                 title: "Bạn có chắc muốn thực hiện thao tác không?",
                                 text: "Nếu có tất cả danh sách sẽ bị xóa đi!",
                                 icon: "warning",
-                                buttons: true,
+                                buttons: {
+                                    cancel: {
+                                        text: "Thoát",
+                                        value: null,
+                                        visible: true,
+                                        closeModal: true,
+                                    },
+                                    confirm: {
+                                        text: "Chấp nhận",
+                                        value: true,
+                                        visible: true,
+                                        closeModal: true
+                                    }
+                                },
                                 dangerMode: true,
                             })
                             .then((willDelete) => {

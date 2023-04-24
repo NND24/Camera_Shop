@@ -2,14 +2,12 @@
 session_start();
 $mysqli = new mysqli("localhost", "root", "", "camera_shop");
 
-if (isset($_SESSION['id_user'])) {
 
-    $answerContent = $_POST['answerContent'];
-    $answerContent = trim($answerContent);
-    $reviewId = $_POST['reviewId'];
-    $idAdmin = $_SESSION['id_user'];
-    $answer_date = time();
+$answerContent = $_POST['answerContent'];
+$answerContent = trim($answerContent);
+$reviewId = $_POST['reviewId'];
+$idAdmin = $_SESSION['id_user'];
+$answer_date = time();
 
-    $sql_update = "UPDATE `tbl_reviews` SET `id_admin`='$idAdmin',`answer_review`='$answerContent',`answer_date`='$answer_date' WHERE id_review = '$reviewId'";
-    $query_update = mysqli_query($mysqli, $sql_update);
-}
+$sql_update = "UPDATE `tbl_reviews` SET `id_admin`='$idAdmin',`answer_review`='$answerContent',`answer_date`='$answer_date' WHERE id_review = '$reviewId'";
+$query_update = mysqli_query($mysqli, $sql_update);

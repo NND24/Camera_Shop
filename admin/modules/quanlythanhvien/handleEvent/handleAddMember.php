@@ -30,9 +30,9 @@ VALUE ('" . 1 . "','" . $username . "','" . $email . "','" . $password . "','" .
 
     if ($duty == 0) {
         mysqli_query($mysqli, "INSERT INTO tbl_privilege(id_admin,list_category,add_category,delete_category,delete_all_category,detail_category,edit_category,list_product,add_product,delete_product,delete_all_product,detail_product,edit_product,list_order,delete_order,delete_all_order,detail_order,list_member,add_member,delete_member,delete_all_member,detail_member,edit_member) 
-VALUE ('" . $row_admin['id_admin'] . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "')");
+        VALUE ('" . $row_admin['id_admin'] . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "')");
     } else {
         mysqli_query($mysqli, "INSERT INTO tbl_privilege(id_admin,list_category,add_category,delete_category,delete_all_category,detail_category,edit_category,list_product,add_product,delete_product,delete_all_product,detail_product,edit_product,list_order,delete_order,delete_all_order,detail_order,list_member,add_member,delete_member,delete_all_member,detail_member,edit_member) 
-        VALUE ('" . $row_admin['id_admin'] . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "')");
+        VALUE ('" . $row_admin['id_admin'] . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 1 . "','" . 0 . "','" . 0 . "','" . 0 . "','" . 0 . "','" . 0 . "','" . 0 . "','" . 0 . "','" . 0 . "','" . 0 . "','" . 0 . "')");
     }
 }
