@@ -183,6 +183,10 @@
                 errors.priceError = "Giảm giá phải lớn hơn 0";
                 swal("Vui lòng nhập lại", errors.priceError, "error");
                 $('.giamgia').css("border-color", "#ff000087");
+            } else if (giamgia >= 90) {
+                errors.priceError = "Giảm giá phải nhỏ hơn 90%";
+                swal("Vui lòng nhập lại", errors.priceError, "error");
+                $('.giamgia').css("border-color", "#ff000087");
             } else {
                 errors.discountError = '';
                 $('.giamgia').css("border-color", "#008000ab");

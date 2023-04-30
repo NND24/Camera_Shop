@@ -149,10 +149,10 @@ ORDER BY id_sanpham DESC";
 
                                 <div class="filter-menu-buttons">
                                     <button class="filter-button reset">
-                                        Reset
+                                        Đặt lại
                                     </button>
                                     <button class="filter-button apply">
-                                        Apply
+                                        Áp dụng
                                     </button>
                                 </div>
 

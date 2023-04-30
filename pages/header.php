@@ -57,7 +57,8 @@ include('./js/link.php');
                         <div class="header_search_content">
                             <div class="header_search_form_container">
                                 <div class="header_search_form">
-                                    <input type="search" class="header_search_input" placeholder="Tìm camera...">
+                                    <input type="search" class="header_search_input" maxlength="200"
+                                        placeholder="Tìm camera...">
                                     <button class="header_search_button">
                                         <img
                                             src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918770/search.png">
@@ -271,22 +272,36 @@ $(document).ready(() => {
     // Search
     $(document).on("click", '.header_search_button ', function() {
         var searchInput = $('.header_search_input').val();
-        $.ajax({
-            url: "tim-kiem.php",
-            data: {
-                searchInput: searchInput,
-            },
-            dataType: 'html',
-            method: "post",
-            cache: true,
-            success: function(data) {
-                let searchInputModified = searchInput.replace(/\s+/g, '-');
-                var url = "tim-kiem.php?tukhoa=" + searchInputModified;
-                window.history.pushState("new", "title", url);
-                $(".container").load("tim-kiem.php?tukhoa=" + searchInputModified);
-                $(window).scrollTop(0);
-            },
-        })
+
+        let errors = {
+            lengthError: ''
+        }
+
+        if (searchInput.length >= 100) {
+            errors.lengthError = 'Không được nhập quá 100 ký tự'
+            swal("Vui lòng nhập lại", errors.lengthError, "error");
+        } else {
+            errors.lengthError = '';
+        }
+
+        if (errors.lengthError === '') {
+            $.ajax({
+                url: "tim-kiem.php",
+                data: {
+                    searchInput: searchInput,
+                },
+                dataType: 'html',
+                method: "post",
+                cache: true,
+                success: function(data) {
+                    let searchInputModified = searchInput.replace(/\s+/g, '-');
+                    var url = "tim-kiem.php?tukhoa=" + searchInputModified;
+                    window.history.pushState("new", "title", url);
+                    $(".container").load("tim-kiem.php?tukhoa=" + searchInputModified);
+                    $(window).scrollTop(0);
+                },
+            })
+        }
     })
 
     /* HANDLE CART START */
