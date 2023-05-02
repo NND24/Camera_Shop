@@ -26,7 +26,7 @@
                     $query_order = mysqli_query($mysqli, $sql_order);
                     $total_order = mysqli_num_rows($query_order);
 
-                    $sql_user = "SELECT * FROM tbl_user";
+                    $sql_user = "SELECT * FROM tbl_user WHERE privilege=0";
                     $query_user = mysqli_query($mysqli, $sql_user);
                     $total_user = mysqli_num_rows($query_user);
 
@@ -46,17 +46,17 @@
                         <?php if ($total_revenue > 1000000) {
                             if ($total_revenue / 100000 < 100) {
                         ?>
-                        <h1><?php echo round($total_revenue / 1000000, 1) ?>Mđ</h1>
+                                <h1><?php echo round($total_revenue / 1000000, 1) ?>Mđ</h1>
 
-                        <?php } else if ($total_revenue / 100000 < 1000) { ?>
-                        <h1><?php echo round($total_revenue / 1000000, 1) ?>Mđ</h1>
+                            <?php } else if ($total_revenue / 100000 < 1000) { ?>
+                                <h1><?php echo round($total_revenue / 1000000, 1) ?>Mđ</h1>
+                            <?php } else { ?>
+                                <h1><?php echo number_format(round($total_revenue, -5) / 100000, 0, ',', '.') ?>Mđ</h1>
+
+                            <?php } ?>
+
                         <?php } else { ?>
-                        <h1><?php echo number_format(round($total_revenue, -5) / 100000, 0, ',', '.') ?>Mđ</h1>
-
-                        <?php } ?>
-
-                        <?php } else { ?>
-                        <h1><?php echo number_format($total_revenue, 0, ',', '.')  ?>đ</h1>
+                            <h1><?php echo number_format($total_revenue, 0, ',', '.')  ?>đ</h1>
                         <?php } ?>
                         <h4>Tổng doanh thu</h4>
                     </div>
@@ -98,74 +98,74 @@
     </div>
 
     <script>
-    $(document).ready(() => {
-        $(document).on("click", '.update-revenue-btn', function() {
-            $.post('modules/quanlydashboard/loadCommentData.php')
-        })
-
-        function update_revenue_data() {
-            $.post('modules/quanlydashboard/handleUbdateRevenue.php')
-        }
-        update_revenue_data()
-
-
-        // View review data
-        function view_review_data() {
-            $.post('modules/quanlydashboard/loadReviewData.php',
-                function(data) {
-                    $('#load__review-data').html(data)
-                })
-        }
-        view_review_data()
-
-        // View comment data
-        function view_comment_data() {
-            $.post('modules/quanlydashboard/loadCommentData.php',
-                function(data) {
-                    $('#load__comment-data').html(data)
-                })
-        }
-        view_comment_data()
-
-        var char = new Morris.Line({
-
-            element: 'myfirstchart',
-
-            xkey: 'date',
-
-            ykeys: ['sales', 'quantity'],
-
-            labels: ['Doanh thu', 'Số lượng bán ra']
-        });
-
-        $(document).on("change", '.order-date-filter', function() {
-            var thoigian = $(this).val();
-            $.ajax({
-                url: "modules/quanlydashboard/handleStatistics.php",
-                method: 'POST',
-                data: {
-                    thoigian: thoigian
-                },
-                dataType: "json",
-                success: function(data) {
-                    char.setData(data);
-                }
+        $(document).ready(() => {
+            $(document).on("click", '.update-revenue-btn', function() {
+                $.post('modules/quanlydashboard/loadCommentData.php')
             })
-        })
 
-        function thongke() {
-            var text = '365 ngày qua';
-            $.ajax({
-                url: "modules/quanlydashboard/handleStatistics.php",
-                method: 'POST',
-                dataType: "json",
-                success: function(data) {
-                    char.setData(data);
-                }
+            function update_revenue_data() {
+                $.post('modules/quanlydashboard/handleUbdateRevenue.php')
+            }
+            update_revenue_data()
+
+
+            // View review data
+            function view_review_data() {
+                $.post('modules/quanlydashboard/loadReviewData.php',
+                    function(data) {
+                        $('#load__review-data').html(data)
+                    })
+            }
+            view_review_data()
+
+            // View comment data
+            function view_comment_data() {
+                $.post('modules/quanlydashboard/loadCommentData.php',
+                    function(data) {
+                        $('#load__comment-data').html(data)
+                    })
+            }
+            view_comment_data()
+
+            var char = new Morris.Line({
+
+                element: 'myfirstchart',
+
+                xkey: 'date',
+
+                ykeys: ['sales', 'quantity'],
+
+                labels: ['Doanh thu', 'Số lượng bán ra']
+            });
+
+            $(document).on("change", '.order-date-filter', function() {
+                var thoigian = $(this).val();
+                $.ajax({
+                    url: "modules/quanlydashboard/handleStatistics.php",
+                    method: 'POST',
+                    data: {
+                        thoigian: thoigian
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        char.setData(data);
+                    }
+                })
             })
-        }
-        thongke();
-    })
+
+            function thongke() {
+                var text = '365 ngày qua';
+                $.ajax({
+                    url: "modules/quanlydashboard/handleStatistics.php",
+                    method: 'POST',
+                    dataType: "json",
+                    success: function(data) {
+                        char.setData(data);
+                    }
+                })
+            }
+            thongke();
+        })
     </script>
 </body>
 
