@@ -52,7 +52,7 @@
                                         <div class="swiper mySwiper">
                                             <div class="swiper-wrapper">
                                                 <div class="swiper-slide">
-                                                    <img src="images/ads/ads1.gif" alt="">
+                                                    <img src="images/ads/ads2.jpg" alt="">
                                                 </div>
                                                 <div class="swiper-slide">
                                                     <img src="images/ads/ads2.jpg" alt="">

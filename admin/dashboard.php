@@ -15,7 +15,7 @@
         <div class="main" id="main">
             <?php include('./modules/menu.php') ?>
             <div class="app-content">
-                <h1 class="app-content-headerText">Dashboard</h1>
+                <h1 class="app-content-headerText">Thống kê</h1>
                 <div class="supply-statistics-container row">
                     <?php
                     $sql_review = "SELECT * FROM tbl_reviews";
@@ -82,7 +82,7 @@
 
                 <div class="chart-container">
                     <div class="chart-header">
-                        <h1 class="app-content-headerText">Bảng thống kê</h1>
+                        <h1 class="app-content-headerText">Thống kê doanh thu</h1>
                         <select class="order-date-filter">
                             <option>Lọc</option>
                             <option value="7ngay">7 ngày qua</option>

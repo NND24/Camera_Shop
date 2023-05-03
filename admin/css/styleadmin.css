@@ -1005,7 +1005,7 @@ ul.pagination {
 .chart-header {
   display: flex;
   justify-content: space-between;
-  width: 26%;
+  width: 31%;
 }
 
 .chart-container {
