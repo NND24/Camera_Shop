@@ -1,6 +1,6 @@
 <?php
 session_start();
-$mysqli = new mysqli("localhost", "id20562858_gpmcamera", "E$/eM/1KHb{b?D23", "id20562858_camera_shop");
+$mysqli = new mysqli("sql.freedb.tech", "freedb_gpm_camera", "wk94?FQWZh@r4V$", "freedb_camera_shop");
 if (!isset($_SESSION['dangnhap'])) {
     header('Location: login.php');
 }
