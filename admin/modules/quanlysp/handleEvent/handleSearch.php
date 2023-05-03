@@ -1,6 +1,6 @@
 <?php
 session_start();
-$mysqli = new mysqli("localhost", "root", "", "camera_shop");
+include('../../../../admin/config/config.php');
 
 if (isset($_POST['searchInput'])) {
     $item_per_page = 7;

@@ -11,7 +11,7 @@
 
 <body>
     <?php
-    $mysqli = new mysqli("localhost", "root", "", "camera_shop");
+    include('../admin/config/config.php');
     $sql_lietke_sp = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
 ORDER BY id_sanpham DESC";
     $query_lietke_sp = mysqli_query($mysqli, $sql_lietke_sp);

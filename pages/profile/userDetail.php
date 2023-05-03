@@ -1,6 +1,6 @@
 <?php
 session_start();
-$mysqli = new mysqli("localhost", "root", "", "camera_shop");
+include('../../admin/config/config.php');
 
 $sql_user = "SELECT * FROM tbl_user WHERE id_user='$_SESSION[id_user]'";
 $query_user = mysqli_query($mysqli, $sql_user);

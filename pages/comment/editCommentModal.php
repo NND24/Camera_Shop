@@ -1,7 +1,7 @@
 <div class="review-modal-container">
     <div class="review-wrapper">
         <?php
-        $mysqli = new mysqli("localhost", "root", "", "camera_shop");
+        include('../../admin/config/config.php');
 
         $sql_comment = "SELECT * FROM tbl_comments WHERE id_comment = '$_GET[idComment]' LIMIT 1";
         $query_comment = mysqli_query($mysqli, $sql_comment);

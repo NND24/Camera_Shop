@@ -1,5 +1,5 @@
 <?php
-$mysqli = new mysqli("localhost", "root", "", "camera_shop");
+include('../../../../admin/config/config.php');
 
 $tendanhmuc = $_POST['tendanhmuc'];
 $trangthai = $_POST['trangthai'];

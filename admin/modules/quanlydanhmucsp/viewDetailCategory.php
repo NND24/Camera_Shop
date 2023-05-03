@@ -1,5 +1,5 @@
 <?php
-$mysqli = new mysqli("localhost", "root", "", "camera_shop");
+include('../../../admin/config/config.php');
 $sql = "SELECT * FROM tbl_danhmuc WHERE id_danhmuc='" . $_GET['iddanhmuc'] . "' LIMIT 1";
 $query = mysqli_query($mysqli, $sql);
 $row = mysqli_fetch_array($query)
@@ -31,11 +31,11 @@ $row = mysqli_fetch_array($query)
                         <?php
                         if ($row['category_status'] == 1) {
                         ?>
-                        <option readonly value="1" selected>Kích hoạt</option>
+                            <option readonly value="1" selected>Kích hoạt</option>
                         <?php
                         } else {
                         ?>
-                        <option readonly value="0">Ẩn</option>
+                            <option readonly value="0">Ẩn</option>
                         <?php
                         }
                         ?>
@@ -52,5 +52,5 @@ $row = mysqli_fetch_array($query)
 </div>
 
 <script>
-CKEDITOR.replace('view-content')
+    CKEDITOR.replace('view-content')
 </script>

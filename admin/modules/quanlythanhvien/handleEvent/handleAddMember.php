@@ -1,5 +1,5 @@
 <?php
-$mysqli = new mysqli("localhost", "root", "", "camera_shop");
+include('../../../../admin/config/config.php');
 
 $username = $_POST['username'];
 $email = $_POST['email'];

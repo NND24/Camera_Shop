@@ -1,5 +1,5 @@
 <?php
-$mysqli = new mysqli("localhost", "root", "", "camera_shop");
+include('../../admin/config/config.php');
 ?>
 <div class="address__modal-container">
     <div class="address__modal-wrapper">
@@ -24,7 +24,7 @@ $mysqli = new mysqli("localhost", "root", "", "camera_shop");
                 $query_province = mysqli_query($mysqli, $sql_province);
                 while ($row_province = mysqli_fetch_array($query_province)) {
                 ?>
-                <option value="<?php echo $row_province['province_id'] ?>"><?php echo $row_province['name'] ?></option>
+                    <option value="<?php echo $row_province['province_id'] ?>"><?php echo $row_province['name'] ?></option>
                 <?php
                 }
                 ?>
@@ -55,63 +55,63 @@ $mysqli = new mysqli("localhost", "root", "", "camera_shop");
 </div>
 
 <script>
-$(document).ready(() => {
-    $(document).on("change", '#province', function(e) {
-        e.preventDefault()
-        var province_id = $(this).val();
-        if (province_id) {
-            $.ajax({
-                url: " pages/checkout/getDistrict.php",
-                data: {
-                    province_id: province_id,
-                },
-                dataType: 'json',
-                method: "post",
-                cache: true,
-                success: function(data) {
-                    $('#district').empty();
+    $(document).ready(() => {
+        $(document).on("change", '#province', function(e) {
+            e.preventDefault()
+            var province_id = $(this).val();
+            if (province_id) {
+                $.ajax({
+                    url: " pages/checkout/getDistrict.php",
+                    data: {
+                        province_id: province_id,
+                    },
+                    dataType: 'json',
+                    method: "post",
+                    cache: true,
+                    success: function(data) {
+                        $('#district').empty();
 
-                    $.each(data, function(i, district) {
-                        $('#district').append($('<option>', {
-                            value: district.id,
-                            text: district.name
-                        }));
-                    });
+                        $.each(data, function(i, district) {
+                            $('#district').append($('<option>', {
+                                value: district.id,
+                                text: district.name
+                            }));
+                        });
 
-                    $('#wards').empty();
-                }
-            })
-            $('#wards').empty();
-        } else {
-            $('#district').empty();
-        }
+                        $('#wards').empty();
+                    }
+                })
+                $('#wards').empty();
+            } else {
+                $('#district').empty();
+            }
+        })
+
+        $(document).on("change", '#district', function(e) {
+            e.preventDefault()
+            var district_id = $(this).val();
+            if (district_id) {
+                $.ajax({
+                    url: " pages/checkout/getWard.php",
+                    data: {
+                        district_id: district_id,
+                    },
+                    dataType: 'json',
+                    method: "post",
+                    cache: true,
+                    success: function(data) {
+                        $('#ward').empty();
+                        $.each(data, function(i, wards) {
+                            $('#wards').append($('<option>', {
+                                value: wards.id,
+                                text: wards.name
+                            }));
+                        });
+                    }
+                })
+            } else {
+                $('#ward').empty();
+            }
+        })
     })
-
-    $(document).on("change", '#district', function(e) {
-        e.preventDefault()
-        var district_id = $(this).val();
-        if (district_id) {
-            $.ajax({
-                url: " pages/checkout/getWard.php",
-                data: {
-                    district_id: district_id,
-                },
-                dataType: 'json',
-                method: "post",
-                cache: true,
-                success: function(data) {
-                    $('#ward').empty();
-                    $.each(data, function(i, wards) {
-                        $('#wards').append($('<option>', {
-                            value: wards.id,
-                            text: wards.name
-                        }));
-                    });
-                }
-            })
-        } else {
-            $('#ward').empty();
-        }
-    })
-})
 </script>

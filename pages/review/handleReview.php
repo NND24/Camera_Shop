@@ -1,6 +1,6 @@
 <?php
 session_start();
-$mysqli = new mysqli("localhost", "root", "", "camera_shop");
+include('../../admin/config/config.php');
 
 $idProduct = $_POST['idProduct'];
 $idUser = $_SESSION['id_user'];

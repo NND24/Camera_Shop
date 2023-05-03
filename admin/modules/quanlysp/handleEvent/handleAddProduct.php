@@ -1,6 +1,6 @@
 <?php
 session_start();
-$mysqli = new mysqli("localhost", "root", "", "camera_shop");
+include('../../../../admin/config/config.php');
 
 $tensanpham = $_POST['tensanpham'];
 $giasp = round($_POST['giasp'], -3);

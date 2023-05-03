@@ -1,6 +1,6 @@
 <div id="order__detail-model">
     <?php
-    $mysqli = new mysqli("localhost", "root", "", "camera_shop");
+    include('../../../admin/config/config.php');
     $sql_order = "SELECT * FROM tbl_order, tbl_user WHERE tbl_order.id_user=tbl_user.id_user AND tbl_order.id_order='" . $_GET['id_order'] . "' LIMIT 1";
     $query_order = mysqli_query($mysqli, $sql_order);
     $row_order = mysqli_fetch_array($query_order);

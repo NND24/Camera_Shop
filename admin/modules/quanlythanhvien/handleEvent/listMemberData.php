@@ -1,6 +1,6 @@
 <?php
 session_start();
-$mysqli = new mysqli("localhost", "root", "", "camera_shop");
+include('../../../../admin/config/config.php');
 $item_per_page = 10;
 $current_page = $_GET['pageIndex'];
 $offset = ($current_page - 1) * $item_per_page;

@@ -10,7 +10,7 @@
 <div class="review-admin-wrapper">
     <?php
     session_start();
-    $mysqli = new mysqli("localhost", "root", "", "camera_shop");
+    include('../../../admin/config/config.php');
     $sql_review = "SELECT * FROM tbl_reviews, tbl_user, tbl_sanpham WHERE tbl_reviews.id_user=tbl_user.id_user AND tbl_reviews.id_sanpham=tbl_sanpham.id_sanpham";
     $query_review = mysqli_query($mysqli, $sql_review);
     if (mysqli_num_rows($query_review) > 0) {

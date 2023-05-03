@@ -1,5 +1,5 @@
 <?php
-$mysqli = new mysqli("localhost", "root", "", "camera_shop");
+include('../../../admin/config/config.php');
 $sql = "SELECT * FROM tbl_user WHERE id_user='" . $_GET['idUser'] . "' LIMIT 1";
 $query = mysqli_query($mysqli, $sql);
 $row = mysqli_fetch_array($query);

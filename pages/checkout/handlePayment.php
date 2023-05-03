@@ -1,6 +1,6 @@
 <?php
 session_start();
-$mysqli = new mysqli("localhost", "root", "", "camera_shop");
+include('../../admin/config/config.php');
 
 if (isset($_SESSION['id_user'])) {
     $id_user = $_SESSION['id_user'];

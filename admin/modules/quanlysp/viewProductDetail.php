@@ -1,6 +1,6 @@
 <div id="product__detail-model">
     <?php
-    $mysqli = new mysqli("localhost", "root", "", "camera_shop");
+    include('../../../admin/config/config.php');
     $sql_view_detail_sp = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc AND id_sanpham='" . $_GET['idsanpham'] . "' LIMIT 1";
     $query_view_detail_sp = mysqli_query($mysqli, $sql_view_detail_sp);
     $row = mysqli_fetch_array($query_view_detail_sp)
@@ -25,16 +25,16 @@
                         while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
                             if ($row_danhmuc['id_danhmuc'] == $row['id_danhmuc']) {
                         ?>
-                        <option selected value="<?php echo $row_danhmuc['id_danhmuc'] ?>">
-                            <?php echo $row_danhmuc['ten_danhmuc'] ?>
-                        </option>
-                        <?php
+                                <option selected value="<?php echo $row_danhmuc['id_danhmuc'] ?>">
+                                    <?php echo $row_danhmuc['ten_danhmuc'] ?>
+                                </option>
+                            <?php
                             } else {
                             ?>
-                        <option value="<?php echo $row_danhmuc['id_danhmuc'] ?>">
-                            <?php echo $row_danhmuc['ten_danhmuc'] ?>
-                        </option>
-                        <?php
+                                <option value="<?php echo $row_danhmuc['id_danhmuc'] ?>">
+                                    <?php echo $row_danhmuc['ten_danhmuc'] ?>
+                                </option>
+                            <?php
                             }
                             ?>
                         <?php } ?>
@@ -42,8 +42,7 @@
                 </div>
                 <div class="model__content">
                     <label class="col-2">Hình ảnh: </label>
-                    <img src="modules/quanlysp/handleEvent/uploads/<?php echo $row['hinhanh'] ?>" class="image" alt=""
-                        style="width:100px; border:1px solid #ccc;">
+                    <img src="modules/quanlysp/handleEvent/uploads/<?php echo $row['hinhanh'] ?>" class="image" alt="" style="width:100px; border:1px solid #ccc;">
                 </div>
                 <div class="model__content">
                     <label class="col-2">Số lượng: </label>
@@ -99,7 +98,7 @@
     </div>
 
     <script>
-    CKEDITOR.replace('product-view-tomtat')
-    CKEDITOR.replace('product-view-detail')
+        CKEDITOR.replace('product-view-tomtat')
+        CKEDITOR.replace('product-view-detail')
     </script>
 </div>

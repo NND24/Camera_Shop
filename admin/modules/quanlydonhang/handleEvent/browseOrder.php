@@ -1,5 +1,5 @@
 <?php
-$mysqli = new mysqli("localhost", "root", "", "camera_shop");
+include('../../../../admin/config/config.php');
 
 if (isset($_GET['action'])) {
     $sql_update = "UPDATE tbl_order SET order_status='1',browsed_date='" . time() . "' WHERE id_order='$_GET[id_order]' ";
