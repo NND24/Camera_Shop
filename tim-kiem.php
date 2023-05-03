@@ -138,9 +138,9 @@ include('./admin/config/config.php');
 
             // Quay ve trang chu
             $(document).on("click", '.view__home', function() {
-                var url = "trang-chu.php";
+                var url = "index.php";
                 window.history.pushState("new", "title", url);
-                $(".container").load("trang-chu.php");
+                $(".container").load("index.php");
                 $(window).scrollTop(0);
             })
         })

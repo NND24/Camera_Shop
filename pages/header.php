@@ -185,9 +185,9 @@ include('./js/link.php');
         })
 
         $(document).on("click", '.logo a', function() {
-            var url = "trang-chu.php";
+            var url = "index.php";
             window.history.pushState("new", "title", url);
-            $(".container").load("trang-chu.php");
+            $(".container").load("index.php");
             window.location.reload();
             $(window).scrollTop(0);
         })
@@ -216,9 +216,9 @@ include('./js/link.php');
         $(document).on("click", '.logout', function() {
             $.post('pages/handleEvent/handleLogin.php?logout=' + 1, (data) => {
                 setTimeout(function() {
-                    var url = "trang-chu.php";
+                    var url = "index.php";
                     window.history.pushState("new", "title", url);
-                    $(".container").load("trang-chu.php");
+                    $(".container").load("index.php");
                     window.location.reload();
                     $(window).scrollTop(0);
                 }, 1000);
