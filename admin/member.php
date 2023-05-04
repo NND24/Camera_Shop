@@ -111,7 +111,7 @@
                     view_data();
                     // View data
                     function view_data() {
-                        $.post('modules/quanlythanhvien/handleEvent/listmemberData.php?pageIndex=' +
+                        $.post('modules/quanlythanhvien/handleEvent/listMemberData.php?pageIndex=' +
                             pageIndexMainMember,
                             function(
                                 data) {
@@ -122,7 +122,7 @@
                     $(document).on("click", '.page-link.mainMember', function() {
                         pageIndexMainMember = $(this).attr("value");
                         $.ajax({
-                            url: 'modules/quanlythanhvien/handleEvent/listmemberData.php?pageIndex=' +
+                            url: 'modules/quanlythanhvien/handleEvent/listMemberData.php?pageIndex=' +
                                 pageIndexMainMember,
                             dataType: 'html',
                             method: "post",

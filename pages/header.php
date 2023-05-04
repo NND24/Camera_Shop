@@ -112,7 +112,7 @@ include('./js/link.php');
     <div class="main__menu">
         <div class="main__menu-logo">
             <div class="main__menu-logo">
-                <img src="images/logo.webp" alt="logo">
+                <a href="index.php"><img src="images/logo.webp" alt="logo"></a>
             </div>
             <div class="main__menu-close">
                 <i class="fa-solid fa-xmark"></i>
