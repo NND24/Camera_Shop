@@ -30,7 +30,7 @@ if (isset($_SESSION['id_user'])) {
         while ($row_cart = mysqli_fetch_array($query_cart)) {
             if ($row_cart['id_user'] == $_SESSION['id_user']) {
                 $insert_order_details = "INSERT INTO tbl_order_details(id_user,order_code,id_sanpham, soluongmua) 
-        VALUE('" . $id_user . "','" . $order_code . "','" . $row_cart['id_sanpham'] . "','" . $row_cart['amount'] . "')";
+        VALUES ('" . $id_user . "','" . $order_code . "','" . $row_cart['id_sanpham'] . "','" . $row_cart['amount'] . "')";
                 mysqli_query($mysqli, $insert_order_details);
 
                 $soluong = $row_cart['soluong'] - $row_cart['amount'];

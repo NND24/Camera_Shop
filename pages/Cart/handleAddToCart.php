@@ -29,7 +29,7 @@ if (isset($_SESSION['id_user'])) {
             }
         } else {
             $sql_them = "INSERT INTO tbl_cart(id_user, id_sanpham, amount) 
-        VALUE('" . $_SESSION['id_user'] . "', '" . $id_sanpham . "','" . 1 . "')";
+        VALUES ('" . $_SESSION['id_user'] . "', '" . $id_sanpham . "','" . 1 . "')";
             mysqli_query($mysqli, $sql_them);
         }
     }

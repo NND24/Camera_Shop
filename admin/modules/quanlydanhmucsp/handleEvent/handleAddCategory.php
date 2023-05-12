@@ -16,6 +16,6 @@ if (mysqli_num_rows($query_category_name) > 0) {
     $d = array("existName" => 0);
     echo json_encode($d);
     $sql_them = "INSERT INTO tbl_danhmuc(ten_danhmuc, category_status, category_detail, category_created_time, category_last_updated) 
-    VALUE('" . $tendanhmuc . "', '" . $trangthai . "','" . $category_detail . "','" . time() . "','" . time() . "')";
+    VALUES('" . $tendanhmuc . "', '" . $trangthai . "','" . $category_detail . "','" . time() . "','" . time() . "')";
     mysqli_query($mysqli, $sql_them);
 }

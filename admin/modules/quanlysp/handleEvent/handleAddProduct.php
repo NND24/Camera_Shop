@@ -45,7 +45,7 @@ if (mysqli_num_rows($query_product_name) > 0) {
     echo json_encode($b);
     $sql_them = "INSERT INTO tbl_sanpham(tensanpham, giasp, soluong, hinhanh, giamgia,giadagiam, tomtat,
  noidung, trangthaisp, id_danhmuc, created_time, last_updated) 
-VALUE('" . $tensanpham . "','" . $giasp . "','" . $soluong . "','" . $image . "','" . $giamgia . "','" . round($giadagiam, -3)  . "','" . $tomtat . "','" . $noidung . "',
+VALUES('" . $tensanpham . "','" . $giasp . "','" . $soluong . "','" . $image . "','" . $giamgia . "','" . round($giadagiam, -3)  . "','" . $tomtat . "','" . $noidung . "',
 '" . $trangthai . "','" . $danhmuc . "','" . time() . "','" . time() . "')";
     mysqli_query($mysqli, $sql_them);
 }

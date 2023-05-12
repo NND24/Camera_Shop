@@ -27,10 +27,10 @@ while ($row = mysqli_fetch_array($query_order)) {
 if (mysqli_num_rows($query_tkhoadon) != 0) {
     mysqli_query($mysqli, "TRUNCATE TABLE tbl_tkdonhang");
     foreach ($data as $date => $values) {
-        mysqli_query($mysqli, "INSERT INTO tbl_tkdonhang (ngaydat,soluongban,doanhthu) VALUE('$date','$values[soluongmua]','$values[doanhthu]')");
+        mysqli_query($mysqli, "INSERT INTO tbl_tkdonhang (ngaydat,soluongban,doanhthu) VALUES('$date','$values[soluongmua]','$values[doanhthu]')");
     }
 } else {
     foreach ($data as $date => $values) {
-        mysqli_query($mysqli, "INSERT INTO tbl_tkdonhang (ngaydat,soluongban,doanhthu) VALUE('$date','$values[soluongmua]','$values[doanhthu]')");
+        mysqli_query($mysqli, "INSERT INTO tbl_tkdonhang (ngaydat,soluongban,doanhthu) VALUES('$date','$values[soluongmua]','$values[doanhthu]')");
     }
 }

@@ -7,7 +7,7 @@ $idProduct = $_POST['idProduct'];
 $idUser = $_SESSION['id_user'];
 $comment = $_POST['comment'];
 
-$sql_comment = "INSERT INTO tbl_comments(id_sanpham, id_user, comment, comment_date) VALUE(
+$sql_comment = "INSERT INTO tbl_comments(id_sanpham, id_user, comment, comment_date) VALUES(
     '" . $idProduct . "','" . $idUser . "','" . $comment . "','" . time() . "'
 )";
 $query_comment = mysqli_query($mysqli, $sql_comment);

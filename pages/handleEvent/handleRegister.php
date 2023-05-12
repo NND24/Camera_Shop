@@ -15,5 +15,5 @@ if (mysqli_num_rows($query_user) > 0) {
     $a = array("existEmail" => 0);
     echo json_encode($a);
     $sql_dangky = mysqli_query($mysqli, "INSERT INTO tbl_user(name,email,password) 
-VALUE ('" . $tenkhachhang . "','" . $email . "','" . $matkhau . "')");
+VALUES ('" . $tenkhachhang . "','" . $email . "','" . $matkhau . "')");
 }
