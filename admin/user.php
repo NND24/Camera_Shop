@@ -33,14 +33,14 @@
                     </div>
                     <div class="app-content-actions-wrapper">
                         <div class="filter-button-wrapper">
-                            <button class="action-button filter jsFilter"><span>Loc</span><svg
+                            <button class="action-button filter jsFilter"><span>Lọc</span><svg
                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-filter">
                                     <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
                                 </svg></button>
                             <div class="filter-menu-cate">
-                                <label>Ngày đăng</label>
+                                <label>Ngày tạo</label>
                                 <select class="filter_dated">
                                     <option value="2">Tất cả</option>
                                     <option value="1">Mới nhất</option>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../../../../admin/config/config.php');
-$item_per_page = 8;
+$item_per_page = 7;
 $current_page = $_GET['pageIndex'];
 $offset = ($current_page - 1) * $item_per_page;
 

@@ -2,7 +2,7 @@
 session_start();
 include('../../../../admin/config/config.php');
 if (isset($_POST['searchInput'])) {
-    $item_per_page = 10;
+    $item_per_page = 7;
     $current_page = $_GET['pageIndex'];
     $offset = ($current_page - 1) * $item_per_page;
 
