@@ -136,7 +136,7 @@
      $(document).ready(() => {
          setTimeout(() => {
              $(window).scrollTop(0);
-         }, 1000);
+         }, );
          // View product detail
          $(document).on("click", '.view__product-detail', function() {
              var id = $(this).attr("value");
@@ -144,9 +144,6 @@
              window.history.pushState("new", "title", url);
              $(".container").load("san-pham.php?id=" + id);
              window.location.reload();
-             setTimeout(() => {
-                 $(window).scrollTop(0);
-             }, 1000);
          })
 
          // Quay ve trang chu
@@ -154,9 +151,6 @@
              var url = "trang-chu.php";
              window.history.pushState("new", "title", url);
              $(".container").load("trang-chu.php");
-             setTimeout(() => {
-                 $(window).scrollTop(0);
-             }, 1000);
          })
      })
      </script>

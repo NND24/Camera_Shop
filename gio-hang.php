@@ -47,7 +47,8 @@ session_start();
                             <div class="row__title row">
                                 <div class="col-4 justify-content-center d-flex">SẢN PHẨM</div>
                                 <div class="col justify-content-center  hide-on-mobile-425">GIÁ</div>
-                                <div class="col-sm-3 col-lg-2-4-sm justify-content-left d-flex quantity">SỐ LƯỢNG</div>
+                                <div class="col-sm-3 col-lg-2-4-sm justify-content-center d-flex quantity">SỐ LƯỢNG
+                                </div>
                                 <div class="col justify-content-center sum">TỔNG</div>
                             </div>
 
@@ -137,7 +138,7 @@ session_start();
     $(document).ready(() => {
         setTimeout(() => {
             $(window).scrollTop(0);
-        }, 1000);
+        });
 
         var cartCount = 0;
         var pageIndexCart = 1;
@@ -259,17 +260,11 @@ session_start();
                                 view_cart();
                                 view_data()
                                 window.location.reload();
-                                setTimeout(() => {
-                                    $(window).scrollTop(0);
-                                }, 1000);
                             },
                             error: function() {
                                 view_cart();
                                 view_data()
                                 window.location.reload();
-                                setTimeout(() => {
-                                    $(window).scrollTop(0);
-                                }, 1000);
                             }
                         })
                     }
@@ -329,9 +324,6 @@ session_start();
             var url = "trang-chu.php";
             window.history.pushState("new", "title", url);
             $(".container").load("trang-chu.php");
-            setTimeout(() => {
-                $(window).scrollTop(0);
-            }, 1000);
         })
 
         // View product detail
@@ -341,9 +333,6 @@ session_start();
             window.history.pushState("new", "title", url);
             $(".container").load("san-pham.php?id=" + id);
             window.location.reload();
-            setTimeout(() => {
-                $(window).scrollTop(0);
-            }, 1000);
         })
 
         $(document).on("click", '.pay-product-btn', function() {
@@ -351,9 +340,6 @@ session_start();
             window.history.pushState("new", "title", url);
             $(".container").load("thanh-toan.php");
             window.location.reload();
-            setTimeout(() => {
-                $(window).scrollTop(0);
-            }, 1000);
         })
     })
     </script>

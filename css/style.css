@@ -1535,6 +1535,10 @@ ul.social__option-list {
 }
 
 /* Product footer sidebar */
+.product__sidebar-container {
+  padding-right: 0 !important;
+}
+
 .product__footer-sidebar {
   background-color: white;
   border-radius: 4px;
@@ -2166,11 +2170,16 @@ span#countContent {
 .cart_wrapper .cart {
   background-color: #fff;
   padding: 10px 0px 10px 10px;
+  position: relative;
+}
+
+.cart__content {
+  padding-bottom: 60px;
 }
 
 .summary {
   background-color: #ddd;
-  padding: 4vh;
+  padding: 10px;
   color: rgb(65, 65, 65);
 }
 
@@ -2262,11 +2271,23 @@ span#countContent {
   padding-left: 40px;
 }
 
+.cart__footer-back {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-left: 20px;
+}
+
 .back-to-shop,
 .pay-product,
 .delete-all-cart {
   margin-top: 40px;
   align-items: flex-end;
+}
+
+.pay-product {
+  margin-top: 100px;
 }
 
 .back-to-shop-btn {

@@ -185,9 +185,6 @@ $(document).ready(() => {
         window.history.pushState("new", "title", url);
         $(".container").load("danh-muc.php?id=" + id);
         window.location.reload();
-        setTimeout(() => {
-            $(window).scrollTop(0);
-        }, 1000);
     })
 
     $(document).on("click", '.logo a', function() {
@@ -195,9 +192,6 @@ $(document).ready(() => {
         window.history.pushState("new", "title", url);
         $(".container").load("trang-chu.php");
         window.location.reload();
-        setTimeout(() => {
-            $(window).scrollTop(0);
-        }, 1000);
     })
 
     $(document).on("click", '.user__option i.chua', function() {
@@ -228,9 +222,6 @@ $(document).ready(() => {
                 window.history.pushState("new", "title", url);
                 $(".container").load("trang-chu.php");
                 window.location.reload();
-                setTimeout(() => {
-                    $(window).scrollTop(0);
-                }, 1000);
             }, 1000);
         });
 
@@ -241,9 +232,6 @@ $(document).ready(() => {
         window.history.pushState("new", "title", url);
         $(".container").load("thong-tin-khach-hang.php");
         window.location.reload();
-        setTimeout(() => {
-            $(window).scrollTop(0);
-        }, 1000);
     })
 
     $(document).on("click", '.modal-background', function() {
@@ -274,9 +262,6 @@ $(document).ready(() => {
 
     window.onpopstate = function() {
         window.location.reload();
-        setTimeout(() => {
-            $(window).scrollTop(0);
-        }, 1000);
     };
 
     // Search
@@ -308,11 +293,45 @@ $(document).ready(() => {
                     var url = "tim-kiem.php?tukhoa=" + searchInputModified;
                     window.history.pushState("new", "title", url);
                     $(".container").load("tim-kiem.php?tukhoa=" + searchInputModified);
-                    setTimeout(() => {
-                        $(window).scrollTop(0);
-                    }, 1000);
+                    window.location.reload();
                 },
             })
+        }
+    })
+
+    $(document).on("keypress", '.header_search_input', function(e) {
+        var searchInput = $('.header_search_input').val();
+        if (e.keyCode === 13 && searchInput) {
+
+            let errors = {
+                lengthError: ''
+            }
+
+            if (searchInput.length >= 100) {
+                errors.lengthError = 'Không được nhập quá 100 ký tự'
+                swal("Vui lòng nhập lại", errors.lengthError, "error");
+            } else {
+                errors.lengthError = '';
+            }
+
+            if (errors.lengthError === '') {
+                $.ajax({
+                    url: "tim-kiem.php",
+                    data: {
+                        searchInput: searchInput,
+                    },
+                    dataType: 'html',
+                    method: "post",
+                    cache: true,
+                    success: function(data) {
+                        let searchInputModified = searchInput.replace(/\s+/g, '-');
+                        var url = "tim-kiem.php?tukhoa=" + searchInputModified;
+                        window.history.pushState("new", "title", url);
+                        $(".container").load("tim-kiem.php?tukhoa=" + searchInputModified);
+                        window.location.reload();
+                    },
+                })
+            }
         }
     })
 
@@ -423,9 +442,6 @@ $(document).ready(() => {
         window.history.pushState("new", "title", url);
         $(".container").load("gio-hang.php");
         window.location.reload();
-        setTimeout(() => {
-            $(window).scrollTop(0);
-        }, 1000);
     })
 
     $(document).on("click", '.add-to-cart-button-not-login', function() {
@@ -440,9 +456,6 @@ $(document).ready(() => {
         window.history.pushState("new", "title", url);
         $(".container").load("gio-hang.php");
         window.location.reload();
-        setTimeout(() => {
-            $(window).scrollTop(0);
-        }, 1000);
     })
     /* HANDLE CART START */
 })

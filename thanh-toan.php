@@ -188,7 +188,7 @@ session_start();
     $(document).ready(() => {
         setTimeout(() => {
             $(window).scrollTop(0);
-        }, 1000);
+        });
 
         $(document).on("click", '.add-address-btn', function() {
             $('#load__address-modal').load('pages/checkout/addressModal.php')
@@ -450,9 +450,6 @@ session_start();
             var url = "trang-chu.php";
             window.history.pushState("new", "title", url);
             $(".container").load("trang-chu.php");
-            setTimeout(() => {
-                $(window).scrollTop(0);
-            }, 1000);
             <?php } else { ?>
             swal("Quý khách chưa nhập địa chỉ",
                 "Vui lòng thêm địa chỉ để tiếp tục thanh toán!",

@@ -274,6 +274,10 @@
     max-width: 600px !important;
   }
 
+  .pay-product {
+    margin-top: 0px;
+  }
+
   .header_search {
     display: none;
   }
@@ -653,6 +657,14 @@
 @media (max-width: 425px) {
   .row__title {
     font-size: 12px;
+  }
+
+  .back-to-shop-btn {
+    font-size: 13px;
+  }
+
+  .delete-all-cart-btn {
+    padding: 7px 26px;
   }
 
   .hide-on-mobile-425 {

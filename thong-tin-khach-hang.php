@@ -80,7 +80,7 @@ session_start();
     $(document).ready(() => {
         setTimeout(() => {
             $(window).scrollTop(0);
-        }, 1000);
+        }, );
         // Lay du lieu thon tin kh
         view_data();
 
@@ -96,9 +96,6 @@ session_start();
             var url = "trang-chu.php";
             window.history.pushState("new", "title", url);
             $(".container").load("trang-chu.php");
-            setTimeout(() => {
-                $(window).scrollTop(0);
-            }, 1000);
         })
 
         // Vao trang doi mat khau

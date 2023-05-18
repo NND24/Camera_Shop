@@ -111,7 +111,7 @@
     $(document).ready(() => {
         setTimeout(() => {
             $(window).scrollTop(0);
-        }, 1000);
+        });
 
         // Load more description
         $(document).on("click", '.load-more', function() {
@@ -134,18 +134,12 @@
             window.history.pushState("new", "title", url);
             $(".container").load("san-pham.php?id=" + id);
             window.location.reload();
-            setTimeout(() => {
-                $(window).scrollTop(0);
-            }, 1000);
         })
 
         $(document).on("click", '.view__home', function() {
             var url = "trang-chu.php";
             window.history.pushState("new", "title", url);
             $(".container").load("trang-chu.php");
-            setTimeout(() => {
-                $(window).scrollTop(0);
-            }, 1000);
         })
 
         var pageIndexMain = 1
