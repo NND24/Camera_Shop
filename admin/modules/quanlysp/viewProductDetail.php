@@ -20,29 +20,19 @@
                     <label class="col-2">Danh mục sản phẩm: </label>
                     <select readonly>
                         <?php
-                        $sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc ASC";
+                        $sql_danhmuc = "SELECT * FROM tbl_danhmuc WHERE id_danhmuc=$row[id_danhmuc]  LIMIT 1";
                         $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
-                        while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
-                            if ($row_danhmuc['id_danhmuc'] == $row['id_danhmuc']) {
+                        $row_danhmuc = mysqli_fetch_array($query_danhmuc)
                         ?>
-                                <option selected value="<?php echo $row_danhmuc['id_danhmuc'] ?>">
-                                    <?php echo $row_danhmuc['ten_danhmuc'] ?>
-                                </option>
-                            <?php
-                            } else {
-                            ?>
-                                <option value="<?php echo $row_danhmuc['id_danhmuc'] ?>">
-                                    <?php echo $row_danhmuc['ten_danhmuc'] ?>
-                                </option>
-                            <?php
-                            }
-                            ?>
-                        <?php } ?>
+                        <option selected value="<?php echo $row_danhmuc['id_danhmuc'] ?>">
+                            <?php echo $row_danhmuc['ten_danhmuc'] ?>
+                        </option>
                     </select>
                 </div>
                 <div class="model__content">
                     <label class="col-2">Hình ảnh: </label>
-                    <img src="modules/quanlysp/handleEvent/uploads/<?php echo $row['hinhanh'] ?>" class="image" alt="" style="width:100px; border:1px solid #ccc;">
+                    <img src="modules/quanlysp/handleEvent/uploads/<?php echo $row['hinhanh'] ?>" class="image" alt=""
+                        style="width:100px; border:1px solid #ccc;">
                 </div>
                 <div class="model__content">
                     <label class="col-2">Số lượng: </label>
@@ -98,7 +88,7 @@
     </div>
 
     <script>
-        CKEDITOR.replace('product-view-tomtat')
-        CKEDITOR.replace('product-view-detail')
+    CKEDITOR.replace('product-view-tomtat')
+    CKEDITOR.replace('product-view-detail')
     </script>
 </div>
