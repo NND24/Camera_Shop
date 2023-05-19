@@ -81,7 +81,7 @@ session_start();
                             <h5><b>TÓM TẮT ĐƠN HÀNG</b></h5>
                         </div>
                         <?php if (isset($_SESSION['id_user'])) { ?>
-                        <p class=" pb-2">Chi phí đơn hàng = Giá trị đơn hàng + phí vận chuyển + Thuế</p>
+                        <p class=" pb-2">Chi phí đơn hàng = Giá trị đơn hàng + phí vận chuyển</p>
                         <div class="d-flex justify-content-between pb-2">
                             <p>Giá trị đơn hàng</p>
                             <p class="order-value">0đ</p>
@@ -90,10 +90,7 @@ session_start();
                             <p>Phí vận chuyển</p>
                             <p>0đ</p>
                         </div>
-                        <div class="d-flex justify-content-between pb-2">
-                            <p>Thuế</p>
-                            <p>0đ</p>
-                        </div>
+
                         <div class="d-flex justify-content-between pb-2">
                             <p>Tổng Chi Phí </p>
                             <p class="order-value" style="font-weight:500;font-size:18px;">
@@ -108,17 +105,13 @@ session_start();
                             <?php } ?>
                         </div>
                         <?php } else { ?>
-                        <p class=" pb-2">Chi phí đơn hàng = Giá trị đơn hàng + phí vận chuyển + Thuế</p>
+                        <p class=" pb-2">Chi phí đơn hàng = Giá trị đơn hàng + phí vận chuyển</p>
                         <div class="d-flex justify-content-between pb-2">
                             <p>Giá trị đơn hàng</p>
                             <p>0đ</p>
                         </div>
                         <div class="d-flex justify-content-between pb-2">
                             <p>Phí vận chuyển</p>
-                            <p>0đ</p>
-                        </div>
-                        <div class="d-flex justify-content-between pb-2">
-                            <p>Thuế</p>
                             <p>0đ</p>
                         </div>
                         <div class="d-flex justify-content-between pb-2">
