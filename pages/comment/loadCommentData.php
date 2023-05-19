@@ -5,6 +5,10 @@ $item_per_page = 10;
 $current_page = $_GET['pageIndex'];
 $offset = ($current_page - 1) * $item_per_page;
 
+$sql = "SELECT * FROM tbl_user WHERE id_user='$_SESSION[id_user]' LIMIT 1 ";
+$query = mysqli_query($mysqli, $sql);
+$row = mysqli_fetch_array($query);
+
 $idsanpham = $_GET['idsanpham'];
 $sql_comment = "SELECT * FROM tbl_comments, tbl_user WHERE tbl_comments.id_user=tbl_user.id_user AND tbl_comments.id_sanpham=$idsanpham LIMIT " . $item_per_page . " OFFSET " . $offset . " ";
 $query_comment = mysqli_query($mysqli, $sql_comment);
@@ -23,7 +27,7 @@ if (mysqli_num_rows($query_comment) > 0) {
                 <span class="comment__header-name"><?php echo $row_comment['name'] ?></span>
 
                 <?php
-                if (isset($_SESSION['id_user']) && $_SESSION['id_user'] == $row_comment['id_user']) {
+                if ((isset($_SESSION['id_user']) && $_SESSION['id_user'] == $row_comment['id_user']) || $row['privilege'] == 1) {
                 ?>
                     <button class="comment__delete-btn btn btn-danger" value="<?php echo $row_comment['id_comment'] ?>">Xóa</button>
                 <?php
@@ -61,11 +65,14 @@ if (mysqli_num_rows($query_comment) > 0) {
             </div>
 
             <?php
-            if (strlen($row_comment['answer_comment'])) {
+            if (strlen($row_comment['answer_comment']) && $row_comment['id_admin'] != 0) {
+                $sql_answer = "SELECT * FROM tbl_admin WHERE id_admin='$row_comment[id_admin]' ";
+                $query_answer = mysqli_query($mysqli, $sql_answer);
+                $row_answer = mysqli_fetch_array($query_answer)
             ?>
                 <div class="answer__wrapper">
                     <div class="review__header">
-                        <span class="review__header-name"><?php echo $row_comment['name'] ?></span>
+                        <span class="review__header-name"><?php echo $row_answer['username'] ?></span>
                         <span class="review__admin">Quản trị viên</span>
 
                     </div>
@@ -73,7 +80,7 @@ if (mysqli_num_rows($query_comment) > 0) {
                         <div class="answer_review_content row">
                             <span class="col-11"><?php echo $row_comment['answer_comment'] ?></span>
                             <?php
-                            if (isset($_SESSION['id_user']) && $_SESSION['id_user'] == $row_comment['id_admin'] && $row_comment['privilege'] = '1') {
+                            if ((isset($_SESSION['id_user']) && $_SESSION['id_user'] == $row_comment['id_admin']) || $row['privilege'] == '1') {
                             ?>
                                 <button class="answer-comment-delete-btn btn btn-danger col-1" value="<?php echo $row_comment['id_comment'] ?>">Xóa</button>
                             <?php

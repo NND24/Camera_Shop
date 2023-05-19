@@ -33,7 +33,11 @@ session_start();
                 <div class="col-lg-3 col-md-3 col profile__sidebar">
                     <div class="profile__avatar">
                         <i class="fa-solid fa-user"></i>
-                        <span><?php echo $_SESSION['login'] ?></span>
+                        <span><?php
+                        $sql_user = "SELECT * FROM tbl_user WHERE id_user='$_SESSION[id_user]'";
+                        $query_user = mysqli_query($mysqli, $sql_user);
+                        $row_user = mysqli_fetch_array($query_user);
+                        echo $row_user['name'] ?></span>
                     </div>
                     <button class="user-detail">Thông tin chi tiết</button>
 

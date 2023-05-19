@@ -956,22 +956,51 @@
             $(document).on("click", '.review__delete-btn', function() {
                 var idReview = $(this).val()
 
-                $.ajax({
-                    url: " pages/review/handleDeleteReview.php",
-                    data: {
-                        idReview: idReview,
-                    },
-                    dataType: 'json',
-                    method: "post",
-                    cache: true,
-                    success: function(data) {
-                        swal("OK!", "Xóa đánh giá thành công", "success");
-                        view_review_data()
-                    },
-                    error: function() {
-                        view_review_data()
-                    }
-                })
+                swal({
+                        title: "Bạn có chắc muốn thực hiện thao tác không?",
+                        text: "Nếu có đánh giá này sẽ bị xóa đi!",
+                        icon: "warning",
+                        buttons: {
+                            cancel: {
+                                text: "Thoát",
+                                value: null,
+                                visible: true,
+                                closeModal: true,
+                            },
+                            confirm: {
+                                text: "Chấp nhận",
+                                value: true,
+                                visible: true,
+                                closeModal: true
+                            }
+                        },
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            swal("Xóa đánh giá thành công!", {
+                                icon: "success",
+                            });
+                            $.ajax({
+                                url: " pages/review/handleDeleteReview.php",
+                                data: {
+                                    idReview: idReview,
+                                },
+                                dataType: 'json',
+                                method: "post",
+                                cache: true,
+                                success: function(data) {
+                                    swal("OK!", "Xóa đánh giá thành công", "success");
+                                    view_review_data()
+                                },
+                                error: function() {
+                                    view_review_data()
+                                }
+                            })
+                        }
+                    });
+
+
             })
 
             // Edit review
@@ -1019,15 +1048,36 @@
                     url: " pages/review/handleAnswerReview.php",
                     data: {
                         answerContent: answerContent,
-                        reviewId: reviewId
+                        reviewId: reviewId,
+                        idAdmin: <?php
+                                    if (isset($_SESSION['id_user'])) {
+                                        $sql_admin = "SELECT * FROM tbl_user WHERE id_user='$_SESSION[id_user]' ";
+                                        $query_admin = mysqli_query($mysqli, $sql_admin);
+                                        $row_admin = mysqli_fetch_array($query_admin);
+                                        if ($row_admin['privilege'] == 1) {
+                                            $sql_answer = "SELECT * FROM tbl_admin WHERE email='$row_admin[email]' ";
+                                            $query_answer = mysqli_query($mysqli, $sql_answer);
+                                            $row_answer = mysqli_fetch_array($query_answer);
+
+                                            echo $row_answer['id_admin'];
+                                        } else {
+                                            echo '0';
+                                        }
+                                    } else {
+                                        echo '0';
+                                    }
+
+                                    ?>
                     },
                     dataType: 'json',
                     method: "post",
                     cache: true,
                     success: function(data) {
+                        swal("OK!", "Trả lời đánh giá thành công", "success");
                         view_review_data()
                     },
                     error: function() {
+                        swal("OK!", "Trả lời đánh giá thành công", "success");
                         view_review_data()
                     }
                 })
@@ -1036,23 +1086,48 @@
             // Delete answer review
             $(document).on("click", '.answer-review-delete-btn', function() {
                 var idReview = $(this).val()
-
-                $.ajax({
-                    url: " pages/review/handleDeleteAnswerReiview.php",
-                    data: {
-                        idReview: idReview,
-                    },
-                    dataType: 'json',
-                    method: "post",
-                    cache: true,
-                    success: function(data) {
-                        swal("OK!", "Xóa đánh giá thành công", "success");
-                        view_review_data()
-                    },
-                    error: function() {
-                        view_review_data()
-                    }
-                })
+                swal({
+                        title: "Bạn có chắc muốn thực hiện thao tác không?",
+                        text: "Nếu có câu trả lời này sẽ bị xóa đi!",
+                        icon: "warning",
+                        buttons: {
+                            cancel: {
+                                text: "Thoát",
+                                value: null,
+                                visible: true,
+                                closeModal: true,
+                            },
+                            confirm: {
+                                text: "Chấp nhận",
+                                value: true,
+                                visible: true,
+                                closeModal: true
+                            }
+                        },
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            swal("Xóa câu trả lời thành công!", {
+                                icon: "success",
+                            });
+                            $.ajax({
+                                url: " pages/review/handleDeleteAnswerReiview.php",
+                                data: {
+                                    idReview: idReview,
+                                },
+                                dataType: 'json',
+                                method: "post",
+                                cache: true,
+                                success: function(data) {
+                                    view_review_data()
+                                },
+                                error: function() {
+                                    view_review_data()
+                                }
+                            })
+                        }
+                    });
             })
 
             $(document).on("keyup", '#review', function() {
@@ -1138,23 +1213,49 @@
             $(document).on("click", '.comment__delete-btn', function() {
                 var idComment = $(this).val()
 
-                $.ajax({
-                    url: " pages/comment/handleDeleteComment.php",
-                    data: {
-                        idComment: idComment,
-                    },
-                    dataType: 'json',
-                    method: "post",
-                    cache: true,
-                    success: function(data) {
-                        swal("OK!", "Xóa câu hỏi thành công", "success");
-                        view_comment_data()
-                    },
-                    error: function() {
-                        swal("OK!", "Xóa câu hỏi thành công", "success");
-                        view_comment_data()
-                    }
-                })
+                swal({
+                        title: "Bạn có chắc muốn thực hiện thao tác không?",
+                        text: "Nếu có câu hỏi này sẽ bị xóa đi!",
+                        icon: "warning",
+                        buttons: {
+                            cancel: {
+                                text: "Thoát",
+                                value: null,
+                                visible: true,
+                                closeModal: true,
+                            },
+                            confirm: {
+                                text: "Chấp nhận",
+                                value: true,
+                                visible: true,
+                                closeModal: true
+                            }
+                        },
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            swal("Xóa câu hỏi thành công!", {
+                                icon: "success",
+                            });
+                            $.ajax({
+                                url: " pages/comment/handleDeleteComment.php",
+                                data: {
+                                    idComment: idComment,
+                                },
+                                dataType: 'json',
+                                method: "post",
+                                cache: true,
+                                success: function(data) {
+                                    view_comment_data()
+                                },
+                                error: function() {
+                                    swal("OK!", "Xóa câu hỏi thành công", "success");
+                                    view_comment_data()
+                                }
+                            })
+                        }
+                    });
             })
 
             // Edit comment
@@ -1217,16 +1318,36 @@
                     url: "pages/comment/handleAnswerComment.php",
                     data: {
                         answerContent: answerContent,
-                        commentId: commentId
+                        commentId: commentId,
+                        idAdmin: <?php
+                                    if (isset($_SESSION['id_user'])) {
+                                        $sql_admin = "SELECT * FROM tbl_user WHERE id_user='$_SESSION[id_user]' ";
+                                        $query_admin = mysqli_query($mysqli, $sql_admin);
+                                        $row_admin = mysqli_fetch_array($query_admin);
+                                        if ($row_admin['privilege'] == 1) {
+                                            $sql_answer = "SELECT * FROM tbl_admin WHERE email='$row_admin[email]' ";
+                                            $query_answer = mysqli_query($mysqli, $sql_answer);
+                                            $row_answer = mysqli_fetch_array($query_answer);
+
+                                            echo $row_answer['id_admin'];
+                                        } else {
+                                            echo '0';
+                                        }
+                                    } else {
+                                        echo '0';
+                                    }
+                                    ?>
                     },
                     dataType: 'json',
                     method: "post",
                     cache: true,
                     success: function(data) {
+                        swal("OK!", "Trả lời câu hỏi thành công", "success");
                         view_comment_data()
                     },
                     error: function() {
                         view_comment_data()
+                        swal("OK!", "Trả lời câu hỏi thành công", "success");
                     }
                 })
             })
@@ -1234,24 +1355,48 @@
             // Delete answer comment
             $(document).on("click", '.answer-comment-delete-btn', function() {
                 var idComment = $(this).val()
-
-                $.ajax({
-                    url: " pages/comment/handleDeleteAnswerComment.php",
-                    data: {
-                        idComment: idComment,
-                    },
-                    dataType: 'json',
-                    method: "post",
-                    cache: true,
-                    success: function(data) {
-                        swal("OK!", "Xóa câu hỏi thành công", "success");
-                        view_comment_data()
-                    },
-                    error: function() {
-                        swal("OK!", "Xóa câu hỏi thành công", "success");
-                        view_comment_data()
-                    }
-                })
+                swal({
+                        title: "Bạn có chắc muốn thực hiện thao tác không?",
+                        text: "Nếu có câu trả lời này sẽ bị xóa đi!",
+                        icon: "warning",
+                        buttons: {
+                            cancel: {
+                                text: "Thoát",
+                                value: null,
+                                visible: true,
+                                closeModal: true,
+                            },
+                            confirm: {
+                                text: "Chấp nhận",
+                                value: true,
+                                visible: true,
+                                closeModal: true
+                            }
+                        },
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            swal("Xóa câu trả lời  thành công!", {
+                                icon: "success",
+                            });
+                            $.ajax({
+                                url: " pages/comment/handleDeleteAnswerComment.php",
+                                data: {
+                                    idComment: idComment,
+                                },
+                                dataType: 'json',
+                                method: "post",
+                                cache: true,
+                                success: function(data) {
+                                    view_comment_data()
+                                },
+                                error: function() {
+                                    view_comment_data()
+                                }
+                            })
+                        }
+                    });
             })
 
             $(document).on("click", '#content', function() {
